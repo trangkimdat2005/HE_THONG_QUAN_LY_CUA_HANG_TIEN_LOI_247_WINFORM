@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.5.1\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -12,6 +13,8 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -33,8 +36,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.5.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.5.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -46,6 +58,71 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\AppDbContext.cs" />
+    <Compile Include="Models\BaoCao.cs" />
+    <Compile Include="Models\BaoCaoBanChay.cs" />
+    <Compile Include="Models\BaoCaoDoanhThu.cs" />
+    <Compile Include="Models\BaoCaoTonKho.cs" />
+    <Compile Include="Models\Barcode.cs" />
+    <Compile Include="Models\CaLamViec.cs" />
+    <Compile Include="Models\ChamCong.cs" />
+    <Compile Include="Models\ChinhSachHoanTra.cs" />
+    <Compile Include="Models\ChinhSachHoanTra_DanhMuc.cs" />
+    <Compile Include="Models\ChiTietDonOnline.cs" />
+    <Compile Include="Models\ChiTietGiaoDichNCC.cs" />
+    <Compile Include="Models\ChiTietHoaDon.cs" />
+    <Compile Include="Models\ChiTietHoaDonKhuyenMai.cs" />
+    <Compile Include="Models\ChiTietPhieuNhap.cs" />
+    <Compile Include="Models\ChiTietPhieuXuat.cs" />
+    <Compile Include="Models\ChuongTrinhKhuyenMai.cs" />
+    <Compile Include="Models\C__EFMigrationsHistory.cs" />
+    <Compile Include="Models\DanhMuc.cs" />
+    <Compile Include="Models\DieuKienApDung.cs" />
+    <Compile Include="Models\DieuKienApDungDanhMuc.cs" />
+    <Compile Include="Models\DieuKienApDungSanPham.cs" />
+    <Compile Include="Models\DieuKienApDungToanBo.cs" />
+    <Compile Include="Models\DonGiaoHang.cs" />
+    <Compile Include="Models\DonHangOnline.cs" />
+    <Compile Include="Models\DonViDoLuong.cs" />
+    <Compile Include="Models\GiaoDichThanhToan.cs" />
+    <Compile Include="Models\HoaDon.cs" />
+    <Compile Include="Models\HoaDonKhuyenMai.cs" />
+    <Compile Include="Models\KenhThanhToan.cs" />
+    <Compile Include="Models\KhachHang.cs" />
+    <Compile Include="Models\KiemKe.cs" />
+    <Compile Include="Models\LichSuGiaBan.cs" />
+    <Compile Include="Models\LichSuGiaoDich.cs" />
+    <Compile Include="Models\LichSuMuaHang.cs" />
+    <Compile Include="Models\MaDinhDanhSanPham.cs" />
+    <Compile Include="Models\MaKhuyenMai.cs" />
+    <Compile Include="Models\NhaCungCap.cs" />
+    <Compile Include="Models\NhanHieu.cs" />
+    <Compile Include="Models\NhanVien.cs" />
+    <Compile Include="Models\NhatKyHoatDong.cs" />
+    <Compile Include="Models\Permission.cs" />
+    <Compile Include="Models\PhanCongCaLamViec.cs" />
+    <Compile Include="Models\PhieuDoiTra.cs" />
+    <Compile Include="Models\PhieuNhap.cs" />
+    <Compile Include="Models\PhieuXuat.cs" />
+    <Compile Include="Models\PhiVanChuyen.cs" />
+    <Compile Include="Models\QRCode.cs" />
+    <Compile Include="Models\Role.cs" />
+    <Compile Include="Models\RolePermission.cs" />
+    <Compile Include="Models\SanPham.cs" />
+    <Compile Include="Models\SanPhamDanhMuc.cs" />
+    <Compile Include="Models\SanPhamDonVi.cs" />
+    <Compile Include="Models\SanPhamViTri.cs" />
+    <Compile Include="Models\Shipper.cs" />
+    <Compile Include="Models\TaiKhoan.cs" />
+    <Compile Include="Models\TaiKhoanKhachHang.cs" />
+    <Compile Include="Models\TaiKhoanNhanVien.cs" />
+    <Compile Include="Models\TemNhan.cs" />
+    <Compile Include="Models\TheThanhVien.cs" />
+    <Compile Include="Models\TonKho.cs" />
+    <Compile Include="Models\TrangThaiGiaoHang.cs" />
+    <Compile Include="Models\TrangThaiXuLy.cs" />
+    <Compile Include="Models\UserRole.cs" />
+    <Compile Include="Models\ViTri.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -57,6 +134,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -70,5 +148,14 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.5.1\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.5.1\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.5.1\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.targets')" />
 </Project>
