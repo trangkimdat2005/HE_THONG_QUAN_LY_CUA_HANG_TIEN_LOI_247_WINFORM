@@ -58,6 +58,35 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\AppConfig.cs" />
+    <Compile Include="Common\DateTimeHelper.cs" />
+    <Compile Include="Common\ImageHelper.cs" />
+    <Compile Include="Common\StringHelper.cs" />
+    <Compile Include="Common\ValidationHelper.cs" />
+    <Compile Include="DataAccessLayer\DBConnection.cs" />
+    <Compile Include="DataAccessLayer\Repositories\BaseRepository.cs" />
+    <Compile Include="DataAccessLayer\Repositories\CustomerRepository.cs" />
+    <Compile Include="DataAccessLayer\Repositories\EmployeeRepository.cs" />
+    <Compile Include="DataAccessLayer\Repositories\InventoryRepository.cs" />
+    <Compile Include="DataAccessLayer\Repositories\ProductRepository.cs" />
+    <Compile Include="DataAccessLayer\Repositories\PromotionRepository.cs" />
+    <Compile Include="DataAccessLayer\Repositories\ReportRepository.cs" />
+    <Compile Include="DataAccessLayer\Repositories\SaleRepository.cs" />
+    <Compile Include="DataAccessLayer\Repositories\SupplierRepository.cs" />
+    <Compile Include="BusinessLogicLayer\CustomerService.cs" />
+    <Compile Include="BusinessLogicLayer\EmployeeService.cs" />
+    <Compile Include="BusinessLogicLayer\InventoryService.cs" />
+    <Compile Include="BusinessLogicLayer\ProductService.cs" />
+    <Compile Include="BusinessLogicLayer\ReportService.cs" />
+    <Compile Include="BusinessLogicLayer\SaleService.cs" />
+    <Compile Include="DataTransferObjects\Account.cs" />
+    <Compile Include="DataTransferObjects\Category.cs" />
+    <Compile Include="DataTransferObjects\Customer.cs" />
+    <Compile Include="DataTransferObjects\Employee.cs" />
+    <Compile Include="DataTransferObjects\Product.cs" />
+    <Compile Include="DataTransferObjects\Sale.cs" />
+    <Compile Include="DataTransferObjects\Shift.cs" />
+    <Compile Include="DataTransferObjects\Supplier.cs" />
     <Compile Include="Models\AppDbContext.cs" />
     <Compile Include="Models\BaoCao.cs" />
     <Compile Include="Models\BaoCaoBanChay.cs" />
@@ -123,6 +152,69 @@
     <Compile Include="Models\TrangThaiXuLy.cs" />
     <Compile Include="Models\UserRole.cs" />
     <Compile Include="Models\ViTri.cs" />
+    <Compile Include="PresentationLayer\Controls\ucRequiredTextBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Controls\ucRoundButton.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\Customers\frmCustomerDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\Customers\frmCustomerList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\Employees\frmEmployeeList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\Employees\frmShiftManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\Inventory\frmStockCheck.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\Inventory\frmStockIn.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\Inventory\frmStockOut.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\Main\frmDashboard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\Main\frmLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\Main\frmMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\Products\frmCategory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\Products\frmProductDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\Products\frmProductList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\Reports\frmDailyRevenue.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\Reports\frmInventoryReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\Sales\frmPOS.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\Sales\frmSalesHistory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\System\frmAccount.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\System\frmSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
