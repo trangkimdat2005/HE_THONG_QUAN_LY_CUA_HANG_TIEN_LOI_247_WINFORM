@@ -26,7 +26,6 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Models
         [StringLength(20)]
         public string loaiViTri { get; set; }
 
-        [Required]
         [StringLength(500)]
         public string moTa { get; set; }
 

@@ -34,11 +34,9 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Models
 
         public string cauHinh { get; set; }
 
-        [Column(TypeName = "datetime2")]
-        public DateTime createdAt { get; set; }
+        public DateTime ngayTao { get; set; }
 
-        [Column(TypeName = "datetime2")]
-        public DateTime updatedAt { get; set; }
+        public DateTime ngayCapNhat { get; set; }
 
         public bool isDelete { get; set; }
 

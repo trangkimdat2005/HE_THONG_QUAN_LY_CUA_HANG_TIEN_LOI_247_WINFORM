@@ -31,7 +31,6 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Models
         [StringLength(50)]
         public string soDienThoai { get; set; }
 
-        [Required]
         [StringLength(200)]
         public string email { get; set; }
 
@@ -39,7 +38,6 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Models
         [StringLength(500)]
         public string diaChi { get; set; }
 
-        [Column(TypeName = "date")]
         public DateTime ngayDangKy { get; set; }
 
         [Required]
@@ -48,8 +46,15 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Models
 
         public bool isDelete { get; set; }
 
+        public bool gioiTinh { get; set; }
+
+        [StringLength(50)]
+        public string anhId { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DonHangOnline> DonHangOnlines { get; set; }
+
+        public virtual HinhAnh HinhAnh { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HoaDon> HoaDons { get; set; }

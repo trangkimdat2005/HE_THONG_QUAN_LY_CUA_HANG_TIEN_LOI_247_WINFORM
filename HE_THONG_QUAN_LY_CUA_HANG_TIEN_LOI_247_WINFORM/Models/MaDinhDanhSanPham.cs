@@ -12,8 +12,6 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public MaDinhDanhSanPham()
         {
-            Barcodes = new HashSet<Barcode>();
-            QRCodes = new HashSet<QRCode>();
             TemNhans = new HashSet<TemNhan>();
         }
 
@@ -38,11 +36,10 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Models
 
         public bool isDelete { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Barcode> Barcodes { get; set; }
+        [StringLength(50)]
+        public string anhId { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<QRCode> QRCodes { get; set; }
+        public virtual HinhAnh HinhAnh { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TemNhan> TemNhans { get; set; }

@@ -8,15 +8,15 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Models
     public partial class AppDbContext : DbContext
     {
         public AppDbContext()
-            : base("name=AppDbContext")
+            : base("name=AppDbContext1")
         {
         }
 
+        public virtual DbSet<Anh_SanPhamDonVi> Anh_SanPhamDonVi { get; set; }
         public virtual DbSet<BaoCao> BaoCaos { get; set; }
         public virtual DbSet<BaoCaoBanChay> BaoCaoBanChays { get; set; }
         public virtual DbSet<BaoCaoDoanhThu> BaoCaoDoanhThus { get; set; }
         public virtual DbSet<BaoCaoTonKho> BaoCaoTonKhoes { get; set; }
-        public virtual DbSet<Barcode> Barcodes { get; set; }
         public virtual DbSet<CaLamViec> CaLamViecs { get; set; }
         public virtual DbSet<ChamCong> ChamCongs { get; set; }
         public virtual DbSet<ChinhSachHoanTra> ChinhSachHoanTras { get; set; }
@@ -37,8 +37,9 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Models
         public virtual DbSet<DonHangOnline> DonHangOnlines { get; set; }
         public virtual DbSet<DonViDoLuong> DonViDoLuongs { get; set; }
         public virtual DbSet<GiaoDichThanhToan> GiaoDichThanhToans { get; set; }
+        public virtual DbSet<GioHang> GioHangs { get; set; }
+        public virtual DbSet<HinhAnh> HinhAnhs { get; set; }
         public virtual DbSet<HoaDon> HoaDons { get; set; }
-        public virtual DbSet<HoaDonKhuyenMai> HoaDonKhuyenMais { get; set; }
         public virtual DbSet<KenhThanhToan> KenhThanhToans { get; set; }
         public virtual DbSet<KhachHang> KhachHangs { get; set; }
         public virtual DbSet<KiemKe> KiemKes { get; set; }
@@ -57,7 +58,6 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Models
         public virtual DbSet<PhieuNhap> PhieuNhaps { get; set; }
         public virtual DbSet<PhieuXuat> PhieuXuats { get; set; }
         public virtual DbSet<PhiVanChuyen> PhiVanChuyens { get; set; }
-        public virtual DbSet<QRCode> QRCodes { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<RolePermission> RolePermissions { get; set; }
         public virtual DbSet<SanPham> SanPhams { get; set; }
@@ -95,25 +95,9 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Models
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<CaLamViec>()
-                .Property(e => e.thoiGianBatDau)
-                .HasPrecision(0);
-
-            modelBuilder.Entity<CaLamViec>()
-                .Property(e => e.thoiGianKetThuc)
-                .HasPrecision(0);
-
-            modelBuilder.Entity<CaLamViec>()
                 .HasMany(e => e.PhanCongCaLamViecs)
                 .WithRequired(e => e.CaLamViec)
                 .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<ChamCong>()
-                .Property(e => e.gioVao)
-                .HasPrecision(0);
-
-            modelBuilder.Entity<ChamCong>()
-                .Property(e => e.gioRa)
-                .HasPrecision(0);
 
             modelBuilder.Entity<ChinhSachHoanTra>()
                 .HasMany(e => e.ChinhSachHoanTra_DanhMuc)
@@ -201,9 +185,33 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Models
                 .HasForeignKey(e => e.donViId)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<HoaDon>()
-                .Property(e => e.ngayLap)
-                .HasPrecision(0);
+            modelBuilder.Entity<HinhAnh>()
+                .HasMany(e => e.Anh_SanPhamDonVi)
+                .WithRequired(e => e.HinhAnh)
+                .HasForeignKey(e => e.anhId)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<HinhAnh>()
+                .HasMany(e => e.KhachHangs)
+                .WithOptional(e => e.HinhAnh)
+                .HasForeignKey(e => e.anhId);
+
+            modelBuilder.Entity<HinhAnh>()
+                .HasMany(e => e.MaDinhDanhSanPhams)
+                .WithOptional(e => e.HinhAnh)
+                .HasForeignKey(e => e.anhId);
+
+            modelBuilder.Entity<HinhAnh>()
+                .HasMany(e => e.NhanViens)
+                .WithRequired(e => e.HinhAnh)
+                .HasForeignKey(e => e.anhId)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<HinhAnh>()
+                .HasMany(e => e.TemNhans)
+                .WithRequired(e => e.HinhAnh)
+                .HasForeignKey(e => e.anhId)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<HoaDon>()
                 .HasMany(e => e.ChiTietHoaDons)
@@ -231,11 +239,6 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Models
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<HoaDon>()
-                .HasMany(e => e.HoaDonKhuyenMais)
-                .WithRequired(e => e.HoaDon)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<HoaDon>()
                 .HasMany(e => e.LichSuMuaHangs)
                 .WithRequired(e => e.HoaDon)
                 .WillCascadeOnDelete(false);
@@ -244,14 +247,6 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Models
                 .HasMany(e => e.PhieuDoiTras)
                 .WithRequired(e => e.HoaDon)
                 .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<KenhThanhToan>()
-                .Property(e => e.createdAt)
-                .HasPrecision(0);
-
-            modelBuilder.Entity<KenhThanhToan>()
-                .Property(e => e.updatedAt)
-                .HasPrecision(0);
 
             modelBuilder.Entity<KenhThanhToan>()
                 .HasMany(e => e.GiaoDichThanhToans)
@@ -295,18 +290,6 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Models
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<MaDinhDanhSanPham>()
-                .HasMany(e => e.Barcodes)
-                .WithRequired(e => e.MaDinhDanhSanPham)
-                .HasForeignKey(e => e.maDinhDanhId)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<MaDinhDanhSanPham>()
-                .HasMany(e => e.QRCodes)
-                .WithRequired(e => e.MaDinhDanhSanPham)
-                .HasForeignKey(e => e.maDinhDanhId)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<MaDinhDanhSanPham>()
                 .HasMany(e => e.TemNhans)
                 .WithRequired(e => e.MaDinhDanhSanPham)
                 .HasForeignKey(e => e.maDinhDanhId)
@@ -314,11 +297,6 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Models
 
             modelBuilder.Entity<MaKhuyenMai>()
                 .HasMany(e => e.ChiTietHoaDonKhuyenMais)
-                .WithRequired(e => e.MaKhuyenMai)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<MaKhuyenMai>()
-                .HasMany(e => e.HoaDonKhuyenMais)
                 .WithRequired(e => e.MaKhuyenMai)
                 .WillCascadeOnDelete(false);
 
@@ -371,10 +349,6 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Models
                 .HasMany(e => e.TaiKhoanNhanViens)
                 .WithRequired(e => e.NhanVien)
                 .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<NhatKyHoatDong>()
-                .Property(e => e.thoiGian)
-                .HasPrecision(0);
 
             modelBuilder.Entity<Permission>()
                 .HasMany(e => e.RolePermissions)
@@ -441,6 +415,11 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Models
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<TaiKhoan>()
+                .HasMany(e => e.GioHangs)
+                .WithRequired(e => e.TaiKhoan)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<TaiKhoan>()
                 .HasMany(e => e.NhatKyHoatDongs)
                 .WithRequired(e => e.TaiKhoan)
                 .WillCascadeOnDelete(false);
@@ -459,14 +438,6 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Models
                 .HasMany(e => e.UserRoles)
                 .WithRequired(e => e.TaiKhoan)
                 .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<TrangThaiGiaoHang>()
-                .Property(e => e.ngayCapNhat)
-                .HasPrecision(0);
-
-            modelBuilder.Entity<TrangThaiXuLy>()
-                .Property(e => e.ngayCapNhat)
-                .HasPrecision(0);
 
             modelBuilder.Entity<ViTri>()
                 .HasMany(e => e.SanPhamViTris)

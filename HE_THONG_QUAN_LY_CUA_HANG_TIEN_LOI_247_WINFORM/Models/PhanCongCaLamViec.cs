@@ -20,7 +20,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Models
         public string caLamViecId { get; set; }
 
         [Key]
-        [Column(Order = 2, TypeName = "date")]
+        [Column(Order = 2)]
         public DateTime ngay { get; set; }
 
         [StringLength(50)]

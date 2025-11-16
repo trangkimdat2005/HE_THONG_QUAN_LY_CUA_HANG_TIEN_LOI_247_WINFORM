@@ -27,7 +27,6 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Models
         [StringLength(50)]
         public string soDienThoai { get; set; }
 
-        [Required]
         [StringLength(200)]
         public string email { get; set; }
 

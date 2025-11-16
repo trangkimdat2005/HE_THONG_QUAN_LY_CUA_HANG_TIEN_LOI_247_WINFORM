@@ -25,6 +25,8 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Models
 
         public bool isDelete { get; set; }
 
+        public decimal? tongTien { get; set; }
+
         public virtual PhieuXuat PhieuXuat { get; set; }
     }
 }

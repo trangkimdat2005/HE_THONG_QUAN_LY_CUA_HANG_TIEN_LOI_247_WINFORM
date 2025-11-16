@@ -22,7 +22,6 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Models
 
         public int diemTichLuy { get; set; }
 
-        [Column(TypeName = "date")]
         public DateTime ngayCap { get; set; }
 
         public bool isDelete { get; set; }

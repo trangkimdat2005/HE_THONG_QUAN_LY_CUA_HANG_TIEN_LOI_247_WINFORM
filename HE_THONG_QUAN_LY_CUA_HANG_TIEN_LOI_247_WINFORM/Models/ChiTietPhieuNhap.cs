@@ -23,10 +23,11 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Models
 
         public decimal donGia { get; set; }
 
-        [Column(TypeName = "date")]
-        public DateTime hanSuDung { get; set; }
-
         public bool isDelete { get; set; }
+
+        public decimal tongTien { get; set; }
+
+        public DateTime hanSuDung { get; set; }
 
         public virtual PhieuNhap PhieuNhap { get; set; }
     }

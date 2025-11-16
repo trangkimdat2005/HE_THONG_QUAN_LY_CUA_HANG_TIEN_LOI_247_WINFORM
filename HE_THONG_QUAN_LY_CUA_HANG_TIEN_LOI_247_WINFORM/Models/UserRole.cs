@@ -19,10 +19,8 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Models
         [StringLength(50)]
         public string roleId { get; set; }
 
-        [Column(TypeName = "date")]
         public DateTime? hieuLucTu { get; set; }
 
-        [Column(TypeName = "date")]
         public DateTime? hieuLucDen { get; set; }
 
         [StringLength(50)]

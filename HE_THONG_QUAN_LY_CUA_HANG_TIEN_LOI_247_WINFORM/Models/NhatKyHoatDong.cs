@@ -16,7 +16,6 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Models
         [StringLength(50)]
         public string taiKhoanId { get; set; }
 
-        [Column(TypeName = "datetime2")]
         public DateTime thoiGian { get; set; }
 
         [Required]

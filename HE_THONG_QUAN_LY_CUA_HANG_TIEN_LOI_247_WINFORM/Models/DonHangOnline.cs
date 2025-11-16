@@ -31,7 +31,6 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Models
         [StringLength(20)]
         public string kenhDat { get; set; }
 
-        [Column(TypeName = "date")]
         public DateTime ngayDat { get; set; }
 
         public decimal tongTien { get; set; }

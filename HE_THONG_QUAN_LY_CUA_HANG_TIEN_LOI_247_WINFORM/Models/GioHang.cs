@@ -6,28 +6,27 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("core.HoaDonKhuyenMai")]
-    public partial class HoaDonKhuyenMai
+    [Table("core.GioHang")]
+    public partial class GioHang
     {
         [Key]
         [Column(Order = 0)]
         [StringLength(50)]
-        public string hoaDonId { get; set; }
+        public string taiKhoanId { get; set; }
 
         [Key]
         [Column(Order = 1)]
         [StringLength(50)]
-        public string maKhuyenMaiId { get; set; }
+        public string sanPhamDonViId { get; set; }
 
-        public decimal giaTriApDung { get; set; }
-
-        [StringLength(50)]
-        public string id { get; set; }
+        public int soLuong { get; set; }
 
         public bool isDelete { get; set; }
 
-        public virtual HoaDon HoaDon { get; set; }
+        public DateTime ngayTao { get; set; }
 
-        public virtual MaKhuyenMai MaKhuyenMai { get; set; }
+        public DateTime ngayCapNhat { get; set; }
+
+        public virtual TaiKhoan TaiKhoan { get; set; }
     }
 }

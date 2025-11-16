@@ -13,7 +13,6 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Models
         public MaKhuyenMai()
         {
             ChiTietHoaDonKhuyenMais = new HashSet<ChiTietHoaDonKhuyenMai>();
-            HoaDonKhuyenMais = new HashSet<HoaDonKhuyenMai>();
         }
 
         [StringLength(50)]
@@ -35,20 +34,11 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Models
         [StringLength(20)]
         public string trangThai { get; set; }
 
-        [Column(TypeName = "date")]
-        public DateTime ngayBatDau { get; set; }
-
-        [Column(TypeName = "date")]
-        public DateTime ngayKetThuc { get; set; }
-
         public bool isDelete { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ChiTietHoaDonKhuyenMai> ChiTietHoaDonKhuyenMais { get; set; }
 
         public virtual ChuongTrinhKhuyenMai ChuongTrinhKhuyenMai { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<HoaDonKhuyenMai> HoaDonKhuyenMais { get; set; }
     }
 }
