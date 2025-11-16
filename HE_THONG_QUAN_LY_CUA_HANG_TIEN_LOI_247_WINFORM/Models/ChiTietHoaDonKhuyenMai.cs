@@ -26,6 +26,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Models
 
         public decimal giaTriApDung { get; set; }
 
+        [Required]
         [StringLength(50)]
         public string id { get; set; }
 

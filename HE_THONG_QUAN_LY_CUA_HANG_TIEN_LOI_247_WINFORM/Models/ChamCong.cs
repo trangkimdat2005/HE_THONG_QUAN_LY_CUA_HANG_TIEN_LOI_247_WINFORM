@@ -16,16 +16,12 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Models
         [StringLength(50)]
         public string nhanVienId { get; set; }
 
-        [Column(TypeName = "date")]
         public DateTime ngay { get; set; }
 
-        [Column(TypeName = "datetime2")]
-        public DateTime gioVao { get; set; }
+        public TimeSpan gioVao { get; set; }
 
-        [Column(TypeName = "datetime2")]
-        public DateTime gioRa { get; set; }
+        public TimeSpan gioRa { get; set; }
 
-        [Required]
         [StringLength(500)]
         public string ghiChu { get; set; }
 

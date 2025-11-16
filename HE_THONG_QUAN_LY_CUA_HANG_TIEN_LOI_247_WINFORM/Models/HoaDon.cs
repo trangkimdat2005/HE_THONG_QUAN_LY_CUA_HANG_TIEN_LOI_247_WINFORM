@@ -17,7 +17,6 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Models
             DonGiaoHangs = new HashSet<DonGiaoHang>();
             DonHangOnlines = new HashSet<DonHangOnline>();
             GiaoDichThanhToans = new HashSet<GiaoDichThanhToan>();
-            HoaDonKhuyenMais = new HashSet<HoaDonKhuyenMai>();
             LichSuMuaHangs = new HashSet<LichSuMuaHang>();
             PhieuDoiTras = new HashSet<PhieuDoiTra>();
         }
@@ -25,10 +24,9 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Models
         [StringLength(50)]
         public string id { get; set; }
 
-        [Column(TypeName = "datetime2")]
         public DateTime ngayLap { get; set; }
 
-        public decimal tongTien { get; set; }
+        public decimal? tongTien { get; set; }
 
         [Required]
         [StringLength(50)]
@@ -58,9 +56,6 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Models
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GiaoDichThanhToan> GiaoDichThanhToans { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<HoaDonKhuyenMai> HoaDonKhuyenMais { get; set; }
 
         public virtual KhachHang KhachHang { get; set; }
 

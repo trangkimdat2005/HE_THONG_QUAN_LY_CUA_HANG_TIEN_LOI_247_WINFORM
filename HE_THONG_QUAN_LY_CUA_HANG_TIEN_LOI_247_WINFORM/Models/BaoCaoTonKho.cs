@@ -16,9 +16,19 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Models
         [StringLength(50)]
         public string baoCaoId { get; set; }
 
-        public int tongSoLuongTon { get; set; }
-
         public bool isDelete { get; set; }
+
+        [Required]
+        [StringLength(50)]
+        public string sanPhamDonViId { get; set; }
+
+        public int tonDauKy { get; set; }
+
+        public int nhapTrongKy { get; set; }
+
+        public int xuatTrongKy { get; set; }
+
+        public int tonCuoiKy { get; set; }
 
         public virtual BaoCao BaoCao { get; set; }
     }

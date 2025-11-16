@@ -24,14 +24,15 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Models
         [StringLength(20)]
         public string loaiBaoCao { get; set; }
 
-        [Column(TypeName = "date")]
         public DateTime ngayLap { get; set; }
 
-        [Required]
-        [StringLength(500)]
-        public string fileBaoCao { get; set; }
-
         public bool isDelete { get; set; }
+
+        [Column(TypeName = "date")]
+        public DateTime tuNgay { get; set; }
+
+        [Column(TypeName = "date")]
+        public DateTime denNgay { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BaoCaoBanChay> BaoCaoBanChays { get; set; }

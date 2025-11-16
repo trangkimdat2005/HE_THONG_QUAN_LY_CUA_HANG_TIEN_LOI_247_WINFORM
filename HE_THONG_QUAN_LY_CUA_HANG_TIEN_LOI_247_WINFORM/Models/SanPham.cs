@@ -30,12 +30,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Models
         [StringLength(50)]
         public string nhanHieuId { get; set; }
 
-        [Required]
         public string moTa { get; set; }
-
-        [Required]
-        [StringLength(30)]
-        public string trangThai { get; set; }
 
         public bool isDelete { get; set; }
 

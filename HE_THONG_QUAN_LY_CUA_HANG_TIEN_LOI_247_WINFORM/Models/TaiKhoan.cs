@@ -12,6 +12,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public TaiKhoan()
         {
+            GioHangs = new HashSet<GioHang>();
             NhatKyHoatDongs = new HashSet<NhatKyHoatDong>();
             TaiKhoanKhachHangs = new HashSet<TaiKhoanKhachHang>();
             TaiKhoanNhanViens = new HashSet<TaiKhoanNhanVien>();
@@ -29,7 +30,6 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Models
         [StringLength(255)]
         public string matKhauHash { get; set; }
 
-        [Required]
         [StringLength(200)]
         public string email { get; set; }
 
@@ -38,6 +38,9 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Models
         public string trangThai { get; set; }
 
         public bool isDelete { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<GioHang> GioHangs { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NhatKyHoatDong> NhatKyHoatDongs { get; set; }

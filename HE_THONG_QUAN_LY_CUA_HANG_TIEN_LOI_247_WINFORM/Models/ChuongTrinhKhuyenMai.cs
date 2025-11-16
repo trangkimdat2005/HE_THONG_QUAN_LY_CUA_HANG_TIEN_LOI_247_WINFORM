@@ -27,13 +27,10 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Models
         [StringLength(30)]
         public string loai { get; set; }
 
-        [Column(TypeName = "date")]
         public DateTime ngayBatDau { get; set; }
 
-        [Column(TypeName = "date")]
         public DateTime ngayKetThuc { get; set; }
 
-        [Required]
         public string moTa { get; set; }
 
         public bool isDelete { get; set; }

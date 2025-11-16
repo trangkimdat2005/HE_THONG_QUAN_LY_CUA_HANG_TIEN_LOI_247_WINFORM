@@ -18,14 +18,12 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Models
 
         public decimal soTien { get; set; }
 
-        [Column(TypeName = "date")]
         public DateTime ngayGD { get; set; }
 
         [Required]
         [StringLength(50)]
         public string kenhThanhToanId { get; set; }
 
-        [Required]
         [StringLength(500)]
         public string moTa { get; set; }
 

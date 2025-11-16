@@ -20,7 +20,6 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Models
         [StringLength(50)]
         public string sanPhamDonViId { get; set; }
 
-        [Column(TypeName = "date")]
         public DateTime ngayDoiTra { get; set; }
 
         [Required]

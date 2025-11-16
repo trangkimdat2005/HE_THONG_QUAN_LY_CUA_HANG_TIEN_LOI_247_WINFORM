@@ -20,10 +20,8 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Models
         [StringLength(20)]
         public string trangThai { get; set; }
 
-        [Column(TypeName = "datetime2")]
         public DateTime ngayCapNhat { get; set; }
 
-        [Required]
         [StringLength(500)]
         public string ghiChu { get; set; }
 

@@ -12,7 +12,6 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Models
         [StringLength(50)]
         public string id { get; set; }
 
-        [Column(TypeName = "date")]
         public DateTime ngayKiemKe { get; set; }
 
         [Required]
@@ -24,6 +23,9 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Models
         public string nhanVienId { get; set; }
 
         public bool isDelete { get; set; }
+
+        [StringLength(50)]
+        public string sanPhamDonViID { get; set; }
 
         public virtual NhanVien NhanVien { get; set; }
     }

@@ -23,7 +23,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Models
 
         public decimal donGia { get; set; }
 
-        public decimal thanhTien { get; set; }
+        public decimal? thanhTien { get; set; }
 
         public bool isDelete { get; set; }
 

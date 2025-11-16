@@ -29,6 +29,10 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Models
 
         public bool isDelete { get; set; }
 
+        [Required]
+        [StringLength(30)]
+        public string trangThai { get; set; }
+
         public virtual DonViDoLuong DonViDoLuong { get; set; }
 
         public virtual SanPham SanPham { get; set; }

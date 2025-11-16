@@ -19,10 +19,15 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Models
         [Required]
         public string noiDungTem { get; set; }
 
-        [Column(TypeName = "date")]
         public DateTime ngayIn { get; set; }
 
         public bool isDelete { get; set; }
+
+        [Required]
+        [StringLength(50)]
+        public string anhId { get; set; }
+
+        public virtual HinhAnh HinhAnh { get; set; }
 
         public virtual MaDinhDanhSanPham MaDinhDanhSanPham { get; set; }
     }

@@ -23,18 +23,16 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Models
         [StringLength(200)]
         public string tenChinhSach { get; set; }
 
-        public int thoiHan { get; set; }
+        public int? thoiHan { get; set; }
 
         [Required]
         [StringLength(500)]
         public string dieuKien { get; set; }
 
-        public bool apDungToanBo { get; set; }
+        public bool? apDungToanBo { get; set; }
 
-        [Column(TypeName = "date")]
         public DateTime apDungTuNgay { get; set; }
 
-        [Column(TypeName = "date")]
         public DateTime apDungDenNgay { get; set; }
 
         public bool isDelete { get; set; }
