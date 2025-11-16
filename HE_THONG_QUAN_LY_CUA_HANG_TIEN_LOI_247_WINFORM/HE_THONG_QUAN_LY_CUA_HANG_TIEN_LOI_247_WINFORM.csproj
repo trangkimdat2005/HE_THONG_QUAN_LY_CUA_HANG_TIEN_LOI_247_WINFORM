@@ -198,6 +198,36 @@
     <Compile Include="PresentationLayer\Forms\Main\frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="PresentationLayer\Forms\Products\frmBrands.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\Products\frmBrands.Designer.cs">
+      <DependentUpon>frmBrands.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\Products\frmCategorys.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\Products\frmCategorys.Designer.cs">
+      <DependentUpon>frmCategorys.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\Products\frmMeasurements.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\Products\frmMeasurements.Designer.cs">
+      <DependentUpon>frmMeasurements.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\Products\frmProducts.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\Products\frmProducts.Designer.cs">
+      <DependentUpon>frmProducts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\Products\frmSuppliers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\Products\frmSuppliers.Designer.cs">
+      <DependentUpon>frmSuppliers.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="PresentationLayer\Forms\Main\frmDashboard.resx">
@@ -235,13 +265,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Control\" />
-    <Folder Include="PresentationLayer\Forms\Customers\" />
-    <Folder Include="PresentationLayer\Forms\Employees\" />
-    <Folder Include="PresentationLayer\Forms\Inventory\" />
-    <Folder Include="PresentationLayer\Forms\Products\" />
-    <Folder Include="PresentationLayer\Forms\Reports\" />
     <Folder Include="PresentationLayer\Forms\Sales\" />
-    <Folder Include="PresentationLayer\Forms\System\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\img\bill.png" />
@@ -251,6 +275,7 @@
     <Content Include="Resources\img\overview.png" />
     <Content Include="Resources\img\people.png" />
     <Content Include="Resources\img\product.png" />
+    <Content Include="Resources\img\settings.png" />
     <Content Include="Resources\img\supplier.png" />
     <Content Include="Resources\img\track.png" />
     <Content Include="Resources\img\user-logout.png" />
