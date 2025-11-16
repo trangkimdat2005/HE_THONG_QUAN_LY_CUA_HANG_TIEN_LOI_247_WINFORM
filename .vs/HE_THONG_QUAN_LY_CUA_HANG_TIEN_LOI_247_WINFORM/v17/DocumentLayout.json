@@ -11,20 +11,56 @@
       "RelativeMoniker": "D:0:0:{DC124FEF-6459-4A53-A3A4-9DDE2AA20BE9}|HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.csproj|solutionrelative:he_thong_quan_ly_cua_hang_tien_loi_247_winform\\presentationlayer\\forms\\main\\frmmain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DC124FEF-6459-4A53-A3A4-9DDE2AA20BE9}|HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.csproj|E:\\3_year\\TrucQuan\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\he_thong_quan_ly_cua_hang_tien_loi_247_winform\\presentationlayer\\forms\\main\\frmlogin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DC124FEF-6459-4A53-A3A4-9DDE2AA20BE9}|HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.csproj|solutionrelative:he_thong_quan_ly_cua_hang_tien_loi_247_winform\\presentationlayer\\forms\\main\\frmlogin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{DC124FEF-6459-4A53-A3A4-9DDE2AA20BE9}|HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.csproj|e:\\3_year\\trucquan\\he_thong_quan_ly_cua_hang_tien_loi_247_winform\\he_thong_quan_ly_cua_hang_tien_loi_247_winform\\presentationlayer\\forms\\main\\frmlogin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{DC124FEF-6459-4A53-A3A4-9DDE2AA20BE9}|HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.csproj|solutionrelative:he_thong_quan_ly_cua_hang_tien_loi_247_winform\\presentationlayer\\forms\\main\\frmlogin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DC124FEF-6459-4A53-A3A4-9DDE2AA20BE9}|HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.csproj|e:\\3_year\\trucquan\\he_thong_quan_ly_cua_hang_tien_loi_247_winform\\he_thong_quan_ly_cua_hang_tien_loi_247_winform\\presentationlayer\\forms\\main\\frmmain.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DC124FEF-6459-4A53-A3A4-9DDE2AA20BE9}|HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.csproj|solutionrelative:he_thong_quan_ly_cua_hang_tien_loi_247_winform\\presentationlayer\\forms\\main\\frmmain.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DC124FEF-6459-4A53-A3A4-9DDE2AA20BE9}|HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.csproj|e:\\3_year\\trucquan\\he_thong_quan_ly_cua_hang_tien_loi_247_winform\\he_thong_quan_ly_cua_hang_tien_loi_247_winform\\models\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DC124FEF-6459-4A53-A3A4-9DDE2AA20BE9}|HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.csproj|solutionrelative:he_thong_quan_ly_cua_hang_tien_loi_247_winform\\models\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DC124FEF-6459-4A53-A3A4-9DDE2AA20BE9}|HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.csproj|e:\\3_year\\trucquan\\he_thong_quan_ly_cua_hang_tien_loi_247_winform\\he_thong_quan_ly_cua_hang_tien_loi_247_winform\\presentationlayer\\forms\\main\\frmdashboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{DC124FEF-6459-4A53-A3A4-9DDE2AA20BE9}|HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.csproj|solutionrelative:he_thong_quan_ly_cua_hang_tien_loi_247_winform\\presentationlayer\\forms\\main\\frmdashboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DC124FEF-6459-4A53-A3A4-9DDE2AA20BE9}|HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.csproj|e:\\3_year\\trucquan\\he_thong_quan_ly_cua_hang_tien_loi_247_winform\\he_thong_quan_ly_cua_hang_tien_loi_247_winform\\presentationlayer\\forms\\main\\frmdashboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DC124FEF-6459-4A53-A3A4-9DDE2AA20BE9}|HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.csproj|solutionrelative:he_thong_quan_ly_cua_hang_tien_loi_247_winform\\presentationlayer\\forms\\main\\frmdashboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DC124FEF-6459-4A53-A3A4-9DDE2AA20BE9}|HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.csproj|e:\\3_year\\trucquan\\he_thong_quan_ly_cua_hang_tien_loi_247_winform\\he_thong_quan_ly_cua_hang_tien_loi_247_winform\\presentationlayer\\forms\\main\\frmdashboard.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DC124FEF-6459-4A53-A3A4-9DDE2AA20BE9}|HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.csproj|solutionrelative:he_thong_quan_ly_cua_hang_tien_loi_247_winform\\presentationlayer\\forms\\main\\frmdashboard.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DC124FEF-6459-4A53-A3A4-9DDE2AA20BE9}|HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.csproj|E:\\3_year\\TrucQuan\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\he_thong_quan_ly_cua_hang_tien_loi_247_winform\\presentationlayer\\controls\\ucrequiredtextbox.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DC124FEF-6459-4A53-A3A4-9DDE2AA20BE9}|HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.csproj|solutionrelative:he_thong_quan_ly_cua_hang_tien_loi_247_winform\\presentationlayer\\controls\\ucrequiredtextbox.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DC124FEF-6459-4A53-A3A4-9DDE2AA20BE9}|HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.csproj|e:\\3_year\\trucquan\\he_thong_quan_ly_cua_hang_tien_loi_247_winform\\he_thong_quan_ly_cua_hang_tien_loi_247_winform\\packages.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{DC124FEF-6459-4A53-A3A4-9DDE2AA20BE9}|HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.csproj|solutionrelative:he_thong_quan_ly_cua_hang_tien_loi_247_winform\\packages.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{DC124FEF-6459-4A53-A3A4-9DDE2AA20BE9}|HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.csproj|e:\\3_year\\trucquan\\he_thong_quan_ly_cua_hang_tien_loi_247_winform\\he_thong_quan_ly_cua_hang_tien_loi_247_winform\\properties\\resources.resx||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
       "RelativeMoniker": "D:0:0:{DC124FEF-6459-4A53-A3A4-9DDE2AA20BE9}|HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.csproj|solutionrelative:he_thong_quan_ly_cua_hang_tien_loi_247_winform\\properties\\resources.resx||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DC124FEF-6459-4A53-A3A4-9DDE2AA20BE9}|HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.csproj|E:\\3_year\\TrucQuan\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\he_thong_quan_ly_cua_hang_tien_loi_247_winform\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DC124FEF-6459-4A53-A3A4-9DDE2AA20BE9}|HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.csproj|solutionrelative:he_thong_quan_ly_cua_hang_tien_loi_247_winform\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{DC124FEF-6459-4A53-A3A4-9DDE2AA20BE9}|HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.csproj|e:\\3_year\\trucquan\\he_thong_quan_ly_cua_hang_tien_loi_247_winform\\he_thong_quan_ly_cua_hang_tien_loi_247_winform\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{DC124FEF-6459-4A53-A3A4-9DDE2AA20BE9}|HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.csproj|solutionrelative:he_thong_quan_ly_cua_hang_tien_loi_247_winform\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DC124FEF-6459-4A53-A3A4-9DDE2AA20BE9}|HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.csproj|e:\\3_year\\trucquan\\he_thong_quan_ly_cua_hang_tien_loi_247_winform\\he_thong_quan_ly_cua_hang_tien_loi_247_winform\\packages.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
-      "RelativeMoniker": "D:0:0:{DC124FEF-6459-4A53-A3A4-9DDE2AA20BE9}|HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.csproj|solutionrelative:he_thong_quan_ly_cua_hang_tien_loi_247_winform\\packages.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+      "AbsoluteMoniker": "D:0:0:{DC124FEF-6459-4A53-A3A4-9DDE2AA20BE9}|HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.csproj|E:\\3_year\\TrucQuan\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\he_thong_quan_ly_cua_hang_tien_loi_247_winform\\datatransferobjects\\supplier.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DC124FEF-6459-4A53-A3A4-9DDE2AA20BE9}|HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.csproj|solutionrelative:he_thong_quan_ly_cua_hang_tien_loi_247_winform\\datatransferobjects\\supplier.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DC124FEF-6459-4A53-A3A4-9DDE2AA20BE9}|HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.csproj|E:\\3_year\\TrucQuan\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\he_thong_quan_ly_cua_hang_tien_loi_247_winform\\presentationlayer\\forms\\main\\frmlogin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DC124FEF-6459-4A53-A3A4-9DDE2AA20BE9}|HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.csproj|solutionrelative:he_thong_quan_ly_cua_hang_tien_loi_247_winform\\presentationlayer\\forms\\main\\frmlogin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DC124FEF-6459-4A53-A3A4-9DDE2AA20BE9}|HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.csproj|E:\\3_year\\TrucQuan\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\he_thong_quan_ly_cua_hang_tien_loi_247_winform\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DC124FEF-6459-4A53-A3A4-9DDE2AA20BE9}|HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.csproj|solutionrelative:he_thong_quan_ly_cua_hang_tien_loi_247_winform\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{DC124FEF-6459-4A53-A3A4-9DDE2AA20BE9}|HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.csproj|E:\\3_year\\TrucQuan\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\he_thong_quan_ly_cua_hang_tien_loi_247_winform\\datatransferobjects\\account.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -83,10 +119,6 @@
       "RelativeMoniker": "D:0:0:{DC124FEF-6459-4A53-A3A4-9DDE2AA20BE9}|HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.csproj|solutionrelative:he_thong_quan_ly_cua_hang_tien_loi_247_winform\\common\\appconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DC124FEF-6459-4A53-A3A4-9DDE2AA20BE9}|HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.csproj|E:\\3_year\\TrucQuan\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\he_thong_quan_ly_cua_hang_tien_loi_247_winform\\models\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DC124FEF-6459-4A53-A3A4-9DDE2AA20BE9}|HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.csproj|solutionrelative:he_thong_quan_ly_cua_hang_tien_loi_247_winform\\models\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{DC124FEF-6459-4A53-A3A4-9DDE2AA20BE9}|HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.csproj|E:\\3_year\\TrucQuan\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\he_thong_quan_ly_cua_hang_tien_loi_247_winform\\dataaccesslayer\\repositories\\inventoryrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{DC124FEF-6459-4A53-A3A4-9DDE2AA20BE9}|HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.csproj|solutionrelative:he_thong_quan_ly_cua_hang_tien_loi_247_winform\\dataaccesslayer\\repositories\\inventoryrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -143,16 +175,8 @@
       "RelativeMoniker": "D:0:0:{DC124FEF-6459-4A53-A3A4-9DDE2AA20BE9}|HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.csproj|solutionrelative:he_thong_quan_ly_cua_hang_tien_loi_247_winform\\datatransferobjects\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DC124FEF-6459-4A53-A3A4-9DDE2AA20BE9}|HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.csproj|E:\\3_year\\TrucQuan\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\he_thong_quan_ly_cua_hang_tien_loi_247_winform\\datatransferobjects\\supplier.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DC124FEF-6459-4A53-A3A4-9DDE2AA20BE9}|HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.csproj|solutionrelative:he_thong_quan_ly_cua_hang_tien_loi_247_winform\\datatransferobjects\\supplier.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{DC124FEF-6459-4A53-A3A4-9DDE2AA20BE9}|HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.csproj|E:\\3_year\\TrucQuan\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\he_thong_quan_ly_cua_hang_tien_loi_247_winform\\presentationlayer\\controls\\ucroundbutton.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{DC124FEF-6459-4A53-A3A4-9DDE2AA20BE9}|HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.csproj|solutionrelative:he_thong_quan_ly_cua_hang_tien_loi_247_winform\\presentationlayer\\controls\\ucroundbutton.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DC124FEF-6459-4A53-A3A4-9DDE2AA20BE9}|HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.csproj|E:\\3_year\\TrucQuan\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\he_thong_quan_ly_cua_hang_tien_loi_247_winform\\presentationlayer\\controls\\ucrequiredtextbox.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DC124FEF-6459-4A53-A3A4-9DDE2AA20BE9}|HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.csproj|solutionrelative:he_thong_quan_ly_cua_hang_tien_loi_247_winform\\presentationlayer\\controls\\ucrequiredtextbox.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -162,8 +186,22 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 9,
+          "SelectedChildIndex": 13,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "frmMain.cs",
+              "DocumentMoniker": "E:\\3_year\\TrucQuan\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\PresentationLayer\\Forms\\Main\\frmMain.cs",
+              "RelativeDocumentMoniker": "HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\PresentationLayer\\Forms\\Main\\frmMain.cs",
+              "ToolTip": "E:\\3_year\\TrucQuan\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\PresentationLayer\\Forms\\Main\\frmMain.cs*",
+              "RelativeToolTip": "HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\PresentationLayer\\Forms\\Main\\frmMain.cs*",
+              "ViewState": "AgIAAEEAAAAAAAAAAAAQwF0AAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-16T07:19:24.38Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
@@ -186,46 +224,83 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "frmMain.cs",
-              "DocumentMoniker": "E:\\3_year\\TrucQuan\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\PresentationLayer\\Forms\\Main\\frmMain.cs",
-              "RelativeDocumentMoniker": "HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\PresentationLayer\\Forms\\Main\\frmMain.cs",
-              "ToolTip": "E:\\3_year\\TrucQuan\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\PresentationLayer\\Forms\\Main\\frmMain.cs*",
-              "RelativeToolTip": "HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\PresentationLayer\\Forms\\Main\\frmMain.cs*",
-              "ViewState": "AgIAAAEAAAAAAAAAAAAtwBoAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 3,
+              "Title": "frmMain.Designer.cs",
+              "DocumentMoniker": "E:\\3_year\\TrucQuan\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\PresentationLayer\\Forms\\Main\\frmMain.Designer.cs",
+              "RelativeDocumentMoniker": "HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\PresentationLayer\\Forms\\Main\\frmMain.Designer.cs",
+              "ToolTip": "E:\\3_year\\TrucQuan\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\PresentationLayer\\Forms\\Main\\frmMain.Designer.cs*",
+              "RelativeToolTip": "HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\PresentationLayer\\Forms\\Main\\frmMain.Designer.cs*",
+              "ViewState": "AgIAAGEBAAAAAAAAAAArwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-16T07:19:24.38Z",
+              "WhenOpened": "2025-11-16T10:16:06.329Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 2,
+              "Title": "frmLogin.cs [Design]",
+              "DocumentMoniker": "E:\\3_year\\TrucQuan\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\PresentationLayer\\Forms\\Main\\frmLogin.cs",
+              "RelativeDocumentMoniker": "HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\PresentationLayer\\Forms\\Main\\frmLogin.cs",
+              "ToolTip": "E:\\3_year\\TrucQuan\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\PresentationLayer\\Forms\\Main\\frmLogin.cs [Design]",
+              "RelativeToolTip": "HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\PresentationLayer\\Forms\\Main\\frmLogin.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-16T09:35:53.559Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "frmDashboard.cs",
+              "DocumentMoniker": "E:\\3_year\\TrucQuan\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\PresentationLayer\\Forms\\Main\\frmDashboard.cs",
+              "RelativeDocumentMoniker": "HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\PresentationLayer\\Forms\\Main\\frmDashboard.cs",
+              "ToolTip": "E:\\3_year\\TrucQuan\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\PresentationLayer\\Forms\\Main\\frmDashboard.cs",
+              "RelativeToolTip": "HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\PresentationLayer\\Forms\\Main\\frmDashboard.cs",
+              "ViewState": "AgIAAKYAAAAAAAAAAAAkwOEAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-16T08:49:06.794Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "frmDashboard.cs [Design]",
+              "DocumentMoniker": "E:\\3_year\\TrucQuan\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\PresentationLayer\\Forms\\Main\\frmDashboard.cs",
+              "RelativeDocumentMoniker": "HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\PresentationLayer\\Forms\\Main\\frmDashboard.cs",
+              "ToolTip": "E:\\3_year\\TrucQuan\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\PresentationLayer\\Forms\\Main\\frmDashboard.cs [Design]",
+              "RelativeToolTip": "HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\PresentationLayer\\Forms\\Main\\frmDashboard.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-16T08:45:34.392Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
               "Title": "Resources.resx",
               "DocumentMoniker": "E:\\3_year\\TrucQuan\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\Properties\\Resources.resx",
               "RelativeDocumentMoniker": "HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\Properties\\Resources.resx",
               "ToolTip": "E:\\3_year\\TrucQuan\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\Properties\\Resources.resx",
               "RelativeToolTip": "HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\Properties\\Resources.resx",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAIwIQAAAAHAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAIwJ8AAAAHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
               "WhenOpened": "2025-11-16T07:09:01.704Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 9,
               "Title": "packages.config",
               "DocumentMoniker": "E:\\3_year\\TrucQuan\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\packages.config",
               "RelativeDocumentMoniker": "HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\packages.config",
               "ToolTip": "E:\\3_year\\TrucQuan\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\packages.config",
               "RelativeToolTip": "HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\packages.config",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
               "WhenOpened": "2025-11-16T07:08:29.624Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 13,
               "Title": "frmLogin.cs",
               "DocumentMoniker": "E:\\3_year\\TrucQuan\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\PresentationLayer\\Forms\\Main\\frmLogin.cs",
               "RelativeDocumentMoniker": "HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\PresentationLayer\\Forms\\Main\\frmLogin.cs",
@@ -250,7 +325,46 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 35,
+              "DocumentIndex": 7,
+              "Title": "frmDashboard.Designer.cs",
+              "DocumentMoniker": "E:\\3_year\\TrucQuan\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\PresentationLayer\\Forms\\Main\\frmDashboard.Designer.cs",
+              "RelativeDocumentMoniker": "HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\PresentationLayer\\Forms\\Main\\frmDashboard.Designer.cs",
+              "ToolTip": "E:\\3_year\\TrucQuan\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\PresentationLayer\\Forms\\Main\\frmDashboard.Designer.cs",
+              "RelativeToolTip": "HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\PresentationLayer\\Forms\\Main\\frmDashboard.Designer.cs",
+              "ViewState": "AgIAAPQCAAAAAAAAAAAUwBADAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-16T08:50:22.957Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "App.config",
+              "DocumentMoniker": "E:\\3_year\\TrucQuan\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\App.config",
+              "RelativeDocumentMoniker": "HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\App.config",
+              "ToolTip": "E:\\3_year\\TrucQuan\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\App.config",
+              "RelativeToolTip": "HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\App.config",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
+              "WhenOpened": "2025-11-16T07:48:04.126Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "AppDbContext.cs",
+              "DocumentMoniker": "E:\\3_year\\TrucQuan\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\Models\\AppDbContext.cs",
+              "RelativeDocumentMoniker": "HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\Models\\AppDbContext.cs",
+              "ToolTip": "E:\\3_year\\TrucQuan\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\Models\\AppDbContext.cs",
+              "RelativeToolTip": "HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\Models\\AppDbContext.cs",
+              "ViewState": "AgIAAB0AAAAAAAAAAAAxwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-16T07:47:17.792Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
               "Title": "Supplier.cs",
               "DocumentMoniker": "E:\\3_year\\TrucQuan\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\DataTransferObjects\\Supplier.cs",
               "RelativeDocumentMoniker": "HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\DataTransferObjects\\Supplier.cs",
@@ -258,11 +372,12 @@
               "RelativeToolTip": "HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\DataTransferObjects\\Supplier.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-15T13:24:05.992Z"
+              "WhenOpened": "2025-11-15T13:24:05.992Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 34,
+              "DocumentIndex": 42,
               "Title": "Category.cs",
               "DocumentMoniker": "E:\\3_year\\TrucQuan\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\DataTransferObjects\\Category.cs",
               "RelativeDocumentMoniker": "HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\DataTransferObjects\\Category.cs",
@@ -274,7 +389,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 14,
               "Title": "Program.cs",
               "DocumentMoniker": "E:\\3_year\\TrucQuan\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\Program.cs",
               "RelativeDocumentMoniker": "HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\Program.cs",
@@ -287,7 +402,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 16,
               "Title": "Shift.cs",
               "DocumentMoniker": "E:\\3_year\\TrucQuan\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\DataTransferObjects\\Shift.cs",
               "RelativeDocumentMoniker": "HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\DataTransferObjects\\Shift.cs",
@@ -299,7 +414,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 37,
+              "DocumentIndex": 8,
               "Title": "ucRequiredTextBox.cs",
               "DocumentMoniker": "E:\\3_year\\TrucQuan\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\PresentationLayer\\Controls\\ucRequiredTextBox.cs",
               "RelativeDocumentMoniker": "HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\PresentationLayer\\Controls\\ucRequiredTextBox.cs",
@@ -307,11 +422,12 @@
               "RelativeToolTip": "HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\PresentationLayer\\Controls\\ucRequiredTextBox.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-15T13:27:36.276Z"
+              "WhenOpened": "2025-11-15T13:27:36.276Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 36,
+              "DocumentIndex": 43,
               "Title": "ucRoundButton.cs",
               "DocumentMoniker": "E:\\3_year\\TrucQuan\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\PresentationLayer\\Controls\\ucRoundButton.cs",
               "RelativeDocumentMoniker": "HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\PresentationLayer\\Controls\\ucRoundButton.cs",
@@ -323,7 +439,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 15,
               "Title": "Account.cs",
               "DocumentMoniker": "E:\\3_year\\TrucQuan\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\DataTransferObjects\\Account.cs",
               "RelativeDocumentMoniker": "HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\DataTransferObjects\\Account.cs",
@@ -335,7 +451,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 19,
               "Title": "SupplierRepository.cs",
               "DocumentMoniker": "E:\\3_year\\TrucQuan\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\DataAccessLayer\\Repositories\\SupplierRepository.cs",
               "RelativeDocumentMoniker": "HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\DataAccessLayer\\Repositories\\SupplierRepository.cs",
@@ -347,7 +463,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 18,
               "Title": "SaleRepository.cs",
               "DocumentMoniker": "E:\\3_year\\TrucQuan\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\DataAccessLayer\\Repositories\\SaleRepository.cs",
               "RelativeDocumentMoniker": "HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\DataAccessLayer\\Repositories\\SaleRepository.cs",
@@ -359,7 +475,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 17,
               "Title": "DBConnection.cs",
               "DocumentMoniker": "E:\\3_year\\TrucQuan\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\DataAccessLayer\\DBConnection.cs",
               "RelativeDocumentMoniker": "HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\DataAccessLayer\\DBConnection.cs",
@@ -371,7 +487,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 30,
               "Title": "ReportRepository.cs",
               "DocumentMoniker": "E:\\3_year\\TrucQuan\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\DataAccessLayer\\Repositories\\ReportRepository.cs",
               "RelativeDocumentMoniker": "HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\DataAccessLayer\\Repositories\\ReportRepository.cs",
@@ -383,7 +499,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 31,
               "Title": "PromotionRepository.cs",
               "DocumentMoniker": "E:\\3_year\\TrucQuan\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\DataAccessLayer\\Repositories\\PromotionRepository.cs",
               "RelativeDocumentMoniker": "HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\DataAccessLayer\\Repositories\\PromotionRepository.cs",
@@ -395,7 +511,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 33,
+              "DocumentIndex": 41,
               "Title": "Sale.cs",
               "DocumentMoniker": "E:\\3_year\\TrucQuan\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\DataTransferObjects\\Sale.cs",
               "RelativeDocumentMoniker": "HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\DataTransferObjects\\Sale.cs",
@@ -407,7 +523,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 32,
+              "DocumentIndex": 40,
               "Title": "Customer.cs",
               "DocumentMoniker": "E:\\3_year\\TrucQuan\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\DataTransferObjects\\Customer.cs",
               "RelativeDocumentMoniker": "HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\DataTransferObjects\\Customer.cs",
@@ -419,7 +535,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 31,
+              "DocumentIndex": 39,
               "Title": "Employee.cs",
               "DocumentMoniker": "E:\\3_year\\TrucQuan\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\DataTransferObjects\\Employee.cs",
               "RelativeDocumentMoniker": "HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\DataTransferObjects\\Employee.cs",
@@ -431,7 +547,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 38,
               "Title": "Product.cs",
               "DocumentMoniker": "E:\\3_year\\TrucQuan\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\DataTransferObjects\\Product.cs",
               "RelativeDocumentMoniker": "HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\DataTransferObjects\\Product.cs",
@@ -443,7 +559,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 37,
               "Title": "InventoryService.cs",
               "DocumentMoniker": "E:\\3_year\\TrucQuan\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\BusinessLogicLayer\\InventoryService.cs",
               "RelativeDocumentMoniker": "HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\BusinessLogicLayer\\InventoryService.cs",
@@ -455,7 +571,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 36,
               "Title": "ReportService.cs",
               "DocumentMoniker": "E:\\3_year\\TrucQuan\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\BusinessLogicLayer\\ReportService.cs",
               "RelativeDocumentMoniker": "HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\BusinessLogicLayer\\ReportService.cs",
@@ -467,7 +583,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 35,
               "Title": "CustomerService.cs",
               "DocumentMoniker": "E:\\3_year\\TrucQuan\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\BusinessLogicLayer\\CustomerService.cs",
               "RelativeDocumentMoniker": "HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\BusinessLogicLayer\\CustomerService.cs",
@@ -479,7 +595,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 34,
               "Title": "EmployeeService.cs",
               "DocumentMoniker": "E:\\3_year\\TrucQuan\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\BusinessLogicLayer\\EmployeeService.cs",
               "RelativeDocumentMoniker": "HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\BusinessLogicLayer\\EmployeeService.cs",
@@ -491,7 +607,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 33,
               "Title": "SaleService.cs",
               "DocumentMoniker": "E:\\3_year\\TrucQuan\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\BusinessLogicLayer\\SaleService.cs",
               "RelativeDocumentMoniker": "HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\BusinessLogicLayer\\SaleService.cs",
@@ -503,7 +619,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 32,
               "Title": "ProductService.cs",
               "DocumentMoniker": "E:\\3_year\\TrucQuan\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\BusinessLogicLayer\\ProductService.cs",
               "RelativeDocumentMoniker": "HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\BusinessLogicLayer\\ProductService.cs",
@@ -515,7 +631,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 20,
               "Title": "ProductRepository.cs",
               "DocumentMoniker": "E:\\3_year\\TrucQuan\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\DataAccessLayer\\Repositories\\ProductRepository.cs",
               "RelativeDocumentMoniker": "HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\DataAccessLayer\\Repositories\\ProductRepository.cs",
@@ -527,7 +643,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 21,
               "Title": "EmployeeRepository.cs",
               "DocumentMoniker": "E:\\3_year\\TrucQuan\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\DataAccessLayer\\Repositories\\EmployeeRepository.cs",
               "RelativeDocumentMoniker": "HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\DataAccessLayer\\Repositories\\EmployeeRepository.cs",
@@ -539,7 +655,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 29,
               "Title": "InventoryRepository.cs",
               "DocumentMoniker": "E:\\3_year\\TrucQuan\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\DataAccessLayer\\Repositories\\InventoryRepository.cs",
               "RelativeDocumentMoniker": "HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\DataAccessLayer\\Repositories\\InventoryRepository.cs",
@@ -551,7 +667,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 22,
               "Title": "CustomerRepository.cs",
               "DocumentMoniker": "E:\\3_year\\TrucQuan\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\DataAccessLayer\\Repositories\\CustomerRepository.cs",
               "RelativeDocumentMoniker": "HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\DataAccessLayer\\Repositories\\CustomerRepository.cs",
@@ -563,7 +679,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 23,
               "Title": "BaseRepository.cs",
               "DocumentMoniker": "E:\\3_year\\TrucQuan\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\DataAccessLayer\\Repositories\\BaseRepository.cs",
               "RelativeDocumentMoniker": "HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\DataAccessLayer\\Repositories\\BaseRepository.cs",
@@ -575,7 +691,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 24,
               "Title": "ValidationHelper.cs",
               "DocumentMoniker": "E:\\3_year\\TrucQuan\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\Common\\ValidationHelper.cs",
               "RelativeDocumentMoniker": "HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\Common\\ValidationHelper.cs",
@@ -587,7 +703,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 27,
               "Title": "DateTimeHelper.cs",
               "DocumentMoniker": "E:\\3_year\\TrucQuan\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\Common\\DateTimeHelper.cs",
               "RelativeDocumentMoniker": "HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\Common\\DateTimeHelper.cs",
@@ -599,7 +715,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 26,
               "Title": "ImageHelper.cs",
               "DocumentMoniker": "E:\\3_year\\TrucQuan\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\Common\\ImageHelper.cs",
               "RelativeDocumentMoniker": "HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\Common\\ImageHelper.cs",
@@ -611,7 +727,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 25,
               "Title": "StringHelper.cs",
               "DocumentMoniker": "E:\\3_year\\TrucQuan\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\Common\\StringHelper.cs",
               "RelativeDocumentMoniker": "HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\Common\\StringHelper.cs",
@@ -623,7 +739,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 28,
               "Title": "AppConfig.cs",
               "DocumentMoniker": "E:\\3_year\\TrucQuan\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\Common\\AppConfig.cs",
               "RelativeDocumentMoniker": "HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\Common\\AppConfig.cs",
@@ -632,18 +748,6 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-11-15T13:09:01.689Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 20,
-              "Title": "AppDbContext.cs",
-              "DocumentMoniker": "E:\\3_year\\TrucQuan\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\Models\\AppDbContext.cs",
-              "RelativeDocumentMoniker": "HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\Models\\AppDbContext.cs",
-              "ToolTip": "E:\\3_year\\TrucQuan\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\Models\\AppDbContext.cs",
-              "RelativeToolTip": "HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\\Models\\AppDbContext.cs",
-              "ViewState": "AgIAADwAAAAAAAAAAAA/wE8AAAA5AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-27T09:28:30.452Z"
             }
           ]
         },
