@@ -180,6 +180,96 @@
     <Compile Include="PresentationLayer\Controls\ucRoundButton.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="PresentationLayer\Forms\Customers\frmCustomerList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\Customers\frmCustomerList.Designer.cs">
+      <DependentUpon>frmCustomerList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\Customers\frmCustomers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\Customers\frmCustomers.Designer.cs">
+      <DependentUpon>frmCustomers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\Customers\frmMemberCards.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\Customers\frmMemberCards.Designer.cs">
+      <DependentUpon>frmMemberCards.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\Customers\frmPurchaseHistory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\Customers\frmPurchaseHistory.Designer.cs">
+      <DependentUpon>frmPurchaseHistory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\Employees\frmEmployeeList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\Employees\frmEmployeeList.Designer.cs">
+      <DependentUpon>frmEmployeeList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\Employees\frmEmployees.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\Employees\frmEmployees.Designer.cs">
+      <DependentUpon>frmEmployees.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\Employees\frmWorkSchedule.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\Employees\frmWorkSchedule.Designer.cs">
+      <DependentUpon>frmWorkSchedule.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\Inventory\frmGoodsIssue.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\Inventory\frmGoodsIssue.Designer.cs">
+      <DependentUpon>frmGoodsIssue.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\Inventory\frmGoodsReceived.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\Inventory\frmGoodsReceived.Designer.cs">
+      <DependentUpon>frmGoodsReceived.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\Inventory\frmInventoryList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\Inventory\frmInventoryList.Designer.cs">
+      <DependentUpon>frmInventoryList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\Inventory\frmInventoryMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\Inventory\frmInventoryMain.Designer.cs">
+      <DependentUpon>frmInventoryMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\Inventory\frmProductLocation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\Inventory\frmProductLocation.Designer.cs">
+      <DependentUpon>frmProductLocation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\Inventory\frmStocktake.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\Inventory\frmStocktake.Designer.cs">
+      <DependentUpon>frmStocktake.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\Invoice\frmInvoiceDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\Invoice\frmInvoiceDetails.Designer.cs">
+      <DependentUpon>frmInvoiceDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\Invoice\frmInvoices.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\Invoice\frmInvoices.Designer.cs">
+      <DependentUpon>frmInvoices.cs</DependentUpon>
+    </Compile>
     <Compile Include="PresentationLayer\Forms\Main\frmDashboard.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -228,6 +318,30 @@
     <Compile Include="PresentationLayer\Forms\Products\frmSuppliers.Designer.cs">
       <DependentUpon>frmSuppliers.cs</DependentUpon>
     </Compile>
+    <Compile Include="PresentationLayer\Forms\Suppliers\frmSupplierList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\Suppliers\frmSupplierList.Designer.cs">
+      <DependentUpon>frmSupplierList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\Suppliers\frmSuppliersMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\Suppliers\frmSuppliersMain.Designer.cs">
+      <DependentUpon>frmSuppliersMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\Suppliers\frmTransactionHistory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\Suppliers\frmTransactionHistory.Designer.cs">
+      <DependentUpon>frmTransactionHistory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Promotions\frmPromotions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Promotions\frmPromotions.Designer.cs">
+      <DependentUpon>frmPromotions.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="PresentationLayer\Forms\Main\frmDashboard.resx">
@@ -265,7 +379,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Control\" />
-    <Folder Include="PresentationLayer\Forms\Sales\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\img\bill.png" />
