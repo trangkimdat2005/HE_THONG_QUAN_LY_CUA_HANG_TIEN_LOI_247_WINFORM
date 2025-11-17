@@ -270,6 +270,7 @@
     <Compile Include="PresentationLayer\Forms\Invoice\frmInvoices.Designer.cs">
       <DependentUpon>frmInvoices.cs</DependentUpon>
     </Compile>
+    <Compile Include="PresentationLayer\Forms\Main\frmConnectionStringBuilder.cs" />
     <Compile Include="PresentationLayer\Forms\Main\frmDashboard.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -312,6 +313,12 @@
     <Compile Include="PresentationLayer\Forms\Products\frmProducts.Designer.cs">
       <DependentUpon>frmProducts.cs</DependentUpon>
     </Compile>
+    <Compile Include="PresentationLayer\Forms\Products\frmProductsMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Forms\Products\frmProductsMain.Designer.cs">
+      <DependentUpon>frmProductsMain.cs</DependentUpon>
+    </Compile>
     <Compile Include="PresentationLayer\Forms\Products\frmSuppliers.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -323,12 +330,6 @@
     </Compile>
     <Compile Include="PresentationLayer\Forms\Suppliers\frmSupplierList.Designer.cs">
       <DependentUpon>frmSupplierList.cs</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationLayer\Forms\Suppliers\frmSuppliersMain.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PresentationLayer\Forms\Suppliers\frmSuppliersMain.Designer.cs">
-      <DependentUpon>frmSuppliersMain.cs</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Forms\Suppliers\frmTransactionHistory.cs">
       <SubType>Form</SubType>
@@ -352,6 +353,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Forms\Main\frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Forms\Products\frmSuppliers.resx">
+      <DependentUpon>frmSuppliers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Forms\Suppliers\frmSupplierList.resx">
+      <DependentUpon>frmSupplierList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -381,6 +388,7 @@
     <Folder Include="Control\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Database\InsertSampleData.sql" />
     <Content Include="Resources\img\bill.png" />
     <Content Include="Resources\img\fire.png" />
     <Content Include="Resources\img\high-volume.png" />

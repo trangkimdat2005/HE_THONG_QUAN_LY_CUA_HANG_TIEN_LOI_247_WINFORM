@@ -28,12 +28,512 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.panelTop = new System.Windows.Forms.Panel();
+            this.lblTitle = new System.Windows.Forms.Label();
+            this.panelSearch = new System.Windows.Forms.Panel();
+            this.btnRefresh = new System.Windows.Forms.Button();
+            this.btnSearch = new System.Windows.Forms.Button();
+            this.txtSearch = new System.Windows.Forms.TextBox();
+            this.lblSearch = new System.Windows.Forms.Label();
+            this.panelButtons = new System.Windows.Forms.Panel();
+            this.btnExport = new System.Windows.Forms.Button();
+            this.btnDelete = new System.Windows.Forms.Button();
+            this.btnEdit = new System.Windows.Forms.Button();
+            this.btnAdd = new System.Windows.Forms.Button();
+            this.panelGrid = new System.Windows.Forms.Panel();
+            this.dgvSuppliers = new System.Windows.Forms.DataGridView();
+            this.panelDetail = new System.Windows.Forms.Panel();
+            this.groupBoxDetail = new System.Windows.Forms.GroupBox();
+            this.lblReceiptCount = new System.Windows.Forms.Label();
+            this.txtTaxCode = new System.Windows.Forms.TextBox();
+            this.lblTaxCode = new System.Windows.Forms.Label();
+            this.txtAddress = new System.Windows.Forms.TextBox();
+            this.lblAddress = new System.Windows.Forms.Label();
+            this.txtEmail = new System.Windows.Forms.TextBox();
+            this.lblEmail = new System.Windows.Forms.Label();
+            this.txtPhone = new System.Windows.Forms.TextBox();
+            this.lblPhone = new System.Windows.Forms.Label();
+            this.btnCancel = new System.Windows.Forms.Button();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.txtSupplierName = new System.Windows.Forms.TextBox();
+            this.txtSupplierId = new System.Windows.Forms.TextBox();
+            this.lblSupplierName = new System.Windows.Forms.Label();
+            this.lblSupplierId = new System.Windows.Forms.Label();
+            this.panelStatus = new System.Windows.Forms.Panel();
+            this.lblStatus = new System.Windows.Forms.Label();
+            this.panelTop.SuspendLayout();
+            this.panelSearch.SuspendLayout();
+            this.panelButtons.SuspendLayout();
+            this.panelGrid.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSuppliers)).BeginInit();
+            this.panelDetail.SuspendLayout();
+            this.groupBoxDetail.SuspendLayout();
+            this.panelStatus.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // panelTop
+            // 
+            this.panelTop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
+            this.panelTop.Controls.Add(this.lblTitle);
+            this.panelTop.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelTop.Location = new System.Drawing.Point(0, 0);
+            this.panelTop.Name = "panelTop";
+            this.panelTop.Size = new System.Drawing.Size(1400, 60);
+            this.panelTop.TabIndex = 0;
+            // 
+            // lblTitle
+            // 
+            this.lblTitle.AutoSize = true;
+            this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold);
+            this.lblTitle.ForeColor = System.Drawing.Color.White;
+            this.lblTitle.Location = new System.Drawing.Point(12, 12);
+            this.lblTitle.Name = "lblTitle";
+            this.lblTitle.Size = new System.Drawing.Size(308, 32);
+            this.lblTitle.TabIndex = 0;
+            this.lblTitle.Text = "QUẢN LÝ NHÀ CUNG CẤP";
+            // 
+            // panelSearch
+            // 
+            this.panelSearch.BackColor = System.Drawing.Color.White;
+            this.panelSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelSearch.Controls.Add(this.btnRefresh);
+            this.panelSearch.Controls.Add(this.btnSearch);
+            this.panelSearch.Controls.Add(this.txtSearch);
+            this.panelSearch.Controls.Add(this.lblSearch);
+            this.panelSearch.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelSearch.Location = new System.Drawing.Point(0, 60);
+            this.panelSearch.Name = "panelSearch";
+            this.panelSearch.Padding = new System.Windows.Forms.Padding(10);
+            this.panelSearch.Size = new System.Drawing.Size(1400, 70);
+            this.panelSearch.TabIndex = 1;
+            // 
+            // btnRefresh
+            // 
+            this.btnRefresh.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(152)))), ((int)(((byte)(219)))));
+            this.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRefresh.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
+            this.btnRefresh.ForeColor = System.Drawing.Color.White;
+            this.btnRefresh.Location = new System.Drawing.Point(799, 20);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(100, 35);
+            this.btnRefresh.TabIndex = 3;
+            this.btnRefresh.Text = "Làm mới";
+            this.btnRefresh.UseVisualStyleBackColor = false;
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(204)))), ((int)(((byte)(113)))));
+            this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSearch.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
+            this.btnSearch.ForeColor = System.Drawing.Color.White;
+            this.btnSearch.Location = new System.Drawing.Point(693, 20);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(100, 35);
+            this.btnSearch.TabIndex = 2;
+            this.btnSearch.Text = "Tìm kiếm";
+            this.btnSearch.UseVisualStyleBackColor = false;
+            // 
+            // txtSearch
+            // 
+            this.txtSearch.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.txtSearch.Location = new System.Drawing.Point(221, 25);
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(400, 25);
+            this.txtSearch.TabIndex = 1;
+            // 
+            // lblSearch
+            // 
+            this.lblSearch.AutoSize = true;
+            this.lblSearch.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
+            this.lblSearch.Location = new System.Drawing.Point(15, 28);
+            this.lblSearch.Name = "lblSearch";
+            this.lblSearch.Size = new System.Drawing.Size(200, 17);
+            this.lblSearch.TabIndex = 0;
+            this.lblSearch.Text = "Tên / SĐT / MST nhà cung cấp:";
+            // 
+            // panelButtons
+            // 
+            this.panelButtons.BackColor = System.Drawing.Color.White;
+            this.panelButtons.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelButtons.Controls.Add(this.btnExport);
+            this.panelButtons.Controls.Add(this.btnDelete);
+            this.panelButtons.Controls.Add(this.btnEdit);
+            this.panelButtons.Controls.Add(this.btnAdd);
+            this.panelButtons.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelButtons.Location = new System.Drawing.Point(0, 130);
+            this.panelButtons.Name = "panelButtons";
+            this.panelButtons.Size = new System.Drawing.Size(1400, 60);
+            this.panelButtons.TabIndex = 2;
+            // 
+            // btnExport
+            // 
+            this.btnExport.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(89)))), ((int)(((byte)(182)))));
+            this.btnExport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExport.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.btnExport.ForeColor = System.Drawing.Color.White;
+            this.btnExport.Location = new System.Drawing.Point(390, 10);
+            this.btnExport.Name = "btnExport";
+            this.btnExport.Size = new System.Drawing.Size(120, 40);
+            this.btnExport.TabIndex = 3;
+            this.btnExport.Text = "Xuất Excel";
+            this.btnExport.UseVisualStyleBackColor = false;
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(76)))), ((int)(((byte)(60)))));
+            this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDelete.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.btnDelete.ForeColor = System.Drawing.Color.White;
+            this.btnDelete.Location = new System.Drawing.Point(270, 10);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(110, 40);
+            this.btnDelete.TabIndex = 2;
+            this.btnDelete.Text = "Xóa";
+            this.btnDelete.UseVisualStyleBackColor = false;
+            // 
+            // btnEdit
+            // 
+            this.btnEdit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(196)))), ((int)(((byte)(15)))));
+            this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEdit.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.btnEdit.ForeColor = System.Drawing.Color.White;
+            this.btnEdit.Location = new System.Drawing.Point(140, 10);
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.Size = new System.Drawing.Size(120, 40);
+            this.btnEdit.TabIndex = 1;
+            this.btnEdit.Text = "Chỉnh sửa";
+            this.btnEdit.UseVisualStyleBackColor = false;
+            // 
+            // btnAdd
+            // 
+            this.btnAdd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(204)))), ((int)(((byte)(113)))));
+            this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAdd.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.btnAdd.ForeColor = System.Drawing.Color.White;
+            this.btnAdd.Location = new System.Drawing.Point(10, 10);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(120, 40);
+            this.btnAdd.TabIndex = 0;
+            this.btnAdd.Text = "Thêm mới";
+            this.btnAdd.UseVisualStyleBackColor = false;
+            // 
+            // panelGrid
+            // 
+            this.panelGrid.Controls.Add(this.dgvSuppliers);
+            this.panelGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelGrid.Location = new System.Drawing.Point(0, 190);
+            this.panelGrid.Name = "panelGrid";
+            this.panelGrid.Padding = new System.Windows.Forms.Padding(10);
+            this.panelGrid.Size = new System.Drawing.Size(950, 485);
+            this.panelGrid.TabIndex = 3;
+            // 
+            // dgvSuppliers
+            // 
+            this.dgvSuppliers.AllowUserToAddRows = false;
+            this.dgvSuppliers.AllowUserToDeleteRows = false;
+            this.dgvSuppliers.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvSuppliers.BackgroundColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvSuppliers.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            this.dgvSuppliers.ColumnHeadersHeight = 40;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 9F);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(152)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvSuppliers.DefaultCellStyle = dataGridViewCellStyle4;
+            this.dgvSuppliers.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvSuppliers.EnableHeadersVisualStyles = false;
+            this.dgvSuppliers.Location = new System.Drawing.Point(10, 10);
+            this.dgvSuppliers.MultiSelect = false;
+            this.dgvSuppliers.Name = "dgvSuppliers";
+            this.dgvSuppliers.ReadOnly = true;
+            this.dgvSuppliers.RowHeadersVisible = false;
+            this.dgvSuppliers.RowTemplate.Height = 35;
+            this.dgvSuppliers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvSuppliers.Size = new System.Drawing.Size(930, 465);
+            this.dgvSuppliers.TabIndex = 0;
+            // 
+            // panelDetail
+            // 
+            this.panelDetail.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.panelDetail.Controls.Add(this.groupBoxDetail);
+            this.panelDetail.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panelDetail.Location = new System.Drawing.Point(950, 190);
+            this.panelDetail.Name = "panelDetail";
+            this.panelDetail.Padding = new System.Windows.Forms.Padding(10);
+            this.panelDetail.Size = new System.Drawing.Size(450, 485);
+            this.panelDetail.TabIndex = 4;
+            // 
+            // groupBoxDetail
+            // 
+            this.groupBoxDetail.Controls.Add(this.lblReceiptCount);
+            this.groupBoxDetail.Controls.Add(this.txtTaxCode);
+            this.groupBoxDetail.Controls.Add(this.lblTaxCode);
+            this.groupBoxDetail.Controls.Add(this.txtAddress);
+            this.groupBoxDetail.Controls.Add(this.lblAddress);
+            this.groupBoxDetail.Controls.Add(this.txtEmail);
+            this.groupBoxDetail.Controls.Add(this.lblEmail);
+            this.groupBoxDetail.Controls.Add(this.txtPhone);
+            this.groupBoxDetail.Controls.Add(this.lblPhone);
+            this.groupBoxDetail.Controls.Add(this.btnCancel);
+            this.groupBoxDetail.Controls.Add(this.btnSave);
+            this.groupBoxDetail.Controls.Add(this.txtSupplierName);
+            this.groupBoxDetail.Controls.Add(this.txtSupplierId);
+            this.groupBoxDetail.Controls.Add(this.lblSupplierName);
+            this.groupBoxDetail.Controls.Add(this.lblSupplierId);
+            this.groupBoxDetail.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBoxDetail.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.groupBoxDetail.Location = new System.Drawing.Point(10, 10);
+            this.groupBoxDetail.Name = "groupBoxDetail";
+            this.groupBoxDetail.Size = new System.Drawing.Size(430, 465);
+            this.groupBoxDetail.TabIndex = 0;
+            this.groupBoxDetail.TabStop = false;
+            this.groupBoxDetail.Text = "Chi tiết nhà cung cấp";
+            // 
+            // lblReceiptCount
+            // 
+            this.lblReceiptCount.AutoSize = true;
+            this.lblReceiptCount.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
+            this.lblReceiptCount.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(152)))), ((int)(((byte)(219)))));
+            this.lblReceiptCount.Location = new System.Drawing.Point(20, 350);
+            this.lblReceiptCount.Name = "lblReceiptCount";
+            this.lblReceiptCount.Size = new System.Drawing.Size(112, 17);
+            this.lblReceiptCount.TabIndex = 14;
+            this.lblReceiptCount.Text = "Số phiếu nhập: 0";
+            // 
+            // txtTaxCode
+            // 
+            this.txtTaxCode.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.txtTaxCode.Location = new System.Drawing.Point(150, 300);
+            this.txtTaxCode.Name = "txtTaxCode";
+            this.txtTaxCode.Size = new System.Drawing.Size(250, 25);
+            this.txtTaxCode.TabIndex = 13;
+            // 
+            // lblTaxCode
+            // 
+            this.lblTaxCode.AutoSize = true;
+            this.lblTaxCode.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
+            this.lblTaxCode.Location = new System.Drawing.Point(20, 303);
+            this.lblTaxCode.Name = "lblTaxCode";
+            this.lblTaxCode.Size = new System.Drawing.Size(81, 17);
+            this.lblTaxCode.TabIndex = 12;
+            this.lblTaxCode.Text = "Mã số thuế:";
+            // 
+            // txtAddress
+            // 
+            this.txtAddress.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.txtAddress.Location = new System.Drawing.Point(150, 210);
+            this.txtAddress.Multiline = true;
+            this.txtAddress.Name = "txtAddress";
+            this.txtAddress.Size = new System.Drawing.Size(250, 60);
+            this.txtAddress.TabIndex = 11;
+            // 
+            // lblAddress
+            // 
+            this.lblAddress.AutoSize = true;
+            this.lblAddress.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
+            this.lblAddress.Location = new System.Drawing.Point(20, 213);
+            this.lblAddress.Name = "lblAddress";
+            this.lblAddress.Size = new System.Drawing.Size(55, 17);
+            this.lblAddress.TabIndex = 10;
+            this.lblAddress.Text = "Địa chỉ:";
+            // 
+            // txtEmail
+            // 
+            this.txtEmail.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.txtEmail.Location = new System.Drawing.Point(150, 170);
+            this.txtEmail.Name = "txtEmail";
+            this.txtEmail.Size = new System.Drawing.Size(250, 25);
+            this.txtEmail.TabIndex = 9;
+            // 
+            // lblEmail
+            // 
+            this.lblEmail.AutoSize = true;
+            this.lblEmail.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
+            this.lblEmail.Location = new System.Drawing.Point(20, 173);
+            this.lblEmail.Name = "lblEmail";
+            this.lblEmail.Size = new System.Drawing.Size(46, 17);
+            this.lblEmail.TabIndex = 8;
+            this.lblEmail.Text = "Email:";
+            // 
+            // txtPhone
+            // 
+            this.txtPhone.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.txtPhone.Location = new System.Drawing.Point(150, 130);
+            this.txtPhone.Name = "txtPhone";
+            this.txtPhone.Size = new System.Drawing.Size(250, 25);
+            this.txtPhone.TabIndex = 7;
+            // 
+            // lblPhone
+            // 
+            this.lblPhone.AutoSize = true;
+            this.lblPhone.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
+            this.lblPhone.Location = new System.Drawing.Point(20, 133);
+            this.lblPhone.Name = "lblPhone";
+            this.lblPhone.Size = new System.Drawing.Size(94, 17);
+            this.lblPhone.TabIndex = 6;
+            this.lblPhone.Text = "Số điện thoại:";
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(149)))), ((int)(((byte)(165)))), ((int)(((byte)(166)))));
+            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCancel.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.btnCancel.ForeColor = System.Drawing.Color.White;
+            this.btnCancel.Location = new System.Drawing.Point(240, 390);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(110, 40);
+            this.btnCancel.TabIndex = 5;
+            this.btnCancel.Text = "Hủy";
+            this.btnCancel.UseVisualStyleBackColor = false;
+            // 
+            // btnSave
+            // 
+            this.btnSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(204)))), ((int)(((byte)(113)))));
+            this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSave.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.btnSave.ForeColor = System.Drawing.Color.White;
+            this.btnSave.Location = new System.Drawing.Point(90, 390);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(130, 40);
+            this.btnSave.TabIndex = 4;
+            this.btnSave.Text = "Lưu";
+            this.btnSave.UseVisualStyleBackColor = false;
+            // 
+            // txtSupplierName
+            // 
+            this.txtSupplierName.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.txtSupplierName.Location = new System.Drawing.Point(150, 90);
+            this.txtSupplierName.Name = "txtSupplierName";
+            this.txtSupplierName.Size = new System.Drawing.Size(250, 25);
+            this.txtSupplierName.TabIndex = 3;
+            // 
+            // txtSupplierId
+            // 
+            this.txtSupplierId.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.txtSupplierId.Location = new System.Drawing.Point(150, 50);
+            this.txtSupplierId.Name = "txtSupplierId";
+            this.txtSupplierId.ReadOnly = true;
+            this.txtSupplierId.Size = new System.Drawing.Size(250, 25);
+            this.txtSupplierId.TabIndex = 2;
+            // 
+            // lblSupplierName
+            // 
+            this.lblSupplierName.AutoSize = true;
+            this.lblSupplierName.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
+            this.lblSupplierName.Location = new System.Drawing.Point(20, 93);
+            this.lblSupplierName.Name = "lblSupplierName";
+            this.lblSupplierName.Size = new System.Drawing.Size(64, 17);
+            this.lblSupplierName.TabIndex = 1;
+            this.lblSupplierName.Text = "Tên NCC:";
+            // 
+            // lblSupplierId
+            // 
+            this.lblSupplierId.AutoSize = true;
+            this.lblSupplierId.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
+            this.lblSupplierId.Location = new System.Drawing.Point(20, 53);
+            this.lblSupplierId.Name = "lblSupplierId";
+            this.lblSupplierId.Size = new System.Drawing.Size(61, 17);
+            this.lblSupplierId.TabIndex = 0;
+            this.lblSupplierId.Text = "Mã NCC:";
+            // 
+            // panelStatus
+            // 
+            this.panelStatus.BackColor = System.Drawing.Color.White;
+            this.panelStatus.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelStatus.Controls.Add(this.lblStatus);
+            this.panelStatus.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panelStatus.Location = new System.Drawing.Point(0, 675);
+            this.panelStatus.Name = "panelStatus";
+            this.panelStatus.Size = new System.Drawing.Size(1400, 35);
+            this.panelStatus.TabIndex = 5;
+            // 
+            // lblStatus
+            // 
+            this.lblStatus.AutoSize = true;
+            this.lblStatus.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
+            this.lblStatus.Location = new System.Drawing.Point(10, 8);
+            this.lblStatus.Name = "lblStatus";
+            this.lblStatus.Size = new System.Drawing.Size(73, 17);
+            this.lblStatus.TabIndex = 0;
+            this.lblStatus.Text = "Tổng số: 0";
+            // 
+            // frmSuppliers
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "frmSuppliers";
+            this.ClientSize = new System.Drawing.Size(1400, 710);
+            this.Controls.Add(this.panelGrid);
+            this.Controls.Add(this.panelDetail);
+            this.Controls.Add(this.panelButtons);
+            this.Controls.Add(this.panelSearch);
+            this.Controls.Add(this.panelTop);
+            this.Controls.Add(this.panelStatus);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Name = "frmSuppliers";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Quản lý nhà cung cấp";
+            this.panelTop.ResumeLayout(false);
+            this.panelTop.PerformLayout();
+            this.panelSearch.ResumeLayout(false);
+            this.panelSearch.PerformLayout();
+            this.panelButtons.ResumeLayout(false);
+            this.panelGrid.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSuppliers)).EndInit();
+            this.panelDetail.ResumeLayout(false);
+            this.groupBoxDetail.ResumeLayout(false);
+            this.groupBoxDetail.PerformLayout();
+            this.panelStatus.ResumeLayout(false);
+            this.panelStatus.PerformLayout();
+            this.ResumeLayout(false);
+
         }
 
         #endregion
+
+        private System.Windows.Forms.Panel panelTop;
+        private System.Windows.Forms.Label lblTitle;
+        private System.Windows.Forms.Panel panelSearch;
+        private System.Windows.Forms.Button btnSearch;
+        private System.Windows.Forms.TextBox txtSearch;
+        private System.Windows.Forms.Label lblSearch;
+        private System.Windows.Forms.Panel panelButtons;
+        private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.Button btnEdit;
+        private System.Windows.Forms.Button btnAdd;
+        private System.Windows.Forms.Panel panelGrid;
+        private System.Windows.Forms.DataGridView dgvSuppliers;
+        private System.Windows.Forms.Panel panelDetail;
+        private System.Windows.Forms.GroupBox groupBoxDetail;
+        private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.TextBox txtSupplierName;
+        private System.Windows.Forms.TextBox txtSupplierId;
+        private System.Windows.Forms.Label lblSupplierName;
+        private System.Windows.Forms.Label lblSupplierId;
+        private System.Windows.Forms.Button btnRefresh;
+        private System.Windows.Forms.Button btnExport;
+        private System.Windows.Forms.Panel panelStatus;
+        private System.Windows.Forms.Label lblStatus;
+        private System.Windows.Forms.TextBox txtPhone;
+        private System.Windows.Forms.Label lblPhone;
+        private System.Windows.Forms.TextBox txtEmail;
+        private System.Windows.Forms.Label lblEmail;
+        private System.Windows.Forms.TextBox txtAddress;
+        private System.Windows.Forms.Label lblAddress;
+        private System.Windows.Forms.TextBox txtTaxCode;
+        private System.Windows.Forms.Label lblTaxCode;
+        private System.Windows.Forms.Label lblReceiptCount;
     }
 }
