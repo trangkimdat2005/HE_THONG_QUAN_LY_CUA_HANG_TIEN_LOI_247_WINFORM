@@ -20,6 +20,9 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
     public partial class frmMain : Form
     {
         private Form currentChildForm;
+        
+        // Cache forms để tránh khởi tạo lại nhiều lần
+        private Dictionary<Type, Form> formCache = new Dictionary<Type, Form>();
 
         public frmMain()
         {
@@ -40,6 +43,16 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
 
         private void btn_logout_Click(object sender, EventArgs e)
         {
+            // Cleanup cached forms
+            foreach (var form in formCache.Values)
+            {
+                if (form != null && !form.IsDisposed)
+                {
+                    form.Dispose();
+                }
+            }
+            formCache.Clear();
+            
             // Thêm code đăng xuất ở đây
             this.Close();
         }
@@ -131,19 +144,44 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
 
         private void LoadFormIntoPanel(Form childForm)
         {
-            // Kiểm tra nếu form mới trùng với form hiện tại
-            if (currentChildForm != null && currentChildForm.GetType() == childForm.GetType())
+            Type formType = childForm.GetType();
+            
+            // Kiểm tra nếu form đã được cache
+            if (formCache.ContainsKey(formType))
             {
-                // Không load lại nếu cùng loại form
-                childForm.Dispose();
-                return;
+                // Reuse cached form
+                Form cachedForm = formCache[formType];
+                
+                // Kiểm tra nếu form đã bị dispose thì tạo lại
+                if (cachedForm.IsDisposed)
+                {
+                    formCache[formType] = childForm;
+                    cachedForm = childForm;
+                }
+                else
+                {
+                    // Dispose form mới vì đã có cache
+                    childForm.Dispose();
+                }
+                
+                // Kiểm tra nếu form này đang hiển thị
+                if (currentChildForm == cachedForm && sharePanel.Controls.Contains(cachedForm))
+                {
+                    return; // Không làm gì cả
+                }
+                
+                childForm = cachedForm;
+            }
+            else
+            {
+                // Cache form mới
+                formCache[formType] = childForm;
             }
 
-            // Cleanup form cũ nếu có
+            // Ẩn form cũ nếu có (không dispose để có thể reuse)
             if (currentChildForm != null)
             {
-                currentChildForm.Close();
-                currentChildForm.Dispose();
+                currentChildForm.Hide();
             }
 
             // Xóa các control cũ trong sharePanel
@@ -175,71 +213,35 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
             SetActiveButton(btn_products, null);
         }
 
-        // Helper function để load frmProducts nếu nó chưa được load
-        private void LoadProductsFormIfNotLoaded()
-        {
-            if (currentChildForm == null || !(currentChildForm is frmProducts))
-            {
-                LoadFormIntoPanel(new frmProducts());
-            }
-        }
-
-        // Helper function để load frmEmployees nếu nó chưa được load
-        private void LoadEmployeesFormIfNotLoaded()
-        {
-            if (currentChildForm == null || !(currentChildForm is frmEmployees))
-            {
-                LoadFormIntoPanel(new frmEmployees());
-            }
-        }
-
-        // Helper function để load frmCustomers nếu nó chưa được load
-        private void LoadCustomersFormIfNotLoaded()
-        {
-            if (currentChildForm == null || !(currentChildForm is frmCustomers))
-            {
-                LoadFormIntoPanel(new frmCustomers());
-            }
-        }
-
-        // Helper function để load frmSuppliersMain nếu nó chưa được load
-        private void LoadSuppliersFormIfNotLoaded()
-        {
-            if (currentChildForm == null || !(currentChildForm is frmSuppliersMain))
-            {
-                LoadFormIntoPanel(new frmSuppliersMain());
-            }
-        }
-
         // --- Click cho các nút menu con của Sản phẩm ---
 
         private void btnSub_SanPham_Click(object sender, EventArgs e)
         {
-            LoadProductsFormIfNotLoaded();
+            LoadFormIntoPanel(new frmProducts());
             SetActiveButton(btn_products, btnSub_SanPham);
         }
 
         private void btnSub_DanhMuc_Click(object sender, EventArgs e)
         {
-            LoadProductsFormIfNotLoaded();
+            LoadFormIntoPanel(new frmCategorys());
             SetActiveButton(btn_products, btnSub_DanhMuc);
         }
 
         private void btnSub_NhaCungCap_Click(object sender, EventArgs e)
         {
-            LoadProductsFormIfNotLoaded();
+            LoadFormIntoPanel(new frmSuppliers());
             SetActiveButton(btn_products, btnSub_NhaCungCap);
         }
 
         private void btnSub_NhanHieu_Click(object sender, EventArgs e)
         {
-            LoadProductsFormIfNotLoaded();
+            LoadFormIntoPanel(new frmBrands());
             SetActiveButton(btn_products, btnSub_NhanHieu);
         }
 
         private void btnSub_DonViTinh_Click(object sender, EventArgs e)
         {
-            LoadProductsFormIfNotLoaded();
+            LoadFormIntoPanel(new frmMeasurements());
             SetActiveButton(btn_products, btnSub_DonViTinh);
         }
 
@@ -247,19 +249,19 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
 
         private void btnSub_DanhSachNV_Click(object sender, EventArgs e)
         {
-            LoadEmployeesFormIfNotLoaded();
+            LoadFormIntoPanel(new frmEmployees());
             SetActiveButton(btn_employees, btnSub_DanhSachNV);
         }
 
         private void btnSub_PhanCong_Click(object sender, EventArgs e)
         {
-            LoadEmployeesFormIfNotLoaded();
+            LoadFormIntoPanel(new frmEmployees());
             SetActiveButton(btn_employees, btnSub_PhanCong);
         }
 
         private void btnSub_ChamCong_Click(object sender, EventArgs e)
         {
-            LoadEmployeesFormIfNotLoaded();
+            LoadFormIntoPanel(new frmEmployees());
             SetActiveButton(btn_employees, btnSub_ChamCong);
         }
 
@@ -267,19 +269,19 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
 
         private void btnSub_DanhSachKH_Click(object sender, EventArgs e)
         {
-            LoadCustomersFormIfNotLoaded();
+            LoadFormIntoPanel(new frmCustomers());
             SetActiveButton(btn_customers, btnSub_DanhSachKH);
         }
 
         private void btnSub_TheThanhVien_Click(object sender, EventArgs e)
         {
-            LoadCustomersFormIfNotLoaded();
+            LoadFormIntoPanel(new frmCustomers());
             SetActiveButton(btn_customers, btnSub_TheThanhVien);
         }
 
         private void btnSub_LichSuMuaHang_Click(object sender, EventArgs e)
         {
-            LoadCustomersFormIfNotLoaded();
+            LoadFormIntoPanel(new frmCustomers());
             SetActiveButton(btn_customers, btnSub_LichSuMuaHang);
         }
 
@@ -287,13 +289,14 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
 
         private void btnSub_DanhSachNCC_Click(object sender, EventArgs e)
         {
-            LoadSuppliersFormIfNotLoaded();
+            LoadFormIntoPanel(new frmSupplierList());
+
             SetActiveButton(btn_suppliers, btnSub_DanhSachNCC);
         }
 
         private void btnSub_LichSuGiaoDich_Click(object sender, EventArgs e)
         {
-            LoadSuppliersFormIfNotLoaded();
+            LoadFormIntoPanel(new frmTransactionHistory());
             SetActiveButton(btn_suppliers, btnSub_LichSuGiaoDich);
         }
 
