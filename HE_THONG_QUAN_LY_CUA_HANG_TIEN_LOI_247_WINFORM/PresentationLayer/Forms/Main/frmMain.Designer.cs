@@ -35,27 +35,41 @@
             this.sharePanel = new Guna.UI2.WinForms.Guna2ShadowPanel();
             this.pnlSidebar = new Guna.UI2.WinForms.Guna2Panel();
             this.flpMenu = new System.Windows.Forms.FlowLayoutPanel();
-            this.btn_dashboard = new Guna.UI2.WinForms.Guna2Button();
-            this.btn_products = new Guna.UI2.WinForms.Guna2Button();
             this.pnlProductSubmenu = new Guna.UI2.WinForms.Guna2Panel();
             this.btnSub_DonViTinh = new Guna.UI2.WinForms.Guna2Button();
             this.btnSub_NhanHieu = new Guna.UI2.WinForms.Guna2Button();
             this.btnSub_NhaCungCap = new Guna.UI2.WinForms.Guna2Button();
             this.btnSub_DanhMuc = new Guna.UI2.WinForms.Guna2Button();
             this.btnSub_SanPham = new Guna.UI2.WinForms.Guna2Button();
+            this.pnlEmployeeSubmenu = new Guna.UI2.WinForms.Guna2Panel();
+            this.btnSub_ChamCong = new Guna.UI2.WinForms.Guna2Button();
+            this.btnSub_PhanCong = new Guna.UI2.WinForms.Guna2Button();
+            this.btnSub_DanhSachNV = new Guna.UI2.WinForms.Guna2Button();
+            this.pnlCustomerSubmenu = new Guna.UI2.WinForms.Guna2Panel();
+            this.btnSub_LichSuMuaHang = new Guna.UI2.WinForms.Guna2Button();
+            this.btnSub_TheThanhVien = new Guna.UI2.WinForms.Guna2Button();
+            this.btnSub_DanhSachKH = new Guna.UI2.WinForms.Guna2Button();
+            this.pnlSupplierSubmenu = new Guna.UI2.WinForms.Guna2Panel();
+            this.btnSub_LichSuGiaoDich = new Guna.UI2.WinForms.Guna2Button();
+            this.btnSub_DanhSachNCC = new Guna.UI2.WinForms.Guna2Button();
+            this.pnlUserInfo = new Guna.UI2.WinForms.Guna2Panel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.btn_dashboard = new Guna.UI2.WinForms.Guna2Button();
+            this.btn_products = new Guna.UI2.WinForms.Guna2Button();
             this.btn_bills = new Guna.UI2.WinForms.Guna2Button();
             this.btn_employees = new Guna.UI2.WinForms.Guna2Button();
             this.btn_customers = new Guna.UI2.WinForms.Guna2Button();
             this.btn_promotions = new Guna.UI2.WinForms.Guna2Button();
             this.btn_suppliers = new Guna.UI2.WinForms.Guna2Button();
             this.btn_inventory = new Guna.UI2.WinForms.Guna2Button();
-            this.pnlUserInfo = new Guna.UI2.WinForms.Guna2Panel();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.guna2PictureBox1 = new Guna.UI2.WinForms.Guna2PictureBox();
             this.pnlSidebar.SuspendLayout();
             this.flpMenu.SuspendLayout();
             this.pnlProductSubmenu.SuspendLayout();
+            this.pnlEmployeeSubmenu.SuspendLayout();
+            this.pnlCustomerSubmenu.SuspendLayout();
+            this.pnlSupplierSubmenu.SuspendLayout();
             this.pnlUserInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -112,9 +126,12 @@
             this.flpMenu.Controls.Add(this.pnlProductSubmenu);
             this.flpMenu.Controls.Add(this.btn_bills);
             this.flpMenu.Controls.Add(this.btn_employees);
+            this.flpMenu.Controls.Add(this.pnlEmployeeSubmenu);
             this.flpMenu.Controls.Add(this.btn_customers);
+            this.flpMenu.Controls.Add(this.pnlCustomerSubmenu);
             this.flpMenu.Controls.Add(this.btn_promotions);
             this.flpMenu.Controls.Add(this.btn_suppliers);
+            this.flpMenu.Controls.Add(this.pnlSupplierSubmenu);
             this.flpMenu.Controls.Add(this.btn_inventory);
             this.flpMenu.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flpMenu.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
@@ -125,6 +142,443 @@
             this.flpMenu.Size = new System.Drawing.Size(350, 542);
             this.flpMenu.TabIndex = 0;
             this.flpMenu.WrapContents = false;
+            // 
+            // pnlProductSubmenu
+            // 
+            this.pnlProductSubmenu.AutoSize = true;
+            this.pnlProductSubmenu.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.pnlProductSubmenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(220)))), ((int)(((byte)(230)))));
+            this.pnlProductSubmenu.Controls.Add(this.btnSub_DonViTinh);
+            this.pnlProductSubmenu.Controls.Add(this.btnSub_NhanHieu);
+            this.pnlProductSubmenu.Controls.Add(this.btnSub_NhaCungCap);
+            this.pnlProductSubmenu.Controls.Add(this.btnSub_DanhMuc);
+            this.pnlProductSubmenu.Controls.Add(this.btnSub_SanPham);
+            this.pnlProductSubmenu.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlProductSubmenu.Location = new System.Drawing.Point(10, 110);
+            this.pnlProductSubmenu.Margin = new System.Windows.Forms.Padding(2);
+            this.pnlProductSubmenu.Name = "pnlProductSubmenu";
+            this.pnlProductSubmenu.Size = new System.Drawing.Size(338, 207);
+            this.pnlProductSubmenu.TabIndex = 14;
+            this.pnlProductSubmenu.Visible = false;
+            // 
+            // btnSub_DonViTinh
+            // 
+            this.btnSub_DonViTinh.BackColor = System.Drawing.Color.Transparent;
+            this.btnSub_DonViTinh.BorderColor = System.Drawing.Color.White;
+            this.btnSub_DonViTinh.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnSub_DonViTinh.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnSub_DonViTinh.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnSub_DonViTinh.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnSub_DonViTinh.FillColor = System.Drawing.Color.Transparent;
+            this.btnSub_DonViTinh.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.btnSub_DonViTinh.ForeColor = System.Drawing.Color.Black;
+            this.btnSub_DonViTinh.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.btnSub_DonViTinh.ImageOffset = new System.Drawing.Point(20, 0);
+            this.btnSub_DonViTinh.Location = new System.Drawing.Point(0, 166);
+            this.btnSub_DonViTinh.Margin = new System.Windows.Forms.Padding(2);
+            this.btnSub_DonViTinh.Name = "btnSub_DonViTinh";
+            this.btnSub_DonViTinh.PressedColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnSub_DonViTinh.PressedDepth = 50;
+            this.btnSub_DonViTinh.Size = new System.Drawing.Size(336, 39);
+            this.btnSub_DonViTinh.TabIndex = 11;
+            this.btnSub_DonViTinh.Text = "📦 Quản lý Đơn vị tính";
+            this.btnSub_DonViTinh.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.btnSub_DonViTinh.TextOffset = new System.Drawing.Point(20, 0);
+            this.btnSub_DonViTinh.UseTransparentBackground = true;
+            this.btnSub_DonViTinh.Click += new System.EventHandler(this.btnSub_DonViTinh_Click);
+            // 
+            // btnSub_NhanHieu
+            // 
+            this.btnSub_NhanHieu.BackColor = System.Drawing.Color.Transparent;
+            this.btnSub_NhanHieu.BorderColor = System.Drawing.Color.White;
+            this.btnSub_NhanHieu.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnSub_NhanHieu.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnSub_NhanHieu.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnSub_NhanHieu.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnSub_NhanHieu.FillColor = System.Drawing.Color.Transparent;
+            this.btnSub_NhanHieu.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.btnSub_NhanHieu.ForeColor = System.Drawing.Color.Black;
+            this.btnSub_NhanHieu.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.btnSub_NhanHieu.ImageOffset = new System.Drawing.Point(20, 0);
+            this.btnSub_NhanHieu.Location = new System.Drawing.Point(0, 124);
+            this.btnSub_NhanHieu.Margin = new System.Windows.Forms.Padding(2);
+            this.btnSub_NhanHieu.Name = "btnSub_NhanHieu";
+            this.btnSub_NhanHieu.PressedColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnSub_NhanHieu.PressedDepth = 50;
+            this.btnSub_NhanHieu.Size = new System.Drawing.Size(336, 39);
+            this.btnSub_NhanHieu.TabIndex = 10;
+            this.btnSub_NhanHieu.Text = "🏷️ Quản lý Nhãn hiệu";
+            this.btnSub_NhanHieu.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.btnSub_NhanHieu.TextOffset = new System.Drawing.Point(20, 0);
+            this.btnSub_NhanHieu.UseTransparentBackground = true;
+            this.btnSub_NhanHieu.Click += new System.EventHandler(this.btnSub_NhanHieu_Click);
+            // 
+            // btnSub_NhaCungCap
+            // 
+            this.btnSub_NhaCungCap.BackColor = System.Drawing.Color.Transparent;
+            this.btnSub_NhaCungCap.BorderColor = System.Drawing.Color.White;
+            this.btnSub_NhaCungCap.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnSub_NhaCungCap.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnSub_NhaCungCap.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnSub_NhaCungCap.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnSub_NhaCungCap.FillColor = System.Drawing.Color.Transparent;
+            this.btnSub_NhaCungCap.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.btnSub_NhaCungCap.ForeColor = System.Drawing.Color.Black;
+            this.btnSub_NhaCungCap.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.btnSub_NhaCungCap.ImageOffset = new System.Drawing.Point(20, 0);
+            this.btnSub_NhaCungCap.Location = new System.Drawing.Point(0, 83);
+            this.btnSub_NhaCungCap.Margin = new System.Windows.Forms.Padding(2);
+            this.btnSub_NhaCungCap.Name = "btnSub_NhaCungCap";
+            this.btnSub_NhaCungCap.PressedColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnSub_NhaCungCap.PressedDepth = 50;
+            this.btnSub_NhaCungCap.Size = new System.Drawing.Size(336, 39);
+            this.btnSub_NhaCungCap.TabIndex = 9;
+            this.btnSub_NhaCungCap.Text = "🏢 Quản lý Nhà Cung Cấp";
+            this.btnSub_NhaCungCap.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.btnSub_NhaCungCap.TextOffset = new System.Drawing.Point(20, 0);
+            this.btnSub_NhaCungCap.UseTransparentBackground = true;
+            this.btnSub_NhaCungCap.Click += new System.EventHandler(this.btnSub_NhaCungCap_Click);
+            // 
+            // btnSub_DanhMuc
+            // 
+            this.btnSub_DanhMuc.BackColor = System.Drawing.Color.Transparent;
+            this.btnSub_DanhMuc.BorderColor = System.Drawing.Color.White;
+            this.btnSub_DanhMuc.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnSub_DanhMuc.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnSub_DanhMuc.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnSub_DanhMuc.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnSub_DanhMuc.FillColor = System.Drawing.Color.Transparent;
+            this.btnSub_DanhMuc.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.btnSub_DanhMuc.ForeColor = System.Drawing.Color.Black;
+            this.btnSub_DanhMuc.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.btnSub_DanhMuc.ImageOffset = new System.Drawing.Point(20, 0);
+            this.btnSub_DanhMuc.Location = new System.Drawing.Point(0, 41);
+            this.btnSub_DanhMuc.Margin = new System.Windows.Forms.Padding(2);
+            this.btnSub_DanhMuc.Name = "btnSub_DanhMuc";
+            this.btnSub_DanhMuc.PressedColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnSub_DanhMuc.PressedDepth = 50;
+            this.btnSub_DanhMuc.Size = new System.Drawing.Size(336, 39);
+            this.btnSub_DanhMuc.TabIndex = 8;
+            this.btnSub_DanhMuc.Text = "📁 Quản lý Danh mục";
+            this.btnSub_DanhMuc.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.btnSub_DanhMuc.TextOffset = new System.Drawing.Point(20, 0);
+            this.btnSub_DanhMuc.UseTransparentBackground = true;
+            this.btnSub_DanhMuc.Click += new System.EventHandler(this.btnSub_DanhMuc_Click);
+            // 
+            // btnSub_SanPham
+            // 
+            this.btnSub_SanPham.BackColor = System.Drawing.Color.Transparent;
+            this.btnSub_SanPham.BorderColor = System.Drawing.Color.White;
+            this.btnSub_SanPham.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnSub_SanPham.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnSub_SanPham.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnSub_SanPham.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnSub_SanPham.FillColor = System.Drawing.Color.Transparent;
+            this.btnSub_SanPham.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.btnSub_SanPham.ForeColor = System.Drawing.Color.Black;
+            this.btnSub_SanPham.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.btnSub_SanPham.ImageOffset = new System.Drawing.Point(20, 0);
+            this.btnSub_SanPham.Location = new System.Drawing.Point(0, 0);
+            this.btnSub_SanPham.Margin = new System.Windows.Forms.Padding(2);
+            this.btnSub_SanPham.Name = "btnSub_SanPham";
+            this.btnSub_SanPham.PressedColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnSub_SanPham.PressedDepth = 50;
+            this.btnSub_SanPham.Size = new System.Drawing.Size(336, 39);
+            this.btnSub_SanPham.TabIndex = 7;
+            this.btnSub_SanPham.Text = "🛍️ Quản lý Sản phẩm";
+            this.btnSub_SanPham.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.btnSub_SanPham.TextOffset = new System.Drawing.Point(20, 0);
+            this.btnSub_SanPham.UseTransparentBackground = true;
+            this.btnSub_SanPham.Click += new System.EventHandler(this.btnSub_SanPham_Click);
+            // 
+            // pnlEmployeeSubmenu
+            // 
+            this.pnlEmployeeSubmenu.AutoSize = true;
+            this.pnlEmployeeSubmenu.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.pnlEmployeeSubmenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(220)))), ((int)(((byte)(230)))));
+            this.pnlEmployeeSubmenu.Controls.Add(this.btnSub_ChamCong);
+            this.pnlEmployeeSubmenu.Controls.Add(this.btnSub_PhanCong);
+            this.pnlEmployeeSubmenu.Controls.Add(this.btnSub_DanhSachNV);
+            this.pnlEmployeeSubmenu.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlEmployeeSubmenu.Location = new System.Drawing.Point(10, 429);
+            this.pnlEmployeeSubmenu.Margin = new System.Windows.Forms.Padding(2);
+            this.pnlEmployeeSubmenu.Name = "pnlEmployeeSubmenu";
+            this.pnlEmployeeSubmenu.Size = new System.Drawing.Size(338, 124);
+            this.pnlEmployeeSubmenu.TabIndex = 15;
+            this.pnlEmployeeSubmenu.Visible = false;
+            // 
+            // btnSub_ChamCong
+            // 
+            this.btnSub_ChamCong.BackColor = System.Drawing.Color.Transparent;
+            this.btnSub_ChamCong.BorderColor = System.Drawing.Color.White;
+            this.btnSub_ChamCong.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnSub_ChamCong.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnSub_ChamCong.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnSub_ChamCong.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnSub_ChamCong.FillColor = System.Drawing.Color.Transparent;
+            this.btnSub_ChamCong.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.btnSub_ChamCong.ForeColor = System.Drawing.Color.Black;
+            this.btnSub_ChamCong.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.btnSub_ChamCong.ImageOffset = new System.Drawing.Point(20, 0);
+            this.btnSub_ChamCong.Location = new System.Drawing.Point(0, 83);
+            this.btnSub_ChamCong.Margin = new System.Windows.Forms.Padding(2);
+            this.btnSub_ChamCong.Name = "btnSub_ChamCong";
+            this.btnSub_ChamCong.PressedColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnSub_ChamCong.PressedDepth = 50;
+            this.btnSub_ChamCong.Size = new System.Drawing.Size(336, 39);
+            this.btnSub_ChamCong.TabIndex = 9;
+            this.btnSub_ChamCong.Text = "⏰ Chấm công";
+            this.btnSub_ChamCong.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.btnSub_ChamCong.TextOffset = new System.Drawing.Point(20, 0);
+            this.btnSub_ChamCong.UseTransparentBackground = true;
+            this.btnSub_ChamCong.Click += new System.EventHandler(this.btnSub_ChamCong_Click);
+            // 
+            // btnSub_PhanCong
+            // 
+            this.btnSub_PhanCong.BackColor = System.Drawing.Color.Transparent;
+            this.btnSub_PhanCong.BorderColor = System.Drawing.Color.White;
+            this.btnSub_PhanCong.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnSub_PhanCong.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnSub_PhanCong.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnSub_PhanCong.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnSub_PhanCong.FillColor = System.Drawing.Color.Transparent;
+            this.btnSub_PhanCong.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.btnSub_PhanCong.ForeColor = System.Drawing.Color.Black;
+            this.btnSub_PhanCong.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.btnSub_PhanCong.ImageOffset = new System.Drawing.Point(20, 0);
+            this.btnSub_PhanCong.Location = new System.Drawing.Point(0, 41);
+            this.btnSub_PhanCong.Margin = new System.Windows.Forms.Padding(2);
+            this.btnSub_PhanCong.Name = "btnSub_PhanCong";
+            this.btnSub_PhanCong.PressedColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnSub_PhanCong.PressedDepth = 50;
+            this.btnSub_PhanCong.Size = new System.Drawing.Size(336, 39);
+            this.btnSub_PhanCong.TabIndex = 8;
+            this.btnSub_PhanCong.Text = "📅 Phân công làm việc";
+            this.btnSub_PhanCong.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.btnSub_PhanCong.TextOffset = new System.Drawing.Point(20, 0);
+            this.btnSub_PhanCong.UseTransparentBackground = true;
+            this.btnSub_PhanCong.Click += new System.EventHandler(this.btnSub_PhanCong_Click);
+            // 
+            // btnSub_DanhSachNV
+            // 
+            this.btnSub_DanhSachNV.BackColor = System.Drawing.Color.Transparent;
+            this.btnSub_DanhSachNV.BorderColor = System.Drawing.Color.White;
+            this.btnSub_DanhSachNV.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnSub_DanhSachNV.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnSub_DanhSachNV.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnSub_DanhSachNV.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnSub_DanhSachNV.FillColor = System.Drawing.Color.Transparent;
+            this.btnSub_DanhSachNV.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.btnSub_DanhSachNV.ForeColor = System.Drawing.Color.Black;
+            this.btnSub_DanhSachNV.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.btnSub_DanhSachNV.ImageOffset = new System.Drawing.Point(20, 0);
+            this.btnSub_DanhSachNV.Location = new System.Drawing.Point(0, 0);
+            this.btnSub_DanhSachNV.Margin = new System.Windows.Forms.Padding(2);
+            this.btnSub_DanhSachNV.Name = "btnSub_DanhSachNV";
+            this.btnSub_DanhSachNV.PressedColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnSub_DanhSachNV.PressedDepth = 50;
+            this.btnSub_DanhSachNV.Size = new System.Drawing.Size(336, 39);
+            this.btnSub_DanhSachNV.TabIndex = 7;
+            this.btnSub_DanhSachNV.Text = "👥 Danh sách nhân viên";
+            this.btnSub_DanhSachNV.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.btnSub_DanhSachNV.TextOffset = new System.Drawing.Point(20, 0);
+            this.btnSub_DanhSachNV.UseTransparentBackground = true;
+            this.btnSub_DanhSachNV.Click += new System.EventHandler(this.btnSub_DanhSachNV_Click);
+            // 
+            // pnlCustomerSubmenu
+            // 
+            this.pnlCustomerSubmenu.AutoSize = true;
+            this.pnlCustomerSubmenu.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.pnlCustomerSubmenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(220)))), ((int)(((byte)(230)))));
+            this.pnlCustomerSubmenu.Controls.Add(this.btnSub_LichSuMuaHang);
+            this.pnlCustomerSubmenu.Controls.Add(this.btnSub_TheThanhVien);
+            this.pnlCustomerSubmenu.Controls.Add(this.btnSub_DanhSachKH);
+            this.pnlCustomerSubmenu.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlCustomerSubmenu.Location = new System.Drawing.Point(10, 611);
+            this.pnlCustomerSubmenu.Margin = new System.Windows.Forms.Padding(2);
+            this.pnlCustomerSubmenu.Name = "pnlCustomerSubmenu";
+            this.pnlCustomerSubmenu.Size = new System.Drawing.Size(338, 124);
+            this.pnlCustomerSubmenu.TabIndex = 16;
+            this.pnlCustomerSubmenu.Visible = false;
+            // 
+            // btnSub_LichSuMuaHang
+            // 
+            this.btnSub_LichSuMuaHang.BackColor = System.Drawing.Color.Transparent;
+            this.btnSub_LichSuMuaHang.BorderColor = System.Drawing.Color.White;
+            this.btnSub_LichSuMuaHang.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnSub_LichSuMuaHang.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnSub_LichSuMuaHang.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnSub_LichSuMuaHang.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnSub_LichSuMuaHang.FillColor = System.Drawing.Color.Transparent;
+            this.btnSub_LichSuMuaHang.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.btnSub_LichSuMuaHang.ForeColor = System.Drawing.Color.Black;
+            this.btnSub_LichSuMuaHang.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.btnSub_LichSuMuaHang.ImageOffset = new System.Drawing.Point(20, 0);
+            this.btnSub_LichSuMuaHang.Location = new System.Drawing.Point(0, 83);
+            this.btnSub_LichSuMuaHang.Margin = new System.Windows.Forms.Padding(2);
+            this.btnSub_LichSuMuaHang.Name = "btnSub_LichSuMuaHang";
+            this.btnSub_LichSuMuaHang.PressedColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnSub_LichSuMuaHang.PressedDepth = 50;
+            this.btnSub_LichSuMuaHang.Size = new System.Drawing.Size(336, 39);
+            this.btnSub_LichSuMuaHang.TabIndex = 9;
+            this.btnSub_LichSuMuaHang.Text = "📜 Lịch sử mua hàng";
+            this.btnSub_LichSuMuaHang.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.btnSub_LichSuMuaHang.TextOffset = new System.Drawing.Point(20, 0);
+            this.btnSub_LichSuMuaHang.UseTransparentBackground = true;
+            this.btnSub_LichSuMuaHang.Click += new System.EventHandler(this.btnSub_LichSuMuaHang_Click);
+            // 
+            // btnSub_TheThanhVien
+            // 
+            this.btnSub_TheThanhVien.BackColor = System.Drawing.Color.Transparent;
+            this.btnSub_TheThanhVien.BorderColor = System.Drawing.Color.White;
+            this.btnSub_TheThanhVien.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnSub_TheThanhVien.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnSub_TheThanhVien.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnSub_TheThanhVien.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnSub_TheThanhVien.FillColor = System.Drawing.Color.Transparent;
+            this.btnSub_TheThanhVien.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.btnSub_TheThanhVien.ForeColor = System.Drawing.Color.Black;
+            this.btnSub_TheThanhVien.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.btnSub_TheThanhVien.ImageOffset = new System.Drawing.Point(20, 0);
+            this.btnSub_TheThanhVien.Location = new System.Drawing.Point(0, 41);
+            this.btnSub_TheThanhVien.Margin = new System.Windows.Forms.Padding(2);
+            this.btnSub_TheThanhVien.Name = "btnSub_TheThanhVien";
+            this.btnSub_TheThanhVien.PressedColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnSub_TheThanhVien.PressedDepth = 50;
+            this.btnSub_TheThanhVien.Size = new System.Drawing.Size(336, 39);
+            this.btnSub_TheThanhVien.TabIndex = 8;
+            this.btnSub_TheThanhVien.Text = "💳 Thẻ thành viên";
+            this.btnSub_TheThanhVien.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.btnSub_TheThanhVien.TextOffset = new System.Drawing.Point(20, 0);
+            this.btnSub_TheThanhVien.UseTransparentBackground = true;
+            this.btnSub_TheThanhVien.Click += new System.EventHandler(this.btnSub_TheThanhVien_Click);
+            // 
+            // btnSub_DanhSachKH
+            // 
+            this.btnSub_DanhSachKH.BackColor = System.Drawing.Color.Transparent;
+            this.btnSub_DanhSachKH.BorderColor = System.Drawing.Color.White;
+            this.btnSub_DanhSachKH.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnSub_DanhSachKH.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnSub_DanhSachKH.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnSub_DanhSachKH.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnSub_DanhSachKH.FillColor = System.Drawing.Color.Transparent;
+            this.btnSub_DanhSachKH.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.btnSub_DanhSachKH.ForeColor = System.Drawing.Color.Black;
+            this.btnSub_DanhSachKH.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.btnSub_DanhSachKH.ImageOffset = new System.Drawing.Point(20, 0);
+            this.btnSub_DanhSachKH.Location = new System.Drawing.Point(0, 0);
+            this.btnSub_DanhSachKH.Margin = new System.Windows.Forms.Padding(2);
+            this.btnSub_DanhSachKH.Name = "btnSub_DanhSachKH";
+            this.btnSub_DanhSachKH.PressedColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnSub_DanhSachKH.PressedDepth = 50;
+            this.btnSub_DanhSachKH.Size = new System.Drawing.Size(336, 39);
+            this.btnSub_DanhSachKH.TabIndex = 7;
+            this.btnSub_DanhSachKH.Text = "👥 Danh sách khách hàng";
+            this.btnSub_DanhSachKH.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.btnSub_DanhSachKH.TextOffset = new System.Drawing.Point(20, 0);
+            this.btnSub_DanhSachKH.UseTransparentBackground = true;
+            this.btnSub_DanhSachKH.Click += new System.EventHandler(this.btnSub_DanhSachKH_Click);
+            // 
+            // pnlSupplierSubmenu
+            // 
+            this.pnlSupplierSubmenu.AutoSize = true;
+            this.pnlSupplierSubmenu.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.pnlSupplierSubmenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(220)))), ((int)(((byte)(230)))));
+            this.pnlSupplierSubmenu.Controls.Add(this.btnSub_LichSuGiaoDich);
+            this.pnlSupplierSubmenu.Controls.Add(this.btnSub_DanhSachNCC);
+            this.pnlSupplierSubmenu.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlSupplierSubmenu.Location = new System.Drawing.Point(10, 847);
+            this.pnlSupplierSubmenu.Margin = new System.Windows.Forms.Padding(2);
+            this.pnlSupplierSubmenu.Name = "pnlSupplierSubmenu";
+            this.pnlSupplierSubmenu.Size = new System.Drawing.Size(338, 82);
+            this.pnlSupplierSubmenu.TabIndex = 17;
+            this.pnlSupplierSubmenu.Visible = false;
+            // 
+            // btnSub_LichSuGiaoDich
+            // 
+            this.btnSub_LichSuGiaoDich.BackColor = System.Drawing.Color.Transparent;
+            this.btnSub_LichSuGiaoDich.BorderColor = System.Drawing.Color.White;
+            this.btnSub_LichSuGiaoDich.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnSub_LichSuGiaoDich.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnSub_LichSuGiaoDich.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnSub_LichSuGiaoDich.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnSub_LichSuGiaoDich.FillColor = System.Drawing.Color.Transparent;
+            this.btnSub_LichSuGiaoDich.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.btnSub_LichSuGiaoDich.ForeColor = System.Drawing.Color.Black;
+            this.btnSub_LichSuGiaoDich.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.btnSub_LichSuGiaoDich.ImageOffset = new System.Drawing.Point(20, 0);
+            this.btnSub_LichSuGiaoDich.Location = new System.Drawing.Point(0, 41);
+            this.btnSub_LichSuGiaoDich.Margin = new System.Windows.Forms.Padding(2);
+            this.btnSub_LichSuGiaoDich.Name = "btnSub_LichSuGiaoDich";
+            this.btnSub_LichSuGiaoDich.PressedColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnSub_LichSuGiaoDich.PressedDepth = 50;
+            this.btnSub_LichSuGiaoDich.Size = new System.Drawing.Size(336, 39);
+            this.btnSub_LichSuGiaoDich.TabIndex = 8;
+            this.btnSub_LichSuGiaoDich.Text = "📊 Lịch sử giao dịch";
+            this.btnSub_LichSuGiaoDich.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.btnSub_LichSuGiaoDich.TextOffset = new System.Drawing.Point(20, 0);
+            this.btnSub_LichSuGiaoDich.UseTransparentBackground = true;
+            this.btnSub_LichSuGiaoDich.Click += new System.EventHandler(this.btnSub_LichSuGiaoDich_Click);
+            // 
+            // btnSub_DanhSachNCC
+            // 
+            this.btnSub_DanhSachNCC.BackColor = System.Drawing.Color.Transparent;
+            this.btnSub_DanhSachNCC.BorderColor = System.Drawing.Color.White;
+            this.btnSub_DanhSachNCC.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnSub_DanhSachNCC.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnSub_DanhSachNCC.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnSub_DanhSachNCC.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnSub_DanhSachNCC.FillColor = System.Drawing.Color.Transparent;
+            this.btnSub_DanhSachNCC.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.btnSub_DanhSachNCC.ForeColor = System.Drawing.Color.Black;
+            this.btnSub_DanhSachNCC.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.btnSub_DanhSachNCC.ImageOffset = new System.Drawing.Point(20, 0);
+            this.btnSub_DanhSachNCC.Location = new System.Drawing.Point(0, 0);
+            this.btnSub_DanhSachNCC.Margin = new System.Windows.Forms.Padding(2);
+            this.btnSub_DanhSachNCC.Name = "btnSub_DanhSachNCC";
+            this.btnSub_DanhSachNCC.PressedColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnSub_DanhSachNCC.PressedDepth = 50;
+            this.btnSub_DanhSachNCC.Size = new System.Drawing.Size(336, 39);
+            this.btnSub_DanhSachNCC.TabIndex = 7;
+            this.btnSub_DanhSachNCC.Text = "🏢 Danh sách các nhà cung cấp";
+            this.btnSub_DanhSachNCC.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.btnSub_DanhSachNCC.TextOffset = new System.Drawing.Point(20, 0);
+            this.btnSub_DanhSachNCC.UseTransparentBackground = true;
+            this.btnSub_DanhSachNCC.Click += new System.EventHandler(this.btnSub_DanhSachNCC_Click);
+            // 
+            // pnlUserInfo
+            // 
+            this.pnlUserInfo.Controls.Add(this.label2);
+            this.pnlUserInfo.Controls.Add(this.label1);
+            this.pnlUserInfo.Controls.Add(this.guna2PictureBox1);
+            this.pnlUserInfo.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlUserInfo.Location = new System.Drawing.Point(0, 0);
+            this.pnlUserInfo.Margin = new System.Windows.Forms.Padding(2);
+            this.pnlUserInfo.Name = "pnlUserInfo";
+            this.pnlUserInfo.Size = new System.Drawing.Size(350, 111);
+            this.pnlUserInfo.TabIndex = 14;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(76, 47);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(76, 17);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "Chức năng";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(75, 20);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(39, 24);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "tên";
             // 
             // btn_dashboard
             // 
@@ -180,149 +634,6 @@
             this.btn_products.UseTransparentBackground = true;
             this.btn_products.Click += new System.EventHandler(this.btn_products_Click);
             // 
-            // pnlProductSubmenu
-            // 
-            this.pnlProductSubmenu.AutoSize = true;
-            this.pnlProductSubmenu.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.pnlProductSubmenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(220)))), ((int)(((byte)(230)))));
-            this.pnlProductSubmenu.Controls.Add(this.btnSub_DonViTinh);
-            this.pnlProductSubmenu.Controls.Add(this.btnSub_NhanHieu);
-            this.pnlProductSubmenu.Controls.Add(this.btnSub_NhaCungCap);
-            this.pnlProductSubmenu.Controls.Add(this.btnSub_DanhMuc);
-            this.pnlProductSubmenu.Controls.Add(this.btnSub_SanPham);
-            this.pnlProductSubmenu.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlProductSubmenu.Location = new System.Drawing.Point(10, 110);
-            this.pnlProductSubmenu.Margin = new System.Windows.Forms.Padding(2);
-            this.pnlProductSubmenu.Name = "pnlProductSubmenu";
-            this.pnlProductSubmenu.Size = new System.Drawing.Size(338, 207);
-            this.pnlProductSubmenu.TabIndex = 14;
-            this.pnlProductSubmenu.Visible = false;
-            // 
-            // btnSub_DonViTinh
-            // 
-            this.btnSub_DonViTinh.BackColor = System.Drawing.Color.Transparent;
-            this.btnSub_DonViTinh.BorderColor = System.Drawing.Color.White;
-            this.btnSub_DonViTinh.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnSub_DonViTinh.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnSub_DonViTinh.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnSub_DonViTinh.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnSub_DonViTinh.FillColor = System.Drawing.Color.Transparent;
-            this.btnSub_DonViTinh.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.btnSub_DonViTinh.ForeColor = System.Drawing.Color.Black;
-            this.btnSub_DonViTinh.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.btnSub_DonViTinh.ImageOffset = new System.Drawing.Point(20, 0);
-            this.btnSub_DonViTinh.Location = new System.Drawing.Point(0, 166);
-            this.btnSub_DonViTinh.Margin = new System.Windows.Forms.Padding(2);
-            this.btnSub_DonViTinh.Name = "btnSub_DonViTinh";
-            this.btnSub_DonViTinh.PressedColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnSub_DonViTinh.PressedDepth = 50;
-            this.btnSub_DonViTinh.Size = new System.Drawing.Size(336, 39);
-            this.btnSub_DonViTinh.TabIndex = 11;
-            this.btnSub_DonViTinh.Text = "📦 Quản lý Đơn vị tính";
-            this.btnSub_DonViTinh.TextOffset = new System.Drawing.Point(20, 0);
-            this.btnSub_DonViTinh.UseTransparentBackground = true;
-            this.btnSub_DonViTinh.Click += new System.EventHandler(this.btnSub_DonViTinh_Click);
-            // 
-            // btnSub_NhanHieu
-            // 
-            this.btnSub_NhanHieu.BackColor = System.Drawing.Color.Transparent;
-            this.btnSub_NhanHieu.BorderColor = System.Drawing.Color.White;
-            this.btnSub_NhanHieu.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnSub_NhanHieu.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnSub_NhanHieu.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnSub_NhanHieu.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnSub_NhanHieu.FillColor = System.Drawing.Color.Transparent;
-            this.btnSub_NhanHieu.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.btnSub_NhanHieu.ForeColor = System.Drawing.Color.Black;
-            this.btnSub_NhanHieu.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.btnSub_NhanHieu.ImageOffset = new System.Drawing.Point(20, 0);
-            this.btnSub_NhanHieu.Location = new System.Drawing.Point(0, 124);
-            this.btnSub_NhanHieu.Margin = new System.Windows.Forms.Padding(2);
-            this.btnSub_NhanHieu.Name = "btnSub_NhanHieu";
-            this.btnSub_NhanHieu.PressedColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnSub_NhanHieu.PressedDepth = 50;
-            this.btnSub_NhanHieu.Size = new System.Drawing.Size(336, 39);
-            this.btnSub_NhanHieu.TabIndex = 10;
-            this.btnSub_NhanHieu.Text = "🏷️ Quản lý Nhãn hiệu";
-            this.btnSub_NhanHieu.TextOffset = new System.Drawing.Point(20, 0);
-            this.btnSub_NhanHieu.UseTransparentBackground = true;
-            this.btnSub_NhanHieu.Click += new System.EventHandler(this.btnSub_NhanHieu_Click);
-            // 
-            // btnSub_NhaCungCap
-            // 
-            this.btnSub_NhaCungCap.BackColor = System.Drawing.Color.Transparent;
-            this.btnSub_NhaCungCap.BorderColor = System.Drawing.Color.White;
-            this.btnSub_NhaCungCap.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnSub_NhaCungCap.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnSub_NhaCungCap.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnSub_NhaCungCap.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnSub_NhaCungCap.FillColor = System.Drawing.Color.Transparent;
-            this.btnSub_NhaCungCap.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.btnSub_NhaCungCap.ForeColor = System.Drawing.Color.Black;
-            this.btnSub_NhaCungCap.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.btnSub_NhaCungCap.ImageOffset = new System.Drawing.Point(20, 0);
-            this.btnSub_NhaCungCap.Location = new System.Drawing.Point(0, 83);
-            this.btnSub_NhaCungCap.Margin = new System.Windows.Forms.Padding(2);
-            this.btnSub_NhaCungCap.Name = "btnSub_NhaCungCap";
-            this.btnSub_NhaCungCap.PressedColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnSub_NhaCungCap.PressedDepth = 50;
-            this.btnSub_NhaCungCap.Size = new System.Drawing.Size(336, 39);
-            this.btnSub_NhaCungCap.TabIndex = 9;
-            this.btnSub_NhaCungCap.Text = "🏢 Quản lý Nhà Cung Cấp";
-            this.btnSub_NhaCungCap.TextOffset = new System.Drawing.Point(20, 0);
-            this.btnSub_NhaCungCap.UseTransparentBackground = true;
-            this.btnSub_NhaCungCap.Click += new System.EventHandler(this.btnSub_NhaCungCap_Click);
-            // 
-            // btnSub_DanhMuc
-            // 
-            this.btnSub_DanhMuc.BackColor = System.Drawing.Color.Transparent;
-            this.btnSub_DanhMuc.BorderColor = System.Drawing.Color.White;
-            this.btnSub_DanhMuc.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnSub_DanhMuc.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnSub_DanhMuc.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnSub_DanhMuc.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnSub_DanhMuc.FillColor = System.Drawing.Color.Transparent;
-            this.btnSub_DanhMuc.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.btnSub_DanhMuc.ForeColor = System.Drawing.Color.Black;
-            this.btnSub_DanhMuc.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.btnSub_DanhMuc.ImageOffset = new System.Drawing.Point(20, 0);
-            this.btnSub_DanhMuc.Location = new System.Drawing.Point(0, 41);
-            this.btnSub_DanhMuc.Margin = new System.Windows.Forms.Padding(2);
-            this.btnSub_DanhMuc.Name = "btnSub_DanhMuc";
-            this.btnSub_DanhMuc.PressedColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnSub_DanhMuc.PressedDepth = 50;
-            this.btnSub_DanhMuc.Size = new System.Drawing.Size(336, 39);
-            this.btnSub_DanhMuc.TabIndex = 8;
-            this.btnSub_DanhMuc.Text = "📁 Quản lý Danh mục";
-            this.btnSub_DanhMuc.TextOffset = new System.Drawing.Point(20, 0);
-            this.btnSub_DanhMuc.UseTransparentBackground = true;
-            this.btnSub_DanhMuc.Click += new System.EventHandler(this.btnSub_DanhMuc_Click);
-            // 
-            // btnSub_SanPham
-            // 
-            this.btnSub_SanPham.BackColor = System.Drawing.Color.Transparent;
-            this.btnSub_SanPham.BorderColor = System.Drawing.Color.White;
-            this.btnSub_SanPham.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnSub_SanPham.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnSub_SanPham.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnSub_SanPham.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnSub_SanPham.FillColor = System.Drawing.Color.Transparent;
-            this.btnSub_SanPham.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.btnSub_SanPham.ForeColor = System.Drawing.Color.Black;
-            this.btnSub_SanPham.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.btnSub_SanPham.ImageOffset = new System.Drawing.Point(20, 0);
-            this.btnSub_SanPham.Location = new System.Drawing.Point(0, 0);
-            this.btnSub_SanPham.Margin = new System.Windows.Forms.Padding(2);
-            this.btnSub_SanPham.Name = "btnSub_SanPham";
-            this.btnSub_SanPham.PressedColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnSub_SanPham.PressedDepth = 50;
-            this.btnSub_SanPham.Size = new System.Drawing.Size(336, 39);
-            this.btnSub_SanPham.TabIndex = 7;
-            this.btnSub_SanPham.Text = "🛍️ Quản lý Sản phẩm";
-            this.btnSub_SanPham.TextOffset = new System.Drawing.Point(20, 0);
-            this.btnSub_SanPham.UseTransparentBackground = true;
-            this.btnSub_SanPham.Click += new System.EventHandler(this.btnSub_SanPham_Click);
-            // 
             // btn_bills
             // 
             this.btn_bills.BackColor = System.Drawing.Color.Transparent;
@@ -373,7 +684,7 @@
             this.btn_employees.PressedDepth = 50;
             this.btn_employees.Size = new System.Drawing.Size(336, 50);
             this.btn_employees.TabIndex = 9;
-            this.btn_employees.Text = "Nhân viên";
+            this.btn_employees.Text = "Nhân viên ▾";
             this.btn_employees.UseTransparentBackground = true;
             this.btn_employees.Click += new System.EventHandler(this.btn_employees_Click);
             // 
@@ -393,14 +704,14 @@
             this.btn_customers.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.btn_customers.ImageOffset = new System.Drawing.Point(0, 2);
             this.btn_customers.ImageSize = new System.Drawing.Size(40, 40);
-            this.btn_customers.Location = new System.Drawing.Point(10, 429);
+            this.btn_customers.Location = new System.Drawing.Point(10, 557);
             this.btn_customers.Margin = new System.Windows.Forms.Padding(2);
             this.btn_customers.Name = "btn_customers";
             this.btn_customers.PressedColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btn_customers.PressedDepth = 50;
             this.btn_customers.Size = new System.Drawing.Size(336, 50);
             this.btn_customers.TabIndex = 10;
-            this.btn_customers.Text = "Khách hàng";
+            this.btn_customers.Text = "Khách hàng ▾";
             this.btn_customers.UseTransparentBackground = true;
             this.btn_customers.Click += new System.EventHandler(this.btn_customers_Click);
             // 
@@ -420,7 +731,7 @@
             this.btn_promotions.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.btn_promotions.ImageOffset = new System.Drawing.Point(0, 2);
             this.btn_promotions.ImageSize = new System.Drawing.Size(40, 40);
-            this.btn_promotions.Location = new System.Drawing.Point(10, 483);
+            this.btn_promotions.Location = new System.Drawing.Point(10, 739);
             this.btn_promotions.Margin = new System.Windows.Forms.Padding(2);
             this.btn_promotions.Name = "btn_promotions";
             this.btn_promotions.PressedColor = System.Drawing.SystemColors.ButtonHighlight;
@@ -447,77 +758,30 @@
             this.btn_suppliers.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.btn_suppliers.ImageOffset = new System.Drawing.Point(0, 2);
             this.btn_suppliers.ImageSize = new System.Drawing.Size(40, 40);
-            this.btn_suppliers.Location = new System.Drawing.Point(10, 537);
+            this.btn_suppliers.Location = new System.Drawing.Point(10, 793);
             this.btn_suppliers.Margin = new System.Windows.Forms.Padding(2);
             this.btn_suppliers.Name = "btn_suppliers";
             this.btn_suppliers.PressedColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btn_suppliers.PressedDepth = 50;
             this.btn_suppliers.Size = new System.Drawing.Size(336, 50);
             this.btn_suppliers.TabIndex = 12;
-            this.btn_suppliers.Text = "Nhà cung cấp";
+            this.btn_suppliers.Text = "Nhà cung cấp ▾";
             this.btn_suppliers.UseTransparentBackground = true;
             this.btn_suppliers.Click += new System.EventHandler(this.btn_suppliers_Click);
             // 
             // btn_inventory
             // 
-            this.btn_inventory.BackColor = System.Drawing.Color.Transparent;
-            this.btn_inventory.BorderColor = System.Drawing.Color.White;
-            this.btn_inventory.BorderRadius = 5;
-            this.btn_inventory.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btn_inventory.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btn_inventory.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btn_inventory.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
             this.btn_inventory.FillColor = System.Drawing.Color.Transparent;
-            this.btn_inventory.Font = new System.Drawing.Font("Segoe UI", 13.8F);
+            this.btn_inventory.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_inventory.ForeColor = System.Drawing.Color.Black;
-            this.btn_inventory.Image = ((System.Drawing.Image)(resources.GetObject("btn_inventory.Image")));
+            this.btn_inventory.Image = global::HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Properties.Resources.track1;
             this.btn_inventory.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.btn_inventory.ImageOffset = new System.Drawing.Point(0, 2);
             this.btn_inventory.ImageSize = new System.Drawing.Size(40, 40);
-            this.btn_inventory.Location = new System.Drawing.Point(10, 591);
-            this.btn_inventory.Margin = new System.Windows.Forms.Padding(2);
+            this.btn_inventory.Location = new System.Drawing.Point(11, 934);
             this.btn_inventory.Name = "btn_inventory";
-            this.btn_inventory.PressedColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btn_inventory.PressedDepth = 50;
-            this.btn_inventory.Size = new System.Drawing.Size(336, 50);
-            this.btn_inventory.TabIndex = 13;
+            this.btn_inventory.Size = new System.Drawing.Size(334, 45);
+            this.btn_inventory.TabIndex = 18;
             this.btn_inventory.Text = "Kho hàng";
-            this.btn_inventory.UseTransparentBackground = true;
-            this.btn_inventory.Click += new System.EventHandler(this.btn_inventory_Click);
-            // 
-            // pnlUserInfo
-            // 
-            this.pnlUserInfo.Controls.Add(this.label2);
-            this.pnlUserInfo.Controls.Add(this.label1);
-            this.pnlUserInfo.Controls.Add(this.guna2PictureBox1);
-            this.pnlUserInfo.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlUserInfo.Location = new System.Drawing.Point(0, 0);
-            this.pnlUserInfo.Margin = new System.Windows.Forms.Padding(2);
-            this.pnlUserInfo.Name = "pnlUserInfo";
-            this.pnlUserInfo.Size = new System.Drawing.Size(350, 111);
-            this.pnlUserInfo.TabIndex = 14;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(76, 47);
-            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(76, 17);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "Chức năng";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(75, 20);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(39, 24);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "tên";
             // 
             // guna2PictureBox1
             // 
@@ -550,6 +814,9 @@
             this.flpMenu.ResumeLayout(false);
             this.flpMenu.PerformLayout();
             this.pnlProductSubmenu.ResumeLayout(false);
+            this.pnlEmployeeSubmenu.ResumeLayout(false);
+            this.pnlCustomerSubmenu.ResumeLayout(false);
+            this.pnlSupplierSubmenu.ResumeLayout(false);
             this.pnlUserInfo.ResumeLayout(false);
             this.pnlUserInfo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).EndInit();
@@ -581,5 +848,16 @@
         private Guna.UI2.WinForms.Guna2Button btnSub_NhaCungCap;
         private Guna.UI2.WinForms.Guna2Button btnSub_DanhMuc;
         private Guna.UI2.WinForms.Guna2Button btnSub_SanPham;
+        private Guna.UI2.WinForms.Guna2Panel pnlEmployeeSubmenu;
+        private Guna.UI2.WinForms.Guna2Button btnSub_ChamCong;
+        private Guna.UI2.WinForms.Guna2Button btnSub_PhanCong;
+        private Guna.UI2.WinForms.Guna2Button btnSub_DanhSachNV;
+        private Guna.UI2.WinForms.Guna2Panel pnlCustomerSubmenu;
+        private Guna.UI2.WinForms.Guna2Button btnSub_LichSuMuaHang;
+        private Guna.UI2.WinForms.Guna2Button btnSub_TheThanhVien;
+        private Guna.UI2.WinForms.Guna2Button btnSub_DanhSachKH;
+        private Guna.UI2.WinForms.Guna2Panel pnlSupplierSubmenu;
+        private Guna.UI2.WinForms.Guna2Button btnSub_LichSuGiaoDich;
+        private Guna.UI2.WinForms.Guna2Button btnSub_DanhSachNCC;
     }
 }

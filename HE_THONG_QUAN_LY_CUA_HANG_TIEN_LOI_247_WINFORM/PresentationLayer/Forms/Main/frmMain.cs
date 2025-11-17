@@ -1,4 +1,9 @@
-﻿using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms.Products;
+﻿using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms.Bills;
+using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms.Customers;
+using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms.Employees;
+using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms.Products;
+using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms.Suppliers;
+using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Promotions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -43,7 +48,9 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
         private void HideSubMenus()
         {
             pnlProductSubmenu.Visible = false;
-            // Thêm các panel menu con khác ở đây nếu có (ví dụ pnlEmployeeSubmenu.Visible = false;)
+            pnlEmployeeSubmenu.Visible = false;
+            pnlCustomerSubmenu.Visible = false;
+            pnlSupplierSubmenu.Visible = false;
         }
 
         // Highlight nút được chọn
@@ -59,7 +66,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
                 }
             }
 
-            // Reset tất cả các nút con (nếu có)
+            // Reset tất cả các nút con Products
             foreach (Control ctrl in pnlProductSubmenu.Controls)
             {
                 if (ctrl is Guna.UI2.WinForms.Guna2Button)
@@ -68,7 +75,36 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
                     (ctrl as Guna.UI2.WinForms.Guna2Button).ForeColor = Color.Black;
                 }
             }
-            // Thêm các panel con khác nếu có
+
+            // Reset tất cả các nút con Employees
+            foreach (Control ctrl in pnlEmployeeSubmenu.Controls)
+            {
+                if (ctrl is Guna.UI2.WinForms.Guna2Button)
+                {
+                    (ctrl as Guna.UI2.WinForms.Guna2Button).FillColor = Color.Transparent;
+                    (ctrl as Guna.UI2.WinForms.Guna2Button).ForeColor = Color.Black;
+                }
+            }
+
+            // Reset tất cả các nút con Customers
+            foreach (Control ctrl in pnlCustomerSubmenu.Controls)
+            {
+                if (ctrl is Guna.UI2.WinForms.Guna2Button)
+                {
+                    (ctrl as Guna.UI2.WinForms.Guna2Button).FillColor = Color.Transparent;
+                    (ctrl as Guna.UI2.WinForms.Guna2Button).ForeColor = Color.Black;
+                }
+            }
+
+            // Reset tất cả các nút con Suppliers
+            foreach (Control ctrl in pnlSupplierSubmenu.Controls)
+            {
+                if (ctrl is Guna.UI2.WinForms.Guna2Button)
+                {
+                    (ctrl as Guna.UI2.WinForms.Guna2Button).FillColor = Color.Transparent;
+                    (ctrl as Guna.UI2.WinForms.Guna2Button).ForeColor = Color.Black;
+                }
+            }
 
             // Highlight nút cha
             if (activeButton != null)
@@ -132,7 +168,11 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
         {
             // Chỉ toggle menu con, không load form
             pnlProductSubmenu.Visible = !pnlProductSubmenu.Visible;
-            SetActiveButton(btn_products, null); // Highlight nút cha
+            // Ẩn các menu khác
+            pnlEmployeeSubmenu.Visible = false;
+            pnlCustomerSubmenu.Visible = false;
+            pnlSupplierSubmenu.Visible = false;
+            SetActiveButton(btn_products, null);
         }
 
         // Helper function để load frmProducts nếu nó chưa được load
@@ -144,12 +184,38 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
             }
         }
 
+        // Helper function để load frmEmployees nếu nó chưa được load
+        private void LoadEmployeesFormIfNotLoaded()
+        {
+            if (currentChildForm == null || !(currentChildForm is frmEmployees))
+            {
+                LoadFormIntoPanel(new frmEmployees());
+            }
+        }
+
+        // Helper function để load frmCustomers nếu nó chưa được load
+        private void LoadCustomersFormIfNotLoaded()
+        {
+            if (currentChildForm == null || !(currentChildForm is frmCustomers))
+            {
+                LoadFormIntoPanel(new frmCustomers());
+            }
+        }
+
+        // Helper function để load frmSuppliersMain nếu nó chưa được load
+        private void LoadSuppliersFormIfNotLoaded()
+        {
+            if (currentChildForm == null || !(currentChildForm is frmSuppliersMain))
+            {
+                LoadFormIntoPanel(new frmSuppliersMain());
+            }
+        }
+
         // --- Click cho các nút menu con của Sản phẩm ---
 
         private void btnSub_SanPham_Click(object sender, EventArgs e)
         {
             LoadProductsFormIfNotLoaded();
-
             SetActiveButton(btn_products, btnSub_SanPham);
         }
 
@@ -177,46 +243,107 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
             SetActiveButton(btn_products, btnSub_DonViTinh);
         }
 
+        // --- Click cho các nút menu con của Nhân viên ---
+
+        private void btnSub_DanhSachNV_Click(object sender, EventArgs e)
+        {
+            LoadEmployeesFormIfNotLoaded();
+            SetActiveButton(btn_employees, btnSub_DanhSachNV);
+        }
+
+        private void btnSub_PhanCong_Click(object sender, EventArgs e)
+        {
+            LoadEmployeesFormIfNotLoaded();
+            SetActiveButton(btn_employees, btnSub_PhanCong);
+        }
+
+        private void btnSub_ChamCong_Click(object sender, EventArgs e)
+        {
+            LoadEmployeesFormIfNotLoaded();
+            SetActiveButton(btn_employees, btnSub_ChamCong);
+        }
+
+        // --- Click cho các nút menu con của Khách hàng ---
+
+        private void btnSub_DanhSachKH_Click(object sender, EventArgs e)
+        {
+            LoadCustomersFormIfNotLoaded();
+            SetActiveButton(btn_customers, btnSub_DanhSachKH);
+        }
+
+        private void btnSub_TheThanhVien_Click(object sender, EventArgs e)
+        {
+            LoadCustomersFormIfNotLoaded();
+            SetActiveButton(btn_customers, btnSub_TheThanhVien);
+        }
+
+        private void btnSub_LichSuMuaHang_Click(object sender, EventArgs e)
+        {
+            LoadCustomersFormIfNotLoaded();
+            SetActiveButton(btn_customers, btnSub_LichSuMuaHang);
+        }
+
+        // --- Click cho các nút menu con của Nhà cung cấp ---
+
+        private void btnSub_DanhSachNCC_Click(object sender, EventArgs e)
+        {
+            LoadSuppliersFormIfNotLoaded();
+            SetActiveButton(btn_suppliers, btnSub_DanhSachNCC);
+        }
+
+        private void btnSub_LichSuGiaoDich_Click(object sender, EventArgs e)
+        {
+            LoadSuppliersFormIfNotLoaded();
+            SetActiveButton(btn_suppliers, btnSub_LichSuGiaoDich);
+        }
+
         // --- Click cho các nút cha khác ---
 
         private void btn_bills_Click(object sender, EventArgs e)
         {
-            // LoadFormIntoPanel(new frmBills()); // Giả sử bạn có form frmBills
-            MessageBox.Show("Chức năng 'Hóa đơn' đang được phát triển.");
+            LoadFormIntoPanel(new frmInvoices());
             HideSubMenus();
             SetActiveButton(btn_bills, null);
         }
 
         private void btn_employees_Click(object sender, EventArgs e)
         {
-            // LoadFormIntoPanel(new frmEmployees()); // Giả sử bạn có form frmEmployees
-            MessageBox.Show("Chức năng 'Nhân viên' đang được phát triển.");
-            HideSubMenus();
+            // Toggle menu con Nhân viên
+            pnlEmployeeSubmenu.Visible = !pnlEmployeeSubmenu.Visible;
+            // Ẩn các menu khác
+            pnlProductSubmenu.Visible = false;
+            pnlCustomerSubmenu.Visible = false;
+            pnlSupplierSubmenu.Visible = false;
             SetActiveButton(btn_employees, null);
         }
 
         private void btn_customers_Click(object sender, EventArgs e)
         {
-            // LoadFormIntoPanel(new frmCustomers()); // Giả sử bạn có form frmCustomers
-            MessageBox.Show("Chức năng 'Khách hàng' đang được phát triển.");
-            HideSubMenus();
+            // Toggle menu con Khách hàng
+            pnlCustomerSubmenu.Visible = !pnlCustomerSubmenu.Visible;
+            // Ẩn các menu khác
+            pnlProductSubmenu.Visible = false;
+            pnlEmployeeSubmenu.Visible = false;
+            pnlSupplierSubmenu.Visible = false;
             SetActiveButton(btn_customers, null);
         }
 
         private void btn_promotions_Click(object sender, EventArgs e)
         {
-            // LoadFormIntoPanel(new frmPromotions()); // Giả sử bạn có form frmPromotions
-            MessageBox.Show("Chức năng 'Khuyến mãi' đang được phát triển.");
+            LoadFormIntoPanel(new frmPromotions());
             HideSubMenus();
             SetActiveButton(btn_promotions, null);
         }
 
         private void btn_suppliers_Click(object sender, EventArgs e)
         {
-            // Nút này bây giờ là nút cha, nên nó sẽ mở frmProducts và trỏ đến tab NCC
-            LoadProductsFormIfNotLoaded();
-            HideSubMenus(); // Ẩn menu sản phẩm nếu nó đang mở
-            SetActiveButton(btn_suppliers, null); // Highlight nút này
+            // Toggle menu con Nhà cung cấp
+            pnlSupplierSubmenu.Visible = !pnlSupplierSubmenu.Visible;
+            // Ẩn các menu khác
+            pnlProductSubmenu.Visible = false;
+            pnlEmployeeSubmenu.Visible = false;
+            pnlCustomerSubmenu.Visible = false;
+            SetActiveButton(btn_suppliers, null);
         }
 
         private void btn_inventory_Click(object sender, EventArgs e)
