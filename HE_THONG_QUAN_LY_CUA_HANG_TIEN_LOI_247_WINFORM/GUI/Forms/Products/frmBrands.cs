@@ -1,167 +1,154 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Collections;
+using System.Reflection; // Để dùng hàm lấy ID an toàn
+using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Controllers;
 using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.DTO.Models;
 
 namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms.Products
 {
     public partial class frmBrands : Form
     {
-        private AppDbContext _context;
+        private readonly BrandController _brandController;
         private string _selectedBrandId;
         private bool _isAddMode = false;
 
         public frmBrands()
         {
             InitializeComponent();
-            _context = new AppDbContext();
+            _brandController = new BrandController();
+
+            //this.Load += frmBrands_Load;
+            //if (btnAdd != null) this.btnAdd.Click += btnAdd_Click;
+            //if (btnEdit != null) this.btnEdit.Click += btnEdit_Click;
+            //if (btnDelete != null) this.btnDelete.Click += btnDelete_Click;
+            //if (btnSave != null) this.btnSave.Click += btnSave_Click;
+            //if (btnCancel != null) this.btnCancel.Click += btnCancel_Click;
+            //if (btnSearch != null) this.btnSearch.Click += btnSearch_Click;
+            //if (btnRefresh != null) this.btnRefresh.Click += btnRefresh_Click;
+            //if (btnExport != null) this.btnExport.Click += btnExport_Click;
+
+            if (txtSearch != null)
+            {
+                txtSearch.TextChanged += (s, e) => { btnSearch_Click(null, null); };
+            }
+
+            if (dgvBrands != null) this.dgvBrands.SelectionChanged += dgvBrands_SelectionChanged;
+            if (txtSearch != null) txtSearch.KeyPress += (s, e) => { if (e.KeyChar == 13) { btnSearch_Click(s, e); e.Handled = true; } };
+            if (txtBrandName != null) txtBrandName.KeyPress += (s, e) => { if (e.KeyChar == 13) { btnSave_Click(s, e); e.Handled = true; } };
         }
 
         private void frmBrands_Load(object sender, EventArgs e)
         {
             try
             {
-                SetupDataGridView();
+                if (dgvBrands != null) dgvBrands.AutoGenerateColumns = false;
                 LoadBrands();
                 SetFormMode(false);
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Lỗi khi tải dữ liệu: {ex.Message}", "Lỗi",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void SetupDataGridView()
-        {
-            // Cấu hình DataGridView nếu chưa có trong Designer
-            if (dgvBrands.Columns.Count == 0)
-            {
-                dgvBrands.AutoGenerateColumns = false;
-                
-                dgvBrands.Columns.Add(new DataGridViewTextBoxColumn
-                {
-                    Name = "colId",
-                    HeaderText = "Mã nhãn hiệu",
-                    DataPropertyName = "id",
-                    Width = 200
-                });
-
-                dgvBrands.Columns.Add(new DataGridViewTextBoxColumn
-                {
-                    Name = "colName",
-                    HeaderText = "Tên nhãn hiệu",
-                    DataPropertyName = "ten",
-                    Width = 300
-                });
-
-                dgvBrands.Columns.Add(new DataGridViewTextBoxColumn
-                {
-                    Name = "colProductCount",
-                    HeaderText = "Số sản phẩm",
-                    DataPropertyName = "SoLuongSanPham",
-                    Width = 150
-                });
-
-                dgvBrands.Columns.Add(new DataGridViewTextBoxColumn
-                {
-                    Name = "colStatus",
-                    HeaderText = "Trạng thái",
-                    DataPropertyName = "TrangThai",
-                    Width = 150
-                });
-            }
+            catch (Exception ex) { MessageBox.Show($"Lỗi tải form: {ex.Message}"); }
         }
 
         private void LoadBrands()
         {
             try
             {
-                var brands = _context.NhanHieux
-                    .Where(b => !b.isDelete)
-                    .Select(b => new
-                    {
-                        b.id,
-                        b.ten,
-                        SoLuongSanPham = b.SanPhams.Count(sp => !sp.isDelete),
-                        TrangThai = b.isDelete ? "Không hoạt động" : "Hoạt động"
-                    })
-                    .OrderBy(b => b.ten)
-                    .ToList();
-
+                var brands = _brandController.GetAllBrands();
                 dgvBrands.DataSource = brands;
 
-                // Update status
-                lblStatus.Text = $"Tổng số: {brands.Count} nhãn hiệu";
+                // Mapping cột thủ công
+                foreach (DataGridViewColumn col in dgvBrands.Columns)
+                {
+                    if (col.HeaderText.ToLower().Contains("mã")) col.DataPropertyName = "Id";
+                    else if (col.HeaderText.ToLower().Contains("tên")) col.DataPropertyName = "Ten";
+                    else if (col.HeaderText.ToLower().Contains("số lượng")) col.DataPropertyName = "SoLuongSanPham";
+                }
+
+                if (brands is IList list) lblStatus.Text = $"Tổng số: {list.Count} nhãn hiệu";
             }
-            catch (Exception ex)
+            catch (Exception ex) { MessageBox.Show($"Lỗi hiển thị: {ex.Message}"); }
+        }
+
+        // --- HÀM QUAN TRỌNG: Lấy ID an toàn ---
+        private string GetCurrentId()
+        {
+            if (dgvBrands.CurrentRow == null) return null;
+
+            var dataItem = dgvBrands.CurrentRow.DataBoundItem;
+            if (dataItem != null)
             {
-                MessageBox.Show($"Lỗi khi tải danh sách nhãn hiệu: {ex.Message}", "Lỗi",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                var prop = dataItem.GetType().GetProperty("Id");
+                if (prop != null) return prop.GetValue(dataItem)?.ToString();
             }
+
+            // Fallback
+            if (dgvBrands.ColumnCount > 0 && dgvBrands.CurrentRow.Cells[0].Value != null)
+                return dgvBrands.CurrentRow.Cells[0].Value.ToString();
+
+            return null;
         }
 
         private void dgvBrands_SelectionChanged(object sender, EventArgs e)
         {
-            if (dgvBrands.CurrentRow != null && !_isAddMode)
+            if (!_isAddMode)
             {
-                _selectedBrandId = dgvBrands.CurrentRow.Cells["colId"].Value?.ToString();
-                LoadBrandDetail(_selectedBrandId);
+                string id = GetCurrentId();
+                if (!string.IsNullOrEmpty(id))
+                {
+                    _selectedBrandId = id;
+                    LoadBrandDetail(id);
+                }
             }
         }
 
         private void LoadBrandDetail(string brandId)
         {
-            if (string.IsNullOrEmpty(brandId))
-                return;
-
+            if (string.IsNullOrEmpty(brandId)) return;
             try
             {
-                var brand = _context.NhanHieux.Find(brandId);
-
+                var brand = _brandController.GetBrandById(brandId);
                 if (brand != null)
                 {
                     txtBrandId.Text = brand.id;
                     txtBrandName.Text = brand.ten;
-
-                    // Load số lượng sản phẩm
-                    int productCount = _context.SanPhams
-                        .Count(sp => sp.nhanHieuId == brandId && !sp.isDelete);
-                    
-                    lblProductCount.Text = $"Số sản phẩm: {productCount}";
+                    int count = _brandController.GetProductCount(brandId);
+                    lblProductCount.Text = $"Số sản phẩm: {count}";
                 }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Lỗi khi tải chi tiết nhãn hiệu: {ex.Message}", "Lỗi",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            catch { }
         }
+
+        #region CRUD Actions
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
             SetFormMode(true);
             _isAddMode = true;
             ClearForm();
-            txtBrandId.Text = "Tự động tạo";
+
+            try
+            {
+                txtBrandId.Text = _brandController.GenerateNewBrandId();
+            }
+            catch
+            {
+                txtBrandId.Text = "Tự động tạo";
+            }
+
             txtBrandName.Focus();
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            if (dgvBrands.CurrentRow == null)
+            string id = GetCurrentId();
+            if (string.IsNullOrEmpty(id))
             {
-                MessageBox.Show("Vui lòng chọn nhãn hiệu cần chỉnh sửa!", "Thông báo",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Vui lòng chọn nhãn hiệu!");
                 return;
             }
 
+            _selectedBrandId = id;
             SetFormMode(true);
             _isAddMode = false;
             txtBrandName.Focus();
@@ -169,180 +156,86 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (dgvBrands.CurrentRow == null)
+            string id = GetCurrentId();
+            if (string.IsNullOrEmpty(id))
             {
-                MessageBox.Show("Vui lòng chọn nhãn hiệu cần xóa!", "Thông báo",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Vui lòng chọn nhãn hiệu!");
                 return;
             }
 
-            // Kiểm tra xem nhãn hiệu có sản phẩm không
-            int productCount = _context.SanPhams
-                .Count(sp => sp.nhanHieuId == _selectedBrandId && !sp.isDelete);
-
-            if (productCount > 0)
+            if (MessageBox.Show("Bạn có chắc chắn muốn xóa?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                MessageBox.Show(
-                    $"Không thể xóa nhãn hiệu này vì có {productCount} sản phẩm đang sử dụng!\n\n" +
-                    "Vui lòng xóa hoặc chuyển các sản phẩm sang nhãn hiệu khác trước.",
-                    "Không thể xóa",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning);
-                return;
-            }
-
-            var result = MessageBox.Show(
-                $"Bạn có chắc chắn muốn xóa nhãn hiệu '{txtBrandName.Text}'?",
-                "Xác nhận xóa",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question);
-
-            if (result == DialogResult.Yes)
-            {
-                try
+                var (success, message) = _brandController.DeleteBrand(id);
+                if (success)
                 {
-                    var brand = _context.NhanHieux.Find(_selectedBrandId);
-                    if (brand != null)
-                    {
-                        brand.isDelete = true;
-                        _context.SaveChanges();
-
-                        MessageBox.Show("Xóa nhãn hiệu thành công!", "Thông báo",
-                            MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                        LoadBrands();
-                        ClearForm();
-                    }
+                    MessageBox.Show(message, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LoadBrands();
+                    ClearForm();
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Lỗi khi xóa nhãn hiệu: {ex.Message}", "Lỗi",
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                else MessageBox.Show(message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (!ValidateInput())
+            if (string.IsNullOrWhiteSpace(txtBrandName.Text))
+            {
+                MessageBox.Show("Vui lòng nhập tên nhãn hiệu!");
+                txtBrandName.Focus();
                 return;
+            }
 
             try
             {
                 if (_isAddMode)
                 {
-                    // Kiểm tra trùng tên
-                    bool exists = _context.NhanHieux
-                        .Any(b => b.ten.ToLower() == txtBrandName.Text.Trim().ToLower() && !b.isDelete);
-
-                    if (exists)
-                    {
-                        MessageBox.Show("Tên nhãn hiệu đã tồn tại!", "Thông báo",
-                            MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        txtBrandName.Focus();
-                        return;
-                    }
-
-                    // Thêm mới
                     var newBrand = new NhanHieu
                     {
-                        id = Guid.NewGuid().ToString(),
+                        id = txtBrandId.Text.Trim(),
                         ten = txtBrandName.Text.Trim(),
                         isDelete = false
                     };
+                    var (success, message, _) = _brandController.AddBrand(newBrand);
 
-                    _context.NhanHieux.Add(newBrand);
-                    _context.SaveChanges();
-
-                    MessageBox.Show("Thêm nhãn hiệu thành công!", "Thông báo",
-                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    if (success)
+                    {
+                        MessageBox.Show(message, "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        LoadBrands();
+                        SetFormMode(false);
+                    }
+                    else MessageBox.Show(message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
                 {
-                    // Kiểm tra trùng tên (trừ chính nó)
-                    bool exists = _context.NhanHieux
-                        .Any(b => b.id != _selectedBrandId && 
-                             b.ten.ToLower() == txtBrandName.Text.Trim().ToLower() && 
-                             !b.isDelete);
+                    var updateBrand = new NhanHieu { id = _selectedBrandId, ten = txtBrandName.Text.Trim() };
+                    var (success, message) = _brandController.UpdateBrand(updateBrand);
 
-                    if (exists)
+                    if (success)
                     {
-                        MessageBox.Show("Tên nhãn hiệu đã tồn tại!", "Thông báo",
-                            MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        txtBrandName.Focus();
-                        return;
+                        MessageBox.Show(message, "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        LoadBrands();
+                        SetFormMode(false);
                     }
-
-                    // Cập nhật
-                    var brand = _context.NhanHieux.Find(_selectedBrandId);
-                    if (brand != null)
-                    {
-                        brand.ten = txtBrandName.Text.Trim();
-                        _context.SaveChanges();
-
-                        MessageBox.Show("Cập nhật nhãn hiệu thành công!", "Thông báo",
-                            MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
+                    else MessageBox.Show(message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-
-                LoadBrands();
-                SetFormMode(false);
-                _isAddMode = false;
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Lỗi khi lưu nhãn hiệu: {ex.Message}", "Lỗi",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            catch (Exception ex) { MessageBox.Show("Lỗi hệ thống: " + ex.Message); }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
             SetFormMode(false);
             _isAddMode = false;
-
-            if (dgvBrands.CurrentRow != null)
-            {
-                LoadBrandDetail(_selectedBrandId);
-            }
-            else
-            {
-                ClearForm();
-            }
+            string currentId = GetCurrentId();
+            if (!string.IsNullOrEmpty(currentId)) LoadBrandDetail(currentId);
+            else ClearForm();
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            try
-            {
-                string searchText = txtSearch.Text.Trim().ToLower();
-
-                if (string.IsNullOrWhiteSpace(searchText))
-                {
-                    LoadBrands();
-                    return;
-                }
-
-                var brands = _context.NhanHieux
-                    .Where(b => !b.isDelete && b.ten.ToLower().Contains(searchText))
-                    .Select(b => new
-                    {
-                        b.id,
-                        b.ten,
-                        SoLuongSanPham = b.SanPhams.Count(sp => !sp.isDelete),
-                        TrangThai = b.isDelete ? "Không hoạt động" : "Hoạt động"
-                    })
-                    .OrderBy(b => b.ten)
-                    .ToList();
-
-                dgvBrands.DataSource = brands;
-                lblStatus.Text = $"Tìm thấy: {brands.Count} nhãn hiệu";
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Lỗi khi tìm kiếm: {ex.Message}", "Lỗi",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            var list = _brandController.SearchBrands(txtSearch.Text.Trim());
+            dgvBrands.DataSource = list;
+            if (list is IList l) lblStatus.Text = $"Tìm thấy: {l.Count}";
         }
 
         private void btnRefresh_Click(object sender, EventArgs e)
@@ -352,53 +245,26 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
             ClearForm();
         }
 
-        private void btnExport_Click(object sender, EventArgs e)
+        private void btnExport_Click(object sender, EventArgs e) => MessageBox.Show("Đang phát triển!");
+
+        #endregion
+
+        #region Helpers
+        private void SetFormMode(bool isEdit)
         {
-            MessageBox.Show("Chức năng xuất Excel đang được phát triển!", "Thông báo",
-                MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
+            txtBrandName.Enabled = isEdit;
+            btnSave.Enabled = isEdit;
+            btnCancel.Enabled = isEdit;
 
-        private bool ValidateInput()
-        {
-            if (string.IsNullOrWhiteSpace(txtBrandName.Text))
-            {
-                MessageBox.Show("Vui lòng nhập tên nhãn hiệu!", "Thông báo",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtBrandName.Focus();
-                return false;
-            }
+            btnAdd.Enabled = !isEdit;
+            btnEdit.Enabled = !isEdit;
+            btnDelete.Enabled = !isEdit;
+            btnSearch.Enabled = !isEdit;
+            btnRefresh.Enabled = !isEdit;
+            btnExport.Enabled = !isEdit;
 
-            if (txtBrandName.Text.Trim().Length < 2)
-            {
-                MessageBox.Show("Tên nhãn hiệu phải có ít nhất 2 ký tự!", "Thông báo",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtBrandName.Focus();
-                return false;
-            }
-
-            return true;
-        }
-
-        private void SetFormMode(bool isEditMode)
-        {
-            // Enable/disable input fields
-            txtBrandName.Enabled = isEditMode;
-            btnSave.Enabled = isEditMode;
-            btnCancel.Enabled = isEditMode;
-
-            // Enable/disable action buttons
-            btnAdd.Enabled = !isEditMode;
-            btnEdit.Enabled = !isEditMode;
-            btnDelete.Enabled = !isEditMode;
-            btnSearch.Enabled = !isEditMode;
-            btnRefresh.Enabled = !isEditMode;
-            btnExport.Enabled = !isEditMode;
-
-            // Enable/disable search
-            txtSearch.Enabled = !isEditMode;
-
-            // Enable/disable grid selection
-            dgvBrands.Enabled = !isEditMode;
+            dgvBrands.Enabled = !isEdit;
+            txtBrandId.Enabled = false; // Khóa ID
         }
 
         private void ClearForm()
@@ -409,31 +275,11 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
             _selectedBrandId = null;
         }
 
-        // Event handler cho Enter key trong txtSearch
-        private void txtSearch_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar == (char)Keys.Enter)
-            {
-                btnSearch_Click(sender, e);
-                e.Handled = true;
-            }
-        }
-
-        // Event handler cho Enter key trong txtBrandName
-        private void txtBrandName_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar == (char)Keys.Enter)
-            {
-                btnSave_Click(sender, e);
-                e.Handled = true;
-            }
-        }
-
-        // Cleanup
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
+            _brandController?.Dispose();
             base.OnFormClosing(e);
-            _context?.Dispose();
         }
+        #endregion
     }
 }

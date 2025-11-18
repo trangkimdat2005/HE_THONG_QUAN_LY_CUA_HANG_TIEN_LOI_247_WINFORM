@@ -1,13 +1,11 @@
-﻿using System;
+﻿using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services;
+using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.DTO;
+using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.DTO.Models; // <-- Đảm bảo namespace này đúng nơi chứa ProductDetailDto
+using System;
 using System.Collections.Generic;
-using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services;
-using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.DTO.Models;
 
 namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Controllers
 {
-    /// <summary>
-    /// Controller điều phối các thao tác liên quan đến Sản phẩm
-    /// </summary>
     public class ProductController
     {
         private readonly ProductService _productService;
@@ -17,59 +15,19 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Controllers
             _productService = new ProductService();
         }
 
-        #region Get/Search Operations
+        #region Get Data
 
-        public List<SanPham> GetAllProducts()
+        // SỬA QUAN TRỌNG: Trả về List<ProductDetailDto> (đúng tên file DTO bạn vừa tạo)
+        public List<ProductDetailDto> FilterProducts(string keyword = null, string brandId = null, string categoryId = null)
         {
-            return _productService.GetAllProducts();
-        }
-
-        public SanPham GetProductById(string id)
-        {
-            return _productService.GetProductById(id);
-        }
-
-        public List<SanPham> FilterProducts(string keyword = null, string brandId = null, string categoryId = null)
-        {
+            // Gọi Service (Lưu ý: Bên Service cũng phải trả về List<ProductDetailDto> nhé)
             return _productService.FilterProducts(keyword, brandId, categoryId);
         }
 
-        #endregion
-
-        #region CRUD Operations
-
-        /// <summary>
-        /// Thêm sản phẩm mới
-        /// </summary>
-        public (bool success, string message, SanPham product) AddProduct(SanPham product, string categoryId = null)
+        // Hàm này trả về Entity gốc (SanPham) để fill vào các ô nhập liệu khi sửa
+        public SanPham GetProductById(string id)
         {
-            // Service đã xử lý try-catch và Detach, Controller chỉ cần chuyển tiếp kết quả
-            return _productService.AddProduct(product, categoryId);
-        }
-
-        /// <summary>
-        /// Cập nhật thông tin sản phẩm
-        /// </summary>
-        public (bool success, string message) UpdateProduct(SanPham product, string categoryId = null)
-        {
-            return _productService.UpdateProduct(product, categoryId);
-        }
-
-        /// <summary>
-        /// Xóa sản phẩm
-        /// </summary>
-        public (bool success, string message) DeleteProduct(string productId)
-        {
-            return _productService.DeleteProduct(productId);
-        }
-
-        #endregion
-
-        #region Helper Methods & Validation
-
-        public string GenerateNewProductId()
-        {
-            return _productService.GenerateNewProductId();
+            return _productService.GetProductById(id);
         }
 
         public string GetProductCategoryId(string productId)
@@ -77,20 +35,38 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Controllers
             return _productService.GetProductCategoryId(productId);
         }
 
-        public bool IsProductInUse(string productId)
+        public string GenerateNewProductId()
         {
-            return _productService.IsProductInUse(productId);
+            return _productService.GenerateNewProductId();
         }
 
         #endregion
 
-        #region Disposal
+        #region CRUD
+
+        public (bool success, string message, SanPham product) AddProduct(SanPham product, string categoryId)
+        {
+            if (string.IsNullOrEmpty(product.ten))
+                return (false, "Tên sản phẩm không được để trống", null);
+
+            return _productService.AddProduct(product, categoryId);
+        }
+
+        public (bool success, string message) UpdateProduct(SanPham product, string categoryId)
+        {
+            return _productService.UpdateProduct(product, categoryId);
+        }
+
+        public (bool success, string message) DeleteProduct(string productId)
+        {
+            return _productService.DeleteProduct(productId);
+        }
+
+        #endregion
 
         public void Dispose()
         {
             _productService?.Dispose();
         }
-
-        #endregion
     }
 }

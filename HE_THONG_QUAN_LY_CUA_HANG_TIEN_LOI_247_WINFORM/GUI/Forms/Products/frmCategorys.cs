@@ -1,167 +1,160 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Reflection; // Cần cái này để dùng Reflection lấy ID
+using System.Collections;
+using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Controllers;
 using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.DTO.Models;
 
 namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms.Products
 {
     public partial class frmCategorys : Form
     {
-        private AppDbContext _context;
+        private readonly CategoryController _categoryController;
         private string _selectedCategoryId;
         private bool _isAddMode = false;
 
         public frmCategorys()
         {
             InitializeComponent();
-            _context = new AppDbContext();
+            _categoryController = new CategoryController();
+
+            //// --- ĐĂNG KÝ SỰ KIỆN THỦ CÔNG (Đảm bảo nút luôn chạy) ---
+            //this.Load += frmCategorys_Load;
+            //if (btnAdd != null) this.btnAdd.Click += btnAdd_Click;
+            //if (btnEdit != null) this.btnEdit.Click += btnEdit_Click;
+            //if (btnDelete != null) this.btnDelete.Click += btnDelete_Click;
+            //if (btnSave != null) this.btnSave.Click += btnSave_Click;
+            //if (btnCancel != null) this.btnCancel.Click += btnCancel_Click;
+            //if (btnSearch != null) this.btnSearch.Click += btnSearch_Click;
+            //if (btnRefresh != null) this.btnRefresh.Click += btnRefresh_Click;
+            //if (btnExport != null) this.btnExport.Click += btnExport_Click;
+            if (txtSearch != null)
+            {
+                txtSearch.TextChanged += (s, e) => { btnSearch_Click(null, null); };
+            }
+
+            if (dgvCategories != null) this.dgvCategories.SelectionChanged += dgvCategories_SelectionChanged;
+            if (txtSearch != null) txtSearch.KeyPress += (s, e) => { if (e.KeyChar == 13) { btnSearch_Click(s, e); e.Handled = true; } };
+            if (txtCategoryName != null) txtCategoryName.KeyPress += (s, e) => { if (e.KeyChar == 13) { btnSave_Click(s, e); e.Handled = true; } };
         }
 
         private void frmCategorys_Load(object sender, EventArgs e)
         {
             try
             {
-                SetupDataGridView();
+                if (dgvCategories != null) dgvCategories.AutoGenerateColumns = false;
                 LoadCategories();
                 SetFormMode(false);
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Lỗi khi tải dữ liệu: {ex.Message}", "Lỗi",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void SetupDataGridView()
-        {
-            // Cấu hình DataGridView nếu chưa có trong Designer
-            if (dgvCategories.Columns.Count == 0)
-            {
-                dgvCategories.AutoGenerateColumns = false;
-                
-                dgvCategories.Columns.Add(new DataGridViewTextBoxColumn
-                {
-                    Name = "colId",
-                    HeaderText = "Mã danh mục",
-                    DataPropertyName = "id",
-                    Width = 200
-                });
-
-                dgvCategories.Columns.Add(new DataGridViewTextBoxColumn
-                {
-                    Name = "colName",
-                    HeaderText = "Tên danh mục",
-                    DataPropertyName = "ten",
-                    Width = 300
-                });
-
-                dgvCategories.Columns.Add(new DataGridViewTextBoxColumn
-                {
-                    Name = "colProductCount",
-                    HeaderText = "Số sản phẩm",
-                    DataPropertyName = "SoLuongSanPham",
-                    Width = 150
-                });
-
-                dgvCategories.Columns.Add(new DataGridViewTextBoxColumn
-                {
-                    Name = "colStatus",
-                    HeaderText = "Trạng thái",
-                    DataPropertyName = "TrangThai",
-                    Width = 150
-                });
-            }
+            catch (Exception ex) { MessageBox.Show($"Lỗi tải form: {ex.Message}"); }
         }
 
         private void LoadCategories()
         {
             try
             {
-                var categories = _context.DanhMucs
-                    .Where(c => !c.isDelete)
-                    .Select(c => new
-                    {
-                        c.id,
-                        c.ten,
-                        SoLuongSanPham = c.SanPhamDanhMucs.Count(sp => !sp.isDelete),
-                        TrangThai = c.isDelete ? "Không hoạt động" : "Hoạt động"
-                    })
-                    .OrderBy(c => c.ten)
-                    .ToList();
-
+                var categories = _categoryController.GetAllCategories();
                 dgvCategories.DataSource = categories;
 
-                // Update status
-                lblStatus.Text = $"Tổng số: {categories.Count} danh mục";
+                // Mapping cột thủ công cho chắc
+                foreach (DataGridViewColumn col in dgvCategories.Columns)
+                {
+                    if (col.HeaderText.ToLower().Contains("mã")) col.DataPropertyName = "Id";
+                    else if (col.HeaderText.ToLower().Contains("tên")) col.DataPropertyName = "Ten";
+                    else if (col.HeaderText.ToLower().Contains("số lượng")) col.DataPropertyName = "SoLuongSanPham";
+                }
+
+                if (categories is IList list) lblStatus.Text = $"Tổng số: {list.Count} danh mục";
             }
-            catch (Exception ex)
+            catch (Exception ex) { MessageBox.Show($"Lỗi hiển thị: {ex.Message}"); }
+        }
+
+        // --- HÀM QUAN TRỌNG: Lấy ID an toàn từ dòng đang chọn ---
+        private string GetCurrentId()
+        {
+            if (dgvCategories.CurrentRow == null) return null;
+
+            // Cách 1: Lấy từ DataBoundItem (Dynamic Object)
+            var dataItem = dgvCategories.CurrentRow.DataBoundItem;
+            if (dataItem != null)
             {
-                MessageBox.Show($"Lỗi khi tải danh sách danh mục: {ex.Message}", "Lỗi",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                var prop = dataItem.GetType().GetProperty("Id");
+                if (prop != null) return prop.GetValue(dataItem)?.ToString();
             }
+
+            // Cách 2: Lấy từ ô Cell (Fallback)
+            if (dgvCategories.Columns.Contains("Id") && dgvCategories.CurrentRow.Cells["Id"].Value != null)
+                return dgvCategories.CurrentRow.Cells["Id"].Value.ToString();
+
+            // Lấy cột đầu tiên
+            if (dgvCategories.ColumnCount > 0 && dgvCategories.CurrentRow.Cells[0].Value != null)
+                return dgvCategories.CurrentRow.Cells[0].Value.ToString();
+
+            return null;
         }
 
         private void dgvCategories_SelectionChanged(object sender, EventArgs e)
         {
-            if (dgvCategories.CurrentRow != null && !_isAddMode)
+            if (!_isAddMode)
             {
-                _selectedCategoryId = dgvCategories.CurrentRow.Cells["colId"].Value?.ToString();
-                LoadCategoryDetail(_selectedCategoryId);
+                string id = GetCurrentId();
+                if (!string.IsNullOrEmpty(id))
+                {
+                    _selectedCategoryId = id;
+                    LoadCategoryDetail(id);
+                }
             }
         }
 
         private void LoadCategoryDetail(string categoryId)
         {
-            if (string.IsNullOrEmpty(categoryId))
-                return;
-
+            if (string.IsNullOrEmpty(categoryId)) return;
             try
             {
-                var category = _context.DanhMucs.Find(categoryId);
-
+                var category = _categoryController.GetCategoryById(categoryId);
                 if (category != null)
                 {
                     txtCategoryId.Text = category.id;
                     txtCategoryName.Text = category.ten;
-
-                    // Load số lượng sản phẩm
-                    int productCount = _context.SanPhamDanhMucs
-                        .Count(sp => sp.danhMucId == categoryId && !sp.isDelete);
-                    
-                    lblProductCount.Text = $"Số sản phẩm: {productCount}";
+                    int count = _categoryController.GetProductCountFromLocation(categoryId);
+                    lblProductCount.Text = $"Số sản phẩm: {count}";
                 }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Lỗi khi tải chi tiết danh mục: {ex.Message}", "Lỗi",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            catch { }
         }
+
+        #region CRUD Actions
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
             SetFormMode(true);
             _isAddMode = true;
             ClearForm();
-            txtCategoryId.Text = "Tự động tạo";
+
+            // Sinh mã tự động
+            try
+            {
+                txtCategoryId.Text = _categoryController.GenerateNewCategoryId();
+            }
+            catch
+            {
+                txtCategoryId.Text = "Tự động tạo";
+            }
+
             txtCategoryName.Focus();
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            if (dgvCategories.CurrentRow == null)
+            string id = GetCurrentId(); // Lấy ID trực tiếp
+            if (string.IsNullOrEmpty(id))
             {
-                MessageBox.Show("Vui lòng chọn danh mục cần chỉnh sửa!", "Thông báo",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Vui lòng chọn danh mục!");
                 return;
             }
 
+            _selectedCategoryId = id;
             SetFormMode(true);
             _isAddMode = false;
             txtCategoryName.Focus();
@@ -169,180 +162,88 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (dgvCategories.CurrentRow == null)
+            string id = GetCurrentId(); // Lấy ID trực tiếp
+            if (string.IsNullOrEmpty(id))
             {
-                MessageBox.Show("Vui lòng chọn danh mục cần xóa!", "Thông báo",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Vui lòng chọn danh mục!");
                 return;
             }
 
-            // Kiểm tra xem danh mục có sản phẩm không
-            int productCount = _context.SanPhamDanhMucs
-                .Count(sp => sp.danhMucId == _selectedCategoryId && !sp.isDelete);
-
-            if (productCount > 0)
+            if (MessageBox.Show("Bạn có chắc chắn muốn xóa?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                MessageBox.Show(
-                    $"Không thể xóa danh mục này vì có {productCount} sản phẩm đang sử dụng!\n\n" +
-                    "Vui lòng xóa hoặc chuyển các sản phẩm sang danh mục khác trước.",
-                    "Không thể xóa",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning);
-                return;
-            }
-
-            var result = MessageBox.Show(
-                $"Bạn có chắc chắn muốn xóa danh mục '{txtCategoryName.Text}'?",
-                "Xác nhận xóa",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question);
-
-            if (result == DialogResult.Yes)
-            {
-                try
+                var (success, message) = _categoryController.DeleteCategory(id);
+                if (success)
                 {
-                    var category = _context.DanhMucs.Find(_selectedCategoryId);
-                    if (category != null)
-                    {
-                        category.isDelete = true;
-                        _context.SaveChanges();
-
-                        MessageBox.Show("Xóa danh mục thành công!", "Thông báo",
-                            MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                        LoadCategories();
-                        ClearForm();
-                    }
+                    MessageBox.Show(message, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LoadCategories();
+                    ClearForm();
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Lỗi khi xóa danh mục: {ex.Message}", "Lỗi",
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                else MessageBox.Show(message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (!ValidateInput())
+            if (string.IsNullOrWhiteSpace(txtCategoryName.Text))
+            {
+                MessageBox.Show("Vui lòng nhập tên danh mục!");
+                txtCategoryName.Focus();
                 return;
+            }
 
             try
             {
                 if (_isAddMode)
                 {
-                    // Kiểm tra trùng tên
-                    bool exists = _context.DanhMucs
-                        .Any(c => c.ten.ToLower() == txtCategoryName.Text.Trim().ToLower() && !c.isDelete);
-
-                    if (exists)
+                    var newCat = new DanhMuc
                     {
-                        MessageBox.Show("Tên danh mục đã tồn tại!", "Thông báo",
-                            MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        txtCategoryName.Focus();
-                        return;
-                    }
-
-                    // Thêm mới
-                    var newCategory = new DanhMuc
-                    {
-                        id = Guid.NewGuid().ToString(),
+                        // Lấy ID từ ô TextBox (đã sinh mã DM00x)
+                        id = txtCategoryId.Text.Trim(),
                         ten = txtCategoryName.Text.Trim(),
                         isDelete = false
                     };
+                    var (success, message, _) = _categoryController.AddCategory(newCat);
 
-                    _context.DanhMucs.Add(newCategory);
-                    _context.SaveChanges();
-
-                    MessageBox.Show("Thêm danh mục thành công!", "Thông báo",
-                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    if (success)
+                    {
+                        MessageBox.Show(message, "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        LoadCategories();
+                        SetFormMode(false);
+                    }
+                    else MessageBox.Show(message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
                 {
-                    // Kiểm tra trùng tên (trừ chính nó)
-                    bool exists = _context.DanhMucs
-                        .Any(c => c.id != _selectedCategoryId && 
-                             c.ten.ToLower() == txtCategoryName.Text.Trim().ToLower() && 
-                             !c.isDelete);
+                    var updateCat = new DanhMuc { id = _selectedCategoryId, ten = txtCategoryName.Text.Trim() };
+                    var (success, message) = _categoryController.UpdateCategory(updateCat);
 
-                    if (exists)
+                    if (success)
                     {
-                        MessageBox.Show("Tên danh mục đã tồn tại!", "Thông báo",
-                            MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        txtCategoryName.Focus();
-                        return;
+                        MessageBox.Show(message, "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        LoadCategories();
+                        SetFormMode(false);
                     }
-
-                    // Cập nhật
-                    var category = _context.DanhMucs.Find(_selectedCategoryId);
-                    if (category != null)
-                    {
-                        category.ten = txtCategoryName.Text.Trim();
-                        _context.SaveChanges();
-
-                        MessageBox.Show("Cập nhật danh mục thành công!", "Thông báo",
-                            MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
+                    else MessageBox.Show(message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-
-                LoadCategories();
-                SetFormMode(false);
-                _isAddMode = false;
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Lỗi khi lưu danh mục: {ex.Message}", "Lỗi",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            catch (Exception ex) { MessageBox.Show("Lỗi hệ thống: " + ex.Message); }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
             SetFormMode(false);
             _isAddMode = false;
-
-            if (dgvCategories.CurrentRow != null)
-            {
-                LoadCategoryDetail(_selectedCategoryId);
-            }
-            else
-            {
-                ClearForm();
-            }
+            // Load lại chi tiết dòng đang chọn (nếu có)
+            string currentId = GetCurrentId();
+            if (!string.IsNullOrEmpty(currentId)) LoadCategoryDetail(currentId);
+            else ClearForm();
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            try
-            {
-                string searchText = txtSearch.Text.Trim().ToLower();
-
-                if (string.IsNullOrWhiteSpace(searchText))
-                {
-                    LoadCategories();
-                    return;
-                }
-
-                var categories = _context.DanhMucs
-                    .Where(c => !c.isDelete && c.ten.ToLower().Contains(searchText))
-                    .Select(c => new
-                    {
-                        c.id,
-                        c.ten,
-                        SoLuongSanPham = c.SanPhamDanhMucs.Count(sp => !sp.isDelete),
-                        TrangThai = c.isDelete ? "Không hoạt động" : "Hoạt động"
-                    })
-                    .OrderBy(c => c.ten)
-                    .ToList();
-
-                dgvCategories.DataSource = categories;
-                lblStatus.Text = $"Tìm thấy: {categories.Count} danh mục";
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Lỗi khi tìm kiếm: {ex.Message}", "Lỗi",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            var list = _categoryController.SearchCategories(txtSearch.Text.Trim());
+            dgvCategories.DataSource = list;
+            if (list is IList l) lblStatus.Text = $"Tìm thấy: {l.Count}";
         }
 
         private void btnRefresh_Click(object sender, EventArgs e)
@@ -352,53 +253,26 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
             ClearForm();
         }
 
-        private void btnExport_Click(object sender, EventArgs e)
+        private void btnExport_Click(object sender, EventArgs e) => MessageBox.Show("Đang phát triển!");
+
+        #endregion
+
+        #region Helpers
+        private void SetFormMode(bool isEdit)
         {
-            MessageBox.Show("Chức năng xuất Excel đang được phát triển!", "Thông báo",
-                MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
+            txtCategoryName.Enabled = isEdit;
+            btnSave.Enabled = isEdit;
+            btnCancel.Enabled = isEdit;
 
-        private bool ValidateInput()
-        {
-            if (string.IsNullOrWhiteSpace(txtCategoryName.Text))
-            {
-                MessageBox.Show("Vui lòng nhập tên danh mục!", "Thông báo",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtCategoryName.Focus();
-                return false;
-            }
+            btnAdd.Enabled = !isEdit;
+            btnEdit.Enabled = !isEdit;
+            btnDelete.Enabled = !isEdit;
+            btnSearch.Enabled = !isEdit;
+            btnRefresh.Enabled = !isEdit;
+            btnExport.Enabled = !isEdit;
 
-            if (txtCategoryName.Text.Trim().Length < 2)
-            {
-                MessageBox.Show("Tên danh mục phải có ít nhất 2 ký tự!", "Thông báo",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtCategoryName.Focus();
-                return false;
-            }
-
-            return true;
-        }
-
-        private void SetFormMode(bool isEditMode)
-        {
-            // Enable/disable input fields
-            txtCategoryName.Enabled = isEditMode;
-            btnSave.Enabled = isEditMode;
-            btnCancel.Enabled = isEditMode;
-
-            // Enable/disable action buttons
-            btnAdd.Enabled = !isEditMode;
-            btnEdit.Enabled = !isEditMode;
-            btnDelete.Enabled = !isEditMode;
-            btnSearch.Enabled = !isEditMode;
-            btnRefresh.Enabled = !isEditMode;
-            btnExport.Enabled = !isEditMode;
-
-            // Enable/disable search
-            txtSearch.Enabled = !isEditMode;
-
-            // Enable/disable grid selection
-            dgvCategories.Enabled = !isEditMode;
+            dgvCategories.Enabled = !isEdit;
+            txtCategoryId.Enabled = false; 
         }
 
         private void ClearForm()
@@ -409,31 +283,11 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
             _selectedCategoryId = null;
         }
 
-        // Event handler cho Enter key trong txtSearch
-        private void txtSearch_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar == (char)Keys.Enter)
-            {
-                btnSearch_Click(sender, e);
-                e.Handled = true;
-            }
-        }
-
-        // Event handler cho Enter key trong txtCategoryName
-        private void txtCategoryName_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar == (char)Keys.Enter)
-            {
-                btnSave_Click(sender, e);
-                e.Handled = true;
-            }
-        }
-
-        // Cleanup
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
+            _categoryController?.Dispose();
             base.OnFormClosing(e);
-            _context?.Dispose();
         }
+        #endregion
     }
 }
