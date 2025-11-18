@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -20,11 +21,26 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
         private string _imagePath = string.Empty;
         private bool _isDataLoaded = false;
 
+
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
+        private static extern Int32 SendMessage(IntPtr hWnd, int msg, int wParam, [MarshalAs(UnmanagedType.LPWStr)] string lParam);
+
+        private const int EM_SETCUEBANNER = 0x1501;
+
+        private void SetPlaceholder(TextBox txt, string text)
+        {
+            if (txt != null)
+            {
+                SendMessage(txt.Handle, EM_SETCUEBANNER, 0, text);
+            }
+        }
         public frmProducts()
         {
             InitializeComponent();
             _productController = new ProductController();
             _context = new AppDbContext();
+
+            SetPlaceholder(txtSearch, "Nhập tên hoặc mã sản phẩm để tìm...");
 
             //// --- ĐĂNG KÝ SỰ KIỆN THỦ CÔNG (Đảm bảo hoạt động) ---
             //this.Load += frmProducts_Load;

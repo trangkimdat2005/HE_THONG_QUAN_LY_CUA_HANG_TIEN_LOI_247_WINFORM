@@ -1,10 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Windows.Forms;
-using System.Reflection; // Cần cái này để dùng Reflection lấy ID
-using System.Collections;
-using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Controllers;
+﻿using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Controllers;
 using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.DTO.Models;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Reflection; // Cần cái này để dùng Reflection lấy ID
+using System.Runtime.InteropServices;
+using System.Windows.Forms;
 
 namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms.Products
 {
@@ -14,10 +15,24 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
         private string _selectedCategoryId;
         private bool _isAddMode = false;
 
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
+        private static extern Int32 SendMessage(IntPtr hWnd, int msg, int wParam, [MarshalAs(UnmanagedType.LPWStr)] string lParam);
+
+        private const int EM_SETCUEBANNER = 0x1501;
+
+        private void SetPlaceholder(TextBox txt, string text)
+        {
+            if (txt != null)
+            {
+                SendMessage(txt.Handle, EM_SETCUEBANNER, 0, text);
+            }
+        }
         public frmCategorys()
         {
             InitializeComponent();
             _categoryController = new CategoryController();
+
+            SetPlaceholder(txtSearch, "Nhập tên hoặc mã ký hiệu để tìm...");
 
             //// --- ĐĂNG KÝ SỰ KIỆN THỦ CÔNG (Đảm bảo nút luôn chạy) ---
             //this.Load += frmCategorys_Load;

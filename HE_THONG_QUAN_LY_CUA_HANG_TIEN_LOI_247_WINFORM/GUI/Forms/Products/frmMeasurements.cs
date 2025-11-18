@@ -1,174 +1,176 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Collections;
+using System.Reflection;
+using System.Runtime.InteropServices;
 using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.DTO.Models;
+using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Controllers;
 
 namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms.Products
 {
     public partial class frmMeasurements : Form
     {
-        private AppDbContext _context;
+        private readonly MeasurementController _measurementController;
         private string _selectedUnitId;
         private bool _isAddMode = false;
 
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
+        private static extern Int32 SendMessage(IntPtr hWnd, int msg, int wParam, [MarshalAs(UnmanagedType.LPWStr)] string lParam);
+
+        private const int EM_SETCUEBANNER = 0x1501;
+
+        private void SetPlaceholder(TextBox txt, string text)
+        {
+            if (txt != null)
+            {
+                SendMessage(txt.Handle, EM_SETCUEBANNER, 0, text);
+            }
+        }
         public frmMeasurements()
         {
             InitializeComponent();
-            _context = new AppDbContext();
+            _measurementController = new MeasurementController();
+
+            SetPlaceholder(txtSearch, "Nhập tên hoặc mã danh mục để tìm...");
+
+            //this.Load += frmMeasurements_Load;
+            //if (btnAdd != null) this.btnAdd.Click += btnAdd_Click;
+            //if (btnEdit != null) this.btnEdit.Click += btnEdit_Click;
+            //if (btnDelete != null) this.btnDelete.Click += btnDelete_Click;
+            //if (btnSave != null) this.btnSave.Click += btnSave_Click;
+            //if (btnCancel != null) this.btnCancel.Click += btnCancel_Click;
+            //if (btnSearch != null) this.btnSearch.Click += btnSearch_Click;
+            //if (btnRefresh != null) this.btnRefresh.Click += btnRefresh_Click;
+            //if (btnExport != null) this.btnExport.Click += btnExport_Click;
+
+            //if (dgvUnits != null) this.dgvUnits.SelectionChanged += dgvUnits_SelectionChanged;
+
+            if (txtSearch != null)
+            {
+                txtSearch.TextChanged += (s, e) => { btnSearch_Click(null, null); };
+                txtSearch.KeyPress += (s, e) => { if (e.KeyChar == 13) { btnSearch_Click(s, e); e.Handled = true; } };
+            }
+            if (txtUnitName != null) txtUnitName.KeyPress += (s, e) => { if (e.KeyChar == 13) { txtSymbol?.Focus(); e.Handled = true; } };
+            if (txtSymbol != null) txtSymbol.KeyPress += (s, e) => { if (e.KeyChar == 13) { btnSave_Click(s, e); e.Handled = true; } };
+
+            
+
         }
 
         private void frmMeasurements_Load(object sender, EventArgs e)
         {
             try
             {
-                SetupDataGridView();
+                if (dgvUnits != null) dgvUnits.AutoGenerateColumns = false;
                 LoadUnits();
                 SetFormMode(false);
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Lỗi khi tải dữ liệu: {ex.Message}", "Lỗi",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void SetupDataGridView()
-        {
-            if (dgvUnits.Columns.Count == 0)
-            {
-                dgvUnits.AutoGenerateColumns = false;
-                
-                dgvUnits.Columns.Add(new DataGridViewTextBoxColumn
-                {
-                    Name = "colId",
-                    HeaderText = "Mã đơn vị",
-                    DataPropertyName = "id",
-                    Width = 150
-                });
-
-                dgvUnits.Columns.Add(new DataGridViewTextBoxColumn
-                {
-                    Name = "colName",
-                    HeaderText = "Tên đơn vị",
-                    DataPropertyName = "ten",
-                    Width = 250
-                });
-
-                dgvUnits.Columns.Add(new DataGridViewTextBoxColumn
-                {
-                    Name = "colSymbol",
-                    HeaderText = "Ký hiệu",
-                    DataPropertyName = "kyHieu",
-                    Width = 120
-                });
-
-                dgvUnits.Columns.Add(new DataGridViewTextBoxColumn
-                {
-                    Name = "colProductCount",
-                    HeaderText = "Số sản phẩm",
-                    DataPropertyName = "SoLuongSanPham",
-                    Width = 120
-                });
-
-                dgvUnits.Columns.Add(new DataGridViewTextBoxColumn
-                {
-                    Name = "colStatus",
-                    HeaderText = "Trạng thái",
-                    DataPropertyName = "TrangThai",
-                    Width = 120
-                });
-            }
+            catch (Exception ex) { MessageBox.Show($"Lỗi tải form: {ex.Message}"); }
         }
 
         private void LoadUnits()
         {
             try
             {
-                var units = _context.DonViDoLuongs
-                    .Where(u => !u.isDelete)
-                    .Select(u => new
-                    {
-                        u.id,
-                        u.ten,
-                        u.kyHieu,
-                        SoLuongSanPham = u.SanPhamDonVis.Count(sp => !sp.isDelete),
-                        TrangThai = u.isDelete ? "Không hoạt động" : "Hoạt động"
-                    })
-                    .OrderBy(u => u.ten)
-                    .ToList();
-
+                var units = _measurementController.GetAllMeasurements();
                 dgvUnits.DataSource = units;
-                lblStatus.Text = $"Tổng số: {units.Count} đơn vị";
+
+                foreach (DataGridViewColumn col in dgvUnits.Columns)
+                {
+                    if (col.Name == "Id" || col.HeaderText.Contains("Mã"))
+                        col.DataPropertyName = "Id";
+
+                    else if (col.Name == "Ten" || col.HeaderText.Contains("Tên"))
+                        col.DataPropertyName = "Ten";
+                    else if (col.Name == "KyHieu" || col.HeaderText.Contains("Ký hiệu") || col.HeaderText.Contains("Kí hiệu") || col.HeaderText.Contains("Kí Hiệu"))
+                        col.DataPropertyName = "KyHieu"; 
+                }
+
+                if (units is IList list) lblStatus.Text = $"Tổng số: {list.Count} đơn vị";
             }
-            catch (Exception ex)
+            catch (Exception ex) { MessageBox.Show($"Lỗi hiển thị: {ex.Message}"); }
+        }
+
+        private string GetCurrentId()
+        {
+            if (dgvUnits.CurrentRow == null) return null;
+
+            var dataItem = dgvUnits.CurrentRow.DataBoundItem;
+            if (dataItem != null)
             {
-                MessageBox.Show($"Lỗi khi tải danh sách đơn vị: {ex.Message}", "Lỗi",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                var prop = dataItem.GetType().GetProperty("Id");
+                if (prop != null) return prop.GetValue(dataItem)?.ToString();
             }
+
+            if (dgvUnits.ColumnCount > 0 && dgvUnits.CurrentRow.Cells[0].Value != null)
+                return dgvUnits.CurrentRow.Cells[0].Value.ToString();
+
+            return null;
         }
 
         private void dgvUnits_SelectionChanged(object sender, EventArgs e)
         {
-            if (dgvUnits.CurrentRow != null && !_isAddMode)
+            if (!_isAddMode)
             {
-                _selectedUnitId = dgvUnits.CurrentRow.Cells["colId"].Value?.ToString();
-                LoadUnitDetail(_selectedUnitId);
+                string id = GetCurrentId();
+                if (!string.IsNullOrEmpty(id))
+                {
+                    _selectedUnitId = id;
+                    LoadUnitDetail(id);
+                }
             }
         }
 
         private void LoadUnitDetail(string unitId)
         {
-            if (string.IsNullOrEmpty(unitId))
-                return;
-
+            if (string.IsNullOrEmpty(unitId)) return;
             try
             {
-                var unit = _context.DonViDoLuongs.Find(unitId);
-
+                var unit = _measurementController.GetMeasurementById(unitId);
                 if (unit != null)
                 {
                     txtUnitId.Text = unit.id;
                     txtUnitName.Text = unit.ten;
                     txtSymbol.Text = unit.kyHieu;
 
-                    // Load số lượng sản phẩm
-                    int productCount = _context.SanPhamDonVis
-                        .Count(sp => sp.donViId == unitId && !sp.isDelete);
-                    
-                    lblProductCount.Text = $"Số sản phẩm: {productCount}";
+                    int count = _measurementController.GetProductCount(unitId);
+                    lblProductCount.Text = $"Số sản phẩm: {count}";
                 }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Lỗi khi tải chi tiết đơn vị: {ex.Message}", "Lỗi",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            catch { }
         }
+
+        #region CRUD Actions
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
             SetFormMode(true);
             _isAddMode = true;
             ClearForm();
-            txtUnitId.Text = "Tự động tạo";
+
+            try
+            {
+                txtUnitId.Text = _measurementController.GenerateNewMeasurementId();
+            }
+            catch
+            {
+                txtUnitId.Text = "Tự động tạo";
+            }
+
             txtUnitName.Focus();
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            if (dgvUnits.CurrentRow == null)
+            string id = GetCurrentId();
+            if (string.IsNullOrEmpty(id))
             {
-                MessageBox.Show("Vui lòng chọn đơn vị cần chỉnh sửa!", "Thông báo",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Vui lòng chọn đơn vị!");
                 return;
             }
 
+            _selectedUnitId = id;
             SetFormMode(true);
             _isAddMode = false;
             txtUnitName.Focus();
@@ -176,210 +178,87 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (dgvUnits.CurrentRow == null)
+            string id = GetCurrentId();
+            if (string.IsNullOrEmpty(id))
             {
-                MessageBox.Show("Vui lòng chọn đơn vị cần xóa!", "Thông báo",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Vui lòng chọn đơn vị!");
                 return;
             }
 
-            // Kiểm tra có sản phẩm sử dụng không
-            int productCount = _context.SanPhamDonVis
-                .Count(sp => sp.donViId == _selectedUnitId && !sp.isDelete);
-
-            if (productCount > 0)
+            if (MessageBox.Show("Bạn có chắc chắn muốn xóa?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                MessageBox.Show(
-                    $"Không thể xóa đơn vị này vì có {productCount} sản phẩm đang sử dụng!\n\n" +
-                    "Vui lòng chuyển các sản phẩm sang đơn vị khác trước.",
-                    "Không thể xóa",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning);
-                return;
-            }
-
-            var result = MessageBox.Show(
-                $"Bạn có chắc chắn muốn xóa đơn vị '{txtUnitName.Text}'?",
-                "Xác nhận xóa",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question);
-
-            if (result == DialogResult.Yes)
-            {
-                try
+                var (success, message) = _measurementController.DeleteMeasurement(id);
+                if (success)
                 {
-                    var unit = _context.DonViDoLuongs.Find(_selectedUnitId);
-                    if (unit != null)
-                    {
-                        unit.isDelete = true;
-                        _context.SaveChanges();
-
-                        MessageBox.Show("Xóa đơn vị thành công!", "Thông báo",
-                            MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                        LoadUnits();
-                        ClearForm();
-                    }
+                    MessageBox.Show(message, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LoadUnits();
+                    ClearForm();
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Lỗi khi xóa đơn vị: {ex.Message}", "Lỗi",
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                else MessageBox.Show(message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (!ValidateInput())
-                return;
+            if (!ValidateInput()) return;
 
             try
             {
                 if (_isAddMode)
                 {
-                    // Kiểm tra trùng tên hoặc ký hiệu
-                    bool nameExists = _context.DonViDoLuongs
-                        .Any(u => u.ten.ToLower() == txtUnitName.Text.Trim().ToLower() && !u.isDelete);
-
-                    if (nameExists)
-                    {
-                        MessageBox.Show("Tên đơn vị đã tồn tại!", "Thông báo",
-                            MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        txtUnitName.Focus();
-                        return;
-                    }
-
-                    bool symbolExists = _context.DonViDoLuongs
-                        .Any(u => u.kyHieu.ToLower() == txtSymbol.Text.Trim().ToLower() && !u.isDelete);
-
-                    if (symbolExists)
-                    {
-                        MessageBox.Show("Ký hiệu đơn vị đã tồn tại!", "Thông báo",
-                            MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        txtSymbol.Focus();
-                        return;
-                    }
-
-                    // Thêm mới
                     var newUnit = new DonViDoLuong
                     {
-                        id = Guid.NewGuid().ToString(),
+                        id = txtUnitId.Text.Trim(), // Lấy mã đã sinh
                         ten = txtUnitName.Text.Trim(),
                         kyHieu = txtSymbol.Text.Trim(),
                         isDelete = false
                     };
+                    var (success, message, _) = _measurementController.AddMeasurement(newUnit);
 
-                    _context.DonViDoLuongs.Add(newUnit);
-                    _context.SaveChanges();
-
-                    MessageBox.Show("Thêm đơn vị thành công!", "Thông báo",
-                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    if (success)
+                    {
+                        MessageBox.Show(message, "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        LoadUnits();
+                        SetFormMode(false);
+                    }
+                    else MessageBox.Show(message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
                 {
-                    // Kiểm tra trùng tên (trừ chính nó)
-                    bool nameExists = _context.DonViDoLuongs
-                        .Any(u => u.id != _selectedUnitId && 
-                             u.ten.ToLower() == txtUnitName.Text.Trim().ToLower() && 
-                             !u.isDelete);
-
-                    if (nameExists)
+                    var updatedUnit = new DonViDoLuong
                     {
-                        MessageBox.Show("Tên đơn vị đã tồn tại!", "Thông báo",
-                            MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        txtUnitName.Focus();
-                        return;
-                    }
+                        id = _selectedUnitId,
+                        ten = txtUnitName.Text.Trim(),
+                        kyHieu = txtSymbol.Text.Trim()
+                    };
+                    var (success, message) = _measurementController.UpdateMeasurement(updatedUnit);
 
-                    bool symbolExists = _context.DonViDoLuongs
-                        .Any(u => u.id != _selectedUnitId && 
-                             u.kyHieu.ToLower() == txtSymbol.Text.Trim().ToLower() && 
-                             !u.isDelete);
-
-                    if (symbolExists)
+                    if (success)
                     {
-                        MessageBox.Show("Ký hiệu đơn vị đã tồn tại!", "Thông báo",
-                            MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        txtSymbol.Focus();
-                        return;
+                        MessageBox.Show(message, "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        LoadUnits();
+                        SetFormMode(false);
                     }
-
-                    // Cập nhật
-                    var unit = _context.DonViDoLuongs.Find(_selectedUnitId);
-                    if (unit != null)
-                    {
-                        unit.ten = txtUnitName.Text.Trim();
-                        unit.kyHieu = txtSymbol.Text.Trim();
-
-                        _context.SaveChanges();
-
-                        MessageBox.Show("Cập nhật đơn vị thành công!", "Thông báo",
-                            MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
+                    else MessageBox.Show(message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-
-                LoadUnits();
-                SetFormMode(false);
-                _isAddMode = false;
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Lỗi khi lưu đơn vị: {ex.Message}", "Lỗi",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            catch (Exception ex) { MessageBox.Show("Lỗi hệ thống: " + ex.Message); }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
             SetFormMode(false);
             _isAddMode = false;
-
-            if (dgvUnits.CurrentRow != null)
-            {
-                LoadUnitDetail(_selectedUnitId);
-            }
-            else
-            {
-                ClearForm();
-            }
+            string currentId = GetCurrentId();
+            if (!string.IsNullOrEmpty(currentId)) LoadUnitDetail(currentId);
+            else ClearForm();
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            try
-            {
-                string searchText = txtSearch.Text.Trim().ToLower();
-
-                if (string.IsNullOrWhiteSpace(searchText))
-                {
-                    LoadUnits();
-                    return;
-                }
-
-                var units = _context.DonViDoLuongs
-                    .Where(u => !u.isDelete && 
-                           (u.ten.ToLower().Contains(searchText) || 
-                            u.kyHieu.ToLower().Contains(searchText)))
-                    .Select(u => new
-                    {
-                        u.id,
-                        u.ten,
-                        u.kyHieu,
-                        SoLuongSanPham = u.SanPhamDonVis.Count(sp => !sp.isDelete),
-                        TrangThai = u.isDelete ? "Không hoạt động" : "Hoạt động"
-                    })
-                    .OrderBy(u => u.ten)
-                    .ToList();
-
-                dgvUnits.DataSource = units;
-                lblStatus.Text = $"Tìm thấy: {units.Count} đơn vị";
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Lỗi khi tìm kiếm: {ex.Message}", "Lỗi",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            var list = _measurementController.SearchMeasurements(txtSearch.Text.Trim());
+            dgvUnits.DataSource = list;
+            if (list is IList l) lblStatus.Text = $"Tìm thấy: {l.Count}";
         }
 
         private void btnRefresh_Click(object sender, EventArgs e)
@@ -389,62 +268,44 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
             ClearForm();
         }
 
-        private void btnExport_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("Chức năng xuất Excel đang được phát triển!", "Thông báo",
-                MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
+        private void btnExport_Click(object sender, EventArgs e) => MessageBox.Show("Đang phát triển!");
 
+        #endregion
+
+        #region Helpers
         private bool ValidateInput()
         {
             if (string.IsNullOrWhiteSpace(txtUnitName.Text))
             {
-                MessageBox.Show("Vui lòng nhập tên đơn vị!", "Thông báo",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Nhập tên đơn vị!");
                 txtUnitName.Focus();
                 return false;
             }
-
-            if (txtUnitName.Text.Trim().Length < 1)
-            {
-                MessageBox.Show("Tên đơn vị phải có ít nhất 1 ký tự!", "Thông báo",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtUnitName.Focus();
-                return false;
-            }
-
             if (string.IsNullOrWhiteSpace(txtSymbol.Text))
             {
-                MessageBox.Show("Vui lòng nhập ký hiệu đơn vị!", "Thông báo",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Nhập ký hiệu!");
                 txtSymbol.Focus();
                 return false;
             }
-
             return true;
         }
 
-        private void SetFormMode(bool isEditMode)
+        private void SetFormMode(bool isEdit)
         {
-            // Enable/disable input fields
-            txtUnitName.Enabled = isEditMode;
-            txtSymbol.Enabled = isEditMode;
-            btnSave.Enabled = isEditMode;
-            btnCancel.Enabled = isEditMode;
+            txtUnitName.Enabled = isEdit;
+            txtSymbol.Enabled = isEdit;
+            btnSave.Enabled = isEdit;
+            btnCancel.Enabled = isEdit;
 
-            // Enable/disable action buttons
-            btnAdd.Enabled = !isEditMode;
-            btnEdit.Enabled = !isEditMode;
-            btnDelete.Enabled = !isEditMode;
-            btnSearch.Enabled = !isEditMode;
-            btnRefresh.Enabled = !isEditMode;
-            btnExport.Enabled = !isEditMode;
+            btnAdd.Enabled = !isEdit;
+            btnEdit.Enabled = !isEdit;
+            btnDelete.Enabled = !isEdit;
+            btnSearch.Enabled = !isEdit;
+            btnRefresh.Enabled = !isEdit;
+            btnExport.Enabled = !isEdit;
 
-            // Enable/disable search
-            txtSearch.Enabled = !isEditMode;
-
-            // Enable/disable grid selection
-            dgvUnits.Enabled = !isEditMode;
+            dgvUnits.Enabled = !isEdit;
+            txtUnitId.Enabled = false; // Khóa ID
         }
 
         private void ClearForm()
@@ -456,30 +317,11 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
             _selectedUnitId = null;
         }
 
-        // Event handlers
-        private void txtSearch_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar == (char)Keys.Enter)
-            {
-                btnSearch_Click(sender, e);
-                e.Handled = true;
-            }
-        }
-
-        private void txtUnitName_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar == (char)Keys.Enter)
-            {
-                txtSymbol.Focus();
-                e.Handled = true;
-            }
-        }
-
-        // Cleanup
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
+            _measurementController?.Dispose();
             base.OnFormClosing(e);
-            _context?.Dispose();
         }
+        #endregion
     }
 }
