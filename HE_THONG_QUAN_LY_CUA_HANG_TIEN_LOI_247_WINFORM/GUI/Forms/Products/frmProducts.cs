@@ -1,19 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.DTO.Models;
+using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Controllers;
 
 namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms.Products
 {
+    /// <summary>
+    /// Form quản lý sản phẩm với Controller Pattern
+    /// Form -> ProductController -> ProductService -> AppDbContext
+    /// </summary>
     public partial class frmProducts : Form
     {
-        private AppDbContext _context;
+        private readonly ProductController _productController;
+        private readonly AppDbContext _context;
         private string _selectedProductId;
         private bool _isAddMode = false;
         private string _imagePath = string.Empty;
@@ -22,38 +25,37 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
         public frmProducts()
         {
             InitializeComponent();
+            _productController = new ProductController();
             _context = new AppDbContext();
+            RegisterEnterKeyHandlers();
         }
+
+        #region Form Load & Initialization
 
         private async void frmProducts_Load(object sender, EventArgs e)
         {
             try
             {
-                // Hiển thị loading message
-                dgvProducts.DataSource = null;
-                lblTitle.Text = "QUẢN LÝ SẢN PHẨM - Đang tải dữ liệu...";
-
-                // Disable controls trong khi loading
+                lblTitle.Text = "ĐANG TẢI DỮ LIỆU...";
                 DisableControlsWhileLoading();
-
-                // Load data async để không block UI
                 await LoadDataAsync();
-
                 SetFormMode(false);
                 _isDataLoaded = true;
-
                 lblTitle.Text = "QUẢN LÝ SẢN PHẨM";
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Lỗi khi tải dữ liệu: {ex.Message}", "Lỗi",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-                lblTitle.Text = "QUẢN LÝ SẢN PHẨM - Lỗi tải dữ liệu";
+                MessageBox.Show($"Lỗi tải dữ liệu: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
                 EnableControlsAfterLoading();
             }
+        }
+
+        private void RegisterEnterKeyHandlers()
+        {
+            txtSearch.KeyPress += (s, e) => { if (e.KeyChar == 13) { LoadProducts(); e.Handled = true; } };
         }
 
         private void DisableControlsWhileLoading()
@@ -70,32 +72,18 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
             dgvProducts.Enabled = true;
         }
 
+        #endregion
+
+        #region Data Loading
+
         private async Task LoadDataAsync()
         {
-            // Load all data in parallel
             await Task.Run(() =>
             {
-                // Load brands synchronously in background thread
                 this.Invoke((MethodInvoker)delegate
                 {
                     LoadBrands();
-                });
-            });
-
-            await Task.Run(() =>
-            {
-                // Load categories synchronously in background thread
-                this.Invoke((MethodInvoker)delegate
-                {
                     LoadCategories();
-                });
-            });
-
-            await Task.Run(() =>
-            {
-                // Load products synchronously in background thread
-                this.Invoke((MethodInvoker)delegate
-                {
                     LoadProducts();
                 });
             });
@@ -103,157 +91,296 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
 
         private void LoadBrands()
         {
-            try
-            {
-                var brands = _context.NhanHieux
-                    .Where(b => !b.isDelete)
-                    .OrderBy(b => b.ten)
-                    .ToList();
+            var brands = _context.NhanHieux.Where(b => !b.isDelete).OrderBy(b => b.ten).ToList();
 
-                // Load for search filter
-                var brandListWithAll = new List<NhanHieu> { new NhanHieu { id = "", ten = "-- Tất cả --" } };
-                brandListWithAll.AddRange(brands);
+            var filterBrands = new List<NhanHieu> { new NhanHieu { id = "", ten = "-- Tất cả --" } };
+            filterBrands.AddRange(brands);
+            cmbBrand.DataSource = filterBrands;
+            cmbBrand.DisplayMember = "ten";
+            cmbBrand.ValueMember = "id";
 
-                cmbBrand.DataSource = brandListWithAll;
-                cmbBrand.DisplayMember = "ten";
-                cmbBrand.ValueMember = "id";
-
-                // Load for detail form (clone list to avoid data binding issues)
-                cmbBrandDetail.DataSource = brands.ToList();
-                cmbBrandDetail.DisplayMember = "ten";
-                cmbBrandDetail.ValueMember = "id";
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Lỗi khi tải danh sách nhãn hiệu: {ex.Message}", "Lỗi",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            cmbBrandDetail.DataSource = new List<NhanHieu>(brands);
+            cmbBrandDetail.DisplayMember = "ten";
+            cmbBrandDetail.ValueMember = "id";
         }
 
         private void LoadCategories()
         {
-            try
-            {
-                var categories = _context.DanhMucs
-                    .Where(c => !c.isDelete)
-                    .OrderBy(c => c.ten)
-                    .ToList();
+            var cats = _context.DanhMucs.Where(c => !c.isDelete).OrderBy(c => c.ten).ToList();
 
-                var categoryListWithAll = new List<DanhMuc> { new DanhMuc { id = "", ten = "-- Tất cả --" } };
-                categoryListWithAll.AddRange(categories);
+            var filterCats = new List<DanhMuc> { new DanhMuc { id = "", ten = "-- Tất cả --" } };
+            filterCats.AddRange(cats);
+            cmbCategory.DataSource = filterCats;
+            cmbCategory.DisplayMember = "ten";
+            cmbCategory.ValueMember = "id";
 
-                cmbCategory.DataSource = categoryListWithAll;
-                cmbCategory.DisplayMember = "ten";
-                cmbCategory.ValueMember = "id";
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Lỗi khi tải danh sách danh mục: {ex.Message}", "Lỗi",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            cmbStatusDetail.DataSource = new List<DanhMuc>(cats);
+            cmbStatusDetail.DisplayMember = "ten";
+            cmbStatusDetail.ValueMember = "id";
         }
 
         private void LoadProducts()
         {
             try
             {
-                var query = _context.SanPhams
-                    .Where(p => !p.isDelete)
-                    .AsQueryable();
+                string keyword = string.IsNullOrWhiteSpace(txtSearch.Text) ? null : txtSearch.Text;
+                string brandId = (cmbBrand.SelectedValue != null && !string.IsNullOrEmpty(cmbBrand.SelectedValue.ToString()))
+                    ? cmbBrand.SelectedValue.ToString() : null;
+                string categoryId = (cmbCategory.SelectedValue != null && !string.IsNullOrEmpty(cmbCategory.SelectedValue.ToString()))
+                    ? cmbCategory.SelectedValue.ToString() : null;
 
-                // Apply search filter
-                if (!string.IsNullOrWhiteSpace(txtSearch.Text))
-                {
-                    string searchText = txtSearch.Text.ToLower();
-                    query = query.Where(p => p.ten.ToLower().Contains(searchText));
-                }
+                var products = _productController.FilterProducts(keyword, brandId, categoryId);
 
-                // Apply brand filter
-                if (cmbBrand.SelectedValue != null && !string.IsNullOrEmpty(cmbBrand.SelectedValue.ToString()))
+                var displayList = new List<object>();
+                foreach (var p in products)
                 {
-                    string brandId = cmbBrand.SelectedValue.ToString();
-                    if (!string.IsNullOrEmpty(brandId))
+                    string catName = "";
+                    string catId = _productController.GetProductCategoryId(p.id);
+                    if (!string.IsNullOrEmpty(catId))
                     {
-                        query = query.Where(p => p.nhanHieuId == brandId);
+                        var cat = _context.DanhMucs.Find(catId);
+                        if (cat != null) catName = cat.ten;
                     }
-                }
 
-                // Apply category filter
-                if (cmbCategory.SelectedValue != null && !string.IsNullOrEmpty(cmbCategory.SelectedValue.ToString()))
-                {
-                    string categoryId = cmbCategory.SelectedValue.ToString();
-                    if (!string.IsNullOrEmpty(categoryId))
+                    string brandName = "";
+                    if (!string.IsNullOrEmpty(p.nhanHieuId))
                     {
-                        query = query.Where(p => p.SanPhamDanhMucs.Any(spdm => spdm.danhMucId == categoryId && !spdm.isDelete));
+                        var brand = _context.NhanHieux.Find(p.nhanHieuId);
+                        if (brand != null) brandName = brand.ten;
                     }
-                }
 
-                // Take only 1000 records max to prevent performance issues
-                var products = query
-                    .Take(1000)
-                    .Select(p => new
+                    displayList.Add(new
                     {
                         p.id,
                         p.ten,
-                        NhanHieu = p.NhanHieu.ten,
-                        DanhMuc = p.SanPhamDanhMucs
-                            .Where(spdm => !spdm.isDelete)
-                            .Select(spdm => spdm.DanhMuc.ten)
-                            .FirstOrDefault() ?? "",
+                        NhanHieu = brandName,
+                        DanhMuc = catName,
                         p.moTa,
                         isDelete = p.isDelete ? "Ngừng kinh doanh" : "Đang kinh doanh"
-                    })
-                    .OrderBy(p => p.ten)
-                    .ToList();
+                    });
+                }
 
-                dgvProducts.DataSource = products;
-
-                // Update status label
-                this.Text = $"Quản lý sản phẩm - Tổng số: {products.Count}";
+                dgvProducts.DataSource = displayList;
+                this.Text = $"Quản lý sản phẩm - Tổng: {displayList.Count}";
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Lỗi khi tải danh sách sản phẩm: {ex.Message}", "Lỗi",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void dgvProducts_SelectionChanged(object sender, EventArgs e)
-        {
-            if (dgvProducts.CurrentRow != null && !_isAddMode && _isDataLoaded)
-            {
-                _selectedProductId = dgvProducts.CurrentRow.Cells["colId"].Value?.ToString();
-                LoadProductDetail(_selectedProductId);
+                MessageBox.Show($"Lỗi hiển thị danh sách: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void LoadProductDetail(string productId)
         {
-            if (string.IsNullOrEmpty(productId))
-                return;
-
+            if (string.IsNullOrEmpty(productId)) return;
             try
             {
-                var product = _context.SanPhams
-                    .FirstOrDefault(p => p.id == productId);
-
-                if (product != null)
+                var p = _productController.GetProductById(productId);
+                if (p != null)
                 {
-                    txtProductId.Text = product.id;
-                    txtProductName.Text = product.ten;
-                    cmbBrandDetail.SelectedValue = product.nhanHieuId;
-                    txtDescription.Text = product.moTa ?? "";
+                    txtProductId.Text = p.id;
+                    txtProductName.Text = p.ten;
+                    cmbBrandDetail.SelectedValue = p.nhanHieuId;
+                    txtDescription.Text = p.moTa;
 
-                    // Clear image for now (can be implemented later with actual image storage)
+                    var catId = _productController.GetProductCategoryId(productId);
+                    if (!string.IsNullOrEmpty(catId)) cmbStatusDetail.SelectedValue = catId;
+                    else cmbStatusDetail.SelectedIndex = -1;
+
                     picProduct.Image = null;
                     _imagePath = string.Empty;
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Lỗi khi tải chi tiết sản phẩm: {ex.Message}", "Lỗi",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Lỗi tải chi tiết: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        #endregion
+
+        #region CRUD Operations
+
+        private void AddProduct()
+        {
+            if (!ValidateInput()) return;
+
+            try
+            {
+                var newProduct = new SanPham
+                {
+                    ten = txtProductName.Text.Trim(),
+                    nhanHieuId = cmbBrandDetail.SelectedValue.ToString(),
+                    moTa = txtDescription.Text.Trim()
+                };
+                string categoryId = cmbStatusDetail.SelectedValue?.ToString();
+
+                var (success, message, product) = _productController.AddProduct(newProduct, categoryId);
+
+                if (success)
+                {
+                    MessageBox.Show(message, "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LoadProducts();
+                    SetFormMode(false);
+                    _isAddMode = false;
+                }
+                else
+                {
+                    MessageBox.Show(message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void UpdateProduct()
+        {
+            if (!ValidateInput()) return;
+
+            try
+            {
+                string currentId = txtProductId.Text.Trim();
+
+                if (string.IsNullOrEmpty(currentId))
+                {
+                    MessageBox.Show("Không xác định được mã sản phẩm để sửa!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                var updatedProduct = new SanPham
+                {
+                    id = currentId,
+                    ten = txtProductName.Text.Trim(),
+                    nhanHieuId = cmbBrandDetail.SelectedValue.ToString(),
+                    moTa = txtDescription.Text.Trim()
+                };
+                string categoryId = cmbStatusDetail.SelectedValue?.ToString();
+
+                var (success, message) = _productController.UpdateProduct(updatedProduct, categoryId);
+
+                if (success)
+                {
+                    MessageBox.Show(message, "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LoadProducts();
+                    SetFormMode(false);
+                    _isAddMode = false;
+                }
+                else
+                {
+                    MessageBox.Show(message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi cập nhật: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void DeleteProduct()
+        {
+            if (string.IsNullOrEmpty(_selectedProductId))
+            {
+                MessageBox.Show("Vui lòng chọn sản phẩm cần xóa!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (MessageBox.Show("Bạn có chắc chắn muốn xóa sản phẩm này?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                var (success, message) = _productController.DeleteProduct(_selectedProductId);
+                if (success)
+                {
+                    MessageBox.Show(message, "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LoadProducts();
+                    ClearForm();
+                }
+                else
+                {
+                    MessageBox.Show(message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        #endregion
+
+        #region Validation & UI Helpers
+
+        private bool ValidateInput()
+        {
+            if (string.IsNullOrWhiteSpace(txtProductName.Text))
+            {
+                MessageBox.Show("Nhập tên sản phẩm!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtProductName.Focus();
+                return false;
+            }
+            if (cmbBrandDetail.SelectedValue == null)
+            {
+                MessageBox.Show("Chọn nhãn hiệu!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                cmbBrandDetail.Focus();
+                return false;
+            }
+            return true;
+        }
+
+        private void SetFormMode(bool isEdit)
+        {
+            txtProductName.Enabled = isEdit;
+            cmbBrandDetail.Enabled = isEdit;
+            cmbStatusDetail.Enabled = isEdit;
+            txtDescription.Enabled = isEdit;
+            btnBrowseImage.Enabled = isEdit;
+            btnClearImage.Enabled = isEdit;
+            btnSave.Enabled = isEdit;
+            btnCancel.Enabled = isEdit;
+
+            btnAdd.Enabled = !isEdit;
+            btnEdit.Enabled = !isEdit && dgvProducts.CurrentRow != null;
+            btnDelete.Enabled = !isEdit && dgvProducts.CurrentRow != null;
+            btnExport.Enabled = !isEdit;
+
+            panelSearch.Enabled = !isEdit;
+            dgvProducts.Enabled = !isEdit;
+            txtProductId.Enabled = false;
+        }
+
+        private void ClearForm()
+        {
+            txtProductId.Clear();
+            txtProductName.Clear();
+            txtDescription.Clear();
+            cmbBrandDetail.SelectedIndex = -1;
+            cmbStatusDetail.SelectedIndex = -1;
+            picProduct.Image = null;
+            _imagePath = string.Empty;
+            _selectedProductId = null;
+        }
+
+        #endregion
+
+        #region Event Handlers
+
+        private void dgvProducts_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dgvProducts.CurrentRow != null && !_isAddMode && _isDataLoaded)
+            {
+                if (dgvProducts.Columns.Contains("id"))
+                    _selectedProductId = dgvProducts.CurrentRow.Cells["id"].Value?.ToString();
+                else if (dgvProducts.Columns.Contains("colId"))
+                    _selectedProductId = dgvProducts.CurrentRow.Cells["colId"].Value?.ToString();
+                else
+                    _selectedProductId = dgvProducts.CurrentRow.Cells[0].Value?.ToString();
+
+                LoadProductDetail(_selectedProductId);
+                
+                // Update button states
+                btnEdit.Enabled = !_isAddMode;
+                btnDelete.Enabled = !_isAddMode;
+            }
+        }
+
+        private void dgvProducts_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // Reserved for future features
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -261,125 +388,39 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
             SetFormMode(true);
             _isAddMode = true;
             ClearForm();
-            txtProductId.Text = "Tự động tạo";
+            txtProductId.Text = _productController.GenerateNewProductId();
+            txtProductName.Focus();
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            if (dgvProducts.CurrentRow == null)
+            if (string.IsNullOrEmpty(_selectedProductId))
             {
-                MessageBox.Show("Vui lòng chọn sản phẩm cần chỉnh sửa!", "Thông báo",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Chọn sản phẩm cần sửa!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-
             SetFormMode(true);
             _isAddMode = false;
+            txtProductName.Focus();
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (dgvProducts.CurrentRow == null)
-            {
-                MessageBox.Show("Vui lòng chọn sản phẩm cần xóa!", "Thông báo",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            var result = MessageBox.Show(
-                "Bạn có chắc chắn muốn xóa sản phẩm này?",
-                "Xác nhận xóa",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question);
-
-            if (result == DialogResult.Yes)
-            {
-                try
-                {
-                    var product = _context.SanPhams.Find(_selectedProductId);
-                    if (product != null)
-                    {
-                        product.isDelete = true;
-                        _context.SaveChanges();
-                        MessageBox.Show("Xóa sản phẩm thành công!", "Thông báo",
-                            MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        LoadProducts();
-                        ClearForm();
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Lỗi khi xóa sản phẩm: {ex.Message}", "Lỗi",
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
+            DeleteProduct();
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (!ValidateInput())
-                return;
-
-            try
-            {
-                if (_isAddMode)
-                {
-                    // Add new product
-                    var newProduct = new SanPham
-                    {
-                        id = Guid.NewGuid().ToString(),
-                        ten = txtProductName.Text.Trim(),
-                        nhanHieuId = cmbBrandDetail.SelectedValue.ToString(),
-                        moTa = txtDescription.Text.Trim(),
-                        isDelete = false
-                    };
-
-                    _context.SanPhams.Add(newProduct);
-                    _context.SaveChanges();
-
-                    MessageBox.Show("Thêm sản phẩm thành công!", "Thông báo",
-                        MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                else
-                {
-                    // Update existing product
-                    var product = _context.SanPhams.Find(_selectedProductId);
-                    if (product != null)
-                    {
-                        product.ten = txtProductName.Text.Trim();
-                        product.nhanHieuId = cmbBrandDetail.SelectedValue.ToString();
-                        product.moTa = txtDescription.Text.Trim();
-
-                        _context.SaveChanges();
-
-                        MessageBox.Show("Cập nhật sản phẩm thành công!", "Thông báo",
-                            MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                }
-
-                LoadProducts();
-                SetFormMode(false);
-                _isAddMode = false;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Lỗi khi lưu sản phẩm: {ex.Message}", "Lỗi",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            if (_isAddMode) AddProduct();
+            else UpdateProduct();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
             SetFormMode(false);
             _isAddMode = false;
-            if (dgvProducts.CurrentRow != null)
-            {
-                LoadProductDetail(_selectedProductId);
-            }
-            else
-            {
-                ClearForm();
-            }
+            if (!string.IsNullOrEmpty(_selectedProductId)) LoadProductDetail(_selectedProductId);
+            else ClearForm();
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
@@ -390,9 +431,10 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             txtSearch.Clear();
-            cmbBrand.SelectedIndex = 0;
-            cmbCategory.SelectedIndex = 0;
+            if (cmbBrand.Items.Count > 0) cmbBrand.SelectedIndex = 0;
+            if (cmbCategory.Items.Count > 0) cmbCategory.SelectedIndex = 0;
             LoadProducts();
+            ClearForm();
         }
 
         private void btnExport_Click(object sender, EventArgs e)
@@ -430,62 +472,22 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
             _imagePath = string.Empty;
         }
 
-        private bool ValidateInput()
+        #endregion
+
+        #region Cleanup
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtProductName.Text))
+            if (picProduct.Image != null)
             {
-                MessageBox.Show("Vui lòng nhập tên sản phẩm!", "Thông báo",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtProductName.Focus();
-                return false;
+                picProduct.Image.Dispose();
+                picProduct.Image = null;
             }
-
-            if (cmbBrandDetail.SelectedValue == null)
-            {
-                MessageBox.Show("Vui lòng chọn nhãn hiệu!", "Thông báo",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                cmbBrandDetail.Focus();
-                return false;
-            }
-
-            return true;
+            _context?.Dispose();
+            _productController?.Dispose();
+            base.OnFormClosing(e);
         }
 
-        private void SetFormMode(bool isEditMode)
-        {
-            // Enable/disable input fields
-            txtProductName.Enabled = isEditMode;
-            cmbBrandDetail.Enabled = isEditMode;
-            txtDescription.Enabled = isEditMode;
-            btnBrowseImage.Enabled = isEditMode;
-            btnClearImage.Enabled = isEditMode;
-            btnSave.Enabled = isEditMode;
-            btnCancel.Enabled = isEditMode;
-
-            // Enable/disable action buttons
-            btnAdd.Enabled = !isEditMode;
-            btnEdit.Enabled = !isEditMode;
-            btnDelete.Enabled = !isEditMode;
-            btnExport.Enabled = !isEditMode;
-
-            // Enable/disable grid selection
-            dgvProducts.Enabled = !isEditMode;
-        }
-
-        private void ClearForm()
-        {
-            txtProductId.Clear();
-            txtProductName.Clear();
-            txtDescription.Clear();
-            cmbBrandDetail.SelectedIndex = -1;
-            picProduct.Image = null;
-            _imagePath = string.Empty;
-            _selectedProductId = null;
-        }
-
-        private void dgvProducts_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
+        #endregion
     }
 }
