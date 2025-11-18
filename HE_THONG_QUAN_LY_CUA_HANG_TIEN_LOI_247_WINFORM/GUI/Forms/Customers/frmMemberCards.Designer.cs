@@ -42,12 +42,6 @@
             this.splitContainer = new System.Windows.Forms.SplitContainer();
             this.pnlLeft = new System.Windows.Forms.Panel();
             this.dgvMemberCards = new System.Windows.Forms.DataGridView();
-            this.colCustomerId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCustomerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPhone = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colRank = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPoints = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colIssueDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlRight = new System.Windows.Forms.Panel();
             this.groupBoxActions = new System.Windows.Forms.GroupBox();
             this.btnViewHistory = new System.Windows.Forms.Button();
@@ -70,6 +64,12 @@
             this.label2 = new System.Windows.Forms.Label();
             this.pnlBottom = new System.Windows.Forms.Panel();
             this.btnClose = new System.Windows.Forms.Button();
+            this.colCustomerId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCustomerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPhone = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colRank = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPoints = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colIssueDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlTop.SuspendLayout();
             this.pnlSearch.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
@@ -101,7 +101,7 @@
             this.lblTitle.ForeColor = System.Drawing.Color.White;
             this.lblTitle.Location = new System.Drawing.Point(12, 12);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(325, 32);
+            this.lblTitle.Size = new System.Drawing.Size(326, 32);
             this.lblTitle.TabIndex = 0;
             this.lblTitle.Text = "QUẢN LÝ THẺ THÀNH VIÊN";
             // 
@@ -152,14 +152,13 @@
             this.label1.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             this.label1.Location = new System.Drawing.Point(580, 28);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(84, 17);
+            this.label1.Size = new System.Drawing.Size(86, 17);
             this.label1.TabIndex = 3;
             this.label1.Text = "Lọc hạng thẻ:";
             // 
             // btnSearch
             // 
-            this.btnSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))))
-;
+            this.btnSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
             this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSearch.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
             this.btnSearch.ForeColor = System.Drawing.Color.White;
@@ -185,7 +184,7 @@
             this.lblSearch.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             this.lblSearch.Location = new System.Drawing.Point(20, 28);
             this.lblSearch.Name = "lblSearch";
-            this.lblSearch.Size = new System.Drawing.Size(68, 17);
+            this.lblSearch.Size = new System.Drawing.Size(63, 17);
             this.lblSearch.TabIndex = 0;
             this.lblSearch.Text = "Tìm kiếm:";
             // 
@@ -243,8 +242,7 @@
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(152)))), ((int)(((byte)(219)))))
-;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(152)))), ((int)(((byte)(219)))));
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvMemberCards.DefaultCellStyle = dataGridViewCellStyle2;
@@ -260,45 +258,6 @@
             this.dgvMemberCards.Size = new System.Drawing.Size(830, 530);
             this.dgvMemberCards.TabIndex = 0;
             this.dgvMemberCards.SelectionChanged += new System.EventHandler(this.dgvMemberCards_SelectionChanged);
-            // 
-            // colCustomerId
-            // 
-            this.colCustomerId.DataPropertyName = "id";
-            this.colCustomerId.HeaderText = "Mã KH";
-            this.colCustomerId.Name = "colCustomerId";
-            this.colCustomerId.ReadOnly = true;
-            // 
-            // colCustomerName
-            // 
-            this.colCustomerName.DataPropertyName = "hoTen";
-            this.colCustomerName.HeaderText = "Tên khách hàng";
-            this.colCustomerName.Name = "colCustomerName";
-            this.colCustomerName.ReadOnly = true;
-            // 
-            // colPhone
-            // 
-            this.colPhone.DataPropertyName = "soDienThoai";
-            this.colPhone.HeaderText = "Số điện thoại";
-            this.colPhone.Name = "colPhone";
-            this.colPhone.ReadOnly = true;
-            // 
-            // colRank
-            // 
-            this.colRank.HeaderText = "Hạng thẻ";
-            this.colRank.Name = "colRank";
-            this.colRank.ReadOnly = true;
-            // 
-            // colPoints
-            // 
-            this.colPoints.HeaderText = "Điểm tích lũy";
-            this.colPoints.Name = "colPoints";
-            this.colPoints.ReadOnly = true;
-            // 
-            // colIssueDate
-            // 
-            this.colIssueDate.HeaderText = "Ngày cấp";
-            this.colIssueDate.Name = "colIssueDate";
-            this.colIssueDate.ReadOnly = true;
             // 
             // pnlRight
             // 
@@ -373,7 +332,7 @@
             this.label8.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             this.label8.Location = new System.Drawing.Point(20, 53);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(114, 17);
+            this.label8.Size = new System.Drawing.Size(125, 17);
             this.label8.TabIndex = 1;
             this.label8.Text = "Số điểm cộng thêm:";
             // 
@@ -430,7 +389,7 @@
             this.label7.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             this.label7.Location = new System.Drawing.Point(20, 308);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(72, 17);
+            this.label7.Size = new System.Drawing.Size(67, 17);
             this.label7.TabIndex = 10;
             this.label7.Text = "Ngày cấp:";
             // 
@@ -450,7 +409,7 @@
             this.label6.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             this.label6.Location = new System.Drawing.Point(20, 263);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(68, 17);
+            this.label6.Size = new System.Drawing.Size(64, 17);
             this.label6.TabIndex = 8;
             this.label6.Text = "Hạng thẻ:";
             // 
@@ -469,7 +428,7 @@
             this.label5.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             this.label5.Location = new System.Drawing.Point(20, 218);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(93, 17);
+            this.label5.Size = new System.Drawing.Size(85, 17);
             this.label5.TabIndex = 6;
             this.label5.Text = "Điểm tích lũy:";
             // 
@@ -488,7 +447,7 @@
             this.label4.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             this.label4.Location = new System.Drawing.Point(20, 173);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(94, 17);
+            this.label4.Size = new System.Drawing.Size(88, 17);
             this.label4.TabIndex = 4;
             this.label4.Text = "Số điện thoại:";
             // 
@@ -526,7 +485,7 @@
             this.label2.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             this.label2.Location = new System.Drawing.Point(20, 83);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(97, 17);
+            this.label2.Size = new System.Drawing.Size(100, 17);
             this.label2.TabIndex = 0;
             this.label2.Text = "Mã khách hàng:";
             // 
@@ -554,6 +513,48 @@
             this.btnClose.Text = "Đóng";
             this.btnClose.UseVisualStyleBackColor = false;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            // 
+            // colCustomerId
+            // 
+            this.colCustomerId.DataPropertyName = "id";
+            this.colCustomerId.HeaderText = "Mã KH";
+            this.colCustomerId.Name = "colCustomerId";
+            this.colCustomerId.ReadOnly = true;
+            // 
+            // colCustomerName
+            // 
+            this.colCustomerName.DataPropertyName = "hoTen";
+            this.colCustomerName.HeaderText = "Tên khách hàng";
+            this.colCustomerName.Name = "colCustomerName";
+            this.colCustomerName.ReadOnly = true;
+            // 
+            // colPhone
+            // 
+            this.colPhone.DataPropertyName = "soDienThoai";
+            this.colPhone.HeaderText = "Số điện thoại";
+            this.colPhone.Name = "colPhone";
+            this.colPhone.ReadOnly = true;
+            // 
+            // colRank
+            // 
+            this.colRank.DataPropertyName = "hang";
+            this.colRank.HeaderText = "Hạng thẻ";
+            this.colRank.Name = "colRank";
+            this.colRank.ReadOnly = true;
+            // 
+            // colPoints
+            // 
+            this.colPoints.DataPropertyName = "diemTichLuy";
+            this.colPoints.HeaderText = "Điểm tích lũy";
+            this.colPoints.Name = "colPoints";
+            this.colPoints.ReadOnly = true;
+            // 
+            // colIssueDate
+            // 
+            this.colIssueDate.DataPropertyName = "ngayCap";
+            this.colIssueDate.HeaderText = "Ngày cấp";
+            this.colIssueDate.Name = "colIssueDate";
+            this.colIssueDate.ReadOnly = true;
             // 
             // frmMemberCards
             // 

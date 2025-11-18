@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.DTO;
@@ -7,7 +7,7 @@ using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.DTO.Models;
 namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM
 {
     /// <summary>
-    /// Service x? l� logic nghi?p v? cho Kh�ch h�ng
+    /// Service xử lý logic nghiệp vụ cho Khách hàng
     /// </summary>
     public class CustomerService
     {
@@ -19,7 +19,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM
         }
 
         /// <summary>
-        /// L?y t?t c? kh�ch h�ng
+        /// Lấy tất cả khách hàng
         /// </summary>
         public List<KhachHang> GetAllCustomers()
         {
@@ -32,35 +32,24 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM
             }
             catch (Exception ex)
             {
-                throw new Exception($"L?i khi l?y danh s�ch kh�ch h�ng: {ex.Message}");
+                throw new Exception($"Lỗi khi lấy danh sách khách hàng: {ex.Message}");
             }
         }
 
         /// <summary>
-        /// L?y kh�ch h�ng theo ID
+        /// Lấy khách hàng theo ID
         /// </summary>
         public KhachHang GetCustomerById(string id)
         {
-            try
-            {
-                var customer = _context.KhachHangs
-                    .FirstOrDefault(k => k.id == id && !k.isDelete);
+            // Hàm này chỉ có nhiệm vụ: Tìm và trả về kết quả (hoặc null).
+            // Không nên tự ý ném lỗi (throw exception) ở đây.
 
-                if (customer == null)
-                {
-                    throw new Exception("Kh�ng t�m th?y kh�ch h�ng.");
-                }
-
-                return customer;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception($"L?i khi l?y th�ng tin kh�ch h�ng: {ex.Message}");
-            }
+            return _context.KhachHangs
+                           .FirstOrDefault(k => k.id == id && !k.isDelete);
         }
 
         /// <summary>
-        /// T�m ki?m kh�ch h�ng
+        /// Tìm kiếm khách hàng
         /// </summary>
         public List<KhachHang> SearchCustomers(string keyword)
         {
@@ -83,87 +72,152 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM
             }
             catch (Exception ex)
             {
-                throw new Exception($"L?i khi t�m ki?m kh�ch h�ng: {ex.Message}");
+                throw new Exception($"Lỗi khi tìm kiếm khách hàng: {ex.Message}");
             }
         }
 
         /// <summary>
-        /// Th�m kh�ch h�ng m?i
+        /// Thêm khách hàng mới
         /// </summary>
         public (bool success, string message) AddCustomer(KhachHang customer)
         {
             try
             {
-                // Ki?m tra s? ?i?n tho?i ?� t?n t?i
+                // Validate required fields
+                if (string.IsNullOrWhiteSpace(customer.hoTen))
+                {
+                    return (false, "Tên khách hàng không được để trống.");
+                }
+
+                if (string.IsNullOrWhiteSpace(customer.soDienThoai))
+                {
+                    return (false, "Số điện thoại không được để trống.");
+                }
+
+                // Kiểm tra số điện thoại đã tồn tại
                 var existingCustomer = _context.KhachHangs
                     .FirstOrDefault(k => k.soDienThoai == customer.soDienThoai && !k.isDelete);
 
                 if (existingCustomer != null)
                 {
-                    return (false, "S? ?i?n tho?i ?� ???c ??ng k�.");
+                    return (false, "Số điện thoại đã được đăng ký.");
                 }
 
-                // T?o ID m?i
+                // Tạo ID mới
                 customer.id = GenerateNewCustomerId();
                 customer.ngayDangKy = DateTime.Now;
                 customer.isDelete = false;
+                
+                // Đảm bảo các trường bắt buộc có giá trị
+                if (string.IsNullOrWhiteSpace(customer.diaChi))
+                {
+                    customer.diaChi = "Chưa cập nhật";
+                }
+                
+                if (string.IsNullOrWhiteSpace(customer.trangThai))
+                {
+                    customer.trangThai = "Active";
+                }
+                
+                if (string.IsNullOrWhiteSpace(customer.email))
+                {
+                    customer.email = "";
+                }
 
                 _context.KhachHangs.Add(customer);
                 _context.SaveChanges();
 
-                return (true, "Th�m kh�ch h�ng th�nh c�ng.");
+                return (true, "Thêm khách hàng thành công.");
+            }
+            catch (System.Data.Entity.Validation.DbEntityValidationException ex)
+            {
+                // Log chi tiết lỗi validation
+                var errorMessages = new System.Text.StringBuilder();
+                foreach (var validationErrors in ex.EntityValidationErrors)
+                {
+                    foreach (var validationError in validationErrors.ValidationErrors)
+                    {
+                        errorMessages.AppendLine($"- {validationError.PropertyName}: {validationError.ErrorMessage}");
+                    }
+                }
+                return (false, $"Lỗi validation:\n{errorMessages.ToString()}");
             }
             catch (Exception ex)
             {
-                return (false, $"L?i khi th�m kh�ch h�ng: {ex.Message}");
+                return (false, $"Lỗi khi thêm khách hàng: {ex.Message}");
             }
         }
 
         /// <summary>
-        /// C?p nh?t th�ng tin kh�ch h�ng
+        /// Cập nhật thông tin khách hàng
         /// </summary>
         public (bool success, string message) UpdateCustomer(KhachHang customer)
         {
             try
             {
+                // Validate required fields
+                if (string.IsNullOrWhiteSpace(customer.hoTen))
+                {
+                    return (false, "Tên khách hàng không được để trống.");
+                }
+
+                if (string.IsNullOrWhiteSpace(customer.soDienThoai))
+                {
+                    return (false, "Số điện thoại không được để trống.");
+                }
+
                 var existingCustomer = _context.KhachHangs
                     .FirstOrDefault(k => k.id == customer.id);
 
                 if (existingCustomer == null)
                 {
-                    return (false, "Kh�ng t�m th?y kh�ch h�ng.");
+                    return (false, "Không tìm thấy khách hàng.");
                 }
 
-                // Ki?m tra s? ?i?n tho?i tr�ng v?i kh�ch h�ng kh�c
+                // Kiểm tra số điện thoại trùng với khách hàng khác
                 var duplicatePhone = _context.KhachHangs
                     .FirstOrDefault(k => k.soDienThoai == customer.soDienThoai &&
                                         k.id != customer.id && !k.isDelete);
 
                 if (duplicatePhone != null)
                 {
-                    return (false, "S? ?i?n tho?i ?� ???c s? d?ng b?i kh�ch h�ng kh�c.");
+                    return (false, "Số điện thoại đã được sử dụng bởi khách hàng khác.");
                 }
 
+                // Cập nhật thông tin
                 existingCustomer.hoTen = customer.hoTen;
                 existingCustomer.soDienThoai = customer.soDienThoai;
-                existingCustomer.email = customer.email;
-                existingCustomer.diaChi = customer.diaChi;
+                existingCustomer.email = string.IsNullOrWhiteSpace(customer.email) ? "" : customer.email;
+                existingCustomer.diaChi = string.IsNullOrWhiteSpace(customer.diaChi) ? "Chưa cập nhật" : customer.diaChi;
                 existingCustomer.gioiTinh = customer.gioiTinh;
-                existingCustomer.trangThai = customer.trangThai;
+                existingCustomer.trangThai = string.IsNullOrWhiteSpace(customer.trangThai) ? "Active" : customer.trangThai;
                 existingCustomer.anhId = customer.anhId;
 
                 _context.SaveChanges();
 
-                return (true, "C?p nh?t kh�ch h�ng th�nh c�ng.");
+                return (true, "Cập nhật khách hàng thành công.");
+            }
+            catch (System.Data.Entity.Validation.DbEntityValidationException ex)
+            {
+                // Log chi tiết lỗi validation
+                var errorMessages = new System.Text.StringBuilder();
+                foreach (var validationErrors in ex.EntityValidationErrors)
+                {
+                    foreach (var validationError in validationErrors.ValidationErrors)
+                    {
+                        errorMessages.AppendLine($"- {validationError.PropertyName}: {validationError.ErrorMessage}");
+                    }
+                }
+                return (false, $"Lỗi validation:\n{errorMessages.ToString()}");
             }
             catch (Exception ex)
             {
-                return (false, $"L?i khi c?p nh?t kh�ch h�ng: {ex.Message}");
+                return (false, $"Lỗi khi cập nhật khách hàng: {ex.Message}");
             }
         }
 
         /// <summary>
-        /// X�a kh�ch h�ng (soft delete)
+        /// Xóa khách hàng (soft delete)
         /// </summary>
         public (bool success, string message) DeleteCustomer(string id)
         {
@@ -174,22 +228,22 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM
 
                 if (customer == null)
                 {
-                    return (false, "Kh�ng t�m th?y kh�ch h�ng.");
+                    return (false, "Không tìm thấy khách hàng.");
                 }
 
                 customer.isDelete = true;
                 _context.SaveChanges();
 
-                return (true, "X�a kh�ch h�ng th�nh c�ng.");
+                return (true, "Xóa khách hàng thành công.");
             }
             catch (Exception ex)
             {
-                return (false, $"L?i khi x�a kh�ch h�ng: {ex.Message}");
+                return (false, $"Lỗi khi xóa khách hàng: {ex.Message}");
             }
         }
 
         /// <summary>
-        /// L?y danh s�ch kh�ch h�ng VIP (kh�ch h�ng c� th? h?ng V�ng)
+        /// Lấy danh sách khách hàng VIP (khách hàng có thẻ hạng Vàng)
         /// </summary>
         public List<KhachHang> GetVIPCustomers()
         {
@@ -197,18 +251,34 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM
             {
                 return _context.KhachHangs
                     .Where(k => !k.isDelete &&
-                        k.TheThanhViens.Any(t => !t.isDelete && t.hang == "V�ng"))
+                        k.TheThanhViens.Any(t => !t.isDelete && t.hang == "Vàng"))
                     .OrderBy(k => k.hoTen)
                     .ToList();
             }
             catch (Exception ex)
             {
-                throw new Exception($"L?i khi l?y danh s�ch kh�ch h�ng VIP: {ex.Message}");
+                throw new Exception($"Lỗi khi lấy danh sách khách hàng VIP: {ex.Message}");
             }
         }
-
         /// <summary>
-        /// L?y th�ng tin chi ti?t kh�ch h�ng
+        /// Lấy lịch sử mua hàng
+        /// </summary>
+        public List<LichSuMuaHang> GetPurchaseHistory(string customerId)
+        {
+            try
+            {
+                return _context.LichSuMuaHangs
+                    .Where(l => l.khachHangId == customerId && !l.isDelete)
+                    .OrderByDescending(l => l.ngayMua)
+                    .ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Lỗi khi lấy lịch sử mua hàng: {ex.Message}");
+            }
+        }
+        /// <summary>
+        /// Lấy thông tin chi tiết khách hàng
         /// </summary>
         public CustomerDetailDto GetCustomerDetail(string customerId)
         {
@@ -218,7 +288,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM
 
                 if (customer == null)
                 {
-                    throw new Exception("Kh�ng t�m th?y kh�ch h�ng.");
+                    throw new Exception("Không tìm thấy khách hàng.");
                 }
 
                 var purchaseHistory = GetPurchaseHistory(customerId);
@@ -235,30 +305,14 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM
             }
             catch (Exception ex)
             {
-                throw new Exception($"L?i khi l?y th�ng tin chi ti?t kh�ch h�ng: {ex.Message}");
+                throw new Exception($"Lỗi khi lấy thông tin chi tiết khách hàng: {ex.Message}");
             }
         }
 
-        /// <summary>
-        /// L?y l?ch s? mua h�ng
-        /// </summary>
-        public List<LichSuMuaHang> GetPurchaseHistory(string customerId)
-        {
-            try
-            {
-                return _context.LichSuMuaHangs
-                    .Where(l => l.khachHangId == customerId && !l.isDelete)
-                    .OrderByDescending(l => l.ngayMua)
-                    .ToList();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception($"L?i khi l?y l?ch s? mua h�ng: {ex.Message}");
-            }
-        }
+
 
         /// <summary>
-        /// L?y th? th�nh vi�n
+        /// Lấy thẻ thành viên
         /// </summary>
         public TheThanhVien GetMemberCard(string customerId)
         {
@@ -269,12 +323,12 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM
             }
             catch (Exception ex)
             {
-                throw new Exception($"L?i khi l?y th�ng tin th? th�nh vi�n: {ex.Message}");
+                throw new Exception($"Lỗi khi lấy thông tin thẻ thành viên: {ex.Message}");
             }
         }
 
         /// <summary>
-        /// C?p nh?t th? th�nh vi�n
+        /// Cập nhật thẻ thành viên
         /// </summary>
         public (bool success, string message) UpdateMemberCard(TheThanhVien memberCard)
         {
@@ -285,14 +339,14 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM
 
                 if (existingCard == null)
                 {
-                    // T?o m?i th? th�nh vi�n
+                    // Tạo mới thẻ thành viên
                     memberCard.id = GenerateNewMemberCardId();
                     memberCard.isDelete = false;
                     _context.TheThanhViens.Add(memberCard);
                 }
                 else
                 {
-                    // C?p nh?t th? th�nh vi�n
+                    // Cập nhật thẻ thành viên
                     existingCard.hang = memberCard.hang;
                     existingCard.diemTichLuy = memberCard.diemTichLuy;
                     existingCard.ngayCap = memberCard.ngayCap;
@@ -300,16 +354,16 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM
 
                 _context.SaveChanges();
 
-                return (true, "C?p nh?t th? th�nh vi�n th�nh c�ng.");
+                return (true, "Cập nhật thẻ thành viên thành công.");
             }
             catch (Exception ex)
             {
-                return (false, $"L?i khi c?p nh?t th? th�nh vi�n: {ex.Message}");
+                return (false, $"Lỗi khi cập nhật thẻ thành viên: {ex.Message}");
             }
         }
 
         /// <summary>
-        /// T�nh ?i?m t�ch l?y (1 ?i?m cho m?i 10,000 VN?)
+        /// Tính điểm tích lũy (1 điểm cho mỗi 10,000 VNĐ)
         /// </summary>
         public int CalculateLoyaltyPoints(decimal totalPurchase)
         {
@@ -319,12 +373,12 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM
             }
             catch (Exception ex)
             {
-                throw new Exception($"L?i khi t�nh ?i?m t�ch l?y: {ex.Message}");
+                throw new Exception($"Lỗi khi tính điểm tích lũy: {ex.Message}");
             }
         }
 
         /// <summary>
-        /// X�c ??nh h?ng th? d?a tr�n ?i?m t�ch l?y
+        /// Xác định hạng thẻ dựa trên điểm tích lũy
         /// </summary>
         public string DetermineMemberRank(int points)
         {
@@ -332,25 +386,25 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM
             {
                 if (points >= 1000)
                 {
-                    return "V�ng";
+                    return "Vàng";
                 }
                 else if (points >= 500)
                 {
-                    return "B?c";
+                    return "Bạc";
                 }
                 else
                 {
-                    return "??ng";
+                    return "Đồng";
                 }
             }
             catch (Exception ex)
             {
-                throw new Exception($"L?i khi x�c ??nh h?ng th?: {ex.Message}");
+                throw new Exception($"Lỗi khi xác định hạng thẻ: {ex.Message}");
             }
         }
 
         /// <summary>
-        /// T?o ID m?i cho kh�ch h�ng
+        /// Tạo ID mới cho khách hàng
         /// </summary>
         private string GenerateNewCustomerId()
         {
@@ -365,7 +419,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM
                     return "KH00001";
                 }
 
-                // L?y ph?n s? t? ID cu?i c�ng
+                // Lấy phần số từ ID cuối cùng
                 var lastIdNumber = lastCustomer.id.Substring(2);
                 if (int.TryParse(lastIdNumber, out int number))
                 {
@@ -380,9 +434,26 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM
                 return "KH00001";
             }
         }
-
+        public List<LichSuMuaHang> GetPurchaseHistoryByDate(string customerId, DateTime fromDate, DateTime toDate)
+        {
+            try
+            {
+                // Lọc ngay tại nguồn dữ liệu
+                return _context.LichSuMuaHangs
+                    .Where(l => l.khachHangId == customerId
+                             && !l.isDelete
+                             && l.ngayMua >= fromDate
+                             && l.ngayMua <= toDate) // Logic lọc nằm ở đây
+                    .OrderByDescending(l => l.ngayMua)
+                    .ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Lỗi khi lọc lịch sử mua hàng: {ex.Message}");
+            }
+        }
         /// <summary>
-        /// T?o ID m?i cho th? th�nh vi�n
+        /// Tạo ID mới cho thẻ thành viên
         /// </summary>
         private string GenerateNewMemberCardId()
         {
@@ -397,7 +468,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM
                     return "TTV00001";
                 }
 
-                // L?y ph?n s? t? ID cu?i c�ng
+                // Lấy phần số từ ID cuối cùng
                 var lastIdNumber = lastCard.id.Substring(3);
                 if (int.TryParse(lastIdNumber, out int number))
                 {

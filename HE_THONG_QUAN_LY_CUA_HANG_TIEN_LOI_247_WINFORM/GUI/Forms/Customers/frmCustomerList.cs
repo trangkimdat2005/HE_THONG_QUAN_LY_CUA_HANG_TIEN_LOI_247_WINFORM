@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Guna.UI2.AnimatorNS;
+using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Controllers;
+using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.DTO.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,8 +10,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Controllers;
-using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.DTO.Models;
 
 namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms.Customers
 {
@@ -70,31 +71,48 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
         {
             try
             {
-                // Tạo danh sách hiển thị với thông tin đầy đủ
-                var displayList = new List<dynamic>();
+                dgvCustomers.Rows.Clear(); //Xóa dữ liệu cũ
                 
-                foreach (var customer in customers)
+                // Pre-load tất cả thẻ thành viên và lịch sử để tránh N+1 query problem
+                var customerIds = customers.Select(c => c.id).ToList();
+                var allMemberCards = new Dictionary<string, TheThanhVien>();
+                var allPurchaseTotals = new Dictionary<string, decimal>();
+                
+                foreach (var customerId in customerIds)
                 {
-                    var memberCard = _customerController.GetMemberCard(customer.id);
-                    var purchaseHistory = _customerController.GetPurchaseHistory(customer.id);
-                    var totalPurchase = purchaseHistory.Sum(p => p.tongTien);
-                    
-                    displayList.Add(new
+                    var memberCard = _customerController.GetMemberCard(customerId);
+                    if (memberCard != null)
                     {
-                        id = customer.id,
-                        hoTen = customer.hoTen,
-                        soDienThoai = customer.soDienThoai,
-                        email = customer.email,
-                        diaChi = customer.diaChi,
-                        ngayDangKy = customer.ngayDangKy.ToString("dd/MM/yyyy"),
-                        trangThai = customer.trangThai,
-                        MemberRank = memberCard?.hang ?? "Chưa có",
-                        Points = memberCard?.diemTichLuy ?? 0,
-                        TotalPurchase = totalPurchase.ToString("N0") + " VNĐ"
-                    });
+                        allMemberCards[customerId] = memberCard;
+                    }
+                    
+                    // Lấy toàn bộ lịch sử mua hàng (từ ngày đầu tiên đến hiện tại)
+                    var purchaseHistory = _customerController.GetPurchaseHistoryByDate(
+                        customerId, 
+                        DateTime.MinValue, 
+                        DateTime.Now);
+                    allPurchaseTotals[customerId] = purchaseHistory.Sum(p => p.tongTien);
                 }
                 
-                dgvCustomers.DataSource = displayList;
+                // Bind dữ liệu vào DataGridView
+                foreach (var customer in customers)
+                {
+                    allMemberCards.TryGetValue(customer.id, out var memberCard);
+                    allPurchaseTotals.TryGetValue(customer.id, out var totalPurchase);
+                    
+                    dgvCustomers.Rows.Add(
+                        customer.id,                              // colId
+                        customer.hoTen,                           // colName  
+                        customer.soDienThoai,                     // colPhone
+                        customer.email,                           // colEmail
+                        customer.diaChi,                          // colAddress
+                        customer.ngayDangKy.ToString("dd/MM/yyyy"), // colRegisterDate
+                        customer.trangThai,                       // colStatus
+                        memberCard?.hang ?? "Chưa có",            // colMemberRank
+                        memberCard?.diemTichLuy ?? 0,             // colPoints
+                        totalPurchase.ToString("N0") + " VNĐ"     // colTotalPurchase
+                    );
+                }
                 
                 // Hiển thị thống kê
                 DisplayStatistics(customers);
@@ -403,16 +421,33 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
 
         private void dgvCustomers_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0 && e.ColumnIndex == dgvCustomers.Columns["colActions"].Index)
+            // 1. Kiểm tra click hợp lệ
+            if (e.RowIndex >= 0 && dgvCustomers.Columns[e.ColumnIndex].Name == "colActions")
             {
                 var customerId = dgvCustomers.Rows[e.RowIndex].Cells["colId"].Value?.ToString();
+
                 if (!string.IsNullOrEmpty(customerId))
                 {
-                    _selectedCustomer = _allCustomers.FirstOrDefault(c => c.id == customerId);
-                    ViewCustomerDetail();
+                    // Lấy thông tin khách hàng
+                    var customer = _customerController.GetCustomerById(customerId);
+
+                    if (customer != null)
+                    {
+                        // Set selected customer và mở form chi tiết
+                        _selectedCustomer = customer;
+                        ViewCustomerDetail();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Không tìm thấy thông tin khách hàng!", "Thông báo", 
+                            MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        // Reload lại danh sách nếu cần
+                        LoadCustomers();
+                    }
                 }
             }
         }
+
 
         #endregion
     }

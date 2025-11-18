@@ -61,6 +61,10 @@
             this.label1 = new System.Windows.Forms.Label();
             this.pnlMain = new System.Windows.Forms.Panel();
             this.dgvCustomers = new System.Windows.Forms.DataGridView();
+            this.pnlBottom = new System.Windows.Forms.Panel();
+            this.btnClose = new System.Windows.Forms.Button();
+            this.btnViewHistory = new System.Windows.Forms.Button();
+            this.btnViewDetail = new System.Windows.Forms.Button();
             this.colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPhone = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -71,11 +75,6 @@
             this.colMemberRank = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPoints = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTotalPurchase = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colActions = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.pnlBottom = new System.Windows.Forms.Panel();
-            this.btnClose = new System.Windows.Forms.Button();
-            this.btnViewHistory = new System.Windows.Forms.Button();
-            this.btnViewDetail = new System.Windows.Forms.Button();
             this.pnlTop.SuspendLayout();
             this.pnlSearch.SuspendLayout();
             this.pnlStatistics.SuspendLayout();
@@ -106,7 +105,7 @@
             this.lblTitle.ForeColor = System.Drawing.Color.White;
             this.lblTitle.Location = new System.Drawing.Point(12, 12);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(292, 32);
+            this.lblTitle.Size = new System.Drawing.Size(325, 32);
             this.lblTitle.TabIndex = 0;
             this.lblTitle.Text = "DANH SÁCH KHÁCH HÀNG";
             // 
@@ -189,7 +188,7 @@
             this.lblMemberRank.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             this.lblMemberRank.Location = new System.Drawing.Point(780, 33);
             this.lblMemberRank.Name = "lblMemberRank";
-            this.lblMemberRank.Size = new System.Drawing.Size(68, 17);
+            this.lblMemberRank.Size = new System.Drawing.Size(64, 17);
             this.lblMemberRank.TabIndex = 5;
             this.lblMemberRank.Text = "Hạng thẻ:";
             // 
@@ -210,7 +209,7 @@
             this.lblStatus.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             this.lblStatus.Location = new System.Drawing.Point(530, 33);
             this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(72, 17);
+            this.lblStatus.Size = new System.Drawing.Size(69, 17);
             this.lblStatus.TabIndex = 3;
             this.lblStatus.Text = "Trạng thái:";
             // 
@@ -243,7 +242,7 @@
             this.lblSearch.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             this.lblSearch.Location = new System.Drawing.Point(20, 33);
             this.lblSearch.Name = "lblSearch";
-            this.lblSearch.Size = new System.Drawing.Size(68, 17);
+            this.lblSearch.Size = new System.Drawing.Size(63, 17);
             this.lblSearch.TabIndex = 0;
             this.lblSearch.Text = "Tìm kiếm:";
             // 
@@ -468,8 +467,7 @@
             this.colStatus,
             this.colMemberRank,
             this.colPoints,
-            this.colTotalPurchase,
-            this.colActions});
+            this.colTotalPurchase});
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9.75F);
@@ -491,81 +489,6 @@
             this.dgvCustomers.TabIndex = 0;
             this.dgvCustomers.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCustomers_CellClick);
             this.dgvCustomers.SelectionChanged += new System.EventHandler(this.dgvCustomers_SelectionChanged);
-            // 
-            // colId
-            // 
-            this.colId.DataPropertyName = "id";
-            this.colId.HeaderText = "Mã KH";
-            this.colId.Name = "colId";
-            this.colId.ReadOnly = true;
-            // 
-            // colName
-            // 
-            this.colName.DataPropertyName = "hoTen";
-            this.colName.HeaderText = "Họ tên";
-            this.colName.Name = "colName";
-            this.colName.ReadOnly = true;
-            // 
-            // colPhone
-            // 
-            this.colPhone.DataPropertyName = "soDienThoai";
-            this.colPhone.HeaderText = "Số điện thoại";
-            this.colPhone.Name = "colPhone";
-            this.colPhone.ReadOnly = true;
-            // 
-            // colEmail
-            // 
-            this.colEmail.DataPropertyName = "email";
-            this.colEmail.HeaderText = "Email";
-            this.colEmail.Name = "colEmail";
-            this.colEmail.ReadOnly = true;
-            // 
-            // colAddress
-            // 
-            this.colAddress.DataPropertyName = "diaChi";
-            this.colAddress.HeaderText = "Địa chỉ";
-            this.colAddress.Name = "colAddress";
-            this.colAddress.ReadOnly = true;
-            // 
-            // colRegisterDate
-            // 
-            this.colRegisterDate.DataPropertyName = "ngayDangKy";
-            this.colRegisterDate.HeaderText = "Ngày đăng ký";
-            this.colRegisterDate.Name = "colRegisterDate";
-            this.colRegisterDate.ReadOnly = true;
-            // 
-            // colStatus
-            // 
-            this.colStatus.DataPropertyName = "trangThai";
-            this.colStatus.HeaderText = "Trạng thái";
-            this.colStatus.Name = "colStatus";
-            this.colStatus.ReadOnly = true;
-            // 
-            // colMemberRank
-            // 
-            this.colMemberRank.HeaderText = "Hạng thẻ";
-            this.colMemberRank.Name = "colMemberRank";
-            this.colMemberRank.ReadOnly = true;
-            // 
-            // colPoints
-            // 
-            this.colPoints.HeaderText = "Điểm tích lũy";
-            this.colPoints.Name = "colPoints";
-            this.colPoints.ReadOnly = true;
-            // 
-            // colTotalPurchase
-            // 
-            this.colTotalPurchase.HeaderText = "Tổng mua";
-            this.colTotalPurchase.Name = "colTotalPurchase";
-            this.colTotalPurchase.ReadOnly = true;
-            // 
-            // colActions
-            // 
-            this.colActions.HeaderText = "Thao tác";
-            this.colActions.Name = "colActions";
-            this.colActions.ReadOnly = true;
-            this.colActions.Text = "Xem";
-            this.colActions.UseColumnTextForButtonValue = true;
             // 
             // pnlBottom
             // 
@@ -621,6 +544,76 @@
             this.btnViewDetail.Text = "Xem chi tiết";
             this.btnViewDetail.UseVisualStyleBackColor = false;
             this.btnViewDetail.Click += new System.EventHandler(this.btnViewDetail_Click);
+            // 
+            // colId
+            // 
+            this.colId.DataPropertyName = "id";
+            this.colId.HeaderText = "Mã KH";
+            this.colId.Name = "colId";
+            this.colId.ReadOnly = true;
+            // 
+            // colName
+            // 
+            this.colName.DataPropertyName = "hoTen";
+            this.colName.HeaderText = "Họ tên";
+            this.colName.Name = "colName";
+            this.colName.ReadOnly = true;
+            // 
+            // colPhone
+            // 
+            this.colPhone.DataPropertyName = "soDienThoai";
+            this.colPhone.HeaderText = "Số điện thoại";
+            this.colPhone.Name = "colPhone";
+            this.colPhone.ReadOnly = true;
+            // 
+            // colEmail
+            // 
+            this.colEmail.DataPropertyName = "email";
+            this.colEmail.HeaderText = "Email";
+            this.colEmail.Name = "colEmail";
+            this.colEmail.ReadOnly = true;
+            // 
+            // colAddress
+            // 
+            this.colAddress.DataPropertyName = "diaChi";
+            this.colAddress.HeaderText = "Địa chỉ";
+            this.colAddress.Name = "colAddress";
+            this.colAddress.ReadOnly = true;
+            // 
+            // colRegisterDate
+            // 
+            this.colRegisterDate.DataPropertyName = "ngayDangKy";
+            this.colRegisterDate.HeaderText = "Ngày đăng ký";
+            this.colRegisterDate.Name = "colRegisterDate";
+            this.colRegisterDate.ReadOnly = true;
+            // 
+            // colStatus
+            // 
+            this.colStatus.DataPropertyName = "trangThai";
+            this.colStatus.HeaderText = "Trạng thái";
+            this.colStatus.Name = "colStatus";
+            this.colStatus.ReadOnly = true;
+            // 
+            // colMemberRank
+            // 
+            this.colMemberRank.DataPropertyName = "hang";
+            this.colMemberRank.HeaderText = "Hạng thẻ";
+            this.colMemberRank.Name = "colMemberRank";
+            this.colMemberRank.ReadOnly = true;
+            // 
+            // colPoints
+            // 
+            this.colPoints.DataPropertyName = "diemTichLuy";
+            this.colPoints.HeaderText = "Điểm tích lũy";
+            this.colPoints.Name = "colPoints";
+            this.colPoints.ReadOnly = true;
+            // 
+            // colTotalPurchase
+            // 
+            this.colTotalPurchase.DataPropertyName = "tongTien";
+            this.colTotalPurchase.HeaderText = "Tổng mua";
+            this.colTotalPurchase.Name = "colTotalPurchase";
+            this.colTotalPurchase.ReadOnly = true;
             // 
             // frmCustomerList
             // 
@@ -702,6 +695,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemberRank;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPoints;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTotalPurchase;
-        private System.Windows.Forms.DataGridViewButtonColumn colActions;
     }
 }
