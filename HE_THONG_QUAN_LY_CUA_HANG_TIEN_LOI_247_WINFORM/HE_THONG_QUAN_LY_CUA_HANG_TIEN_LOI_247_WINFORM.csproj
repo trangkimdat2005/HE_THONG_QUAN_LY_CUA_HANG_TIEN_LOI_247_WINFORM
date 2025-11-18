@@ -80,10 +80,14 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BLL\Services\BrandService.cs" />
+    <Compile Include="BLL\Services\CategoryService.cs" />
     <Compile Include="BLL\Services\CustomerService.cs" />
     <Compile Include="BLL\Services\IQuanLyServices.cs" />
     <Compile Include="BLL\Services\ProductService.cs" />
     <Compile Include="BLL\Services\QuanLyServices.cs" />
+    <Compile Include="Controllers\BrandController.cs" />
+    <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="DTO\CustomerDetailDto.cs" />
@@ -152,6 +156,7 @@
     <Compile Include="DTO\Models\TrangThaiXuLy.cs" />
     <Compile Include="DTO\Models\UserRole.cs" />
     <Compile Include="DTO\Models\ViTri.cs" />
+    <Compile Include="DTO\ProductDetailDto.cs" />
     <Compile Include="Helpers\Utils\AppConfig.cs" />
     <Compile Include="Helpers\Utils\DateTimeHelper.cs" />
     <Compile Include="Helpers\Utils\ImageHelper.cs" />
@@ -348,6 +353,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Forms\Main\frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Forms\Products\frmBrands.resx">
+      <DependentUpon>frmBrands.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Forms\Products\frmCategorys.resx">
+      <DependentUpon>frmCategorys.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Forms\Products\frmProducts.resx">
       <DependentUpon>frmProducts.cs</DependentUpon>
