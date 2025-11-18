@@ -80,7 +80,11 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BLL\Services\CustomerService.cs" />
+    <Compile Include="BLL\Services\IQuanLyServices.cs" />
+    <Compile Include="BLL\Services\QuanLyServices.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
+    <Compile Include="DTO\CustomerDetailDto.cs" />
     <Compile Include="DTO\Models\Anh_SanPhamDonVi.cs" />
     <Compile Include="DTO\Models\AppDbContext.cs" />
     <Compile Include="DTO\Models\BaoCao.cs" />
@@ -378,14 +382,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="GUI\Forms\Customers\README_MVC.md" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="BLL\Interfaces\" />
-    <Folder Include="BLL\Services\" />
     <Folder Include="Common\Constants\" />
     <Folder Include="Common\Enums\" />
     <Folder Include="Common\Results\" />

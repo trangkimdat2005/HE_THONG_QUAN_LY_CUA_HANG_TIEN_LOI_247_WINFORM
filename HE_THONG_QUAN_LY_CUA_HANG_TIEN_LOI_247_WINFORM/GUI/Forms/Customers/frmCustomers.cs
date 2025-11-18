@@ -12,6 +12,9 @@ using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.DTO.Models;
 
 namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms.Customers
 {
+    /// <summary>
+    /// Form CRUD khách hàng - Thêm, Sửa, Xóa khách hàng
+    /// </summary>
     public partial class frmCustomers : Form
     {
         private readonly CustomerController _customerController;
@@ -201,7 +204,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
         }
 
         /// <summary>
-        /// Xem chi tiết khách hàng
+        /// Xem chi tiết khách hàng - Mở form CustomerList
         /// </summary>
         private void ViewCustomerDetail()
         {
@@ -214,20 +217,12 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
                     return;
                 }
 
-                var detail = _customerController.GetCustomerDetail(_selectedCustomer.id);
+                // Mở form danh sách để xem chi tiết đầy đủ
+                var frmList = new frmCustomerList();
+                frmList.ShowDialog();
                 
-                if (detail != null)
-                {
-                    MessageBox.Show(
-                        $"Khách hàng: {detail.Customer.hoTen}\n" +
-                        $"Tổng tiền đã mua: {detail.TotalPurchase:N0} VND\n" +
-                        $"Số lần mua: {detail.PurchaseCount}\n" +
-                        $"Điểm tích lũy: {detail.MemberCard?.diemTichLuy ?? 0}\n" +
-                        $"Hạng thẻ: {detail.MemberCard?.hang ?? "Chưa có"}",
-                        "Thông tin chi tiết",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Information);
-                }
+                // Refresh lại danh sách sau khi đóng form
+                LoadCustomers();
             }
             catch (Exception ex)
             {
@@ -252,7 +247,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
         }
 
         /// <summary>
-        /// Xem khách hàng VIP
+        /// Xem khách hàng VIP - Mở form CustomerList với filter VIP
         /// </summary>
         private void ViewVIPCustomers()
         {
@@ -307,7 +302,6 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
             else
                 rbFemale.Checked = true;
             
-            // dtpBirthDate.Value = DateTime.Now; // Model không có ngaySinh
             cmbStatus.SelectedItem = customer.trangThai;
         }
 
