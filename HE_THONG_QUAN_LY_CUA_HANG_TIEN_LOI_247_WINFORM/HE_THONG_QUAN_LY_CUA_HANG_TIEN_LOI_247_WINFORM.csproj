@@ -84,11 +84,13 @@
     <Compile Include="BLL\Services\CategoryService.cs" />
     <Compile Include="BLL\Services\CustomerService.cs" />
     <Compile Include="BLL\Services\IQuanLyServices.cs" />
+    <Compile Include="BLL\Services\MeasurementService.cs" />
     <Compile Include="BLL\Services\ProductService.cs" />
     <Compile Include="BLL\Services\QuanLyServices.cs" />
     <Compile Include="Controllers\BrandController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
+    <Compile Include="Controllers\MeasurementController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="DTO\CustomerDetailDto.cs" />
     <Compile Include="DTO\Models\Anh_SanPhamDonVi.cs" />
@@ -359,6 +361,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Forms\Products\frmCategorys.resx">
       <DependentUpon>frmCategorys.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Forms\Products\frmMeasurements.resx">
+      <DependentUpon>frmMeasurements.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Forms\Products\frmProducts.resx">
       <DependentUpon>frmProducts.cs</DependentUpon>

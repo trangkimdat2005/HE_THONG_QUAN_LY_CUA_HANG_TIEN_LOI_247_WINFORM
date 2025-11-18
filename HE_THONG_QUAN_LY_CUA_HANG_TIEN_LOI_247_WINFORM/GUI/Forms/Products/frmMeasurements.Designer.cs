@@ -57,6 +57,9 @@
             this.lblUnitId = new System.Windows.Forms.Label();
             this.panelStatus = new System.Windows.Forms.Panel();
             this.lblStatus = new System.Windows.Forms.Label();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ten = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.kiHieu = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelTop.SuspendLayout();
             this.panelSearch.SuspendLayout();
             this.panelButtons.SuspendLayout();
@@ -84,7 +87,7 @@
             this.lblTitle.ForeColor = System.Drawing.Color.White;
             this.lblTitle.Location = new System.Drawing.Point(12, 12);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(346, 32);
+            this.lblTitle.Size = new System.Drawing.Size(348, 32);
             this.lblTitle.TabIndex = 0;
             this.lblTitle.Text = "QUẢN LÝ ĐƠN VỊ ĐO LƯỜNG";
             // 
@@ -138,7 +141,7 @@
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(420, 25);
             this.txtSearch.TabIndex = 1;
-            this.txtSearch.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSearch_KeyPress);
+           // this.txtSearch.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSearch_KeyPress);
             // 
             // lblSearch
             // 
@@ -146,7 +149,7 @@
             this.lblSearch.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
             this.lblSearch.Location = new System.Drawing.Point(15, 28);
             this.lblSearch.Name = "lblSearch";
-            this.lblSearch.Size = new System.Drawing.Size(159, 17);
+            this.lblSearch.Size = new System.Drawing.Size(137, 17);
             this.lblSearch.TabIndex = 0;
             this.lblSearch.Text = "Tên đơn vị / Ký hiệu:";
             // 
@@ -245,6 +248,10 @@
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvUnits.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvUnits.ColumnHeadersHeight = 40;
+            this.dgvUnits.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.id,
+            this.ten,
+            this.kiHieu});
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F);
@@ -304,7 +311,7 @@
             this.lblProductCount.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(152)))), ((int)(((byte)(219)))));
             this.lblProductCount.Location = new System.Drawing.Point(20, 180);
             this.lblProductCount.Name = "lblProductCount";
-            this.lblProductCount.Size = new System.Drawing.Size(113, 17);
+            this.lblProductCount.Size = new System.Drawing.Size(102, 17);
             this.lblProductCount.TabIndex = 8;
             this.lblProductCount.Text = "Số sản phẩm: 0";
             // 
@@ -322,7 +329,7 @@
             this.lblSymbol.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
             this.lblSymbol.Location = new System.Drawing.Point(20, 133);
             this.lblSymbol.Name = "lblSymbol";
-            this.lblSymbol.Size = new System.Drawing.Size(60, 17);
+            this.lblSymbol.Size = new System.Drawing.Size(58, 17);
             this.lblSymbol.TabIndex = 6;
             this.lblSymbol.Text = "Ký hiệu:";
             // 
@@ -361,7 +368,7 @@
             this.txtUnitName.Name = "txtUnitName";
             this.txtUnitName.Size = new System.Drawing.Size(170, 25);
             this.txtUnitName.TabIndex = 3;
-            this.txtUnitName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtUnitName_KeyPress);
+           // this.txtUnitName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtUnitName_KeyPress);
             // 
             // txtUnitId
             // 
@@ -378,7 +385,7 @@
             this.lblUnitName.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
             this.lblUnitName.Location = new System.Drawing.Point(20, 93);
             this.lblUnitName.Name = "lblUnitName";
-            this.lblUnitName.Size = new System.Drawing.Size(87, 17);
+            this.lblUnitName.Size = new System.Drawing.Size(77, 17);
             this.lblUnitName.TabIndex = 1;
             this.lblUnitName.Text = "Tên đơn vị:";
             // 
@@ -388,7 +395,7 @@
             this.lblUnitId.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
             this.lblUnitId.Location = new System.Drawing.Point(20, 53);
             this.lblUnitId.Name = "lblUnitId";
-            this.lblUnitId.Size = new System.Drawing.Size(86, 17);
+            this.lblUnitId.Size = new System.Drawing.Size(74, 17);
             this.lblUnitId.TabIndex = 0;
             this.lblUnitId.Text = "Mã đơn vị:";
             // 
@@ -409,9 +416,27 @@
             this.lblStatus.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
             this.lblStatus.Location = new System.Drawing.Point(10, 8);
             this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(91, 17);
+            this.lblStatus.Size = new System.Drawing.Size(73, 17);
             this.lblStatus.TabIndex = 0;
             this.lblStatus.Text = "Tổng số: 0";
+            // 
+            // id
+            // 
+            this.id.HeaderText = "Mã đơn vị";
+            this.id.Name = "id";
+            this.id.ReadOnly = true;
+            // 
+            // ten
+            // 
+            this.ten.HeaderText = "Tên đơn vị";
+            this.ten.Name = "ten";
+            this.ten.ReadOnly = true;
+            // 
+            // kiHieu
+            // 
+            this.kiHieu.HeaderText = "Kí Hiệu";
+            this.kiHieu.Name = "kiHieu";
+            this.kiHieu.ReadOnly = true;
             // 
             // frmMeasurements
             // 
@@ -442,6 +467,7 @@
             this.panelStatus.ResumeLayout(false);
             this.panelStatus.PerformLayout();
             this.ResumeLayout(false);
+
         }
 
         #endregion
@@ -473,5 +499,8 @@
         private System.Windows.Forms.Label lblStatus;
         private System.Windows.Forms.TextBox txtSymbol;
         private System.Windows.Forms.Label lblSymbol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ten;
+        private System.Windows.Forms.DataGridViewTextBoxColumn kiHieu;
     }
 }
