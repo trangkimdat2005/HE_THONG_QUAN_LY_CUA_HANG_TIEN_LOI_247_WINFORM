@@ -12,6 +12,9 @@ using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.DTO.Models;
 
 namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms.Customers
 {
+    /// <summary>
+    /// Form Danh sách khách hàng - Hiển thị tổng quan, thống kê, tìm kiếm nâng cao
+    /// </summary>
     public partial class frmCustomerList : Form
     {
         private readonly CustomerController _customerController;
@@ -72,8 +75,9 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
                 
                 foreach (var customer in customers)
                 {
-                    var detail = _customerController.GetCustomerDetail(customer.id);
                     var memberCard = _customerController.GetMemberCard(customer.id);
+                    var purchaseHistory = _customerController.GetPurchaseHistory(customer.id);
+                    var totalPurchase = purchaseHistory.Sum(p => p.tongTien);
                     
                     displayList.Add(new
                     {
@@ -86,7 +90,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
                         trangThai = customer.trangThai,
                         MemberRank = memberCard?.hang ?? "Chưa có",
                         Points = memberCard?.diemTichLuy ?? 0,
-                        TotalPurchase = detail?.TotalPurchase.ToString("N0") + " VNĐ" ?? "0 VNĐ"
+                        TotalPurchase = totalPurchase.ToString("N0") + " VNĐ"
                     });
                 }
                 
@@ -253,8 +257,8 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
                     return;
                 }
 
+                // Mở form CRUD để xem/sửa thông tin
                 var frmDetail = new frmCustomers();
-                // TODO: Pass customer ID to detail form
                 frmDetail.ShowDialog();
                 
                 // Refresh lại danh sách sau khi đóng form
@@ -312,45 +316,6 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
         private void RefreshList()
         {
             LoadCustomers();
-        }
-
-        /// <summary>
-        /// Sắp xếp danh sách
-        /// </summary>
-        private void SortCustomers(string sortBy, bool ascending = true)
-        {
-            try
-            {
-                List<KhachHang> sorted = null;
-
-                switch (sortBy)
-                {
-                    case "Name":
-                        sorted = ascending
-                            ? _allCustomers.OrderBy(c => c.hoTen).ToList()
-                            : _allCustomers.OrderByDescending(c => c.hoTen).ToList();
-                        break;
-                    case "RegisterDate":
-                        sorted = ascending
-                            ? _allCustomers.OrderBy(c => c.ngayDangKy).ToList()
-                            : _allCustomers.OrderByDescending(c => c.ngayDangKy).ToList();
-                        break;
-                    case "TotalPurchase":
-                        sorted = ascending
-                            ? _allCustomers.OrderBy(c => _customerController.GetCustomerDetail(c.id)?.TotalPurchase ?? 0).ToList()
-                            : _allCustomers.OrderByDescending(c => _customerController.GetCustomerDetail(c.id)?.TotalPurchase ?? 0).ToList();
-                        break;
-                    default:
-                        sorted = _allCustomers;
-                        break;
-                }
-
-                DisplayCustomers(sorted);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
         }
 
         /// <summary>

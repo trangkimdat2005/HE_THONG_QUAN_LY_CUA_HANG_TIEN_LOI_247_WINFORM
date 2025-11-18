@@ -1,12 +1,13 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM;
+using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.DTO;
 using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.DTO.Models;
 
 namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Controllers
 {
     /// <summary>
-    /// Controller điều phối các thao tác liên quan đến Khách hàng
+    /// Controller ?i?u ph?i c�c thao t�c li�n quan ??n Kh�ch h�ng
     /// </summary>
     public class CustomerController
     {
@@ -18,7 +19,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Controllers
         }
 
         /// <summary>
-        /// Lấy tất cả khách hàng
+        /// L?y t?t c? kh�ch h�ng
         /// </summary>
         public List<KhachHang> GetAllCustomers()
         {
@@ -28,12 +29,12 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Controllers
             }
             catch (Exception ex)
             {
-                throw new Exception($"Lỗi khi lấy danh sách khách hàng: {ex.Message}");
+                throw new Exception($"L?i khi l?y danh s�ch kh�ch h�ng: {ex.Message}");
             }
         }
 
         /// <summary>
-        /// Lấy khách hàng theo ID
+        /// L?y kh�ch h�ng theo ID
         /// </summary>
         public KhachHang GetCustomerById(string id)
         {
@@ -43,12 +44,12 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Controllers
             }
             catch (Exception ex)
             {
-                throw new Exception($"Lỗi khi lấy thông tin khách hàng: {ex.Message}");
+                throw new Exception($"L?i khi l?y th�ng tin kh�ch h�ng: {ex.Message}");
             }
         }
 
         /// <summary>
-        /// Tìm kiếm khách hàng
+        /// T�m ki?m kh�ch h�ng
         /// </summary>
         public List<KhachHang> SearchCustomers(string keyword)
         {
@@ -58,12 +59,12 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Controllers
             }
             catch (Exception ex)
             {
-                throw new Exception($"Lỗi khi tìm kiếm khách hàng: {ex.Message}");
+                throw new Exception($"L?i khi t�m ki?m kh�ch h�ng: {ex.Message}");
             }
         }
 
         /// <summary>
-        /// Thêm khách hàng mới
+        /// Th�m kh�ch h�ng m?i
         /// </summary>
         public (bool success, string message) AddCustomer(KhachHang customer)
         {
@@ -73,12 +74,12 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Controllers
             }
             catch (Exception ex)
             {
-                return (false, $"Lỗi khi thêm khách hàng: {ex.Message}");
+                return (false, $"L?i khi th�m kh�ch h�ng: {ex.Message}");
             }
         }
 
         /// <summary>
-        /// Cập nhật thông tin khách hàng
+        /// C?p nh?t th�ng tin kh�ch h�ng
         /// </summary>
         public (bool success, string message) UpdateCustomer(KhachHang customer)
         {
@@ -88,12 +89,12 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Controllers
             }
             catch (Exception ex)
             {
-                return (false, $"Lỗi khi cập nhật khách hàng: {ex.Message}");
+                return (false, $"L?i khi c?p nh?t kh�ch h�ng: {ex.Message}");
             }
         }
 
         /// <summary>
-        /// Xóa khách hàng
+        /// X�a kh�ch h�ng
         /// </summary>
         public (bool success, string message) DeleteCustomer(string id)
         {
@@ -103,12 +104,12 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Controllers
             }
             catch (Exception ex)
             {
-                return (false, $"Lỗi khi xóa khách hàng: {ex.Message}");
+                return (false, $"L?i khi x�a kh�ch h�ng: {ex.Message}");
             }
         }
 
         /// <summary>
-        /// Lấy danh sách khách hàng VIP
+        /// L?y danh s�ch kh�ch h�ng VIP
         /// </summary>
         public List<KhachHang> GetVIPCustomers()
         {
@@ -118,12 +119,12 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Controllers
             }
             catch (Exception ex)
             {
-                throw new Exception($"Lỗi khi lấy danh sách khách hàng VIP: {ex.Message}");
+                throw new Exception($"L?i khi l?y danh s�ch kh�ch h�ng VIP: {ex.Message}");
             }
         }
 
         /// <summary>
-        /// Lấy thông tin chi tiết khách hàng
+        /// L?y th�ng tin chi ti?t kh�ch h�ng
         /// </summary>
         public CustomerDetailDto GetCustomerDetail(string customerId)
         {
@@ -133,12 +134,12 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Controllers
             }
             catch (Exception ex)
             {
-                throw new Exception($"Lỗi khi lấy thông tin chi tiết khách hàng: {ex.Message}");
+                throw new Exception($"L?i khi l?y th�ng tin chi ti?t kh�ch h�ng: {ex.Message}");
             }
         }
 
         /// <summary>
-        /// Lấy lịch sử mua hàng
+        /// L?y l?ch s? mua h�ng
         /// </summary>
         public List<LichSuMuaHang> GetPurchaseHistory(string customerId)
         {
@@ -148,12 +149,12 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Controllers
             }
             catch (Exception ex)
             {
-                throw new Exception($"Lỗi khi lấy lịch sử mua hàng: {ex.Message}");
+                throw new Exception($"L?i khi l?y l?ch s? mua h�ng: {ex.Message}");
             }
         }
 
         /// <summary>
-        /// Lấy thẻ thành viên
+        /// L?y th? th�nh vi�n
         /// </summary>
         public TheThanhVien GetMemberCard(string customerId)
         {
@@ -163,12 +164,12 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Controllers
             }
             catch (Exception ex)
             {
-                throw new Exception($"Lỗi khi lấy thông tin thẻ thành viên: {ex.Message}");
+                throw new Exception($"L?i khi l?y th�ng tin th? th�nh vi�n: {ex.Message}");
             }
         }
 
         /// <summary>
-        /// Cập nhật thẻ thành viên
+        /// C?p nh?t th? th�nh vi�n
         /// </summary>
         public (bool success, string message) UpdateMemberCard(TheThanhVien memberCard)
         {
@@ -178,12 +179,12 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Controllers
             }
             catch (Exception ex)
             {
-                return (false, $"Lỗi khi cập nhật thẻ thành viên: {ex.Message}");
+                return (false, $"L?i khi c?p nh?t th? th�nh vi�n: {ex.Message}");
             }
         }
 
         /// <summary>
-        /// Tính điểm tích lũy
+        /// T�nh ?i?m t�ch l?y
         /// </summary>
         public int CalculateLoyaltyPoints(decimal totalPurchase)
         {
@@ -193,12 +194,12 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Controllers
             }
             catch (Exception ex)
             {
-                throw new Exception($"Lỗi khi tính điểm tích lũy: {ex.Message}");
+                throw new Exception($"L?i khi t�nh ?i?m t�ch l?y: {ex.Message}");
             }
         }
 
         /// <summary>
-        /// Xác định hạng thẻ
+        /// X�c ??nh h?ng th?
         /// </summary>
         public string DetermineMemberRank(int points)
         {
@@ -208,7 +209,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Controllers
             }
             catch (Exception ex)
             {
-                throw new Exception($"Lỗi khi xác định hạng thẻ: {ex.Message}");
+                throw new Exception($"L?i khi x�c ??nh h?ng th?: {ex.Message}");
             }
         }
     }
