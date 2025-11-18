@@ -80,11 +80,11 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Common\AppConfig.cs" />
-    <Compile Include="Common\DateTimeHelper.cs" />
-    <Compile Include="Common\ImageHelper.cs" />
-    <Compile Include="Common\StringHelper.cs" />
-    <Compile Include="Common\ValidationHelper.cs" />
+    <Compile Include="Utils\AppConfig.cs" />
+    <Compile Include="Utils\DateTimeHelper.cs" />
+    <Compile Include="Utils\ImageHelper.cs" />
+    <Compile Include="Utils\StringHelper.cs" />
+    <Compile Include="Utils\ValidationHelper.cs" />
     <Compile Include="DataAccessLayer\DBConnection.cs" />
     <Compile Include="DataAccessLayer\Repositories\BaseRepository.cs" />
     <Compile Include="DataAccessLayer\Repositories\CustomerRepository.cs" />
@@ -95,20 +95,6 @@
     <Compile Include="DataAccessLayer\Repositories\ReportRepository.cs" />
     <Compile Include="DataAccessLayer\Repositories\SaleRepository.cs" />
     <Compile Include="DataAccessLayer\Repositories\SupplierRepository.cs" />
-    <Compile Include="BusinessLogicLayer\CustomerService.cs" />
-    <Compile Include="BusinessLogicLayer\EmployeeService.cs" />
-    <Compile Include="BusinessLogicLayer\InventoryService.cs" />
-    <Compile Include="BusinessLogicLayer\ProductService.cs" />
-    <Compile Include="BusinessLogicLayer\ReportService.cs" />
-    <Compile Include="BusinessLogicLayer\SaleService.cs" />
-    <Compile Include="DataTransferObjects\Account.cs" />
-    <Compile Include="DataTransferObjects\Category.cs" />
-    <Compile Include="DataTransferObjects\Customer.cs" />
-    <Compile Include="DataTransferObjects\Employee.cs" />
-    <Compile Include="DataTransferObjects\Product.cs" />
-    <Compile Include="DataTransferObjects\Sale.cs" />
-    <Compile Include="DataTransferObjects\Shift.cs" />
-    <Compile Include="DataTransferObjects\Supplier.cs" />
     <Compile Include="Models\Anh_SanPhamDonVi.cs" />
     <Compile Include="Models\AppDbContext.cs" />
     <Compile Include="Models\BaoCao.cs" />
@@ -174,190 +160,193 @@
     <Compile Include="Models\TrangThaiXuLy.cs" />
     <Compile Include="Models\UserRole.cs" />
     <Compile Include="Models\ViTri.cs" />
-    <Compile Include="PresentationLayer\Controls\ucRequiredTextBox.cs">
+    <Compile Include="Views\Controls\ucRequiredTextBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Controls\ucRoundButton.cs">
+    <Compile Include="Views\Controls\ucRoundButton.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\Customers\frmCustomerList.cs">
+    <Compile Include="Views\Forms\Customers\frmCustomerList.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\Customers\frmCustomerList.Designer.cs">
+    <Compile Include="Views\Forms\Customers\frmCustomerList.Designer.cs">
       <DependentUpon>frmCustomerList.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\Customers\frmCustomers.cs">
+    <Compile Include="Views\Forms\Customers\frmCustomers.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\Customers\frmCustomers.Designer.cs">
+    <Compile Include="Views\Forms\Customers\frmCustomers.Designer.cs">
       <DependentUpon>frmCustomers.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\Customers\frmMemberCards.cs">
+    <Compile Include="Views\Forms\Customers\frmMemberCards.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\Customers\frmMemberCards.Designer.cs">
+    <Compile Include="Views\Forms\Customers\frmMemberCards.Designer.cs">
       <DependentUpon>frmMemberCards.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\Customers\frmPurchaseHistory.cs">
+    <Compile Include="Views\Forms\Customers\frmPurchaseHistory.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\Customers\frmPurchaseHistory.Designer.cs">
+    <Compile Include="Views\Forms\Customers\frmPurchaseHistory.Designer.cs">
       <DependentUpon>frmPurchaseHistory.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\Employees\frmEmployeeList.cs">
+    <Compile Include="Views\Forms\Employees\frmEmployeeList.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\Employees\frmEmployeeList.Designer.cs">
+    <Compile Include="Views\Forms\Employees\frmEmployeeList.Designer.cs">
       <DependentUpon>frmEmployeeList.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\Employees\frmEmployees.cs">
+    <Compile Include="Views\Forms\Employees\frmEmployees.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\Employees\frmEmployees.Designer.cs">
+    <Compile Include="Views\Forms\Employees\frmEmployees.Designer.cs">
       <DependentUpon>frmEmployees.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\Employees\frmWorkSchedule.cs">
+    <Compile Include="Views\Forms\Employees\frmWorkSchedule.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\Employees\frmWorkSchedule.Designer.cs">
+    <Compile Include="Views\Forms\Employees\frmWorkSchedule.Designer.cs">
       <DependentUpon>frmWorkSchedule.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\Inventory\frmGoodsIssue.cs">
+    <Compile Include="Views\Forms\Inventory\frmGoodsIssue.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\Inventory\frmGoodsIssue.Designer.cs">
+    <Compile Include="Views\Forms\Inventory\frmGoodsIssue.Designer.cs">
       <DependentUpon>frmGoodsIssue.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\Inventory\frmGoodsReceived.cs">
+    <Compile Include="Views\Forms\Inventory\frmGoodsReceived.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\Inventory\frmGoodsReceived.Designer.cs">
+    <Compile Include="Views\Forms\Inventory\frmGoodsReceived.Designer.cs">
       <DependentUpon>frmGoodsReceived.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\Inventory\frmInventoryList.cs">
+    <Compile Include="Views\Forms\Inventory\frmInventoryList.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\Inventory\frmInventoryList.Designer.cs">
+    <Compile Include="Views\Forms\Inventory\frmInventoryList.Designer.cs">
       <DependentUpon>frmInventoryList.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\Inventory\frmInventoryMain.cs">
+    <Compile Include="Views\Forms\Inventory\frmInventoryMain.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\Inventory\frmInventoryMain.Designer.cs">
+    <Compile Include="Views\Forms\Inventory\frmInventoryMain.Designer.cs">
       <DependentUpon>frmInventoryMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\Inventory\frmProductLocation.cs">
+    <Compile Include="Views\Forms\Inventory\frmProductLocation.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\Inventory\frmProductLocation.Designer.cs">
+    <Compile Include="Views\Forms\Inventory\frmProductLocation.Designer.cs">
       <DependentUpon>frmProductLocation.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\Inventory\frmStocktake.cs">
+    <Compile Include="Views\Forms\Inventory\frmStocktake.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\Inventory\frmStocktake.Designer.cs">
+    <Compile Include="Views\Forms\Inventory\frmStocktake.Designer.cs">
       <DependentUpon>frmStocktake.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\Invoice\frmInvoiceDetails.cs">
+    <Compile Include="Views\Forms\Invoice\frmInvoiceDetails.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\Invoice\frmInvoiceDetails.Designer.cs">
+    <Compile Include="Views\Forms\Invoice\frmInvoiceDetails.Designer.cs">
       <DependentUpon>frmInvoiceDetails.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\Invoice\frmInvoices.cs">
+    <Compile Include="Views\Forms\Invoice\frmInvoices.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\Invoice\frmInvoices.Designer.cs">
+    <Compile Include="Views\Forms\Invoice\frmInvoices.Designer.cs">
       <DependentUpon>frmInvoices.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\Main\frmConnectionStringBuilder.cs" />
-    <Compile Include="PresentationLayer\Forms\Main\frmDashboard.cs">
+    <Compile Include="Views\Forms\Main\frmConnectionStringBuilder.cs" />
+    <Compile Include="Views\Forms\Main\frmDashboard.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\Main\frmDashboard.Designer.cs">
+    <Compile Include="Views\Forms\Main\frmDashboard.Designer.cs">
       <DependentUpon>frmDashboard.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\Main\frmLogin.cs">
+    <Compile Include="Views\Forms\Main\frmLogin.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\Main\frmLogin.Designer.cs">
+    <Compile Include="Views\Forms\Main\frmLogin.Designer.cs">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\Main\frmMain.cs">
+    <Compile Include="Views\Forms\Main\frmMain.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\Main\frmMain.Designer.cs">
+    <Compile Include="Views\Forms\Main\frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\Products\frmBrands.cs">
+    <Compile Include="Views\Forms\Products\frmBrands.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\Products\frmBrands.Designer.cs">
+    <Compile Include="Views\Forms\Products\frmBrands.Designer.cs">
       <DependentUpon>frmBrands.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\Products\frmCategorys.cs">
+    <Compile Include="Views\Forms\Products\frmCategorys.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\Products\frmCategorys.Designer.cs">
+    <Compile Include="Views\Forms\Products\frmCategorys.Designer.cs">
       <DependentUpon>frmCategorys.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\Products\frmMeasurements.cs">
+    <Compile Include="Views\Forms\Products\frmMeasurements.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\Products\frmMeasurements.Designer.cs">
+    <Compile Include="Views\Forms\Products\frmMeasurements.Designer.cs">
       <DependentUpon>frmMeasurements.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\Products\frmProducts.cs">
+    <Compile Include="Views\Forms\Products\frmProducts.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\Products\frmProducts.Designer.cs">
+    <Compile Include="Views\Forms\Products\frmProducts.Designer.cs">
       <DependentUpon>frmProducts.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\Products\frmProductsMain.cs">
+    <Compile Include="Views\Forms\Products\frmProductsMain.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\Products\frmProductsMain.Designer.cs">
+    <Compile Include="Views\Forms\Products\frmProductsMain.Designer.cs">
       <DependentUpon>frmProductsMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\Products\frmSuppliers.cs">
+    <Compile Include="Views\Forms\Products\frmSuppliers.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\Products\frmSuppliers.Designer.cs">
+    <Compile Include="Views\Forms\Products\frmSuppliers.Designer.cs">
       <DependentUpon>frmSuppliers.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\Suppliers\frmSupplierList.cs">
+    <Compile Include="Views\Forms\Suppliers\frmSupplierList.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\Suppliers\frmSupplierList.Designer.cs">
+    <Compile Include="Views\Forms\Suppliers\frmSupplierList.Designer.cs">
       <DependentUpon>frmSupplierList.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\Suppliers\frmTransactionHistory.cs">
+    <Compile Include="Views\Forms\Suppliers\frmTransactionHistory.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Forms\Suppliers\frmTransactionHistory.Designer.cs">
+    <Compile Include="Views\Forms\Suppliers\frmTransactionHistory.Designer.cs">
       <DependentUpon>frmTransactionHistory.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Promotions\frmPromotions.cs">
+    <Compile Include="Views\Promotions\frmPromotions.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Promotions\frmPromotions.Designer.cs">
+    <Compile Include="Views\Promotions\frmPromotions.Designer.cs">
       <DependentUpon>frmPromotions.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="PresentationLayer\Forms\Main\frmDashboard.resx">
+    <EmbeddedResource Include="Views\Forms\Main\frmDashboard.resx">
       <DependentUpon>frmDashboard.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Forms\Main\frmLogin.resx">
+    <EmbeddedResource Include="Views\Forms\Main\frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Forms\Main\frmMain.resx">
+    <EmbeddedResource Include="Views\Forms\Main\frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Forms\Products\frmSuppliers.resx">
+    <EmbeddedResource Include="Views\Forms\Products\frmProducts.resx">
+      <DependentUpon>frmProducts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Forms\Products\frmSuppliers.resx">
       <DependentUpon>frmSuppliers.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Forms\Suppliers\frmSupplierList.resx">
+    <EmbeddedResource Include="Views\Forms\Suppliers\frmSupplierList.resx">
       <DependentUpon>frmSupplierList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -385,10 +374,11 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Control\" />
+    <Folder Include="Controller\" />
+    <Folder Include="Services\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Database\InsertSampleData.sql" />
+    <Content Include="DataAccessLayer\Insert.sql" />
     <Content Include="Resources\img\bill.png" />
     <Content Include="Resources\img\fire.png" />
     <Content Include="Resources\img\high-volume.png" />
