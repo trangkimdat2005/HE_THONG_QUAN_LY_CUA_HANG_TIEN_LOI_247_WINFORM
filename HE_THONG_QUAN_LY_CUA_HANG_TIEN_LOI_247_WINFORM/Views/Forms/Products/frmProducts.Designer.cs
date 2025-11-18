@@ -96,7 +96,7 @@
             this.lblTitle.ForeColor = System.Drawing.Color.White;
             this.lblTitle.Location = new System.Drawing.Point(12, 12);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(256, 32);
+            this.lblTitle.Size = new System.Drawing.Size(254, 32);
             this.lblTitle.TabIndex = 0;
             this.lblTitle.Text = "QUẢN LÝ SẢN PHẨM";
             // 
@@ -181,7 +181,7 @@
             this.lblBrand.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
             this.lblBrand.Location = new System.Drawing.Point(480, 33);
             this.lblBrand.Name = "lblBrand";
-            this.lblBrand.Size = new System.Drawing.Size(74, 17);
+            this.lblBrand.Size = new System.Drawing.Size(76, 17);
             this.lblBrand.TabIndex = 2;
             this.lblBrand.Text = "Nhãn hiệu:";
             // 
@@ -191,7 +191,7 @@
             this.lblCategory.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
             this.lblCategory.Location = new System.Drawing.Point(760, 33);
             this.lblCategory.Name = "lblCategory";
-            this.lblCategory.Size = new System.Drawing.Size(74, 17);
+            this.lblCategory.Size = new System.Drawing.Size(75, 17);
             this.lblCategory.TabIndex = 1;
             this.lblCategory.Text = "Danh mục:";
             // 
@@ -201,7 +201,7 @@
             this.lblSearch.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
             this.lblSearch.Location = new System.Drawing.Point(15, 33);
             this.lblSearch.Name = "lblSearch";
-            this.lblSearch.Size = new System.Drawing.Size(99, 17);
+            this.lblSearch.Size = new System.Drawing.Size(98, 17);
             this.lblSearch.TabIndex = 0;
             this.lblSearch.Text = "Tên sản phẩm:";
             // 
@@ -326,6 +326,7 @@
             this.dgvProducts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvProducts.Size = new System.Drawing.Size(930, 530);
             this.dgvProducts.TabIndex = 0;
+            this.dgvProducts.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProducts_CellContentClick);
             this.dgvProducts.SelectionChanged += new System.EventHandler(this.dgvProducts_SelectionChanged);
             // 
             // colId
@@ -525,7 +526,7 @@
             this.lblBrandDetail.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
             this.lblBrandDetail.Location = new System.Drawing.Point(20, 113);
             this.lblBrandDetail.Name = "lblBrandDetail";
-            this.lblBrandDetail.Size = new System.Drawing.Size(74, 17);
+            this.lblBrandDetail.Size = new System.Drawing.Size(76, 17);
             this.lblBrandDetail.TabIndex = 2;
             this.lblBrandDetail.Text = "Nhãn hiệu:";
             // 
@@ -535,7 +536,7 @@
             this.lblProductName.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
             this.lblProductName.Location = new System.Drawing.Point(20, 73);
             this.lblProductName.Name = "lblProductName";
-            this.lblProductName.Size = new System.Drawing.Size(99, 17);
+            this.lblProductName.Size = new System.Drawing.Size(98, 17);
             this.lblProductName.TabIndex = 1;
             this.lblProductName.Text = "Tên sản phẩm:";
             // 
@@ -545,7 +546,7 @@
             this.lblProductId.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
             this.lblProductId.Location = new System.Drawing.Point(20, 33);
             this.lblProductId.Name = "lblProductId";
-            this.lblProductId.Size = new System.Drawing.Size(93, 17);
+            this.lblProductId.Size = new System.Drawing.Size(95, 17);
             this.lblProductId.TabIndex = 0;
             this.lblProductId.Text = "Mã sản phẩm:";
             // 
