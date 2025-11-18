@@ -95,14 +95,6 @@
     <Compile Include="DataAccessLayer\Repositories\ReportRepository.cs" />
     <Compile Include="DataAccessLayer\Repositories\SaleRepository.cs" />
     <Compile Include="DataAccessLayer\Repositories\SupplierRepository.cs" />
-    <Compile Include="DataTransferObjects\Account.cs" />
-    <Compile Include="DataTransferObjects\Category.cs" />
-    <Compile Include="DataTransferObjects\Customer.cs" />
-    <Compile Include="DataTransferObjects\Employee.cs" />
-    <Compile Include="DataTransferObjects\Product.cs" />
-    <Compile Include="DataTransferObjects\Sale.cs" />
-    <Compile Include="DataTransferObjects\Shift.cs" />
-    <Compile Include="DataTransferObjects\Supplier.cs" />
     <Compile Include="Models\Anh_SanPhamDonVi.cs" />
     <Compile Include="Models\AppDbContext.cs" />
     <Compile Include="Models\BaoCao.cs" />
@@ -383,9 +375,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controller\" />
+    <Folder Include="Services\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Database\Insert.sql" />
+    <Content Include="DataAccessLayer\Insert.sql" />
     <Content Include="Resources\img\bill.png" />
     <Content Include="Resources\img\fire.png" />
     <Content Include="Resources\img\high-volume.png" />
