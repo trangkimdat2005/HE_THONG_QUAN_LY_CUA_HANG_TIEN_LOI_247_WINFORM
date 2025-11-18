@@ -35,11 +35,6 @@
             this.splitContainer = new System.Windows.Forms.SplitContainer();
             this.pnlLeft = new System.Windows.Forms.Panel();
             this.dgvCustomers = new System.Windows.Forms.DataGridView();
-            this.colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPhone = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colEmail = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlSearch = new System.Windows.Forms.Panel();
             this.btnVIPCustomers = new System.Windows.Forms.Button();
             this.btnRefresh = new System.Windows.Forms.Button();
@@ -73,6 +68,11 @@
             this.label2 = new System.Windows.Forms.Label();
             this.pnlBottom = new System.Windows.Forms.Panel();
             this.btnClose = new System.Windows.Forms.Button();
+            this.colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPhone = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colEmail = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
@@ -104,7 +104,7 @@
             this.lblTitle.ForeColor = System.Drawing.Color.White;
             this.lblTitle.Location = new System.Drawing.Point(12, 12);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(276, 32);
+            this.lblTitle.Size = new System.Drawing.Size(287, 32);
             this.lblTitle.TabIndex = 0;
             this.lblTitle.Text = "QUẢN LÝ KHÁCH HÀNG";
             // 
@@ -178,41 +178,6 @@
             this.dgvCustomers.TabIndex = 1;
             this.dgvCustomers.SelectionChanged += new System.EventHandler(this.dgvCustomers_SelectionChanged);
             // 
-            // colId
-            // 
-            this.colId.DataPropertyName = "id";
-            this.colId.HeaderText = "Mã KH";
-            this.colId.Name = "colId";
-            this.colId.ReadOnly = true;
-            // 
-            // colName
-            // 
-            this.colName.DataPropertyName = "hoTen";
-            this.colName.HeaderText = "Họ tên";
-            this.colName.Name = "colName";
-            this.colName.ReadOnly = true;
-            // 
-            // colPhone
-            // 
-            this.colPhone.DataPropertyName = "soDienThoai";
-            this.colPhone.HeaderText = "Số điện thoại";
-            this.colPhone.Name = "colPhone";
-            this.colPhone.ReadOnly = true;
-            // 
-            // colEmail
-            // 
-            this.colEmail.DataPropertyName = "email";
-            this.colEmail.HeaderText = "Email";
-            this.colEmail.Name = "colEmail";
-            this.colEmail.ReadOnly = true;
-            // 
-            // colStatus
-            // 
-            this.colStatus.DataPropertyName = "trangThai";
-            this.colStatus.HeaderText = "Trạng thái";
-            this.colStatus.Name = "colStatus";
-            this.colStatus.ReadOnly = true;
-            // 
             // pnlSearch
             // 
             this.pnlSearch.BackColor = System.Drawing.Color.White;
@@ -284,7 +249,7 @@
             this.label1.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             this.label1.Location = new System.Drawing.Point(15, 28);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(68, 17);
+            this.label1.Size = new System.Drawing.Size(63, 17);
             this.label1.TabIndex = 0;
             this.label1.Text = "Tìm kiếm:";
             // 
@@ -432,7 +397,7 @@
             this.label9.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             this.label9.Location = new System.Drawing.Point(20, 438);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(75, 17);
+            this.label9.Size = new System.Drawing.Size(69, 17);
             this.label9.TabIndex = 15;
             this.label9.Text = "Trạng thái:";
             // 
@@ -451,7 +416,7 @@
             this.label8.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             this.label8.Location = new System.Drawing.Point(20, 338);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(73, 17);
+            this.label8.Size = new System.Drawing.Size(69, 17);
             this.label8.TabIndex = 13;
             this.label8.Text = "Ngày sinh:";
             // 
@@ -461,7 +426,7 @@
             this.rbFemale.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             this.rbFemale.Location = new System.Drawing.Point(260, 388);
             this.rbFemale.Name = "rbFemale";
-            this.rbFemale.Size = new System.Drawing.Size(45, 21);
+            this.rbFemale.Size = new System.Drawing.Size(44, 21);
             this.rbFemale.TabIndex = 12;
             this.rbFemale.Text = "Nữ";
             this.rbFemale.UseVisualStyleBackColor = true;
@@ -473,7 +438,7 @@
             this.rbMale.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             this.rbMale.Location = new System.Drawing.Point(150, 388);
             this.rbMale.Name = "rbMale";
-            this.rbMale.Size = new System.Drawing.Size(56, 21);
+            this.rbMale.Size = new System.Drawing.Size(54, 21);
             this.rbMale.TabIndex = 11;
             this.rbMale.TabStop = true;
             this.rbMale.Text = "Nam";
@@ -485,7 +450,7 @@
             this.label7.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             this.label7.Location = new System.Drawing.Point(20, 390);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(63, 17);
+            this.label7.Size = new System.Drawing.Size(59, 17);
             this.label7.TabIndex = 10;
             this.label7.Text = "Giới tính:";
             // 
@@ -504,7 +469,7 @@
             this.label6.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             this.label6.Location = new System.Drawing.Point(20, 238);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(51, 17);
+            this.label6.Size = new System.Drawing.Size(50, 17);
             this.label6.TabIndex = 8;
             this.label6.Text = "Địa chỉ:";
             // 
@@ -540,7 +505,7 @@
             this.label4.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             this.label4.Location = new System.Drawing.Point(20, 148);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(94, 17);
+            this.label4.Size = new System.Drawing.Size(88, 17);
             this.label4.TabIndex = 4;
             this.label4.Text = "Số điện thoại:";
             // 
@@ -577,7 +542,7 @@
             this.label2.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             this.label2.Location = new System.Drawing.Point(20, 58);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(97, 17);
+            this.label2.Size = new System.Drawing.Size(100, 17);
             this.label2.TabIndex = 0;
             this.label2.Text = "Mã khách hàng:";
             // 
@@ -605,6 +570,41 @@
             this.btnClose.Text = "Đóng";
             this.btnClose.UseVisualStyleBackColor = false;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            // 
+            // colId
+            // 
+            this.colId.DataPropertyName = "id";
+            this.colId.HeaderText = "Mã KH";
+            this.colId.Name = "colId";
+            this.colId.ReadOnly = true;
+            // 
+            // colName
+            // 
+            this.colName.DataPropertyName = "hoTen";
+            this.colName.HeaderText = "Họ tên";
+            this.colName.Name = "colName";
+            this.colName.ReadOnly = true;
+            // 
+            // colPhone
+            // 
+            this.colPhone.DataPropertyName = "soDienThoai";
+            this.colPhone.HeaderText = "Số điện thoại";
+            this.colPhone.Name = "colPhone";
+            this.colPhone.ReadOnly = true;
+            // 
+            // colEmail
+            // 
+            this.colEmail.DataPropertyName = "email";
+            this.colEmail.HeaderText = "Email";
+            this.colEmail.Name = "colEmail";
+            this.colEmail.ReadOnly = true;
+            // 
+            // colStatus
+            // 
+            this.colStatus.DataPropertyName = "diaChi";
+            this.colStatus.HeaderText = "Địa chỉ ";
+            this.colStatus.Name = "colStatus";
+            this.colStatus.ReadOnly = true;
             // 
             // frmCustomers
             // 

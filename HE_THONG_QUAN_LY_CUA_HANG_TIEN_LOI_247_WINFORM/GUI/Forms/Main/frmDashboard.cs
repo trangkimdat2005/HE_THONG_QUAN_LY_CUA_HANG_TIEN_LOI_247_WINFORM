@@ -253,11 +253,16 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
                     int index = 0;
                     foreach (var product in topProducts)
                     {
-                        // Lấy tên sản phẩm
-                        var sanPhamDonVi = _context.SanPhamDonVis.Find(product.SanPhamDonViId);
-                        string tenSanPham = sanPhamDonVi != null 
-                            ? _context.SanPhams.Find(sanPhamDonVi.sanPhamId)?.ten ?? "N/A"
-                            : "N/A";
+                        // Lấy tên sản phẩm - Fix: Use LINQ query instead of Find for composite key
+                        var sanPhamDonVi = _context.SanPhamDonVis
+                            .FirstOrDefault(spv => spv.id == product.SanPhamDonViId);
+                        
+                        string tenSanPham = "N/A";
+                        if (sanPhamDonVi != null)
+                        {
+                            var sanPham = _context.SanPhams.Find(sanPhamDonVi.sanPhamId);
+                            tenSanPham = sanPham?.ten ?? "N/A";
+                        }
 
                         int pointIndex = series.Points.AddXY(tenSanPham, product.TongSoLuong);
                         series.Points[pointIndex].Label = tenSanPham;
@@ -304,7 +309,10 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
 
                 foreach (var tonKho in lowStockProducts)
                 {
-                    var sanPhamDonVi = _context.SanPhamDonVis.Find(tonKho.sanPhamDonViId);
+                    // Fix: Use LINQ query instead of Find for composite key
+                    var sanPhamDonVi = _context.SanPhamDonVis
+                        .FirstOrDefault(spv => spv.id == tonKho.sanPhamDonViId);
+                    
                     if (sanPhamDonVi != null)
                     {
                         var sanPham = _context.SanPhams.Find(sanPhamDonVi.sanPhamId);

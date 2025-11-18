@@ -51,27 +51,40 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
             try
             {
                 var customers = _customerController.GetAllCustomers();
-                
-                var displayList = new List<dynamic>();
-                foreach (var customer in customers)
-                {
-                    var memberCard = _customerController.GetMemberCard(customer.id);
-                    displayList.Add(new
-                    {
-                        id = customer.id,
-                        hoTen = customer.hoTen,
-                        soDienThoai = customer.soDienThoai,
-                        Rank = memberCard?.hang ?? "Chưa có",
-                        Points = memberCard?.diemTichLuy ?? 0,
-                        IssueDate = memberCard?.ngayCap.ToString("dd/MM/yyyy") ?? ""
-                    });
-                }
-
-                dgvMemberCards.DataSource = displayList;
+                DisplayMemberCards(customers, null);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        /// <summary>
+        /// Hiển thị danh sách thẻ thành viên lên DataGridView
+        /// </summary>
+        private void DisplayMemberCards(List<KhachHang> customers, string filterRank = null)
+        {
+            dgvMemberCards.Rows.Clear();
+            
+            foreach (var customer in customers)
+            {
+                var memberCard = _customerController.GetMemberCard(customer.id);
+                
+                // Nếu có filter rank, chỉ hiển thị khách hàng có thẻ và đúng hạng
+                if (!string.IsNullOrEmpty(filterRank) && filterRank != "Tất cả")
+                {
+                    if (memberCard == null || memberCard.hang != filterRank)
+                        continue;
+                }
+                
+                dgvMemberCards.Rows.Add(
+                    customer.id,                                    // colCustomerId
+                    customer.hoTen,                                 // colCustomerName
+                    customer.soDienThoai,                          // colPhone
+                    memberCard?.hang ?? "Chưa có",                 // colRank
+                    memberCard?.diemTichLuy ?? 0,                  // colPoints
+                    memberCard?.ngayCap.ToString("dd/MM/yyyy") ?? "" // colIssueDate
+                );
             }
         }
 
@@ -223,25 +236,24 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
             {
                 var customers = _customerController.SearchCustomers(keyword);
                 
-                var displayList = new List<dynamic>();
+                dgvMemberCards.Rows.Clear();
+                
                 foreach (var customer in customers)
                 {
                     var memberCard = _customerController.GetMemberCard(customer.id);
+                    // Chỉ hiển thị khách hàng đã có thẻ khi search
                     if (memberCard != null)
                     {
-                        displayList.Add(new
-                        {
-                            id = customer.id,
-                            hoTen = customer.hoTen,
-                            soDienThoai = customer.soDienThoai,
-                            Rank = memberCard.hang,
-                            Points = memberCard.diemTichLuy,
-                            IssueDate = memberCard.ngayCap.ToString("dd/MM/yyyy")
-                        });
+                        dgvMemberCards.Rows.Add(
+                            customer.id,
+                            customer.hoTen,
+                            customer.soDienThoai,
+                            memberCard.hang,
+                            memberCard.diemTichLuy,
+                            memberCard.ngayCap.ToString("dd/MM/yyyy")
+                        );
                     }
                 }
-
-                dgvMemberCards.DataSource = displayList;
             }
             catch (Exception ex)
             {
@@ -257,29 +269,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
             try
             {
                 var customers = _customerController.GetAllCustomers();
-                
-                var displayList = new List<dynamic>();
-                foreach (var customer in customers)
-                {
-                    var memberCard = _customerController.GetMemberCard(customer.id);
-                    if (memberCard != null)
-                    {
-                        if (rank == "Tất cả" || memberCard.hang == rank)
-                        {
-                            displayList.Add(new
-                            {
-                                id = customer.id,
-                                hoTen = customer.hoTen,
-                                soDienThoai = customer.soDienThoai,
-                                Rank = memberCard.hang,
-                                Points = memberCard.diemTichLuy,
-                                IssueDate = memberCard.ngayCap.ToString("dd/MM/yyyy")
-                            });
-                        }
-                    }
-                }
-
-                dgvMemberCards.DataSource = displayList;
+                DisplayMemberCards(customers, rank);
             }
             catch (Exception ex)
             {

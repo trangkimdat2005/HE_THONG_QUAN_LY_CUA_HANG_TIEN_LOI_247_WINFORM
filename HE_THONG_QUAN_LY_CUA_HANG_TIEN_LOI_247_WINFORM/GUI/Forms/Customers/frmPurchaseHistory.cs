@@ -1,4 +1,6 @@
-﻿using System;
+﻿using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Controllers;
+using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.DTO.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,8 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Controllers;
-using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.DTO.Models;
+using static System.Data.Entity.Infrastructure.Design.Executor;
 
 namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms.Customers
 {
@@ -16,6 +17,9 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
     {
         private readonly CustomerController _customerController;
         private string _customerId;
+        private bool _isLoading = false; // Flag để tránh trigger event khi đang load
+        private DateTime _fromDate = DateTime.Now.AddMonths(-6); // Mặc định lấy 6 tháng gần nhất
+        private DateTime _toDate = DateTime.Now;
 
         public frmPurchaseHistory()
         {
@@ -75,18 +79,31 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
         {
             try
             {
+                _isLoading = true; // Bắt đầu loading
+                
                 var customers = _customerController.GetAllCustomers();
-                cmbCustomers.DataSource = customers;
+                
+                // Create a simple list to avoid EF proxy issues
+                var customerList = customers.Select(c => new
+                {
+                    id = c.id,
+                    hoTen = c.hoTen
+                }).ToList();
+                
+                cmbCustomers.DataSource = customerList;
                 cmbCustomers.DisplayMember = "hoTen";
                 cmbCustomers.ValueMember = "id";
                 
-                if (customers.Count > 0)
+                _isLoading = false; // Kết thúc loading
+                
+                if (customerList.Count > 0)
                 {
                     cmbCustomers.SelectedIndex = 0;
                 }
             }
             catch (Exception ex)
             {
+                _isLoading = false;
                 MessageBox.Show(ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -101,9 +118,9 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
                 if (string.IsNullOrEmpty(_customerId))
                     return;
 
-                var purchaseHistory = _customerController.GetPurchaseHistory(_customerId);
+                var purchaseHistory = _customerController.GetPurchaseHistoryByDate(_customerId, _fromDate, _toDate);
                 
-                dgvPurchaseHistory.DataSource = purchaseHistory;
+                DisplayPurchaseHistory(purchaseHistory);
                 
                 // Tính tổng
                 var totalAmount = purchaseHistory.Sum(p => p.tongTien);
@@ -119,34 +136,21 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
         }
 
         /// <summary>
-        /// Lọc theo thời gian
+        /// Hiển thị lịch sử mua hàng lên DataGridView
         /// </summary>
-        private void FilterByDateRange(DateTime fromDate, DateTime toDate)
+        private void DisplayPurchaseHistory(List<LichSuMuaHang> purchaseHistory)
         {
-            try
+            dgvPurchaseHistory.Rows.Clear();
+            
+            foreach (var item in purchaseHistory)
             {
-                if (string.IsNullOrEmpty(_customerId))
-                    return;
-
-                var purchaseHistory = _customerController.GetPurchaseHistory(_customerId);
-                
-                // Lọc theo ngày
-                var filtered = purchaseHistory
-                    .Where(p => p.ngayMua >= fromDate && p.ngayMua <= toDate)
-                    .ToList();
-                
-                dgvPurchaseHistory.DataSource = filtered;
-                
-                // Tính tổng
-                var totalAmount = filtered.Sum(p => p.tongTien);
-                var totalCount = filtered.Count;
-                
-                lblTotalAmount.Text = $"{totalAmount:N0} VNĐ";
-                lblTotalCount.Text = totalCount.ToString();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                dgvPurchaseHistory.Rows.Add(
+                    item.hoaDonId,                           // colInvoiceId
+                    item.ngayMua.ToString("dd/MM/yyyy"),     // colDate
+                    item.tongTien.ToString("N0") + " VNĐ",   // colTotalAmount
+                    "Tiền mặt",                              // colPaymentMethod (có thể join với bảng payment)
+                    ""                                       // colEmployee (có thể join với bảng HoaDon)
+                );
             }
         }
 
@@ -211,13 +215,43 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
 
         private void cmbCustomers_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cmbCustomers.SelectedValue != null)
+            // Bỏ qua nếu đang loading hoặc SelectedValue chưa sẵn sàng
+            if (_isLoading || cmbCustomers.SelectedValue == null)
+                return;
+
+            // Kiểm tra kiểu của SelectedValue trước khi convert
+            if (cmbCustomers.SelectedValue is string customerId) 
             {
-                var customerId = cmbCustomers.SelectedValue.ToString();
                 OnCustomerChanged(customerId);
             }
         }
+        private void FilterByDateRange(DateTime fromDate, DateTime toDate)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(_customerId))
+                    return;
 
+                // Cập nhật date range
+                _fromDate = fromDate;
+                _toDate = toDate;
+
+                // Gọi Controller để lấy danh sách ĐÃ ĐƯỢC LỌC
+                var filteredList = _customerController.GetPurchaseHistoryByDate(_customerId, fromDate, toDate);
+
+                // Hiển thị
+                DisplayPurchaseHistory(filteredList);
+
+                // Cập nhật tổng (Logic tính tổng đơn giản này để ở View cũng chấp nhận được, 
+                // hoặc tạo DTO trả về cả List và TotalAmount từ Controller thì tốt hơn)
+                lblTotalAmount.Text = $"{filteredList.Sum(p => p.tongTien):N0} VNĐ";
+                lblTotalCount.Text = filteredList.Count.ToString();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
         private void btnFilter_Click(object sender, EventArgs e)
         {
             FilterByDateRange(dtpFromDate.Value, dtpToDate.Value);
@@ -244,7 +278,6 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
         {
             this.Close();
         }
-
         #endregion
     }
 }

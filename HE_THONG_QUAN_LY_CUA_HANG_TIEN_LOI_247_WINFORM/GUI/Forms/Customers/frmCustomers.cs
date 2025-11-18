@@ -54,11 +54,33 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
             try
             {
                 var customers = _customerController.GetAllCustomers();
-                dgvCustomers.DataSource = customers;
+                DisplayCustomers(customers);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        /// <summary>
+        /// Hiển thị danh sách khách hàng lên DataGridView
+        /// </summary>
+        private void DisplayCustomers(List<KhachHang> customers)
+        {
+            dgvCustomers.Rows.Clear();
+            
+            foreach (var customer in customers)
+            {
+                dgvCustomers.Rows.Add(
+                    customer.id,
+                    customer.hoTen,
+                    customer.soDienThoai,
+                    customer.email,
+                    customer.diaChi,
+                    customer.ngayDangKy.ToString("dd/MM/yyyy"),
+                    customer.gioiTinh ? "Nam" : "Nữ",
+                    customer.trangThai
+                );
             }
         }
 
@@ -70,7 +92,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
             try
             {
                 var customers = _customerController.SearchCustomers(keyword);
-                dgvCustomers.DataSource = customers;
+                DisplayCustomers(customers);
             }
             catch (Exception ex)
             {
@@ -92,11 +114,11 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
                 {
                     hoTen = txtCustomerName.Text.Trim(),
                     soDienThoai = txtPhone.Text.Trim(),
-                    email = txtEmail.Text.Trim(),
-                    diaChi = txtAddress.Text.Trim(),
+                    email = string.IsNullOrWhiteSpace(txtEmail.Text) ? "" : txtEmail.Text.Trim(),
+                    diaChi = string.IsNullOrWhiteSpace(txtAddress.Text) ? "Chưa cập nhật" : txtAddress.Text.Trim(),
                     gioiTinh = rbMale.Checked,
                     ngayDangKy = DateTime.Now,
-                    trangThai = cmbStatus.SelectedItem.ToString()
+                    trangThai = cmbStatus.SelectedItem?.ToString() ?? "Active"
                 };
 
                 var result = _customerController.AddCustomer(customer);
@@ -114,7 +136,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Lỗi: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -137,10 +159,10 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
 
                 _selectedCustomer.hoTen = txtCustomerName.Text.Trim();
                 _selectedCustomer.soDienThoai = txtPhone.Text.Trim();
-                _selectedCustomer.email = txtEmail.Text.Trim();
-                _selectedCustomer.diaChi = txtAddress.Text.Trim();
+                _selectedCustomer.email = string.IsNullOrWhiteSpace(txtEmail.Text) ? "" : txtEmail.Text.Trim();
+                _selectedCustomer.diaChi = string.IsNullOrWhiteSpace(txtAddress.Text) ? "Chưa cập nhật" : txtAddress.Text.Trim();
                 _selectedCustomer.gioiTinh = rbMale.Checked;
-                _selectedCustomer.trangThai = cmbStatus.SelectedItem.ToString();
+                _selectedCustomer.trangThai = cmbStatus.SelectedItem?.ToString() ?? "Active";
 
                 var result = _customerController.UpdateCustomer(_selectedCustomer);
                 
@@ -157,7 +179,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Lỗi: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -254,7 +276,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
             try
             {
                 var vipCustomers = _customerController.GetVIPCustomers();
-                dgvCustomers.DataSource = vipCustomers;
+                DisplayCustomers(vipCustomers);
             }
             catch (Exception ex)
             {
@@ -278,6 +300,15 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
             if (string.IsNullOrWhiteSpace(txtPhone.Text))
             {
                 MessageBox.Show("Vui lòng nhập số điện thoại.", "Thông báo", 
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtPhone.Focus();
+                return false;
+            }
+
+            // Validate phone number format (basic check)
+            if (txtPhone.Text.Trim().Length < 10)
+            {
+                MessageBox.Show("Số điện thoại không hợp lệ (tối thiểu 10 số).", "Thông báo", 
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtPhone.Focus();
                 return false;

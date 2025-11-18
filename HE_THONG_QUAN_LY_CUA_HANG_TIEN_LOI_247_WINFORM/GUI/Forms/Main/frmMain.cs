@@ -275,15 +275,10 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
 
         private void btnSub_TheThanhVien_Click(object sender, EventArgs e)
         {
-            LoadFormIntoPanel(new frmCustomers());
+            LoadFormIntoPanel(new frmMemberCards());
             SetActiveButton(btn_customers, btnSub_TheThanhVien);
         }
 
-        private void btnSub_LichSuMuaHang_Click(object sender, EventArgs e)
-        {
-            LoadFormIntoPanel(new frmCustomers());
-            SetActiveButton(btn_customers, btnSub_LichSuMuaHang);
-        }
 
         // --- Click cho các nút menu con của Nhà cung cấp ---
 
