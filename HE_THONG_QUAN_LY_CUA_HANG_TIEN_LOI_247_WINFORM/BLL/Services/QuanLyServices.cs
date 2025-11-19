@@ -9,200 +9,214 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
 {
     public class QuanLyServices : IQuanLyServices
     {
-        private readonly AppDbContext _context;
-
-        public QuanLyServices(AppDbContext context)
-        {
-            _context = context;
-        }
-
-        public QuanLyServices()
-        {
-            _context = new AppDbContext();
-        }
+        
 
         public List<T> GetList<T>() where T : class
         {
-            try
+            using(var _context = new AppDbContext())
             {
-                var data = _context.Set<T>().AsNoTracking().ToList();
-
-                var property = typeof(T).GetProperty("isDelete");
-                if (property != null)
+                try
                 {
-                    return data.Where(t =>
-                    {
-                        var value = property.GetValue(t);
-                        return value is bool isDelete && !isDelete;
-                    }).ToList();
-                }
+                    var data = _context.Set<T>().AsNoTracking().ToList();
 
-                return data;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"An error occurred while retrieving entities of type {typeof(T).Name}: {ex.Message}");
-                return new List<T>();
+                    var property = typeof(T).GetProperty("isDelete");
+                    if (property != null)
+                    {
+                        return data.Where(t =>
+                        {
+                            var value = property.GetValue(t);
+                            return value is bool isDelete && !isDelete;
+                        }).ToList();
+                    }
+
+                    return data;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"An error occurred while retrieving entities of type {typeof(T).Name}: {ex.Message}");
+                    return new List<T>();
+                }
             }
         }
 
         public T GetById<T>(params object[] keyValues) where T : class
         {
-            try
-            {
-                var entity = _context.Set<T>().Find(keyValues);
-                if (entity == null)
+            using (var _context = new AppDbContext()) {
+                try
                 {
-                    throw new Exception($"Không tìm thấy đối tượng {typeof(T).Name} với Id: {string.Join(",", keyValues)}");
-                }
-
-                var property = typeof(T).GetProperty("isDelete");
-                if (property != null)
-                {
-                    var value = property.GetValue(entity);
-                    if (value is bool isDelete && isDelete)
+                    var entity = _context.Set<T>().Find(keyValues);
+                    if (entity == null)
                     {
-                        throw new Exception($"Đối tượng {typeof(T).Name} với Id: {string.Join(",", keyValues)} đã bị xóa mềm (isDelete = true)");
+                        throw new Exception($"Không tìm thấy đối tượng {typeof(T).Name} với Id: {string.Join(",", keyValues)}");
                     }
+
+                    var property = typeof(T).GetProperty("isDelete");
+                    if (property != null)
+                    {
+                        var value = property.GetValue(entity);
+                        if (value is bool isDelete && isDelete)
+                        {
+                            throw new Exception($"Đối tượng {typeof(T).Name} với Id: {string.Join(",", keyValues)} đã bị xóa mềm (isDelete = true)");
+                        }
+                    }
+                    return entity;
                 }
-                return entity;
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"An error occurred while retrieving entity of type {typeof(T).Name} with ID {string.Join(",", keyValues)}: {ex.Message}");
+                    return null;
+                }
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"An error occurred while retrieving entity of type {typeof(T).Name} with ID {string.Join(",", keyValues)}: {ex.Message}");
-                return null;
-            }
+                
         }
 
         public bool Add<T>(T entity) where T : class
         {
-            try
-            {
-                _context.Set<T>().Add(entity);
-                _context.SaveChanges();
-                return true;
+            using (var _context = new AppDbContext()) {
+                try
+                {
+                    _context.Set<T>().Add(entity);
+                    _context.SaveChanges();
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"An error occurred while adding entity of type {typeof(T).Name}: {ex.Message}");
+                    return false;
+                }
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"An error occurred while adding entity of type {typeof(T).Name}: {ex.Message}");
-                return false;
-            }
+                
         }
 
         public bool Update<T>(T entity) where T : class
         {
-            try
-            {
-                var entry = _context.Entry(entity);
-                if (entry.State == EntityState.Detached)
+            using (var _context = new AppDbContext()) {
+                try
                 {
-                    _context.Set<T>().Attach(entity);
+                    var entry = _context.Entry(entity);
+                    if (entry.State == EntityState.Detached)
+                    {
+                        _context.Set<T>().Attach(entity);
+                    }
+
+                    // Đánh dấu thực thể là đã thay đổi
+                    entry.State = EntityState.Modified;
+
+                    _context.SaveChanges();
+                    return true;
                 }
-
-                // Đánh dấu thực thể là đã thay đổi
-                entry.State = EntityState.Modified;
-
-                _context.SaveChanges();
-                return true;
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"An error occurred while updating entity of type {typeof(T).Name}: {ex.Message}");
+                    return false;
+                }
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"An error occurred while updating entity of type {typeof(T).Name}: {ex.Message}");
-                return false;
-            }
+                
         }
 
         public bool SoftDelete<T>(T entity) where T : class
         {
-            try
+            using (var _context = new AppDbContext())
             {
-                var entry = _context.Entry(entity);
-                if (entry.State == EntityState.Detached)
+                try
                 {
-                    _context.Set<T>().Attach(entity);
-                }
+                    var entry = _context.Entry(entity);
+                    if (entry.State == EntityState.Detached)
+                    {
+                        _context.Set<T>().Attach(entity);
+                    }
 
-                var property = typeof(T).GetProperty("isDelete");
-                if (property != null && property.CanWrite)
-                {
-                    property.SetValue(entity, true);
-                    entry.State = EntityState.Modified;
-                    _context.SaveChanges();
-                    return true;
+                    var property = typeof(T).GetProperty("isDelete");
+                    if (property != null && property.CanWrite)
+                    {
+                        property.SetValue(entity, true);
+                        entry.State = EntityState.Modified;
+                        _context.SaveChanges();
+                        return true;
+                    }
+                    else
+                    {
+                        Console.WriteLine("No 'isDelete' property found in entity.");
+                        return false;
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    Console.WriteLine("No 'isDelete' property found in entity.");
+                    Console.WriteLine($"An error occurred while soft deleting entity of type {typeof(T).Name}: {ex.Message}");
                     return false;
                 }
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"An error occurred while soft deleting entity of type {typeof(T).Name}: {ex.Message}");
-                return false;
-            }
+                
         }
 
         public bool HardDelete<T>(T entity) where T : class
         {
-            try
+            using (var _context = new AppDbContext())
             {
-                var entry = _context.Entry(entity);
-                if (entry.State == EntityState.Detached)
+                try
                 {
-                    _context.Set<T>().Attach(entity);
-                }
+                    var entry = _context.Entry(entity);
+                    if (entry.State == EntityState.Detached)
+                    {
+                        _context.Set<T>().Attach(entity);
+                    }
 
-                _context.Set<T>().Remove(entity);
-                _context.SaveChanges();
-                return true;
+                    _context.Set<T>().Remove(entity);
+                    _context.SaveChanges();
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"An error occurred while deleting entity of type {typeof(T).Name}: {ex.Message}");
+                    return false;
+                }
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"An error occurred while deleting entity of type {typeof(T).Name}: {ex.Message}");
-                return false;
-            }
+               
         }
 
         public string GenerateNewId<T>(string prefix, int totalLength) where T : class
         {
-            try
+            using (var _context = new AppDbContext())
             {
-                var allEntities = _context.Set<T>().AsNoTracking().ToList();
-                
-                var lastEntity = allEntities
-                    .Select(e =>
-                    {
-                        var idProperty = e.GetType().GetProperty("id") ?? e.GetType().GetProperty("Id");
-                        var id = idProperty?.GetValue(e) as string;
-                        return new { Entity = e, Id = id };
-                    })
-                    .Where(x => x.Id != null && x.Id.StartsWith(prefix))
-                    .OrderByDescending(x => x.Id)
-                    .FirstOrDefault();
-
-                int newNumericPart = 1;
-                if (lastEntity != null && !string.IsNullOrEmpty(lastEntity.Id))
+                try
                 {
-                    var numericPart = lastEntity.Id.Substring(prefix.Length);
-                    if (int.TryParse(numericPart, out int lastNumericPart))
-                    {
-                        newNumericPart = lastNumericPart + 1;
-                    }
-                }
+                    var allEntities = _context.Set<T>().AsNoTracking().ToList();
 
-                string newId = prefix + newNumericPart.ToString().PadLeft(totalLength - prefix.Length, '0');
-                return newId;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"An error occurred while generating new ID for type {typeof(T).Name}: {ex.Message}");
-                return null;
+                    var lastEntity = allEntities
+                        .Select(e =>
+                        {
+                            var idProperty = e.GetType().GetProperty("id") ?? e.GetType().GetProperty("Id");
+                            var id = idProperty?.GetValue(e) as string;
+                            return new { Entity = e, Id = id };
+                        })
+                        .Where(x => x.Id != null && x.Id.StartsWith(prefix))
+                        .OrderByDescending(x => x.Id)
+                        .FirstOrDefault();
+
+                    int newNumericPart = 1;
+                    if (lastEntity != null && !string.IsNullOrEmpty(lastEntity.Id))
+                    {
+                        var numericPart = lastEntity.Id.Substring(prefix.Length);
+                        if (int.TryParse(numericPart, out int lastNumericPart))
+                        {
+                            newNumericPart = lastNumericPart + 1;
+                        }
+                    }
+
+                    string newId = prefix + newNumericPart.ToString().PadLeft(totalLength - prefix.Length, '0');
+                    return newId;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"An error occurred while generating new ID for type {typeof(T).Name}: {ex.Message}");
+                    return null;
+                }
             }
         }
 
         public byte[] ConvertImageToByteArray(string filePath)
         {
+            
             try
             {
                 if (File.Exists(filePath))
