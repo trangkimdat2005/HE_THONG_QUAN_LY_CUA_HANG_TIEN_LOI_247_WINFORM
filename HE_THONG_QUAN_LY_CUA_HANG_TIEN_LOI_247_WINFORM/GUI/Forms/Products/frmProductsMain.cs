@@ -8,7 +8,6 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
         private frmProducts _frmProducts;
         private frmCategorys _frmCategorys;
         private frmBrands _frmBrands;
-        private frmSuppliers _frmSuppliers;
         private frmMeasurements _frmMeasurements;
 
         public frmProductsMain()
@@ -44,10 +43,6 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
             else if (tabControl.SelectedTab == tabBrands)
             {
                 LoadFormIntoTab(tabBrands, ref _frmBrands);
-            }
-            else if (tabControl.SelectedTab == tabSuppliers)
-            {
-                LoadFormIntoTab(tabSuppliers, ref _frmSuppliers);
             }
             else if (tabControl.SelectedTab == tabMeasurements)
             {
@@ -109,7 +104,6 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
             _frmProducts?.Dispose();
             _frmCategorys?.Dispose();
             _frmBrands?.Dispose();
-            _frmSuppliers?.Dispose();
             _frmMeasurements?.Dispose();
         }
     }
