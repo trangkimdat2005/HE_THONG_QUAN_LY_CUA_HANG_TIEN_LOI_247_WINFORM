@@ -80,6 +80,9 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\GoodsController.cs" />
+    <Compile Include="DTO\GoodDetailDto.cs" />
+    <Compile Include="DTO\ProductDetailDto.cs" />
     <Compile Include="Models\Anh_SanPhamDonVi.cs" />
     <Compile Include="Models\AppDbContext.cs" />
     <Compile Include="Models\BaoCao.cs" />
@@ -148,6 +151,7 @@
     <Compile Include="Services\BrandService.cs" />
     <Compile Include="Services\CategoryService.cs" />
     <Compile Include="Services\CustomerService.cs" />
+    <Compile Include="Services\GoodsService.cs" />
     <Compile Include="Services\InvoiceService.cs" />
     <Compile Include="Services\IQuanLyServices.cs" />
     <Compile Include="Services\MeasurementService.cs" />
@@ -160,7 +164,6 @@
     <Compile Include="Controllers\MeasurementController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="DTO\CustomerDetailDto.cs" />
-    <Compile Include="DTO\ProductDetailDto.cs" />
     <Compile Include="Helpers\Utils\AppConfig.cs" />
     <Compile Include="Helpers\Utils\DateTimeHelper.cs" />
     <Compile Include="Helpers\Utils\ImageHelper.cs" />
