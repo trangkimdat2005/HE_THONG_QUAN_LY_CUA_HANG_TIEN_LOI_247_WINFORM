@@ -148,6 +148,7 @@
     <Compile Include="Services\BrandService.cs" />
     <Compile Include="Services\CategoryService.cs" />
     <Compile Include="Services\CustomerService.cs" />
+    <Compile Include="Services\EventService.cs" />
     <Compile Include="Services\InvoiceService.cs" />
     <Compile Include="Services\IQuanLyServices.cs" />
     <Compile Include="Services\MeasurementService.cs" />
@@ -353,6 +354,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Forms\Customers\frmPurchaseHistory.resx">
       <DependentUpon>frmPurchaseHistory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Forms\Employees\frmEmployeeList.resx">
+      <DependentUpon>frmEmployeeList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Forms\Employees\frmEmployees.resx">
+      <DependentUpon>frmEmployees.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Forms\Inventory\frmStockIn.resx">
       <DependentUpon>frmStockIn.cs</DependentUpon>
