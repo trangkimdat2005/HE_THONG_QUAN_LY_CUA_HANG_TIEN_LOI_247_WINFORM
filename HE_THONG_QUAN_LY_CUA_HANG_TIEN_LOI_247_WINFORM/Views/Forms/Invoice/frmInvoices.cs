@@ -119,7 +119,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
         {
             var frmDetail = new frmInvoiceDetails();
             frmDetail.ShowDialog();
-            LoadInvoices(); // Refresh after creating
+            LoadInvoices();
         }
 
         private void btnView_Click(object sender, EventArgs e)
