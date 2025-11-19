@@ -83,6 +83,7 @@
     <Compile Include="BLL\Services\BrandService.cs" />
     <Compile Include="BLL\Services\CategoryService.cs" />
     <Compile Include="BLL\Services\CustomerService.cs" />
+    <Compile Include="BLL\Services\InvoiceService.cs" />
     <Compile Include="BLL\Services\IQuanLyServices.cs" />
     <Compile Include="BLL\Services\MeasurementService.cs" />
     <Compile Include="BLL\Services\ProductService.cs" />
@@ -90,6 +91,7 @@
     <Compile Include="Controllers\BrandController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
+    <Compile Include="Controllers\InvoiceController.cs" />
     <Compile Include="Controllers\MeasurementController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="DTO\CustomerDetailDto.cs" />
@@ -159,6 +161,7 @@
     <Compile Include="DTO\Models\UserRole.cs" />
     <Compile Include="DTO\Models\ViTri.cs" />
     <Compile Include="DTO\ProductDetailDto.cs" />
+    <Compile Include="GUI\Forms\Employees\frmWorkSchedule_NEW.Designer.cs" />
     <Compile Include="Helpers\Utils\AppConfig.cs" />
     <Compile Include="Helpers\Utils\DateTimeHelper.cs" />
     <Compile Include="Helpers\Utils\ImageHelper.cs" />
@@ -303,12 +306,6 @@
     <Compile Include="GUI\Forms\Products\frmProductsMain.Designer.cs">
       <DependentUpon>frmProductsMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\Forms\Products\frmSuppliers.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="GUI\Forms\Products\frmSuppliers.Designer.cs">
-      <DependentUpon>frmSuppliers.cs</DependentUpon>
-    </Compile>
     <Compile Include="GUI\Forms\Promotions\frmPromotionDetail.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -347,6 +344,12 @@
     <EmbeddedResource Include="GUI\Forms\Customers\frmPurchaseHistory.resx">
       <DependentUpon>frmPurchaseHistory.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Forms\Invoice\frmInvoiceDetails.resx">
+      <DependentUpon>frmInvoiceDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Forms\Invoice\frmInvoices.resx">
+      <DependentUpon>frmInvoices.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GUI\Forms\Main\frmDashboard.resx">
       <DependentUpon>frmDashboard.cs</DependentUpon>
     </EmbeddedResource>
@@ -367,9 +370,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Forms\Products\frmProducts.resx">
       <DependentUpon>frmProducts.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="GUI\Forms\Products\frmSuppliers.resx">
-      <DependentUpon>frmSuppliers.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Forms\Promotions\frmPromotionDetail.resx">
       <DependentUpon>frmPromotionDetail.cs</DependentUpon>

@@ -227,11 +227,6 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
             SetActiveButton(btn_products, btnSub_DanhMuc);
         }
 
-        private void btnSub_NhaCungCap_Click(object sender, EventArgs e)
-        {
-            LoadFormIntoPanel(new frmSuppliers());
-            SetActiveButton(btn_products, btnSub_NhaCungCap);
-        }
 
         private void btnSub_NhanHieu_Click(object sender, EventArgs e)
         {
@@ -249,13 +244,13 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
 
         private void btnSub_DanhSachNV_Click(object sender, EventArgs e)
         {
-            LoadFormIntoPanel(new frmEmployees());
+            LoadFormIntoPanel(new frmEmployeeList());
             SetActiveButton(btn_employees, btnSub_DanhSachNV);
         }
 
         private void btnSub_PhanCong_Click(object sender, EventArgs e)
         {
-            LoadFormIntoPanel(new frmEmployees());
+            LoadFormIntoPanel(new frmWorkSchedule());
             SetActiveButton(btn_employees, btnSub_PhanCong);
         }
 
