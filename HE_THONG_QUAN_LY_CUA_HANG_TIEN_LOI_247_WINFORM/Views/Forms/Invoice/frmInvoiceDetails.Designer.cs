@@ -38,6 +38,7 @@
             this.panelLeft = new System.Windows.Forms.Panel();
             this.dgvInvoiceDetails = new System.Windows.Forms.DataGridView();
             this.colProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.donViHoaDon = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colUnitPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -63,6 +64,7 @@
             this.dgvProducts = new System.Windows.Forms.DataGridView();
             this.colProductName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.donVi = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAdd = new System.Windows.Forms.DataGridViewButtonColumn();
             this.pnlProductSearch = new System.Windows.Forms.Panel();
             this.cmbCategory = new System.Windows.Forms.ComboBox();
@@ -105,7 +107,7 @@
             this.lblTitle.ForeColor = System.Drawing.Color.White;
             this.lblTitle.Location = new System.Drawing.Point(12, 12);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(227, 32);
+            this.lblTitle.Size = new System.Drawing.Size(234, 32);
             this.lblTitle.TabIndex = 0;
             this.lblTitle.Text = "CHI TIẾT HÓA ĐƠN";
             // 
@@ -157,6 +159,7 @@
             this.dgvInvoiceDetails.ColumnHeadersHeight = 40;
             this.dgvInvoiceDetails.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colProduct,
+            this.donViHoaDon,
             this.colQuantity,
             this.colUnitPrice,
             this.colTotal,
@@ -175,7 +178,7 @@
             this.dgvInvoiceDetails.Name = "dgvInvoiceDetails";
             this.dgvInvoiceDetails.RowHeadersVisible = false;
             this.dgvInvoiceDetails.RowTemplate.Height = 35;
-            this.dgvInvoiceDetails.Size = new System.Drawing.Size(830, 310);
+            this.dgvInvoiceDetails.Size = new System.Drawing.Size(830, 360);
             this.dgvInvoiceDetails.TabIndex = 0;
             this.dgvInvoiceDetails.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvInvoiceDetails_CellValueChanged);
             // 
@@ -184,6 +187,12 @@
             this.colProduct.HeaderText = "Sản phẩm";
             this.colProduct.Name = "colProduct";
             this.colProduct.ReadOnly = true;
+            // 
+            // donViHoaDon
+            // 
+            this.donViHoaDon.HeaderText = "Đơn vị";
+            this.donViHoaDon.Name = "donViHoaDon";
+            this.donViHoaDon.ReadOnly = true;
             // 
             // colQuantity
             // 
@@ -339,7 +348,7 @@
             this.lblDiscount.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
             this.lblDiscount.Location = new System.Drawing.Point(15, 14);
             this.lblDiscount.Name = "lblDiscount";
-            this.lblDiscount.Size = new System.Drawing.Size(99, 17);
+            this.lblDiscount.Size = new System.Drawing.Size(89, 17);
             this.lblDiscount.TabIndex = 0;
             this.lblDiscount.Text = "Mã giảm giá:";
             // 
@@ -391,7 +400,7 @@
             this.lblCustomer.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
             this.lblCustomer.Location = new System.Drawing.Point(15, 45);
             this.lblCustomer.Name = "lblCustomer";
-            this.lblCustomer.Size = new System.Drawing.Size(87, 17);
+            this.lblCustomer.Size = new System.Drawing.Size(84, 17);
             this.lblCustomer.TabIndex = 2;
             this.lblCustomer.Text = "Khách hàng:";
             // 
@@ -402,7 +411,7 @@
             this.lblInvoiceId.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
             this.lblInvoiceId.Location = new System.Drawing.Point(130, 15);
             this.lblInvoiceId.Name = "lblInvoiceId";
-            this.lblInvoiceId.Size = new System.Drawing.Size(75, 17);
+            this.lblInvoiceId.Size = new System.Drawing.Size(71, 17);
             this.lblInvoiceId.TabIndex = 1;
             this.lblInvoiceId.Text = "[Tự động]";
             // 
@@ -412,7 +421,7 @@
             this.lblInvoiceIdTitle.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
             this.lblInvoiceIdTitle.Location = new System.Drawing.Point(15, 15);
             this.lblInvoiceIdTitle.Name = "lblInvoiceIdTitle";
-            this.lblInvoiceIdTitle.Size = new System.Drawing.Size(93, 17);
+            this.lblInvoiceIdTitle.Size = new System.Drawing.Size(86, 17);
             this.lblInvoiceIdTitle.TabIndex = 0;
             this.lblInvoiceIdTitle.Text = "Mã hóa đơn:";
             // 
@@ -447,6 +456,7 @@
             this.dgvProducts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colProductName,
             this.colPrice,
+            this.donVi,
             this.colAdd});
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
@@ -467,6 +477,7 @@
             this.dgvProducts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvProducts.Size = new System.Drawing.Size(526, 540);
             this.dgvProducts.TabIndex = 0;
+            this.dgvProducts.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProducts_CellContentClick);
             // 
             // colProductName
             // 
@@ -480,6 +491,12 @@
             this.colPrice.HeaderText = "Giá";
             this.colPrice.Name = "colPrice";
             this.colPrice.ReadOnly = true;
+            // 
+            // donVi
+            // 
+            this.donVi.HeaderText = "Đơn vị";
+            this.donVi.Name = "donVi";
+            this.donVi.ReadOnly = true;
             // 
             // colAdd
             // 
@@ -524,7 +541,7 @@
             this.lblCategory.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
             this.lblCategory.Location = new System.Drawing.Point(15, 45);
             this.lblCategory.Name = "lblCategory";
-            this.lblCategory.Size = new System.Drawing.Size(79, 17);
+            this.lblCategory.Size = new System.Drawing.Size(75, 17);
             this.lblCategory.TabIndex = 2;
             this.lblCategory.Text = "Danh mục:";
             // 
@@ -545,7 +562,7 @@
             this.lblSearch.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
             this.lblSearch.Location = new System.Drawing.Point(15, 15);
             this.lblSearch.Name = "lblSearch";
-            this.lblSearch.Size = new System.Drawing.Size(71, 17);
+            this.lblSearch.Size = new System.Drawing.Size(70, 17);
             this.lblSearch.TabIndex = 0;
             this.lblSearch.Text = "Tìm kiếm:";
             // 
@@ -663,13 +680,15 @@
         private System.Windows.Forms.Panel pnlButtons;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnPayment;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colProductName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPrice;
+        private System.Windows.Forms.DataGridViewTextBoxColumn donVi;
+        private System.Windows.Forms.DataGridViewButtonColumn colAdd;
         private System.Windows.Forms.DataGridViewTextBoxColumn colProduct;
+        private System.Windows.Forms.DataGridViewTextBoxColumn donViHoaDon;
         private System.Windows.Forms.DataGridViewTextBoxColumn colQuantity;
         private System.Windows.Forms.DataGridViewTextBoxColumn colUnitPrice;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTotal;
         private System.Windows.Forms.DataGridViewButtonColumn colRemove;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colProductName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPrice;
-        private System.Windows.Forms.DataGridViewButtonColumn colAdd;
     }
 }

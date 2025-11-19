@@ -32,43 +32,42 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
         {
             try
             {
-                var query = _readContext.SanPhams.AsNoTracking()
-                                        .Where(p => !p.isDelete)
-                                        .AsQueryable();
+                var query = _services.GetList<SanPhamDonVi>();
 
-                // 1. Filter
                 if (!string.IsNullOrWhiteSpace(keyword))
                 {
-                    keyword = keyword.ToLower();
-                    query = query.Where(p => p.id.ToLower().Contains(keyword) ||
-                                             p.ten.ToLower().Contains(keyword));
+                    keyword = keyword.ToLower();  // Chuyển keyword về chữ thường
+
+                    query = query.Where(p => (p.sanPhamId != null && p.sanPhamId.ToLower().Contains(keyword)) ||
+                                             (p.SanPham != null && p.SanPham.ten != null && p.SanPham.ten.ToLower().Contains(keyword))).ToList();
                 }
-                if (!string.IsNullOrEmpty(brandId)) query = query.Where(p => p.nhanHieuId == brandId);
+                if (!string.IsNullOrEmpty(brandId)) query = query.Where(p => p.SanPham.nhanHieuId == brandId).ToList();
                 if (!string.IsNullOrEmpty(categoryId))
                 {
-                    query = query.Where(p => p.SanPhamDanhMucs.Any(spdm => spdm.danhMucId == categoryId && !spdm.isDelete));
+                    query = query.Where(p => p.SanPham.SanPhamDanhMucs.Any(spdm => spdm.danhMucId == categoryId && !spdm.isDelete)).ToList();
                 }
 
                 var result = query.Select(p => new
                 {
-                    p.id,
-                    p.ten,
-                    NhanHieuTen = p.NhanHieu.ten,
-                    p.moTa,
+                    p.sanPhamId,
+                    p.SanPham.ten,
+                    NhanHieuTen = p.SanPham.NhanHieu.ten,
+                    DonViTen = p.DonViDoLuong.ten,
+                    p.SanPham.moTa,
                     p.isDelete,
-                    GiaInfo = p.SanPhamDonVis.Where(dv => !dv.isDelete).OrderBy(dv => dv.heSoQuyDoi).FirstOrDefault(),
-                    DanhMucTen = p.SanPhamDanhMucs.Where(dm => !dm.isDelete).Select(dm => dm.DanhMuc.ten).FirstOrDefault()
+                    GiaInfo = p.giaBan,
+                    DanhMucTen = p.SanPham.SanPhamDanhMucs.Where(dm => !dm.isDelete).Select(dm => dm.DanhMuc.ten).FirstOrDefault()
                 }).ToList();
 
                 return result.Select(x => new ProductDetailDto
                 {
-                    Id = x.id,
+                    Id = x.sanPhamId,
                     Ten = x.ten,
                     NhanHieu = x.NhanHieuTen,
                     DanhMuc = x.DanhMucTen ?? "Chưa phân loại",
                     MoTa = x.moTa,
-                    GiaBan = x.GiaInfo != null ? x.GiaInfo.giaBan : 0,
-                    DonVi = x.GiaInfo != null ? x.GiaInfo.DonViDoLuong.ten : "Chưa thiết lập",
+                    GiaBan = x.GiaInfo,
+                    DonVi =  x.DonViTen,
                     TrangThai = x.isDelete ? "Ngừng kinh doanh" : "Đang kinh doanh"
                 }).OrderBy(x => x.Id).Take(1000).ToList();
             }
