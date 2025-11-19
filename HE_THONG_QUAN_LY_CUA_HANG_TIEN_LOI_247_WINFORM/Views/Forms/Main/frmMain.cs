@@ -1,9 +1,12 @@
 ﻿using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms.Bills;
 using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms.Customers;
 using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms.Employees;
+using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms.Inventory;
 using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms.Products;
 using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms.Suppliers;
 using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Promotions;
+using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Views.Forms.Inventory;
+using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Views.Forms.Products;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -64,6 +67,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
             pnlEmployeeSubmenu.Visible = false;
             pnlCustomerSubmenu.Visible = false;
             pnlSupplierSubmenu.Visible = false;
+            pnlStorageSubmenu.Visible = false;
         }
 
         // Highlight nút được chọn
@@ -111,6 +115,16 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
 
             // Reset tất cả các nút con Suppliers
             foreach (Control ctrl in pnlSupplierSubmenu.Controls)
+            {
+                if (ctrl is Guna.UI2.WinForms.Guna2Button)
+                {
+                    (ctrl as Guna.UI2.WinForms.Guna2Button).FillColor = Color.Transparent;
+                    (ctrl as Guna.UI2.WinForms.Guna2Button).ForeColor = Color.Black;
+                }
+            }
+
+            // Reset tất cả các nút con Storage/Inventory
+            foreach (Control ctrl in pnlStorageSubmenu.Controls)
             {
                 if (ctrl is Guna.UI2.WinForms.Guna2Button)
                 {
@@ -220,7 +234,11 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
             LoadFormIntoPanel(new frmProducts());
             SetActiveButton(btn_products, btnSub_SanPham);
         }
-
+        private void btnSub_HangHoa_Click(object sender, EventArgs e)
+        {
+            LoadFormIntoPanel(new frmGoods());
+            SetActiveButton(btn_products, btnSub_HangHoa);
+        }
         private void btnSub_DanhMuc_Click(object sender, EventArgs e)
         {
             LoadFormIntoPanel(new frmCategorys());
@@ -341,10 +359,30 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
 
         private void btn_inventory_Click(object sender, EventArgs e)
         {
-            // LoadFormIntoPanel(new frmInventory()); // Giả sử bạn có form frmInventory
-            MessageBox.Show("Chức năng 'Kho hàng' đang được phát triển.");
-            HideSubMenus();
+            // Toggle menu con Kho hàng
+            pnlStorageSubmenu.Visible = !pnlStorageSubmenu.Visible;
+            // Ẩn các menu khác
+            pnlProductSubmenu.Visible = false;
+            pnlEmployeeSubmenu.Visible = false;
+            pnlCustomerSubmenu.Visible = false;
+            pnlSupplierSubmenu.Visible = false;
             SetActiveButton(btn_inventory, null);
         }
+
+        // --- Click cho các nút menu con của Kho hàng ---
+
+        private void btnSub_NhapKho_Click(object sender, EventArgs e)
+        {
+            LoadFormIntoPanel(new frmStockIn());
+            SetActiveButton(btn_inventory, btnSub_NhapKho);
+        }
+
+        private void btnSub_TonKho_Click(object sender, EventArgs e)
+        {
+            LoadFormIntoPanel(new frmInventoryList());
+            SetActiveButton(btn_inventory, btnSub_TonKho);
+        }
+
+      
     }
 }
