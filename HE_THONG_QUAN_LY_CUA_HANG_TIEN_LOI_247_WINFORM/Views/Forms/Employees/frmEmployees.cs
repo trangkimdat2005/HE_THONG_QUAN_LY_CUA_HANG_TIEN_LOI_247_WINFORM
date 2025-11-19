@@ -19,22 +19,22 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
         private readonly QuanLyServices context;
         private readonly FormMode mode;
         private readonly string employeeId;
+
         public frmEmployees(FormMode mode, string employeeId = null)
         {
             InitializeComponent();
             context = new QuanLyServices();
-            txtId.Text = context.GenerateNewId<NhanVien>("NV",6);
-
             this.mode = mode;
             this.employeeId = employeeId;
 
+            if (mode == FormMode.Add)
+            {
+                txtId.Text = context.GenerateNewId<NhanVien>("NV", 6);
+            }
         }
-        public frmEmployees()
-        {
-            InitializeComponent();
-            context = new QuanLyServices();
-            txtId.Text = context.GenerateNewId<NhanVien>("NV", 6);
 
+        public frmEmployees() : this(FormMode.Add)
+        {
         }
 
         private void frmEmployees_Load(object sender, EventArgs e)
@@ -43,39 +43,37 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
             BatRangBuoc();
             SetUpCombobox();
             SetUpDateTime();
+
             if (mode == FormMode.Add)
             {
                 this.Text = "Thêm nhân viên";
-                // Setup default cho Add
             }
             else if (mode == FormMode.Edit)
             {
                 this.Text = "Chỉnh sửa nhân viên";
                 LoadEmployeeInfo();
             }
-
         }
+
         private void SetupDiaLog()
         {
             this.AcceptButton = btnSave;
             this.CancelButton = btnCancel;
-
             btnSave.DialogResult = DialogResult.OK;
             btnCancel.DialogResult = DialogResult.Cancel;
-
-            // Thuộc tính dialog
             this.FormBorderStyle = FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.StartPosition = FormStartPosition.CenterParent;
             btnSave.DialogResult = DialogResult.None;
-
         }
+
         private void SetUpDateTime()
         {
             EventService.SetupDateTimePicker_AgeRange(dtpBirthDate, 18, 65);
             EventService.SetupDatePicker_ByCondition(dtpStartDate, DateTime.Now, ">=");
         }
+
         private void SetUpCombobox()
         {
             cmbStatus.Items.Clear();
@@ -84,10 +82,12 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
             cmbStatus.SelectedIndex = 0;
 
             cmbPosition.Items.Clear();
-            cmbPosition.Items.Add("Đang làm");
-            cmbPosition.Items.Add("Nghỉ");
+            cmbPosition.Items.Add("Admin");
+            cmbPosition.Items.Add("Quản lý");
+            cmbPosition.Items.Add("Nhân viên");
             cmbPosition.SelectedIndex = 0;
         }
+
         private void BatRangBuoc()
         {
             txtPhone.KeyPress += EventService.TextBox_KhongNhapChu_KeyPress;
@@ -95,11 +95,6 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
             txtName.KeyPress += EventService.TextBox_KhongNhapSo_KeyPress;
             txtEmail.Validating += EventService.TextBox_Email_Validating;
             txtSalary.KeyPress += EventService.TextBox_SoTien_KeyPress;
-        }
-
-        private void TxtSalary_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            throw new NotImplementedException();
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -120,7 +115,6 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
                         }
                         ptrbAnh.Image = Image.FromFile(ofd.FileName);
                         ptrbAnh.SizeMode = PictureBoxSizeMode.Zoom;
-
                         ptrbAnh.Tag = ofd.FileName;
                     }
                 }
@@ -137,24 +131,25 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
                 (txtName, "Vui lòng nhập tên"),
                 (txtPhone, "Vui lòng nhập số điện thoại"),
                 (txtSalary, "Vui lòng nhập lương"),
-                (txtAddress,"Vui lòng nhập địa chỉ")
+                (txtAddress, "Vui lòng nhập địa chỉ")
             )) return;
 
-            if (ptrbAnh.Tag == null)
+            if (ptrbAnh.Tag == null && mode == FormMode.Add)
             {
                 MessageBox.Show("Vui lòng chọn ảnh!", "Thiếu thông tin", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+
             if (mode == FormMode.Add)
                 Save_Add();
             else
                 Save_Edit();
         }
+
         private void Save_Add()
         {
             string nvId = context.GenerateNewId<NhanVien>("NV", 6);
             string imgId = context.GenerateNewId<HinhAnh>("ANH", 7);
-
             string filePath = ptrbAnh.Tag.ToString();
             byte[] imgBytes = context.ConvertImageToByteArray(filePath);
 
@@ -189,10 +184,10 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
                 this.Close();
             }
         }
+
         private void Save_Edit()
         {
-            var nv = context.GetById<NhanVien>(employeeId);
-
+            var nv = context.GetNhanVienById(employeeId);
             if (nv == null)
             {
                 MessageBox.Show("Không tìm thấy NV!");
@@ -209,13 +204,27 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
             nv.gioiTinh = rbMale.Checked;
             nv.trangThai = cmbStatus.SelectedItem.ToString();
 
-            if (ptrbAnh.Tag != null)
+            if (ptrbAnh.Tag != null && ptrbAnh.Tag.ToString() != "DB_IMAGE")
             {
                 string filePath = ptrbAnh.Tag.ToString();
                 byte[] imgBytes = context.ConvertImageToByteArray(filePath);
 
-                nv.HinhAnh.Anh = imgBytes;
-                nv.HinhAnh.TenAnh = Path.GetFileName(filePath);
+                if (nv.HinhAnh == null)
+                {
+                    string imgId = context.GenerateNewId<HinhAnh>("ANH", 7);
+                    nv.HinhAnh = new HinhAnh
+                    {
+                        Id = imgId,
+                        TenAnh = Path.GetFileName(filePath),
+                        Anh = imgBytes
+                    };
+                    nv.anhId = imgId;
+                }
+                else
+                {
+                    nv.HinhAnh.Anh = imgBytes;
+                    nv.HinhAnh.TenAnh = Path.GetFileName(filePath);
+                }
             }
 
             if (context.Update(nv))
@@ -229,8 +238,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
         private void LoadEmployeeInfo()
         {
             if (employeeId == null) return;
-
-            var nv = context.GetById<NhanVien>(employeeId);
+            var nv = context.GetNhanVienById(employeeId);
 
             if (nv == null)
             {
@@ -244,7 +252,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
             txtPhone.Text = nv.soDienThoai;
             txtEmail.Text = nv.email;
             txtAddress.Text = nv.diaChi;
-            txtSalary.Text = nv.luongCoBan.ToString();
+            txtSalary.Text = nv.luongCoBan.ToString("0.##");
             cmbPosition.SelectedItem = nv.chucVu;
             cmbStatus.SelectedItem = nv.trangThai;
 
@@ -261,10 +269,8 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
                 {
                     ptrbAnh.Image = Image.FromStream(ms);
                 }
-
-                ptrbAnh.Tag = nv.HinhAnh.TenAnh;
+                ptrbAnh.Tag = "DB_IMAGE";
             }
         }
-
     }
 }
