@@ -1,11 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Windows.Forms;
+﻿using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Controllers;
+using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Models;
+using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Drawing;
 using System.Reflection;
 using System.Runtime.InteropServices;
-using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Models;
-using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Controllers;
+using System.Windows.Forms;
 
 namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms.Products
 {
@@ -27,34 +28,36 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
                 SendMessage(txt.Handle, EM_SETCUEBANNER, 0, text);
             }
         }
+        private void CustomizeInterface()
+        {
+            // Style GridView
+            dgvUnits.BorderStyle = BorderStyle.None;
+            dgvUnits.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dgvUnits.GridColor = Color.FromArgb(230, 230, 230);
+            dgvUnits.RowHeadersVisible = false;
+            dgvUnits.EnableHeadersVisualStyles = false;
+            dgvUnits.ColumnHeadersHeight = 40;
+            dgvUnits.RowTemplate.Height = 40;
+
+            dgvUnits.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(41, 128, 185); // Xanh Dương
+            dgvUnits.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgvUnits.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            dgvUnits.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+
+            dgvUnits.DefaultCellStyle.SelectionBackColor = Color.FromArgb(211, 233, 252); // Xanh Nhạt
+            dgvUnits.DefaultCellStyle.SelectionForeColor = Color.Black;
+            dgvUnits.DefaultCellStyle.Font = new Font("Segoe UI", 10F);
+            dgvUnits.DefaultCellStyle.Padding = new Padding(10, 0, 0, 0);
+        }
         public frmMeasurements()
         {
             InitializeComponent();
             _measurementController = new MeasurementController();
-
+            CustomizeInterface();
             SetPlaceholder(txtSearch, "Nhập tên hoặc mã danh mục để tìm...");
 
-            //this.Load += frmMeasurements_Load;
-            //if (btnAdd != null) this.btnAdd.Click += btnAdd_Click;
-            //if (btnEdit != null) this.btnEdit.Click += btnEdit_Click;
-            //if (btnDelete != null) this.btnDelete.Click += btnDelete_Click;
-            //if (btnSave != null) this.btnSave.Click += btnSave_Click;
-            //if (btnCancel != null) this.btnCancel.Click += btnCancel_Click;
-            //if (btnSearch != null) this.btnSearch.Click += btnSearch_Click;
-            //if (btnRefresh != null) this.btnRefresh.Click += btnRefresh_Click;
-            //if (btnExport != null) this.btnExport.Click += btnExport_Click;
 
-            //if (dgvUnits != null) this.dgvUnits.SelectionChanged += dgvUnits_SelectionChanged;
-
-            if (txtSearch != null)
-            {
-                txtSearch.TextChanged += (s, e) => { btnSearch_Click(null, null); };
-                txtSearch.KeyPress += (s, e) => { if (e.KeyChar == 13) { btnSearch_Click(s, e); e.Handled = true; } };
-            }
-            if (txtUnitName != null) txtUnitName.KeyPress += (s, e) => { if (e.KeyChar == 13) { txtSymbol?.Focus(); e.Handled = true; } };
-            if (txtSymbol != null) txtSymbol.KeyPress += (s, e) => { if (e.KeyChar == 13) { btnSave_Click(s, e); e.Handled = true; } };
-
-            
+     
 
         }
 

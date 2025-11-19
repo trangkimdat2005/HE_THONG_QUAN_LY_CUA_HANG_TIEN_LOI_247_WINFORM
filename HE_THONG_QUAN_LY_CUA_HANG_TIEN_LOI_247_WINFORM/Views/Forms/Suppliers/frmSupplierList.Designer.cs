@@ -2,15 +2,8 @@
 {
     partial class frmSupplierList
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -22,10 +15,6 @@
 
         #region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -42,6 +31,7 @@
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
+            this.panelContainer = new System.Windows.Forms.Panel();
             this.panelGrid = new System.Windows.Forms.Panel();
             this.dgvSuppliers = new System.Windows.Forms.DataGridView();
             this.panelDetail = new System.Windows.Forms.Panel();
@@ -63,9 +53,17 @@
             this.lblSupplierId = new System.Windows.Forms.Label();
             this.panelStatus = new System.Windows.Forms.Panel();
             this.lblStatus = new System.Windows.Forms.Label();
+            this.colStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTaxCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAddress = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colEmail = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPhone = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelTop.SuspendLayout();
             this.panelSearch.SuspendLayout();
             this.panelButtons.SuspendLayout();
+            this.panelContainer.SuspendLayout();
             this.panelGrid.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSuppliers)).BeginInit();
             this.panelDetail.SuspendLayout();
@@ -86,11 +84,11 @@
             // lblTitle
             // 
             this.lblTitle.AutoSize = true;
-            this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold);
             this.lblTitle.ForeColor = System.Drawing.Color.White;
             this.lblTitle.Location = new System.Drawing.Point(12, 12);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(337, 32);
+            this.lblTitle.Size = new System.Drawing.Size(308, 32);
             this.lblTitle.TabIndex = 0;
             this.lblTitle.Text = "QUẢN LÝ NHÀ CUNG CẤP";
             // 
@@ -152,7 +150,7 @@
             this.lblSearch.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
             this.lblSearch.Location = new System.Drawing.Point(15, 28);
             this.lblSearch.Name = "lblSearch";
-            this.lblSearch.Size = new System.Drawing.Size(141, 17);
+            this.lblSearch.Size = new System.Drawing.Size(120, 17);
             this.lblSearch.TabIndex = 0;
             this.lblSearch.Text = "Tên nhà cung cấp:";
             // 
@@ -226,15 +224,25 @@
             this.btnAdd.UseVisualStyleBackColor = false;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
+            // panelContainer
+            // 
+            this.panelContainer.Controls.Add(this.panelGrid);
+            this.panelContainer.Controls.Add(this.panelDetail);
+            this.panelContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelContainer.Location = new System.Drawing.Point(0, 190);
+            this.panelContainer.Name = "panelContainer";
+            this.panelContainer.Size = new System.Drawing.Size(1200, 490);
+            this.panelContainer.TabIndex = 3;
+            // 
             // panelGrid
             // 
             this.panelGrid.Controls.Add(this.dgvSuppliers);
             this.panelGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelGrid.Location = new System.Drawing.Point(0, 190);
+            this.panelGrid.Location = new System.Drawing.Point(0, 0);
             this.panelGrid.Name = "panelGrid";
-            this.panelGrid.Padding = new System.Windows.Forms.Padding(10);
-            this.panelGrid.Size = new System.Drawing.Size(800, 490);
-            this.panelGrid.TabIndex = 3;
+            this.panelGrid.Padding = new System.Windows.Forms.Padding(20);
+            this.panelGrid.Size = new System.Drawing.Size(849, 490);
+            this.panelGrid.TabIndex = 0;
             // 
             // dgvSuppliers
             // 
@@ -242,6 +250,8 @@
             this.dgvSuppliers.AllowUserToDeleteRows = false;
             this.dgvSuppliers.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvSuppliers.BackgroundColor = System.Drawing.Color.White;
+            this.dgvSuppliers.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgvSuppliers.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
@@ -251,24 +261,34 @@
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvSuppliers.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvSuppliers.ColumnHeadersHeight = 40;
+            this.dgvSuppliers.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colId,
+            this.colName,
+            this.colPhone,
+            this.colEmail,
+            this.colAddress,
+            this.colTaxCode,
+            this.colStatus});
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F);
             dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(152)))), ((int)(((byte)(219)))));
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(211)))), ((int)(((byte)(233)))), ((int)(((byte)(252)))));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvSuppliers.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvSuppliers.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvSuppliers.EnableHeadersVisualStyles = false;
-            this.dgvSuppliers.Location = new System.Drawing.Point(10, 10);
+            this.dgvSuppliers.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
+            this.dgvSuppliers.Location = new System.Drawing.Point(20, 20);
             this.dgvSuppliers.MultiSelect = false;
             this.dgvSuppliers.Name = "dgvSuppliers";
             this.dgvSuppliers.ReadOnly = true;
             this.dgvSuppliers.RowHeadersVisible = false;
-            this.dgvSuppliers.RowTemplate.Height = 35;
+            this.dgvSuppliers.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToFirstHeader;
+            this.dgvSuppliers.RowTemplate.Height = 40;
             this.dgvSuppliers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvSuppliers.Size = new System.Drawing.Size(780, 470);
+            this.dgvSuppliers.Size = new System.Drawing.Size(809, 450);
             this.dgvSuppliers.TabIndex = 0;
             this.dgvSuppliers.SelectionChanged += new System.EventHandler(this.dgvSuppliers_SelectionChanged);
             // 
@@ -277,11 +297,11 @@
             this.panelDetail.BackColor = System.Drawing.Color.WhiteSmoke;
             this.panelDetail.Controls.Add(this.groupBoxDetail);
             this.panelDetail.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panelDetail.Location = new System.Drawing.Point(800, 190);
+            this.panelDetail.Location = new System.Drawing.Point(849, 0);
             this.panelDetail.Name = "panelDetail";
             this.panelDetail.Padding = new System.Windows.Forms.Padding(10);
-            this.panelDetail.Size = new System.Drawing.Size(400, 490);
-            this.panelDetail.TabIndex = 4;
+            this.panelDetail.Size = new System.Drawing.Size(351, 490);
+            this.panelDetail.TabIndex = 1;
             // 
             // groupBoxDetail
             // 
@@ -304,7 +324,7 @@
             this.groupBoxDetail.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.groupBoxDetail.Location = new System.Drawing.Point(10, 10);
             this.groupBoxDetail.Name = "groupBoxDetail";
-            this.groupBoxDetail.Size = new System.Drawing.Size(380, 470);
+            this.groupBoxDetail.Size = new System.Drawing.Size(331, 470);
             this.groupBoxDetail.TabIndex = 0;
             this.groupBoxDetail.TabStop = false;
             this.groupBoxDetail.Text = "Chi tiết nhà cung cấp";
@@ -316,7 +336,7 @@
             this.lblReceiptCount.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(152)))), ((int)(((byte)(219)))));
             this.lblReceiptCount.Location = new System.Drawing.Point(20, 350);
             this.lblReceiptCount.Name = "lblReceiptCount";
-            this.lblReceiptCount.Size = new System.Drawing.Size(119, 17);
+            this.lblReceiptCount.Size = new System.Drawing.Size(112, 17);
             this.lblReceiptCount.TabIndex = 14;
             this.lblReceiptCount.Text = "Số phiếu nhập: 0";
             // 
@@ -351,101 +371,101 @@
             // txtTaxCode
             // 
             this.txtTaxCode.Font = new System.Drawing.Font("Segoe UI", 9.75F);
-            this.txtTaxCode.Location = new System.Drawing.Point(160, 300);
+            this.txtTaxCode.Location = new System.Drawing.Point(129, 300);
             this.txtTaxCode.Name = "txtTaxCode";
-            this.txtTaxCode.Size = new System.Drawing.Size(200, 25);
+            this.txtTaxCode.Size = new System.Drawing.Size(191, 25);
             this.txtTaxCode.TabIndex = 11;
             // 
             // lblTaxCode
             // 
             this.lblTaxCode.AutoSize = true;
             this.lblTaxCode.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
-            this.lblTaxCode.Location = new System.Drawing.Point(20, 303);
+            this.lblTaxCode.Location = new System.Drawing.Point(7, 303);
             this.lblTaxCode.Name = "lblTaxCode";
-            this.lblTaxCode.Size = new System.Drawing.Size(83, 17);
+            this.lblTaxCode.Size = new System.Drawing.Size(81, 17);
             this.lblTaxCode.TabIndex = 10;
             this.lblTaxCode.Text = "Mã số thuế:";
             // 
             // txtAddress
             // 
             this.txtAddress.Font = new System.Drawing.Font("Segoe UI", 9.75F);
-            this.txtAddress.Location = new System.Drawing.Point(160, 230);
+            this.txtAddress.Location = new System.Drawing.Point(129, 230);
             this.txtAddress.Multiline = true;
             this.txtAddress.Name = "txtAddress";
-            this.txtAddress.Size = new System.Drawing.Size(200, 50);
+            this.txtAddress.Size = new System.Drawing.Size(191, 50);
             this.txtAddress.TabIndex = 9;
             // 
             // lblAddress
             // 
             this.lblAddress.AutoSize = true;
             this.lblAddress.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
-            this.lblAddress.Location = new System.Drawing.Point(20, 233);
+            this.lblAddress.Location = new System.Drawing.Point(6, 233);
             this.lblAddress.Name = "lblAddress";
-            this.lblAddress.Size = new System.Drawing.Size(58, 17);
+            this.lblAddress.Size = new System.Drawing.Size(55, 17);
             this.lblAddress.TabIndex = 8;
             this.lblAddress.Text = "Địa chỉ:";
             // 
             // txtEmail
             // 
             this.txtEmail.Font = new System.Drawing.Font("Segoe UI", 9.75F);
-            this.txtEmail.Location = new System.Drawing.Point(160, 185);
+            this.txtEmail.Location = new System.Drawing.Point(129, 185);
             this.txtEmail.Name = "txtEmail";
-            this.txtEmail.Size = new System.Drawing.Size(200, 25);
+            this.txtEmail.Size = new System.Drawing.Size(191, 25);
             this.txtEmail.TabIndex = 7;
             // 
             // lblEmail
             // 
             this.lblEmail.AutoSize = true;
             this.lblEmail.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
-            this.lblEmail.Location = new System.Drawing.Point(20, 188);
+            this.lblEmail.Location = new System.Drawing.Point(6, 188);
             this.lblEmail.Name = "lblEmail";
-            this.lblEmail.Size = new System.Drawing.Size(47, 17);
+            this.lblEmail.Size = new System.Drawing.Size(46, 17);
             this.lblEmail.TabIndex = 6;
             this.lblEmail.Text = "Email:";
             // 
             // txtPhone
             // 
             this.txtPhone.Font = new System.Drawing.Font("Segoe UI", 9.75F);
-            this.txtPhone.Location = new System.Drawing.Point(160, 140);
+            this.txtPhone.Location = new System.Drawing.Point(129, 140);
             this.txtPhone.Name = "txtPhone";
-            this.txtPhone.Size = new System.Drawing.Size(200, 25);
+            this.txtPhone.Size = new System.Drawing.Size(191, 25);
             this.txtPhone.TabIndex = 5;
             // 
             // lblPhone
             // 
             this.lblPhone.AutoSize = true;
             this.lblPhone.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
-            this.lblPhone.Location = new System.Drawing.Point(20, 143);
+            this.lblPhone.Location = new System.Drawing.Point(7, 143);
             this.lblPhone.Name = "lblPhone";
-            this.lblPhone.Size = new System.Drawing.Size(101, 17);
+            this.lblPhone.Size = new System.Drawing.Size(94, 17);
             this.lblPhone.TabIndex = 4;
             this.lblPhone.Text = "Số điện thoại:";
             // 
             // txtSupplierName
             // 
             this.txtSupplierName.Font = new System.Drawing.Font("Segoe UI", 9.75F);
-            this.txtSupplierName.Location = new System.Drawing.Point(160, 95);
+            this.txtSupplierName.Location = new System.Drawing.Point(129, 95);
             this.txtSupplierName.Name = "txtSupplierName";
-            this.txtSupplierName.Size = new System.Drawing.Size(200, 25);
+            this.txtSupplierName.Size = new System.Drawing.Size(191, 25);
             this.txtSupplierName.TabIndex = 3;
             this.txtSupplierName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSupplierName_KeyPress);
             // 
             // txtSupplierId
             // 
             this.txtSupplierId.Font = new System.Drawing.Font("Segoe UI", 9.75F);
-            this.txtSupplierId.Location = new System.Drawing.Point(160, 50);
+            this.txtSupplierId.Location = new System.Drawing.Point(129, 50);
             this.txtSupplierId.Name = "txtSupplierId";
             this.txtSupplierId.ReadOnly = true;
-            this.txtSupplierId.Size = new System.Drawing.Size(200, 25);
+            this.txtSupplierId.Size = new System.Drawing.Size(191, 25);
             this.txtSupplierId.TabIndex = 2;
             // 
             // lblSupplierName
             // 
             this.lblSupplierName.AutoSize = true;
             this.lblSupplierName.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
-            this.lblSupplierName.Location = new System.Drawing.Point(20, 98);
+            this.lblSupplierName.Location = new System.Drawing.Point(6, 98);
             this.lblSupplierName.Name = "lblSupplierName";
-            this.lblSupplierName.Size = new System.Drawing.Size(129, 17);
+            this.lblSupplierName.Size = new System.Drawing.Size(120, 17);
             this.lblSupplierName.TabIndex = 1;
             this.lblSupplierName.Text = "Tên nhà cung cấp:";
             // 
@@ -453,9 +473,9 @@
             // 
             this.lblSupplierId.AutoSize = true;
             this.lblSupplierId.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
-            this.lblSupplierId.Location = new System.Drawing.Point(20, 53);
+            this.lblSupplierId.Location = new System.Drawing.Point(6, 53);
             this.lblSupplierId.Name = "lblSupplierId";
-            this.lblSupplierId.Size = new System.Drawing.Size(128, 17);
+            this.lblSupplierId.Size = new System.Drawing.Size(117, 17);
             this.lblSupplierId.TabIndex = 0;
             this.lblSupplierId.Text = "Mã nhà cung cấp:";
             // 
@@ -476,17 +496,66 @@
             this.lblStatus.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
             this.lblStatus.Location = new System.Drawing.Point(10, 8);
             this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(91, 17);
+            this.lblStatus.Size = new System.Drawing.Size(73, 17);
             this.lblStatus.TabIndex = 0;
             this.lblStatus.Text = "Tổng số: 0";
+            // 
+            // colStatus
+            // 
+            this.colStatus.DataPropertyName = "TrangThai";
+            this.colStatus.HeaderText = "Trạng thái";
+            this.colStatus.Name = "colStatus";
+            this.colStatus.ReadOnly = true;
+            // 
+            // colTaxCode
+            // 
+            this.colTaxCode.DataPropertyName = "maSoThue";
+            this.colTaxCode.HeaderText = "Mã số thuế";
+            this.colTaxCode.Name = "colTaxCode";
+            this.colTaxCode.ReadOnly = true;
+            // 
+            // colAddress
+            // 
+            this.colAddress.DataPropertyName = "diaChi";
+            this.colAddress.HeaderText = "Địa chỉ";
+            this.colAddress.Name = "colAddress";
+            this.colAddress.ReadOnly = true;
+            // 
+            // colEmail
+            // 
+            this.colEmail.DataPropertyName = "email";
+            this.colEmail.HeaderText = "Email";
+            this.colEmail.Name = "colEmail";
+            this.colEmail.ReadOnly = true;
+            // 
+            // colPhone
+            // 
+            this.colPhone.DataPropertyName = "soDienThoai";
+            this.colPhone.HeaderText = "Số điện thoại";
+            this.colPhone.Name = "colPhone";
+            this.colPhone.ReadOnly = true;
+            // 
+            // colName
+            // 
+            this.colName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colName.DataPropertyName = "ten";
+            this.colName.HeaderText = "Tên nhà cung cấp";
+            this.colName.Name = "colName";
+            this.colName.ReadOnly = true;
+            // 
+            // colId
+            // 
+            this.colId.DataPropertyName = "id";
+            this.colId.HeaderText = "Mã NCC";
+            this.colId.Name = "colId";
+            this.colId.ReadOnly = true;
             // 
             // frmSupplierList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1200, 715);
-            this.Controls.Add(this.panelGrid);
-            this.Controls.Add(this.panelDetail);
+            this.Controls.Add(this.panelContainer);
             this.Controls.Add(this.panelButtons);
             this.Controls.Add(this.panelSearch);
             this.Controls.Add(this.panelTop);
@@ -501,6 +570,7 @@
             this.panelSearch.ResumeLayout(false);
             this.panelSearch.PerformLayout();
             this.panelButtons.ResumeLayout(false);
+            this.panelContainer.ResumeLayout(false);
             this.panelGrid.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvSuppliers)).EndInit();
             this.panelDetail.ResumeLayout(false);
@@ -509,6 +579,7 @@
             this.panelStatus.ResumeLayout(false);
             this.panelStatus.PerformLayout();
             this.ResumeLayout(false);
+
         }
 
         #endregion
@@ -523,6 +594,7 @@
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.Button btnAdd;
+        private System.Windows.Forms.Panel panelContainer;
         private System.Windows.Forms.Panel panelGrid;
         private System.Windows.Forms.DataGridView dgvSuppliers;
         private System.Windows.Forms.Panel panelDetail;
@@ -546,5 +618,12 @@
         private System.Windows.Forms.Label lblAddress;
         private System.Windows.Forms.TextBox txtTaxCode;
         private System.Windows.Forms.Label lblTaxCode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPhone;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colEmail;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAddress;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTaxCode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colStatus;
     }
 }

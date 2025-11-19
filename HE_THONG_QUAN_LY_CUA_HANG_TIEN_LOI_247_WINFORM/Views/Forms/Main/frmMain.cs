@@ -373,7 +373,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
 
         private void btnSub_NhapKho_Click(object sender, EventArgs e)
         {
-            LoadFormIntoPanel(new frmStockIn());
+            LoadFormIntoPanel(new frmInventoryMain());
             SetActiveButton(btn_inventory, btnSub_NhapKho);
         }
 

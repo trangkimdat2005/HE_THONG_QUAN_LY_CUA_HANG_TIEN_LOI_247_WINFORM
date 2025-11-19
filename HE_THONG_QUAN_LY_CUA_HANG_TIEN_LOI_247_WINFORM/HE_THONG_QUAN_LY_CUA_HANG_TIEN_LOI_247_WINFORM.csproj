@@ -208,18 +208,6 @@
     <Compile Include="Views\Forms\Employees\frmWorkSchedule.Designer.cs">
       <DependentUpon>frmWorkSchedule.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\Forms\Inventory\frmGoodsIssue.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Forms\Inventory\frmGoodsIssue.Designer.cs">
-      <DependentUpon>frmGoodsIssue.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Forms\Inventory\frmGoodsReceived.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Forms\Inventory\frmGoodsReceived.Designer.cs">
-      <DependentUpon>frmGoodsReceived.cs</DependentUpon>
-    </Compile>
     <Compile Include="Views\Forms\Inventory\frmInventoryList.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -232,23 +220,11 @@
     <Compile Include="Views\Forms\Inventory\frmInventoryMain.Designer.cs">
       <DependentUpon>frmInventoryMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\Forms\Inventory\frmProductLocation.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Forms\Inventory\frmProductLocation.Designer.cs">
-      <DependentUpon>frmProductLocation.cs</DependentUpon>
-    </Compile>
     <Compile Include="Views\Forms\Inventory\frmStockIn.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Views\Forms\Inventory\frmStockIn.Designer.cs">
       <DependentUpon>frmStockIn.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Forms\Inventory\frmStocktake.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Forms\Inventory\frmStocktake.Designer.cs">
-      <DependentUpon>frmStocktake.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\Forms\Invoice\frmInvoiceDetails.cs">
       <SubType>Form</SubType>
@@ -310,12 +286,6 @@
     <Compile Include="Views\Forms\Products\frmProducts.Designer.cs">
       <DependentUpon>frmProducts.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\Forms\Products\frmProductsMain.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Forms\Products\frmProductsMain.Designer.cs">
-      <DependentUpon>frmProductsMain.cs</DependentUpon>
-    </Compile>
     <Compile Include="Views\Forms\Promotions\frmPromotionDetail.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -353,6 +323,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Forms\Customers\frmPurchaseHistory.resx">
       <DependentUpon>frmPurchaseHistory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Forms\Employees\frmEmployeeList.resx">
+      <DependentUpon>frmEmployeeList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Forms\Inventory\frmInventoryList.resx">
+      <DependentUpon>frmInventoryList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Forms\Inventory\frmInventoryMain.resx">
+      <DependentUpon>frmInventoryMain.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Forms\Inventory\frmStockIn.resx">
       <DependentUpon>frmStockIn.cs</DependentUpon>
@@ -406,6 +385,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Views\Forms\Suppliers\frmTransactionHistory.resx">
+      <DependentUpon>frmTransactionHistory.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

@@ -25,8 +25,33 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
         {
             InitializeComponent();
             _customerController = new CustomerController();
+            CustomizeInterface();
         }
+        private void CustomizeInterface()
+        {
+            // Style GridView
+            dgvPurchaseHistory.BorderStyle = BorderStyle.None;
+            dgvPurchaseHistory.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dgvPurchaseHistory.GridColor = Color.FromArgb(230, 230, 230);
+            dgvPurchaseHistory.RowHeadersVisible = false;
+            dgvPurchaseHistory.EnableHeadersVisualStyles = false;
+            dgvPurchaseHistory.ColumnHeadersHeight = 40;
+            dgvPurchaseHistory.RowTemplate.Height = 40;
 
+            dgvPurchaseHistory.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(41, 128, 185); // Xanh Dương
+            dgvPurchaseHistory.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgvPurchaseHistory.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            dgvPurchaseHistory.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+
+            dgvPurchaseHistory.DefaultCellStyle.SelectionBackColor = Color.FromArgb(211, 233, 252); // Xanh Nhạt
+            dgvPurchaseHistory.DefaultCellStyle.SelectionForeColor = Color.Black;
+            dgvPurchaseHistory.DefaultCellStyle.Font = new Font("Segoe UI", 10F);
+            dgvPurchaseHistory.DefaultCellStyle.Padding = new Padding(10, 0, 0, 0);
+
+            // Căn chỉnh
+            colTotalAmount.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            colDate.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+        }
         public frmPurchaseHistory(string customerId) : this()
         {
             _customerId = customerId;

@@ -28,8 +28,37 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
             _productController = new ProductController();
             _categoryController = new CategoryController();
             _invoiceDetails = new List<ChiTietHoaDon>();
+            CustomizeInterface();
         }
+        private void CustomizeInterface()
+        {
+            // Style cho bảng Chi tiết hóa đơn (Bên trái)
+            StyleGrid(dgvInvoiceDetails);
+            dgvInvoiceDetails.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(41, 128, 185); // Xanh Dương
 
+            // Style cho bảng Sản phẩm (Bên phải)
+            StyleGrid(dgvProducts);
+            dgvProducts.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(39, 174, 96); // Xanh Lá
+        }
+        private void StyleGrid(DataGridView dgv)
+        {
+            dgv.BorderStyle = BorderStyle.None;
+            dgv.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dgv.GridColor = Color.FromArgb(230, 230, 230);
+            dgv.RowHeadersVisible = false;
+            dgv.EnableHeadersVisualStyles = false;
+            dgv.ColumnHeadersHeight = 40;
+            dgv.RowTemplate.Height = 40;
+
+            dgv.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgv.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            dgv.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+
+            dgv.DefaultCellStyle.SelectionBackColor = Color.FromArgb(211, 233, 252);
+            dgv.DefaultCellStyle.SelectionForeColor = Color.Black;
+            dgv.DefaultCellStyle.Font = new Font("Segoe UI", 10F);
+            dgv.DefaultCellStyle.Padding = new Padding(5, 0, 0, 0);
+        }
         public frmInvoiceDetails(string invoiceId) : this()
         {
             _invoiceId = invoiceId;
