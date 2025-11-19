@@ -59,24 +59,19 @@
             this.groupBoxDetail = new System.Windows.Forms.GroupBox();
             this.txtPrice = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.cmbStatusDetail = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.cmbCategoryDetail = new System.Windows.Forms.ComboBox();
             this.btnClearImage = new System.Windows.Forms.Button();
             this.btnBrowseImage = new System.Windows.Forms.Button();
-            this.picProduct = new System.Windows.Forms.PictureBox();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.txtDescription = new System.Windows.Forms.TextBox();
-            this.cmbBrandDetail = new System.Windows.Forms.ComboBox();
-            this.txtProductName = new System.Windows.Forms.TextBox();
-            this.txtProductId = new System.Windows.Forms.TextBox();
             this.lblDescription = new System.Windows.Forms.Label();
-            this.lblBrandDetail = new System.Windows.Forms.Label();
             this.lblProductName = new System.Windows.Forms.Label();
-            this.lblProductId = new System.Windows.Forms.Label();
+            this.picProduct = new System.Windows.Forms.PictureBox();
+            this.cmbGoodDetail = new System.Windows.Forms.ComboBox();
+            this.cmbUnitDetail = new System.Windows.Forms.ComboBox();
+            this.unittxt = new System.Windows.Forms.Label();
             this.panelTop.SuspendLayout();
             this.panelSearch.SuspendLayout();
             this.panelButtons.SuspendLayout();
@@ -93,22 +88,22 @@
             this.panelTop.Controls.Add(this.lblTitle);
             this.panelTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelTop.Location = new System.Drawing.Point(0, 0);
-            this.panelTop.Margin = new System.Windows.Forms.Padding(4);
             this.panelTop.Name = "panelTop";
-            this.panelTop.Size = new System.Drawing.Size(1867, 74);
+            this.panelTop.Size = new System.Drawing.Size(1400, 60);
             this.panelTop.TabIndex = 0;
+            this.panelTop.Paint += new System.Windows.Forms.PaintEventHandler(this.panelTop_Paint);
             // 
             // lblTitle
             // 
             this.lblTitle.AutoSize = true;
             this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTitle.ForeColor = System.Drawing.Color.White;
-            this.lblTitle.Location = new System.Drawing.Point(16, 15);
-            this.lblTitle.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblTitle.Location = new System.Drawing.Point(12, 12);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(317, 41);
+            this.lblTitle.Size = new System.Drawing.Size(254, 32);
             this.lblTitle.TabIndex = 0;
             this.lblTitle.Text = "QUẢN LÝ SẢN PHẨM";
+            this.lblTitle.Click += new System.EventHandler(this.lblTitle_Click);
             // 
             // panelSearch
             // 
@@ -123,12 +118,12 @@
             this.panelSearch.Controls.Add(this.lblCategory);
             this.panelSearch.Controls.Add(this.lblSearch);
             this.panelSearch.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelSearch.Location = new System.Drawing.Point(0, 74);
-            this.panelSearch.Margin = new System.Windows.Forms.Padding(4);
+            this.panelSearch.Location = new System.Drawing.Point(0, 60);
             this.panelSearch.Name = "panelSearch";
-            this.panelSearch.Padding = new System.Windows.Forms.Padding(13, 12, 13, 12);
-            this.panelSearch.Size = new System.Drawing.Size(1867, 98);
+            this.panelSearch.Padding = new System.Windows.Forms.Padding(10, 10, 10, 10);
+            this.panelSearch.Size = new System.Drawing.Size(1400, 80);
             this.panelSearch.TabIndex = 1;
+            this.panelSearch.Paint += new System.Windows.Forms.PaintEventHandler(this.panelSearch_Paint);
             // 
             // btnRefresh
             // 
@@ -136,14 +131,13 @@
             this.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRefresh.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
             this.btnRefresh.ForeColor = System.Drawing.Color.White;
-            this.btnRefresh.Location = new System.Drawing.Point(1613, 31);
-            this.btnRefresh.Margin = new System.Windows.Forms.Padding(4);
+            this.btnRefresh.Location = new System.Drawing.Point(1210, 25);
             this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(133, 43);
+            this.btnRefresh.Size = new System.Drawing.Size(100, 35);
             this.btnRefresh.TabIndex = 7;
             this.btnRefresh.Text = "Làm mới";
             this.btnRefresh.UseVisualStyleBackColor = false;
-            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            //this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
             // btnSearch
             // 
@@ -151,10 +145,9 @@
             this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSearch.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
             this.btnSearch.ForeColor = System.Drawing.Color.White;
-            this.btnSearch.Location = new System.Drawing.Point(1453, 31);
-            this.btnSearch.Margin = new System.Windows.Forms.Padding(4);
+            this.btnSearch.Location = new System.Drawing.Point(1090, 25);
             this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(133, 43);
+            this.btnSearch.Size = new System.Drawing.Size(100, 35);
             this.btnSearch.TabIndex = 6;
             this.btnSearch.Text = "Tìm kiếm";
             this.btnSearch.UseVisualStyleBackColor = false;
@@ -165,62 +158,61 @@
             this.cmbBrand.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbBrand.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             this.cmbBrand.FormattingEnabled = true;
-            this.cmbBrand.Location = new System.Drawing.Point(744, 35);
-            this.cmbBrand.Margin = new System.Windows.Forms.Padding(4);
+            this.cmbBrand.Location = new System.Drawing.Point(558, 28);
             this.cmbBrand.Name = "cmbBrand";
-            this.cmbBrand.Size = new System.Drawing.Size(265, 29);
+            this.cmbBrand.Size = new System.Drawing.Size(200, 25);
             this.cmbBrand.TabIndex = 5;
+            this.cmbBrand.SelectedIndexChanged += new System.EventHandler(this.cmbBrand_SelectedIndexChanged);
             // 
             // cmbCategory
             // 
             this.cmbCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbCategory.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             this.cmbCategory.FormattingEnabled = true;
-            this.cmbCategory.Location = new System.Drawing.Point(1138, 37);
-            this.cmbCategory.Margin = new System.Windows.Forms.Padding(4);
+            this.cmbCategory.Location = new System.Drawing.Point(854, 30);
             this.cmbCategory.Name = "cmbCategory";
-            this.cmbCategory.Size = new System.Drawing.Size(265, 29);
+            this.cmbCategory.Size = new System.Drawing.Size(200, 25);
             this.cmbCategory.TabIndex = 4;
+            this.cmbCategory.SelectedIndexChanged += new System.EventHandler(this.cmbCategory_SelectedIndexChanged);
             // 
             // txtSearch
             // 
             this.txtSearch.Font = new System.Drawing.Font("Segoe UI", 9.75F);
-            this.txtSearch.Location = new System.Drawing.Point(160, 37);
-            this.txtSearch.Margin = new System.Windows.Forms.Padding(4);
+            this.txtSearch.Location = new System.Drawing.Point(120, 30);
             this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(465, 29);
+            this.txtSearch.Size = new System.Drawing.Size(350, 25);
             this.txtSearch.TabIndex = 3;
+            this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
             // 
             // lblBrand
             // 
             this.lblBrand.AutoSize = true;
             this.lblBrand.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
-            this.lblBrand.Location = new System.Drawing.Point(640, 41);
-            this.lblBrand.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblBrand.Location = new System.Drawing.Point(480, 33);
             this.lblBrand.Name = "lblBrand";
-            this.lblBrand.Size = new System.Drawing.Size(96, 23);
+            this.lblBrand.Size = new System.Drawing.Size(76, 17);
             this.lblBrand.TabIndex = 2;
             this.lblBrand.Text = "Nhãn hiệu:";
+            this.lblBrand.Click += new System.EventHandler(this.lblBrand_Click);
             // 
             // lblCategory
             // 
             this.lblCategory.AutoSize = true;
             this.lblCategory.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
-            this.lblCategory.Location = new System.Drawing.Point(1034, 42);
-            this.lblCategory.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblCategory.Location = new System.Drawing.Point(776, 34);
             this.lblCategory.Name = "lblCategory";
-            this.lblCategory.Size = new System.Drawing.Size(96, 23);
+            this.lblCategory.Size = new System.Drawing.Size(75, 17);
             this.lblCategory.TabIndex = 1;
             this.lblCategory.Text = "Danh mục:";
+            this.lblCategory.Click += new System.EventHandler(this.lblCategory_Click);
             // 
             // lblSearch
             // 
             this.lblSearch.AutoSize = true;
             this.lblSearch.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
-            this.lblSearch.Location = new System.Drawing.Point(20, 41);
-            this.lblSearch.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblSearch.Location = new System.Drawing.Point(15, 33);
             this.lblSearch.Name = "lblSearch";
-            this.lblSearch.Size = new System.Drawing.Size(124, 23);
+            this.lblSearch.Size = new System.Drawing.Size(98, 17);
             this.lblSearch.TabIndex = 0;
             this.lblSearch.Text = "Tên sản phẩm:";
             // 
@@ -233,10 +225,9 @@
             this.panelButtons.Controls.Add(this.btnEdit);
             this.panelButtons.Controls.Add(this.btnAdd);
             this.panelButtons.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelButtons.Location = new System.Drawing.Point(0, 172);
-            this.panelButtons.Margin = new System.Windows.Forms.Padding(4);
+            this.panelButtons.Location = new System.Drawing.Point(0, 140);
             this.panelButtons.Name = "panelButtons";
-            this.panelButtons.Size = new System.Drawing.Size(1867, 73);
+            this.panelButtons.Size = new System.Drawing.Size(1400, 60);
             this.panelButtons.TabIndex = 2;
             // 
             // btnExport
@@ -245,14 +236,12 @@
             this.btnExport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnExport.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.btnExport.ForeColor = System.Drawing.Color.White;
-            this.btnExport.Location = new System.Drawing.Point(520, 12);
-            this.btnExport.Margin = new System.Windows.Forms.Padding(4);
+            this.btnExport.Location = new System.Drawing.Point(390, 10);
             this.btnExport.Name = "btnExport";
-            this.btnExport.Size = new System.Drawing.Size(160, 49);
+            this.btnExport.Size = new System.Drawing.Size(120, 40);
             this.btnExport.TabIndex = 3;
             this.btnExport.Text = "Xuất Excel";
             this.btnExport.UseVisualStyleBackColor = false;
-            //this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
             // 
             // btnDelete
             // 
@@ -260,14 +249,13 @@
             this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDelete.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.btnDelete.ForeColor = System.Drawing.Color.White;
-            this.btnDelete.Location = new System.Drawing.Point(360, 12);
-            this.btnDelete.Margin = new System.Windows.Forms.Padding(4);
+            this.btnDelete.Location = new System.Drawing.Point(270, 10);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(147, 49);
+            this.btnDelete.Size = new System.Drawing.Size(110, 40);
             this.btnDelete.TabIndex = 2;
             this.btnDelete.Text = "Xóa";
             this.btnDelete.UseVisualStyleBackColor = false;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            //this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnEdit
             // 
@@ -275,14 +263,13 @@
             this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEdit.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.btnEdit.ForeColor = System.Drawing.Color.White;
-            this.btnEdit.Location = new System.Drawing.Point(187, 12);
-            this.btnEdit.Margin = new System.Windows.Forms.Padding(4);
+            this.btnEdit.Location = new System.Drawing.Point(140, 10);
             this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(160, 49);
+            this.btnEdit.Size = new System.Drawing.Size(120, 40);
             this.btnEdit.TabIndex = 1;
             this.btnEdit.Text = "Chỉnh sửa";
             this.btnEdit.UseVisualStyleBackColor = false;
-            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
+            //this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
             // btnAdd
             // 
@@ -290,30 +277,27 @@
             this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAdd.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.btnAdd.ForeColor = System.Drawing.Color.White;
-            this.btnAdd.Location = new System.Drawing.Point(13, 12);
-            this.btnAdd.Margin = new System.Windows.Forms.Padding(4);
+            this.btnAdd.Location = new System.Drawing.Point(10, 10);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(160, 49);
+            this.btnAdd.Size = new System.Drawing.Size(120, 40);
             this.btnAdd.TabIndex = 0;
             this.btnAdd.Text = "Thêm mới";
             this.btnAdd.UseVisualStyleBackColor = false;
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            //this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // panelGrid
             // 
             this.panelGrid.Controls.Add(this.dgvProducts);
             this.panelGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelGrid.Location = new System.Drawing.Point(0, 245);
-            this.panelGrid.Margin = new System.Windows.Forms.Padding(4);
+            this.panelGrid.Location = new System.Drawing.Point(0, 200);
             this.panelGrid.Name = "panelGrid";
-            this.panelGrid.Padding = new System.Windows.Forms.Padding(13, 12, 13, 12);
-            this.panelGrid.Size = new System.Drawing.Size(1267, 794);
+            this.panelGrid.Padding = new System.Windows.Forms.Padding(10, 10, 10, 10);
+            this.panelGrid.Size = new System.Drawing.Size(950, 644);
             this.panelGrid.TabIndex = 3;
+            this.panelGrid.Paint += new System.Windows.Forms.PaintEventHandler(this.panelGrid_Paint);
             // 
             // dgvProducts
             // 
-            this.dgvProducts.AllowUserToAddRows = false;
-            this.dgvProducts.AllowUserToDeleteRows = false;
             this.dgvProducts.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvProducts.BackgroundColor = System.Drawing.Color.White;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -343,8 +327,8 @@
             this.dgvProducts.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvProducts.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvProducts.EnableHeadersVisualStyles = false;
-            this.dgvProducts.Location = new System.Drawing.Point(13, 12);
-            this.dgvProducts.Margin = new System.Windows.Forms.Padding(4);
+            this.dgvProducts.GridColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.dgvProducts.Location = new System.Drawing.Point(10, 10);
             this.dgvProducts.MultiSelect = false;
             this.dgvProducts.Name = "dgvProducts";
             this.dgvProducts.ReadOnly = true;
@@ -352,9 +336,10 @@
             this.dgvProducts.RowHeadersWidth = 51;
             this.dgvProducts.RowTemplate.Height = 35;
             this.dgvProducts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvProducts.Size = new System.Drawing.Size(1241, 770);
-            this.dgvProducts.TabIndex = 0;
-            this.dgvProducts.SelectionChanged += new System.EventHandler(this.dgvProducts_SelectionChanged);
+            this.dgvProducts.Size = new System.Drawing.Size(930, 624);
+            this.dgvProducts.TabIndex = 10;
+            this.dgvProducts.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProducts_CellContentClick);
+            //this.dgvProducts.SelectionChanged += new System.EventHandler(this.dgvProducts_SelectionChanged);
             // 
             // colId
             // 
@@ -415,120 +400,81 @@
             this.panelDetail.BackColor = System.Drawing.Color.WhiteSmoke;
             this.panelDetail.Controls.Add(this.groupBoxDetail);
             this.panelDetail.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panelDetail.Location = new System.Drawing.Point(1267, 245);
-            this.panelDetail.Margin = new System.Windows.Forms.Padding(4);
+            this.panelDetail.Location = new System.Drawing.Point(950, 200);
             this.panelDetail.Name = "panelDetail";
-            this.panelDetail.Padding = new System.Windows.Forms.Padding(13, 12, 13, 12);
-            this.panelDetail.Size = new System.Drawing.Size(600, 794);
+            this.panelDetail.Padding = new System.Windows.Forms.Padding(10, 10, 10, 10);
+            this.panelDetail.Size = new System.Drawing.Size(450, 644);
             this.panelDetail.TabIndex = 4;
+            this.panelDetail.Paint += new System.Windows.Forms.PaintEventHandler(this.panelDetail_Paint);
             // 
             // groupBoxDetail
             // 
+            this.groupBoxDetail.Controls.Add(this.cmbUnitDetail);
+            this.groupBoxDetail.Controls.Add(this.cmbGoodDetail);
             this.groupBoxDetail.Controls.Add(this.txtPrice);
-            this.groupBoxDetail.Controls.Add(this.label4);
-            this.groupBoxDetail.Controls.Add(this.label3);
-            this.groupBoxDetail.Controls.Add(this.label2);
             this.groupBoxDetail.Controls.Add(this.cmbStatusDetail);
-            this.groupBoxDetail.Controls.Add(this.label1);
-            this.groupBoxDetail.Controls.Add(this.cmbCategoryDetail);
+            this.groupBoxDetail.Controls.Add(this.txtDescription);
+            this.groupBoxDetail.Controls.Add(this.unittxt);
+            this.groupBoxDetail.Controls.Add(this.label4);
+            this.groupBoxDetail.Controls.Add(this.label2);
+            this.groupBoxDetail.Controls.Add(this.lblDescription);
+            this.groupBoxDetail.Controls.Add(this.lblProductName);
             this.groupBoxDetail.Controls.Add(this.btnClearImage);
             this.groupBoxDetail.Controls.Add(this.btnBrowseImage);
             this.groupBoxDetail.Controls.Add(this.picProduct);
             this.groupBoxDetail.Controls.Add(this.btnCancel);
             this.groupBoxDetail.Controls.Add(this.btnSave);
-            this.groupBoxDetail.Controls.Add(this.txtDescription);
-            this.groupBoxDetail.Controls.Add(this.cmbBrandDetail);
-            this.groupBoxDetail.Controls.Add(this.txtProductName);
-            this.groupBoxDetail.Controls.Add(this.txtProductId);
-            this.groupBoxDetail.Controls.Add(this.lblDescription);
-            this.groupBoxDetail.Controls.Add(this.lblBrandDetail);
-            this.groupBoxDetail.Controls.Add(this.lblProductName);
-            this.groupBoxDetail.Controls.Add(this.lblProductId);
             this.groupBoxDetail.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBoxDetail.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            this.groupBoxDetail.Location = new System.Drawing.Point(13, 12);
-            this.groupBoxDetail.Margin = new System.Windows.Forms.Padding(4);
+            this.groupBoxDetail.Location = new System.Drawing.Point(10, 10);
             this.groupBoxDetail.Name = "groupBoxDetail";
-            this.groupBoxDetail.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBoxDetail.Size = new System.Drawing.Size(574, 770);
+            this.groupBoxDetail.Size = new System.Drawing.Size(430, 624);
             this.groupBoxDetail.TabIndex = 0;
             this.groupBoxDetail.TabStop = false;
             this.groupBoxDetail.Text = "Chi tiết sản phẩm";
+            this.groupBoxDetail.Enter += new System.EventHandler(this.groupBoxDetail_Enter);
             // 
             // txtPrice
             // 
             this.txtPrice.Font = new System.Drawing.Font("Segoe UI", 9.75F);
-            this.txtPrice.Location = new System.Drawing.Point(160, 297);
-            this.txtPrice.Margin = new System.Windows.Forms.Padding(4);
+            this.txtPrice.Location = new System.Drawing.Point(120, 229);
             this.txtPrice.Name = "txtPrice";
-            this.txtPrice.Size = new System.Drawing.Size(385, 29);
+            this.txtPrice.Size = new System.Drawing.Size(290, 25);
             this.txtPrice.TabIndex = 19;
+            this.txtPrice.TextChanged += new System.EventHandler(this.txtPrice_TextChanged);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
-            this.label4.Location = new System.Drawing.Point(27, 303);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label4.Location = new System.Drawing.Point(20, 235);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(77, 23);
+            this.label4.Size = new System.Drawing.Size(60, 17);
             this.label4.TabIndex = 18;
             this.label4.Text = "Giá tiền:";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
-            this.label3.Location = new System.Drawing.Point(27, 245);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(97, 23);
-            this.label3.TabIndex = 16;
-            this.label3.Text = "Trạng thái:";
+            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
-            this.label2.Location = new System.Drawing.Point(27, 242);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(20, 173);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(97, 23);
+            this.label2.Size = new System.Drawing.Size(75, 17);
             this.label2.TabIndex = 16;
             this.label2.Text = "Trạng thái:";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // cmbStatusDetail
             // 
             this.cmbStatusDetail.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbStatusDetail.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             this.cmbStatusDetail.FormattingEnabled = true;
-            this.cmbStatusDetail.Location = new System.Drawing.Point(160, 239);
-            this.cmbStatusDetail.Margin = new System.Windows.Forms.Padding(4);
+            this.cmbStatusDetail.Location = new System.Drawing.Point(120, 169);
             this.cmbStatusDetail.Name = "cmbStatusDetail";
-            this.cmbStatusDetail.Size = new System.Drawing.Size(385, 29);
+            this.cmbStatusDetail.Size = new System.Drawing.Size(290, 25);
             this.cmbStatusDetail.TabIndex = 15;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
-            this.label1.Location = new System.Drawing.Point(27, 189);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(96, 23);
-            this.label1.TabIndex = 14;
-            this.label1.Text = "Danh mục:";
-            // 
-            // cmbCategoryDetail
-            // 
-            this.cmbCategoryDetail.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbCategoryDetail.Font = new System.Drawing.Font("Segoe UI", 9.75F);
-            this.cmbCategoryDetail.FormattingEnabled = true;
-            this.cmbCategoryDetail.Location = new System.Drawing.Point(160, 186);
-            this.cmbCategoryDetail.Margin = new System.Windows.Forms.Padding(4);
-            this.cmbCategoryDetail.Name = "cmbCategoryDetail";
-            this.cmbCategoryDetail.Size = new System.Drawing.Size(385, 29);
-            this.cmbCategoryDetail.TabIndex = 13;
+            this.cmbStatusDetail.SelectedIndexChanged += new System.EventHandler(this.cmbStatusDetail_SelectedIndexChanged);
             // 
             // btnClearImage
             // 
@@ -536,10 +482,9 @@
             this.btnClearImage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnClearImage.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.btnClearImage.ForeColor = System.Drawing.Color.White;
-            this.btnClearImage.Location = new System.Drawing.Point(334, 611);
-            this.btnClearImage.Margin = new System.Windows.Forms.Padding(4);
+            this.btnClearImage.Location = new System.Drawing.Point(250, 496);
             this.btnClearImage.Name = "btnClearImage";
-            this.btnClearImage.Size = new System.Drawing.Size(147, 43);
+            this.btnClearImage.Size = new System.Drawing.Size(110, 35);
             this.btnClearImage.TabIndex = 12;
             this.btnClearImage.Text = "Xóa ảnh";
             this.btnClearImage.UseVisualStyleBackColor = false;
@@ -551,26 +496,13 @@
             this.btnBrowseImage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBrowseImage.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.btnBrowseImage.ForeColor = System.Drawing.Color.White;
-            this.btnBrowseImage.Location = new System.Drawing.Point(135, 611);
-            this.btnBrowseImage.Margin = new System.Windows.Forms.Padding(4);
+            this.btnBrowseImage.Location = new System.Drawing.Point(101, 496);
             this.btnBrowseImage.Name = "btnBrowseImage";
-            this.btnBrowseImage.Size = new System.Drawing.Size(173, 43);
+            this.btnBrowseImage.Size = new System.Drawing.Size(130, 35);
             this.btnBrowseImage.TabIndex = 11;
             this.btnBrowseImage.Text = "Chọn ảnh";
             this.btnBrowseImage.UseVisualStyleBackColor = false;
             this.btnBrowseImage.Click += new System.EventHandler(this.btnBrowseImage_Click);
-            // 
-            // picProduct
-            // 
-            this.picProduct.BackColor = System.Drawing.Color.White;
-            this.picProduct.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.picProduct.Location = new System.Drawing.Point(148, 446);
-            this.picProduct.Margin = new System.Windows.Forms.Padding(4);
-            this.picProduct.Name = "picProduct";
-            this.picProduct.Size = new System.Drawing.Size(346, 144);
-            this.picProduct.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picProduct.TabIndex = 10;
-            this.picProduct.TabStop = false;
             // 
             // btnCancel
             // 
@@ -578,14 +510,13 @@
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.btnCancel.ForeColor = System.Drawing.Color.White;
-            this.btnCancel.Location = new System.Drawing.Point(334, 671);
-            this.btnCancel.Margin = new System.Windows.Forms.Padding(4);
+            this.btnCancel.Location = new System.Drawing.Point(250, 545);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(147, 49);
+            this.btnCancel.Size = new System.Drawing.Size(110, 40);
             this.btnCancel.TabIndex = 9;
             this.btnCancel.Text = "Hủy";
             this.btnCancel.UseVisualStyleBackColor = false;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            //this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnSave
             // 
@@ -593,116 +524,104 @@
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSave.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.btnSave.ForeColor = System.Drawing.Color.White;
-            this.btnSave.Location = new System.Drawing.Point(135, 671);
-            this.btnSave.Margin = new System.Windows.Forms.Padding(4);
+            this.btnSave.Location = new System.Drawing.Point(101, 545);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(173, 49);
+            this.btnSave.Size = new System.Drawing.Size(130, 40);
             this.btnSave.TabIndex = 8;
             this.btnSave.Text = "Lưu";
             this.btnSave.UseVisualStyleBackColor = false;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            //this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // txtDescription
             // 
             this.txtDescription.Font = new System.Drawing.Font("Segoe UI", 9.75F);
-            this.txtDescription.Location = new System.Drawing.Point(160, 357);
-            this.txtDescription.Margin = new System.Windows.Forms.Padding(4);
+            this.txtDescription.Location = new System.Drawing.Point(120, 289);
             this.txtDescription.Multiline = true;
             this.txtDescription.Name = "txtDescription";
             this.txtDescription.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtDescription.Size = new System.Drawing.Size(385, 61);
+            this.txtDescription.Size = new System.Drawing.Size(290, 50);
             this.txtDescription.TabIndex = 7;
-            // 
-            // cmbBrandDetail
-            // 
-            this.cmbBrandDetail.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbBrandDetail.Font = new System.Drawing.Font("Segoe UI", 9.75F);
-            this.cmbBrandDetail.FormattingEnabled = true;
-            this.cmbBrandDetail.Location = new System.Drawing.Point(160, 135);
-            this.cmbBrandDetail.Margin = new System.Windows.Forms.Padding(4);
-            this.cmbBrandDetail.Name = "cmbBrandDetail";
-            this.cmbBrandDetail.Size = new System.Drawing.Size(385, 29);
-            this.cmbBrandDetail.TabIndex = 6;
-            // 
-            // txtProductName
-            // 
-            this.txtProductName.Font = new System.Drawing.Font("Segoe UI", 9.75F);
-            this.txtProductName.Location = new System.Drawing.Point(160, 86);
-            this.txtProductName.Margin = new System.Windows.Forms.Padding(4);
-            this.txtProductName.Name = "txtProductName";
-            this.txtProductName.Size = new System.Drawing.Size(385, 29);
-            this.txtProductName.TabIndex = 5;
-            // 
-            // txtProductId
-            // 
-            this.txtProductId.Font = new System.Drawing.Font("Segoe UI", 9.75F);
-            this.txtProductId.Location = new System.Drawing.Point(160, 37);
-            this.txtProductId.Margin = new System.Windows.Forms.Padding(4);
-            this.txtProductId.Name = "txtProductId";
-            this.txtProductId.ReadOnly = true;
-            this.txtProductId.Size = new System.Drawing.Size(385, 29);
-            this.txtProductId.TabIndex = 4;
+            this.txtDescription.TextChanged += new System.EventHandler(this.txtDescription_TextChanged);
             // 
             // lblDescription
             // 
             this.lblDescription.AutoSize = true;
             this.lblDescription.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
-            this.lblDescription.Location = new System.Drawing.Point(27, 368);
-            this.lblDescription.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblDescription.Location = new System.Drawing.Point(20, 297);
             this.lblDescription.Name = "lblDescription";
-            this.lblDescription.Size = new System.Drawing.Size(62, 23);
+            this.lblDescription.Size = new System.Drawing.Size(48, 17);
             this.lblDescription.TabIndex = 3;
             this.lblDescription.Text = "Mô tả:";
-            // 
-            // lblBrandDetail
-            // 
-            this.lblBrandDetail.AutoSize = true;
-            this.lblBrandDetail.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
-            this.lblBrandDetail.Location = new System.Drawing.Point(27, 139);
-            this.lblBrandDetail.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblBrandDetail.Name = "lblBrandDetail";
-            this.lblBrandDetail.Size = new System.Drawing.Size(96, 23);
-            this.lblBrandDetail.TabIndex = 2;
-            this.lblBrandDetail.Text = "Nhãn hiệu:";
+            this.lblDescription.Click += new System.EventHandler(this.lblDescription_Click);
             // 
             // lblProductName
             // 
             this.lblProductName.AutoSize = true;
             this.lblProductName.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
-            this.lblProductName.Location = new System.Drawing.Point(27, 90);
-            this.lblProductName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblProductName.Location = new System.Drawing.Point(20, 49);
             this.lblProductName.Name = "lblProductName";
-            this.lblProductName.Size = new System.Drawing.Size(124, 23);
+            this.lblProductName.Size = new System.Drawing.Size(72, 17);
             this.lblProductName.TabIndex = 1;
-            this.lblProductName.Text = "Tên sản phẩm:";
+            this.lblProductName.Text = "Hàng hoá:";
+            this.lblProductName.Click += new System.EventHandler(this.lblProductName_Click);
             // 
-            // lblProductId
+            // picProduct
             // 
-            this.lblProductId.AutoSize = true;
-            this.lblProductId.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
-            this.lblProductId.Location = new System.Drawing.Point(27, 41);
-            this.lblProductId.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblProductId.Name = "lblProductId";
-            this.lblProductId.Size = new System.Drawing.Size(122, 23);
-            this.lblProductId.TabIndex = 0;
-            this.lblProductId.Text = "Mã sản phẩm:";
+            this.picProduct.BackColor = System.Drawing.Color.White;
+            this.picProduct.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.picProduct.Location = new System.Drawing.Point(23, 362);
+            this.picProduct.Name = "picProduct";
+            this.picProduct.Size = new System.Drawing.Size(387, 117);
+            this.picProduct.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picProduct.TabIndex = 10;
+            this.picProduct.TabStop = false;
+            this.picProduct.Click += new System.EventHandler(this.picProduct_Click);
+            // 
+            // cmbGoodDetail
+            // 
+            this.cmbGoodDetail.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbGoodDetail.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.cmbGoodDetail.FormattingEnabled = true;
+            this.cmbGoodDetail.Location = new System.Drawing.Point(120, 49);
+            this.cmbGoodDetail.Name = "cmbGoodDetail";
+            this.cmbGoodDetail.Size = new System.Drawing.Size(290, 25);
+            this.cmbGoodDetail.TabIndex = 21;
+            // 
+            // cmbUnitDetail
+            // 
+            this.cmbUnitDetail.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbUnitDetail.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.cmbUnitDetail.FormattingEnabled = true;
+            this.cmbUnitDetail.Location = new System.Drawing.Point(120, 109);
+            this.cmbUnitDetail.Name = "cmbUnitDetail";
+            this.cmbUnitDetail.Size = new System.Drawing.Size(290, 25);
+            this.cmbUnitDetail.TabIndex = 22;
+            // 
+            // unittxt
+            // 
+            this.unittxt.AutoSize = true;
+            this.unittxt.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
+            this.unittxt.Location = new System.Drawing.Point(20, 111);
+            this.unittxt.Name = "unittxt";
+            this.unittxt.Size = new System.Drawing.Size(53, 17);
+            this.unittxt.TabIndex = 23;
+            this.unittxt.Text = "Đơn vị:";
             // 
             // frmProducts
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1867, 1039);
+            this.ClientSize = new System.Drawing.Size(1400, 844);
             this.Controls.Add(this.panelGrid);
             this.Controls.Add(this.panelDetail);
             this.Controls.Add(this.panelButtons);
             this.Controls.Add(this.panelSearch);
             this.Controls.Add(this.panelTop);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmProducts";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Quản lý sản phẩm";
-            this.Load += new System.EventHandler(this.frmProducts_Load);
+            //this.Load += new System.EventHandler(this.frmProducts_Load);
             this.panelTop.ResumeLayout(false);
             this.panelTop.PerformLayout();
             this.panelSearch.ResumeLayout(false);
@@ -741,20 +660,13 @@
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.TextBox txtDescription;
-        private System.Windows.Forms.ComboBox cmbBrandDetail;
-        private System.Windows.Forms.TextBox txtProductName;
-        private System.Windows.Forms.TextBox txtProductId;
         private System.Windows.Forms.Label lblDescription;
-        private System.Windows.Forms.Label lblBrandDetail;
         private System.Windows.Forms.Label lblProductName;
-        private System.Windows.Forms.Label lblProductId;
         private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.Button btnExport;
         private System.Windows.Forms.PictureBox picProduct;
         private System.Windows.Forms.Button btnBrowseImage;
         private System.Windows.Forms.Button btnClearImage;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox cmbCategoryDetail;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox cmbStatusDetail;
         private System.Windows.Forms.DataGridViewTextBoxColumn colId;
@@ -765,7 +677,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn giaBan;
         private System.Windows.Forms.DataGridViewTextBoxColumn trangThai;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtPrice;
+        private System.Windows.Forms.ComboBox cmbGoodDetail;
+        private System.Windows.Forms.Label unittxt;
+        private System.Windows.Forms.ComboBox cmbUnitDetail;
     }
 }
