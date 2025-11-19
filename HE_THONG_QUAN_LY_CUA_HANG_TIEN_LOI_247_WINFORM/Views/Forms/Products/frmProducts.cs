@@ -1,7 +1,7 @@
 ﻿using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services;
 using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Controllers;
 using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.DTO;
-using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.DTO.Models; // Đảm bảo dùng đúng Namespace chứa DTO
+using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Models; // Đảm bảo dùng đúng Namespace chứa DTO
 using System;
 using System.Collections.Generic;
 using System.Drawing;

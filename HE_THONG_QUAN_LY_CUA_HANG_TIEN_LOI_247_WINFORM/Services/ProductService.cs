@@ -1,5 +1,5 @@
 ﻿using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.DTO;
-using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.DTO.Models; // Ensure this namespace has ProductDetailDto
+using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Models; // Ensure this namespace has ProductDetailDto
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
