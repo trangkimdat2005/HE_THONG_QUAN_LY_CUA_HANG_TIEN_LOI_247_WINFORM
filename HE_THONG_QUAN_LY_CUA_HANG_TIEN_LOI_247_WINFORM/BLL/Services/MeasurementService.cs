@@ -14,7 +14,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
         public MeasurementService()
         {
             _readContext = new AppDbContext();
-            _services = new QuanLyServices(_readContext);
+            _services = new QuanLyServices();
         }
 
         #region Get/Search Operations
