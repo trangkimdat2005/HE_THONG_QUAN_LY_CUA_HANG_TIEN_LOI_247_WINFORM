@@ -1,6 +1,6 @@
 ﻿using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services;
 using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.DTO;
-using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.DTO.Models; // <-- Đảm bảo namespace này đúng nơi chứa ProductDetailDto
+using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Models; // <-- Đảm bảo namespace này đúng nơi chứa ProductDetailDto
 using System;
 using System.Collections.Generic;
 

@@ -3,12 +3,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Linq;
 
-namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.DTO.Models
+namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Models
 {
     public partial class AppDbContext : DbContext
     {
         public AppDbContext()
-            : base("name=AppDbContext")
+            : base("name=AppDbContext1")
         {
         }
 
