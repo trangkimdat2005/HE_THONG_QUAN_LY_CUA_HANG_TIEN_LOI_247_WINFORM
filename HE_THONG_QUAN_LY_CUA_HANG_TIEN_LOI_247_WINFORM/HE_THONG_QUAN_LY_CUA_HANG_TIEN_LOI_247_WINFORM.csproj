@@ -80,14 +80,14 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BLL\Services\BrandService.cs" />
-    <Compile Include="BLL\Services\CategoryService.cs" />
-    <Compile Include="BLL\Services\CustomerService.cs" />
-    <Compile Include="BLL\Services\InvoiceService.cs" />
-    <Compile Include="BLL\Services\IQuanLyServices.cs" />
-    <Compile Include="BLL\Services\MeasurementService.cs" />
-    <Compile Include="BLL\Services\ProductService.cs" />
-    <Compile Include="BLL\Services\QuanLyServices.cs" />
+    <Compile Include="Services\BrandService.cs" />
+    <Compile Include="Services\CategoryService.cs" />
+    <Compile Include="Services\CustomerService.cs" />
+    <Compile Include="Services\InvoiceService.cs" />
+    <Compile Include="Services\IQuanLyServices.cs" />
+    <Compile Include="Services\MeasurementService.cs" />
+    <Compile Include="Services\ProductService.cs" />
+    <Compile Include="Services\QuanLyServices.cs" />
     <Compile Include="Controllers\BrandController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
@@ -95,288 +95,287 @@
     <Compile Include="Controllers\MeasurementController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="DTO\CustomerDetailDto.cs" />
-    <Compile Include="DTO\Models\Anh_SanPhamDonVi.cs" />
-    <Compile Include="DTO\Models\AppDbContext.cs" />
-    <Compile Include="DTO\Models\BaoCao.cs" />
-    <Compile Include="DTO\Models\BaoCaoBanChay.cs" />
-    <Compile Include="DTO\Models\BaoCaoDoanhThu.cs" />
-    <Compile Include="DTO\Models\BaoCaoTonKho.cs" />
-    <Compile Include="DTO\Models\CaLamViec.cs" />
-    <Compile Include="DTO\Models\ChamCong.cs" />
-    <Compile Include="DTO\Models\ChinhSachHoanTra.cs" />
-    <Compile Include="DTO\Models\ChinhSachHoanTra_DanhMuc.cs" />
-    <Compile Include="DTO\Models\ChiTietDonOnline.cs" />
-    <Compile Include="DTO\Models\ChiTietGiaoDichNCC.cs" />
-    <Compile Include="DTO\Models\ChiTietHoaDon.cs" />
-    <Compile Include="DTO\Models\ChiTietHoaDonKhuyenMai.cs" />
-    <Compile Include="DTO\Models\ChiTietPhieuNhap.cs" />
-    <Compile Include="DTO\Models\ChiTietPhieuXuat.cs" />
-    <Compile Include="DTO\Models\ChuongTrinhKhuyenMai.cs" />
-    <Compile Include="DTO\Models\C__EFMigrationsHistory.cs" />
-    <Compile Include="DTO\Models\DanhMuc.cs" />
-    <Compile Include="DTO\Models\DieuKienApDung.cs" />
-    <Compile Include="DTO\Models\DieuKienApDungDanhMuc.cs" />
-    <Compile Include="DTO\Models\DieuKienApDungSanPham.cs" />
-    <Compile Include="DTO\Models\DieuKienApDungToanBo.cs" />
-    <Compile Include="DTO\Models\DonGiaoHang.cs" />
-    <Compile Include="DTO\Models\DonHangOnline.cs" />
-    <Compile Include="DTO\Models\DonViDoLuong.cs" />
-    <Compile Include="DTO\Models\GiaoDichThanhToan.cs" />
-    <Compile Include="DTO\Models\GioHang.cs" />
-    <Compile Include="DTO\Models\HinhAnh.cs" />
-    <Compile Include="DTO\Models\HoaDon.cs" />
-    <Compile Include="DTO\Models\KenhThanhToan.cs" />
-    <Compile Include="DTO\Models\KhachHang.cs" />
-    <Compile Include="DTO\Models\KiemKe.cs" />
-    <Compile Include="DTO\Models\LichSuGiaBan.cs" />
-    <Compile Include="DTO\Models\LichSuGiaoDich.cs" />
-    <Compile Include="DTO\Models\LichSuMuaHang.cs" />
-    <Compile Include="DTO\Models\MaDinhDanhSanPham.cs" />
-    <Compile Include="DTO\Models\MaKhuyenMai.cs" />
-    <Compile Include="DTO\Models\NhaCungCap.cs" />
-    <Compile Include="DTO\Models\NhanHieu.cs" />
-    <Compile Include="DTO\Models\NhanVien.cs" />
-    <Compile Include="DTO\Models\NhatKyHoatDong.cs" />
-    <Compile Include="DTO\Models\Permission.cs" />
-    <Compile Include="DTO\Models\PhanCongCaLamViec.cs" />
-    <Compile Include="DTO\Models\PhieuDoiTra.cs" />
-    <Compile Include="DTO\Models\PhieuNhap.cs" />
-    <Compile Include="DTO\Models\PhieuXuat.cs" />
-    <Compile Include="DTO\Models\PhiVanChuyen.cs" />
-    <Compile Include="DTO\Models\Role.cs" />
-    <Compile Include="DTO\Models\RolePermission.cs" />
-    <Compile Include="DTO\Models\SanPham.cs" />
-    <Compile Include="DTO\Models\SanPhamDanhMuc.cs" />
-    <Compile Include="DTO\Models\SanPhamDonVi.cs" />
-    <Compile Include="DTO\Models\SanPhamViTri.cs" />
-    <Compile Include="DTO\Models\Shipper.cs" />
-    <Compile Include="DTO\Models\TaiKhoan.cs" />
-    <Compile Include="DTO\Models\TaiKhoanKhachHang.cs" />
-    <Compile Include="DTO\Models\TaiKhoanNhanVien.cs" />
-    <Compile Include="DTO\Models\TemNhan.cs" />
-    <Compile Include="DTO\Models\TheThanhVien.cs" />
-    <Compile Include="DTO\Models\TonKho.cs" />
-    <Compile Include="DTO\Models\TrangThaiGiaoHang.cs" />
-    <Compile Include="DTO\Models\TrangThaiXuLy.cs" />
-    <Compile Include="DTO\Models\UserRole.cs" />
-    <Compile Include="DTO\Models\ViTri.cs" />
+    <Compile Include="Models\Anh_SanPhamDonVi.cs" />
+    <Compile Include="Models\AppDbContext.cs" />
+    <Compile Include="Models\BaoCao.cs" />
+    <Compile Include="Models\BaoCaoBanChay.cs" />
+    <Compile Include="Models\BaoCaoDoanhThu.cs" />
+    <Compile Include="Models\BaoCaoTonKho.cs" />
+    <Compile Include="Models\CaLamViec.cs" />
+    <Compile Include="Models\ChamCong.cs" />
+    <Compile Include="Models\ChinhSachHoanTra.cs" />
+    <Compile Include="Models\ChinhSachHoanTra_DanhMuc.cs" />
+    <Compile Include="Models\ChiTietDonOnline.cs" />
+    <Compile Include="Models\ChiTietGiaoDichNCC.cs" />
+    <Compile Include="Models\ChiTietHoaDon.cs" />
+    <Compile Include="Models\ChiTietHoaDonKhuyenMai.cs" />
+    <Compile Include="Models\ChiTietPhieuNhap.cs" />
+    <Compile Include="Models\ChiTietPhieuXuat.cs" />
+    <Compile Include="Models\ChuongTrinhKhuyenMai.cs" />
+    <Compile Include="Models\C__EFMigrationsHistory.cs" />
+    <Compile Include="Models\DanhMuc.cs" />
+    <Compile Include="Models\DieuKienApDung.cs" />
+    <Compile Include="Models\DieuKienApDungDanhMuc.cs" />
+    <Compile Include="Models\DieuKienApDungSanPham.cs" />
+    <Compile Include="Models\DieuKienApDungToanBo.cs" />
+    <Compile Include="Models\DonGiaoHang.cs" />
+    <Compile Include="Models\DonHangOnline.cs" />
+    <Compile Include="Models\DonViDoLuong.cs" />
+    <Compile Include="Models\GiaoDichThanhToan.cs" />
+    <Compile Include="Models\GioHang.cs" />
+    <Compile Include="Models\HinhAnh.cs" />
+    <Compile Include="Models\HoaDon.cs" />
+    <Compile Include="Models\KenhThanhToan.cs" />
+    <Compile Include="Models\KhachHang.cs" />
+    <Compile Include="Models\KiemKe.cs" />
+    <Compile Include="Models\LichSuGiaBan.cs" />
+    <Compile Include="Models\LichSuGiaoDich.cs" />
+    <Compile Include="Models\LichSuMuaHang.cs" />
+    <Compile Include="Models\MaDinhDanhSanPham.cs" />
+    <Compile Include="Models\MaKhuyenMai.cs" />
+    <Compile Include="Models\NhaCungCap.cs" />
+    <Compile Include="Models\NhanHieu.cs" />
+    <Compile Include="Models\NhanVien.cs" />
+    <Compile Include="Models\NhatKyHoatDong.cs" />
+    <Compile Include="Models\Permission.cs" />
+    <Compile Include="Models\PhanCongCaLamViec.cs" />
+    <Compile Include="Models\PhieuDoiTra.cs" />
+    <Compile Include="Models\PhieuNhap.cs" />
+    <Compile Include="Models\PhieuXuat.cs" />
+    <Compile Include="Models\PhiVanChuyen.cs" />
+    <Compile Include="Models\Role.cs" />
+    <Compile Include="Models\RolePermission.cs" />
+    <Compile Include="Models\SanPham.cs" />
+    <Compile Include="Models\SanPhamDanhMuc.cs" />
+    <Compile Include="Models\SanPhamDonVi.cs" />
+    <Compile Include="Models\SanPhamViTri.cs" />
+    <Compile Include="Models\Shipper.cs" />
+    <Compile Include="Models\TaiKhoan.cs" />
+    <Compile Include="Models\TaiKhoanKhachHang.cs" />
+    <Compile Include="Models\TaiKhoanNhanVien.cs" />
+    <Compile Include="Models\TemNhan.cs" />
+    <Compile Include="Models\TheThanhVien.cs" />
+    <Compile Include="Models\TonKho.cs" />
+    <Compile Include="Models\TrangThaiGiaoHang.cs" />
+    <Compile Include="Models\TrangThaiXuLy.cs" />
+    <Compile Include="Models\UserRole.cs" />
+    <Compile Include="Models\ViTri.cs" />
     <Compile Include="DTO\ProductDetailDto.cs" />
     <Compile Include="Helpers\Utils\AppConfig.cs" />
     <Compile Include="Helpers\Utils\DateTimeHelper.cs" />
     <Compile Include="Helpers\Utils\ImageHelper.cs" />
     <Compile Include="Helpers\Utils\StringHelper.cs" />
     <Compile Include="Helpers\Utils\ValidationHelper.cs" />
-    <Compile Include="DAL\DBConnection.cs" />
-    <Compile Include="GUI\Forms\Customers\frmCustomerList.cs">
+    <Compile Include="Views\Forms\Customers\frmCustomerList.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\Forms\Customers\frmCustomerList.Designer.cs">
+    <Compile Include="Views\Forms\Customers\frmCustomerList.Designer.cs">
       <DependentUpon>frmCustomerList.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\Forms\Customers\frmCustomers.cs">
+    <Compile Include="Views\Forms\Customers\frmCustomers.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\Forms\Customers\frmCustomers.Designer.cs">
+    <Compile Include="Views\Forms\Customers\frmCustomers.Designer.cs">
       <DependentUpon>frmCustomers.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\Forms\Customers\frmMemberCards.cs">
+    <Compile Include="Views\Forms\Customers\frmMemberCards.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\Forms\Customers\frmMemberCards.Designer.cs">
+    <Compile Include="Views\Forms\Customers\frmMemberCards.Designer.cs">
       <DependentUpon>frmMemberCards.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\Forms\Customers\frmPurchaseHistory.cs">
+    <Compile Include="Views\Forms\Customers\frmPurchaseHistory.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\Forms\Customers\frmPurchaseHistory.Designer.cs">
+    <Compile Include="Views\Forms\Customers\frmPurchaseHistory.Designer.cs">
       <DependentUpon>frmPurchaseHistory.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\Forms\Employees\frmEmployeeList.cs">
+    <Compile Include="Views\Forms\Employees\frmEmployeeList.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\Forms\Employees\frmEmployeeList.Designer.cs">
+    <Compile Include="Views\Forms\Employees\frmEmployeeList.Designer.cs">
       <DependentUpon>frmEmployeeList.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\Forms\Employees\frmEmployees.cs">
+    <Compile Include="Views\Forms\Employees\frmEmployees.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\Forms\Employees\frmEmployees.Designer.cs">
+    <Compile Include="Views\Forms\Employees\frmEmployees.Designer.cs">
       <DependentUpon>frmEmployees.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\Forms\Employees\frmWorkSchedule.cs">
+    <Compile Include="Views\Forms\Employees\frmWorkSchedule.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\Forms\Employees\frmWorkSchedule.Designer.cs">
+    <Compile Include="Views\Forms\Employees\frmWorkSchedule.Designer.cs">
       <DependentUpon>frmWorkSchedule.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\Forms\Inventory\frmGoodsIssue.cs">
+    <Compile Include="Views\Forms\Inventory\frmGoodsIssue.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\Forms\Inventory\frmGoodsIssue.Designer.cs">
+    <Compile Include="Views\Forms\Inventory\frmGoodsIssue.Designer.cs">
       <DependentUpon>frmGoodsIssue.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\Forms\Inventory\frmGoodsReceived.cs">
+    <Compile Include="Views\Forms\Inventory\frmGoodsReceived.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\Forms\Inventory\frmGoodsReceived.Designer.cs">
+    <Compile Include="Views\Forms\Inventory\frmGoodsReceived.Designer.cs">
       <DependentUpon>frmGoodsReceived.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\Forms\Inventory\frmInventoryList.cs">
+    <Compile Include="Views\Forms\Inventory\frmInventoryList.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\Forms\Inventory\frmInventoryList.Designer.cs">
+    <Compile Include="Views\Forms\Inventory\frmInventoryList.Designer.cs">
       <DependentUpon>frmInventoryList.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\Forms\Inventory\frmInventoryMain.cs">
+    <Compile Include="Views\Forms\Inventory\frmInventoryMain.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\Forms\Inventory\frmInventoryMain.Designer.cs">
+    <Compile Include="Views\Forms\Inventory\frmInventoryMain.Designer.cs">
       <DependentUpon>frmInventoryMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\Forms\Inventory\frmProductLocation.cs">
+    <Compile Include="Views\Forms\Inventory\frmProductLocation.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\Forms\Inventory\frmProductLocation.Designer.cs">
+    <Compile Include="Views\Forms\Inventory\frmProductLocation.Designer.cs">
       <DependentUpon>frmProductLocation.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\Forms\Inventory\frmStocktake.cs">
+    <Compile Include="Views\Forms\Inventory\frmStocktake.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\Forms\Inventory\frmStocktake.Designer.cs">
+    <Compile Include="Views\Forms\Inventory\frmStocktake.Designer.cs">
       <DependentUpon>frmStocktake.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\Forms\Invoice\frmInvoiceDetails.cs">
+    <Compile Include="Views\Forms\Invoice\frmInvoiceDetails.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\Forms\Invoice\frmInvoiceDetails.Designer.cs">
+    <Compile Include="Views\Forms\Invoice\frmInvoiceDetails.Designer.cs">
       <DependentUpon>frmInvoiceDetails.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\Forms\Invoice\frmInvoices.cs">
+    <Compile Include="Views\Forms\Invoice\frmInvoices.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\Forms\Invoice\frmInvoices.Designer.cs">
+    <Compile Include="Views\Forms\Invoice\frmInvoices.Designer.cs">
       <DependentUpon>frmInvoices.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\Forms\Main\frmDashboard.cs">
+    <Compile Include="Views\Forms\Main\frmDashboard.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\Forms\Main\frmDashboard.Designer.cs">
+    <Compile Include="Views\Forms\Main\frmDashboard.Designer.cs">
       <DependentUpon>frmDashboard.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\Forms\Main\frmLogin.cs">
+    <Compile Include="Views\Forms\Main\frmLogin.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\Forms\Main\frmLogin.Designer.cs">
+    <Compile Include="Views\Forms\Main\frmLogin.Designer.cs">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\Forms\Main\frmMain.cs">
+    <Compile Include="Views\Forms\Main\frmMain.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\Forms\Main\frmMain.Designer.cs">
+    <Compile Include="Views\Forms\Main\frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\Forms\Products\frmBrands.cs">
+    <Compile Include="Views\Forms\Products\frmBrands.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\Forms\Products\frmBrands.Designer.cs">
+    <Compile Include="Views\Forms\Products\frmBrands.Designer.cs">
       <DependentUpon>frmBrands.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\Forms\Products\frmCategorys.cs">
+    <Compile Include="Views\Forms\Products\frmCategorys.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\Forms\Products\frmCategorys.Designer.cs">
+    <Compile Include="Views\Forms\Products\frmCategorys.Designer.cs">
       <DependentUpon>frmCategorys.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\Forms\Products\frmMeasurements.cs">
+    <Compile Include="Views\Forms\Products\frmMeasurements.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\Forms\Products\frmMeasurements.Designer.cs">
+    <Compile Include="Views\Forms\Products\frmMeasurements.Designer.cs">
       <DependentUpon>frmMeasurements.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\Forms\Products\frmProducts.cs">
+    <Compile Include="Views\Forms\Products\frmProducts.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\Forms\Products\frmProducts.Designer.cs">
+    <Compile Include="Views\Forms\Products\frmProducts.Designer.cs">
       <DependentUpon>frmProducts.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\Forms\Products\frmProductsMain.cs">
+    <Compile Include="Views\Forms\Products\frmProductsMain.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\Forms\Products\frmProductsMain.Designer.cs">
+    <Compile Include="Views\Forms\Products\frmProductsMain.Designer.cs">
       <DependentUpon>frmProductsMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\Forms\Promotions\frmPromotionDetail.cs">
+    <Compile Include="Views\Forms\Promotions\frmPromotionDetail.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\Forms\Promotions\frmPromotionDetail.Designer.cs">
+    <Compile Include="Views\Forms\Promotions\frmPromotionDetail.Designer.cs">
       <DependentUpon>frmPromotionDetail.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\Forms\Suppliers\frmSupplierList.cs">
+    <Compile Include="Views\Forms\Suppliers\frmSupplierList.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\Forms\Suppliers\frmSupplierList.Designer.cs">
+    <Compile Include="Views\Forms\Suppliers\frmSupplierList.Designer.cs">
       <DependentUpon>frmSupplierList.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\Forms\Suppliers\frmTransactionHistory.cs">
+    <Compile Include="Views\Forms\Suppliers\frmTransactionHistory.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\Forms\Suppliers\frmTransactionHistory.Designer.cs">
+    <Compile Include="Views\Forms\Suppliers\frmTransactionHistory.Designer.cs">
       <DependentUpon>frmTransactionHistory.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\Forms\Promotions\frmPromotions.cs">
+    <Compile Include="Views\Forms\Promotions\frmPromotions.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\Forms\Promotions\frmPromotions.Designer.cs">
+    <Compile Include="Views\Forms\Promotions\frmPromotions.Designer.cs">
       <DependentUpon>frmPromotions.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="GUI\Forms\Customers\frmCustomerList.resx">
+    <EmbeddedResource Include="Views\Forms\Customers\frmCustomerList.resx">
       <DependentUpon>frmCustomerList.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\Forms\Customers\frmCustomers.resx">
+    <EmbeddedResource Include="Views\Forms\Customers\frmCustomers.resx">
       <DependentUpon>frmCustomers.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\Forms\Customers\frmMemberCards.resx">
+    <EmbeddedResource Include="Views\Forms\Customers\frmMemberCards.resx">
       <DependentUpon>frmMemberCards.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\Forms\Customers\frmPurchaseHistory.resx">
+    <EmbeddedResource Include="Views\Forms\Customers\frmPurchaseHistory.resx">
       <DependentUpon>frmPurchaseHistory.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\Forms\Invoice\frmInvoiceDetails.resx">
+    <EmbeddedResource Include="Views\Forms\Invoice\frmInvoiceDetails.resx">
       <DependentUpon>frmInvoiceDetails.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\Forms\Invoice\frmInvoices.resx">
+    <EmbeddedResource Include="Views\Forms\Invoice\frmInvoices.resx">
       <DependentUpon>frmInvoices.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\Forms\Main\frmDashboard.resx">
+    <EmbeddedResource Include="Views\Forms\Main\frmDashboard.resx">
       <DependentUpon>frmDashboard.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\Forms\Main\frmLogin.resx">
+    <EmbeddedResource Include="Views\Forms\Main\frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\Forms\Main\frmMain.resx">
+    <EmbeddedResource Include="Views\Forms\Main\frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\Forms\Products\frmBrands.resx">
+    <EmbeddedResource Include="Views\Forms\Products\frmBrands.resx">
       <DependentUpon>frmBrands.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\Forms\Products\frmCategorys.resx">
+    <EmbeddedResource Include="Views\Forms\Products\frmCategorys.resx">
       <DependentUpon>frmCategorys.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\Forms\Products\frmMeasurements.resx">
+    <EmbeddedResource Include="Views\Forms\Products\frmMeasurements.resx">
       <DependentUpon>frmMeasurements.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\Forms\Products\frmProducts.resx">
+    <EmbeddedResource Include="Views\Forms\Products\frmProducts.resx">
       <DependentUpon>frmProducts.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\Forms\Promotions\frmPromotionDetail.resx">
+    <EmbeddedResource Include="Views\Forms\Promotions\frmPromotionDetail.resx">
       <DependentUpon>frmPromotionDetail.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\Forms\Promotions\frmPromotions.resx">
+    <EmbeddedResource Include="Views\Forms\Promotions\frmPromotions.resx">
       <DependentUpon>frmPromotions.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\Forms\Suppliers\frmSupplierList.resx">
+    <EmbeddedResource Include="Views\Forms\Suppliers\frmSupplierList.resx">
       <DependentUpon>frmSupplierList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -403,16 +402,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="BLL\Interfaces\" />
-    <Folder Include="Common\Constants\" />
-    <Folder Include="Common\Enums\" />
-    <Folder Include="Common\Results\" />
-    <Folder Include="DAL\Interfaces\" />
-    <Folder Include="DAL\Repositories\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="DAL\Insert.sql" />
+    <Content Include="Insert.sql" />
     <Content Include="Resources\img\bill.png" />
     <Content Include="Resources\img\fire.png" />
     <Content Include="Resources\img\high-volume.png" />

@@ -6,7 +6,7 @@ using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.DTO.Models;
 
 namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
 {
-    public class CategoryService
+    public class CategoryService : ICategoryService
     {
         private readonly AppDbContext _readContext;
         private readonly QuanLyServices _services;
