@@ -188,11 +188,11 @@
     <Compile Include="Services\BrandService.cs" />
     <Compile Include="Services\CategoryService.cs" />
     <Compile Include="Services\CustomerService.cs" />
-<<<<<<< HEAD
+
     <Compile Include="Services\GoodsService.cs" />
-=======
+
     <Compile Include="Services\EventService.cs" />
->>>>>>> eb5994a112f0267022bb15464f1f5947a854f56c
+
     <Compile Include="Services\InvoiceService.cs" />
     <Compile Include="Services\IQuanLyServices.cs" />
     <Compile Include="Services\MeasurementService.cs" />
