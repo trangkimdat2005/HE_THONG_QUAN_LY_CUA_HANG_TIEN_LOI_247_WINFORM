@@ -26,10 +26,13 @@
             this.splitContainer = new System.Windows.Forms.SplitContainer();
             this.panelLeft = new System.Windows.Forms.Panel();
             this.dgvInvoiceDetails = new System.Windows.Forms.DataGridView();
+            this.colSanPhamId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colUnitInvoice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colUnitPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPromo = new System.Windows.Forms.DataGridViewButtonColumn();
             this.colRemove = new System.Windows.Forms.DataGridViewButtonColumn();
             this.panelTotal = new System.Windows.Forms.Panel();
             this.lblTotal = new System.Windows.Forms.Label();
@@ -38,10 +41,6 @@
             this.lblDiscountTitle = new System.Windows.Forms.Label();
             this.lblSubtotal = new System.Windows.Forms.Label();
             this.lblSubtotalTitle = new System.Windows.Forms.Label();
-            this.panelDiscount = new System.Windows.Forms.Panel();
-            this.btnApplyDiscount = new System.Windows.Forms.Button();
-            this.txtDiscount = new System.Windows.Forms.TextBox();
-            this.lblDiscount = new System.Windows.Forms.Label();
             this.pnlInvoiceInfo = new System.Windows.Forms.Panel();
             this.btnAddCustomer = new System.Windows.Forms.Button();
             this.cmbCustomer = new System.Windows.Forms.ComboBox();
@@ -50,7 +49,10 @@
             this.lblInvoiceIdTitle = new System.Windows.Forms.Label();
             this.panelRight = new System.Windows.Forms.Panel();
             this.dgvProducts = new System.Windows.Forms.DataGridView();
+            this.colProductId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colProductName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colUnitProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAdd = new System.Windows.Forms.DataGridViewButtonColumn();
             this.pnlProductSearch = new System.Windows.Forms.Panel();
@@ -69,7 +71,6 @@
             this.panelLeft.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInvoiceDetails)).BeginInit();
             this.panelTotal.SuspendLayout();
-            this.panelDiscount.SuspendLayout();
             this.pnlInvoiceInfo.SuspendLayout();
             this.panelRight.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProducts)).BeginInit();
@@ -120,7 +121,6 @@
             this.panelLeft.BackColor = System.Drawing.Color.White;
             this.panelLeft.Controls.Add(this.dgvInvoiceDetails);
             this.panelLeft.Controls.Add(this.panelTotal);
-            this.panelLeft.Controls.Add(this.panelDiscount);
             this.panelLeft.Controls.Add(this.pnlInvoiceInfo);
             this.panelLeft.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelLeft.Location = new System.Drawing.Point(0, 0);
@@ -145,10 +145,13 @@
             this.dgvInvoiceDetails.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvInvoiceDetails.ColumnHeadersHeight = 40;
             this.dgvInvoiceDetails.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colSanPhamId,
             this.colProduct,
+            this.colUnitInvoice,
             this.colQuantity,
             this.colUnitPrice,
             this.colTotal,
+            this.colPromo,
             this.colRemove});
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
@@ -164,15 +167,29 @@
             this.dgvInvoiceDetails.Name = "dgvInvoiceDetails";
             this.dgvInvoiceDetails.RowHeadersVisible = false;
             this.dgvInvoiceDetails.RowTemplate.Height = 35;
-            this.dgvInvoiceDetails.Size = new System.Drawing.Size(830, 360);
+            this.dgvInvoiceDetails.Size = new System.Drawing.Size(830, 410);
             this.dgvInvoiceDetails.TabIndex = 0;
+            this.dgvInvoiceDetails.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvInvoiceDetails_CellContentClick);
             this.dgvInvoiceDetails.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvInvoiceDetails_CellValueChanged);
+            // 
+            // colSanPhamId
+            // 
+            this.colSanPhamId.HeaderText = "SanPhamId";
+            this.colSanPhamId.Name = "colSanPhamId";
+            this.colSanPhamId.Visible = false;
             // 
             // colProduct
             // 
             this.colProduct.HeaderText = "Sản phẩm";
             this.colProduct.Name = "colProduct";
             this.colProduct.ReadOnly = true;
+            // 
+            // colUnitInvoice
+            // 
+            this.colUnitInvoice.FillWeight = 60F;
+            this.colUnitInvoice.HeaderText = "Đơn vị";
+            this.colUnitInvoice.Name = "colUnitInvoice";
+            this.colUnitInvoice.ReadOnly = true;
             // 
             // colQuantity
             // 
@@ -194,13 +211,22 @@
             this.colTotal.Name = "colTotal";
             this.colTotal.ReadOnly = true;
             // 
+            // colPromo
+            // 
+            this.colPromo.FillWeight = 50F;
+            this.colPromo.HeaderText = "KM";
+            this.colPromo.Name = "colPromo";
+            this.colPromo.Text = "Chọn";
+            this.colPromo.UseColumnTextForButtonValue = false;
+            this.colPromo.Width = 140; // widen promo column
+            // 
             // colRemove
             // 
-            this.colRemove.FillWeight = 50F;
-            this.colRemove.HeaderText = "";
+            this.colRemove.HeaderText = "X";
             this.colRemove.Name = "colRemove";
-            this.colRemove.Text = "🗑️";
+            this.colRemove.Text = "X";
             this.colRemove.UseColumnTextForButtonValue = true;
+            this.colRemove.Width = 50;
             // 
             // panelTotal
             // 
@@ -213,7 +239,7 @@
             this.panelTotal.Controls.Add(this.lblSubtotal);
             this.panelTotal.Controls.Add(this.lblSubtotalTitle);
             this.panelTotal.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelTotal.Location = new System.Drawing.Point(10, 450);
+            this.panelTotal.Location = new System.Drawing.Point(10, 500);
             this.panelTotal.Name = "panelTotal";
             this.panelTotal.Padding = new System.Windows.Forms.Padding(10);
             this.panelTotal.Size = new System.Drawing.Size(830, 130);
@@ -285,52 +311,6 @@
             this.lblSubtotalTitle.Size = new System.Drawing.Size(70, 20);
             this.lblSubtotalTitle.TabIndex = 0;
             this.lblSubtotalTitle.Text = "Tạm tính:";
-            // 
-            // panelDiscount
-            // 
-            this.panelDiscount.BackColor = System.Drawing.Color.White;
-            this.panelDiscount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelDiscount.Controls.Add(this.btnApplyDiscount);
-            this.panelDiscount.Controls.Add(this.txtDiscount);
-            this.panelDiscount.Controls.Add(this.lblDiscount);
-            this.panelDiscount.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelDiscount.Location = new System.Drawing.Point(10, 580);
-            this.panelDiscount.Name = "panelDiscount";
-            this.panelDiscount.Padding = new System.Windows.Forms.Padding(10);
-            this.panelDiscount.Size = new System.Drawing.Size(830, 50);
-            this.panelDiscount.TabIndex = 2;
-            // 
-            // btnApplyDiscount
-            // 
-            this.btnApplyDiscount.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(196)))), ((int)(((byte)(15)))));
-            this.btnApplyDiscount.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnApplyDiscount.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
-            this.btnApplyDiscount.ForeColor = System.Drawing.Color.White;
-            this.btnApplyDiscount.Location = new System.Drawing.Point(350, 8);
-            this.btnApplyDiscount.Name = "btnApplyDiscount";
-            this.btnApplyDiscount.Size = new System.Drawing.Size(100, 30);
-            this.btnApplyDiscount.TabIndex = 2;
-            this.btnApplyDiscount.Text = "Áp dụng";
-            this.btnApplyDiscount.UseVisualStyleBackColor = false;
-            this.btnApplyDiscount.Click += new System.EventHandler(this.btnApplyDiscount_Click);
-            // 
-            // txtDiscount
-            // 
-            this.txtDiscount.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.txtDiscount.Location = new System.Drawing.Point(120, 11);
-            this.txtDiscount.Name = "txtDiscount";
-            this.txtDiscount.Size = new System.Drawing.Size(220, 25);
-            this.txtDiscount.TabIndex = 1;
-            // 
-            // lblDiscount
-            // 
-            this.lblDiscount.AutoSize = true;
-            this.lblDiscount.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
-            this.lblDiscount.Location = new System.Drawing.Point(15, 14);
-            this.lblDiscount.Name = "lblDiscount";
-            this.lblDiscount.Size = new System.Drawing.Size(89, 17);
-            this.lblDiscount.TabIndex = 0;
-            this.lblDiscount.Text = "Mã giảm giá:";
             // 
             // pnlInvoiceInfo
             // 
@@ -434,7 +414,10 @@
             this.dgvProducts.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvProducts.ColumnHeadersHeight = 40;
             this.dgvProducts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colProductId,
             this.colProductName,
+            this.colCategory,
+            this.colUnitProduct,
             this.colPrice,
             this.colAdd});
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -458,11 +441,31 @@
             this.dgvProducts.TabIndex = 0;
             this.dgvProducts.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProducts_CellContentClick);
             // 
+            // colProductId
+            // 
+            this.colProductId.HeaderText = "Id";
+            this.colProductId.Name = "colProductId";
+            this.colProductId.ReadOnly = true;
+            this.colProductId.Visible = false;
+            // 
             // colProductName
             // 
             this.colProductName.HeaderText = "Tên sản phẩm";
             this.colProductName.Name = "colProductName";
             this.colProductName.ReadOnly = true;
+            // 
+            // colCategory
+            // 
+            this.colCategory.HeaderText = "Danh mục";
+            this.colCategory.Name = "colCategory";
+            this.colCategory.ReadOnly = true;
+            // 
+            // colUnitProduct
+            // 
+            this.colUnitProduct.FillWeight = 60F;
+            this.colUnitProduct.HeaderText = "Đơn vị";
+            this.colUnitProduct.Name = "colUnitProduct";
+            this.colUnitProduct.ReadOnly = true;
             // 
             // colPrice
             // 
@@ -606,8 +609,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvInvoiceDetails)).EndInit();
             this.panelTotal.ResumeLayout(false);
             this.panelTotal.PerformLayout();
-            this.panelDiscount.ResumeLayout(false);
-            this.panelDiscount.PerformLayout();
             this.pnlInvoiceInfo.ResumeLayout(false);
             this.pnlInvoiceInfo.PerformLayout();
             this.panelRight.ResumeLayout(false);
@@ -626,6 +627,14 @@
         private System.Windows.Forms.SplitContainer splitContainer;
         private System.Windows.Forms.Panel panelLeft;
         private System.Windows.Forms.DataGridView dgvInvoiceDetails;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colProduct;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colUnitInvoice;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colQuantity;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colUnitPrice;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTotal;
+        private System.Windows.Forms.DataGridViewButtonColumn colPromo;
+        private System.Windows.Forms.DataGridViewButtonColumn colRemove;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSanPhamId;
         private System.Windows.Forms.Panel panelTotal;
         private System.Windows.Forms.Label lblTotal;
         private System.Windows.Forms.Label lblTotalTitle;
@@ -633,10 +642,6 @@
         private System.Windows.Forms.Label lblDiscountTitle;
         private System.Windows.Forms.Label lblSubtotal;
         private System.Windows.Forms.Label lblSubtotalTitle;
-        private System.Windows.Forms.Panel panelDiscount;
-        private System.Windows.Forms.Button btnApplyDiscount;
-        private System.Windows.Forms.TextBox txtDiscount;
-        private System.Windows.Forms.Label lblDiscount;
         private System.Windows.Forms.Panel pnlInvoiceInfo;
         private System.Windows.Forms.Button btnAddCustomer;
         private System.Windows.Forms.ComboBox cmbCustomer;
@@ -645,6 +650,12 @@
         private System.Windows.Forms.Label lblInvoiceIdTitle;
         private System.Windows.Forms.Panel panelRight;
         private System.Windows.Forms.DataGridView dgvProducts;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colProductName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colProductId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCategory;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colUnitProduct;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPrice;
+        private System.Windows.Forms.DataGridViewButtonColumn colAdd;
         private System.Windows.Forms.Panel pnlProductSearch;
         private System.Windows.Forms.ComboBox cmbCategory;
         private System.Windows.Forms.Label lblCategory;
@@ -653,13 +664,5 @@
         private System.Windows.Forms.Panel pnlButtons;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnPayment;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colProduct;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colQuantity;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colUnitPrice;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colTotal;
-        private System.Windows.Forms.DataGridViewButtonColumn colRemove;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colProductName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPrice;
-        private System.Windows.Forms.DataGridViewButtonColumn colAdd;
     }
 }
