@@ -1,3 +1,4 @@
+
 ﻿namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Views.Forms.Employees
 {
     partial class frmShiftAssignment
@@ -17,7 +18,6 @@
 
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlTop = new System.Windows.Forms.Panel();
             this.lblTitle = new System.Windows.Forms.Label();
@@ -36,7 +36,6 @@
             this.colFri = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.colSat = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.colSun = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.lblInstruction = new System.Windows.Forms.Label();
             this.pnlTop.SuspendLayout();
             this.pnlControls.SuspendLayout();
             this.pnlGrid.SuspendLayout();
@@ -60,7 +59,7 @@
             this.lblTitle.ForeColor = System.Drawing.Color.White;
             this.lblTitle.Location = new System.Drawing.Point(12, 12);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(325, 32);
+            this.lblTitle.Size = new System.Drawing.Size(315, 32);
             this.lblTitle.TabIndex = 0;
             this.lblTitle.Text = "PHÂN CÔNG CA LÀM VIỆC";
             // 
@@ -84,7 +83,7 @@
             this.label1.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.label1.Location = new System.Drawing.Point(20, 25);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(117, 19);
+            this.label1.Size = new System.Drawing.Size(115, 19);
             this.label1.TabIndex = 0;
             this.label1.Text = "Chọn nhân viên:";
             // 
@@ -131,7 +130,6 @@
             // pnlGrid
             // 
             this.pnlGrid.BackColor = System.Drawing.Color.White;
-            this.pnlGrid.Controls.Add(this.lblInstruction);
             this.pnlGrid.Controls.Add(this.dgvShiftMatrix);
             this.pnlGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlGrid.Location = new System.Drawing.Point(0, 130);
@@ -147,14 +145,14 @@
             this.dgvShiftMatrix.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvShiftMatrix.BackgroundColor = System.Drawing.Color.White;
             this.dgvShiftMatrix.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(152)))), ((int)(((byte)(219)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvShiftMatrix.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(152)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvShiftMatrix.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvShiftMatrix.ColumnHeadersHeight = 45;
             this.dgvShiftMatrix.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colShiftName,
@@ -168,12 +166,12 @@
             this.dgvShiftMatrix.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvShiftMatrix.EnableHeadersVisualStyles = false;
             this.dgvShiftMatrix.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
-            this.dgvShiftMatrix.Location = new System.Drawing.Point(20, 50);
+            this.dgvShiftMatrix.Location = new System.Drawing.Point(20, 20);
             this.dgvShiftMatrix.Name = "dgvShiftMatrix";
             this.dgvShiftMatrix.RowHeadersVisible = false;
             this.dgvShiftMatrix.RowTemplate.Height = 40;
             this.dgvShiftMatrix.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dgvShiftMatrix.Size = new System.Drawing.Size(960, 400);
+            this.dgvShiftMatrix.Size = new System.Drawing.Size(960, 430);
             this.dgvShiftMatrix.TabIndex = 0;
             // 
             // colShiftName
@@ -218,19 +216,6 @@
             this.colSun.HeaderText = "Chủ Nhật";
             this.colSun.Name = "colSun";
             // 
-            // lblInstruction
-            // 
-            this.lblInstruction.AutoSize = true;
-            this.lblInstruction.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblInstruction.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Italic);
-            this.lblInstruction.ForeColor = System.Drawing.Color.DimGray;
-            this.lblInstruction.Location = new System.Drawing.Point(20, 20);
-            this.lblInstruction.Name = "lblInstruction";
-            this.lblInstruction.Padding = new System.Windows.Forms.Padding(0, 0, 0, 10);
-            this.lblInstruction.Size = new System.Drawing.Size(389, 29);
-            this.lblInstruction.TabIndex = 1;
-            this.lblInstruction.Text = "Tích chọn vào ô tương ứng để phân công ca làm việc cho nhân viên.";
-            // 
             // frmShiftAssignment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -249,7 +234,6 @@
             this.pnlControls.ResumeLayout(false);
             this.pnlControls.PerformLayout();
             this.pnlGrid.ResumeLayout(false);
-            this.pnlGrid.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvShiftMatrix)).EndInit();
             this.ResumeLayout(false);
 
@@ -265,7 +249,6 @@
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Panel pnlGrid;
-        private System.Windows.Forms.Label lblInstruction;
         private System.Windows.Forms.DataGridView dgvShiftMatrix;
         private System.Windows.Forms.DataGridViewTextBoxColumn colShiftName;
         private System.Windows.Forms.DataGridViewCheckBoxColumn colMon;
@@ -276,4 +259,5 @@
         private System.Windows.Forms.DataGridViewCheckBoxColumn colSat;
         private System.Windows.Forms.DataGridViewCheckBoxColumn colSun;
     }
+
 }

@@ -1,6 +1,5 @@
-
 ## =========================
-## Visual Studio 2022 + WinForms
+## Visual Studio 2022 Ignore + WinForms
 ## =========================
 
 # User-specific files
@@ -86,7 +85,7 @@ project.lock.json
 project.fragment.lock.json
 artifacts/
 
-# ASP.NET Scaffolding (in case of mixed WinForms + Web)
+# ASP.NET Scaffolding (phòng trường hợp WinForms + Web mixed)
 ScaffoldingReadMe.txt
 
 # Azure
@@ -97,6 +96,7 @@ PublishScripts/
 # Others
 *.DS_Store
 *.swp
+*.tmp
 *.temp
 
 docker-compose.override.yml
@@ -106,16 +106,18 @@ docker-compose.override.yml
 # WINFORMS-SPECIFIC IGNORE
 # ============================
 
-# Resource Designer auto-generated files
-# ONLY ignore Resources.Designer.cs, NOT Form Designer files
-*.resources
+# Resource Designer auto-generated (CHỈ ignore Resources.Designer.cs, KHÔNG ignore Form Designer.cs)
 Properties/Resources.Designer.cs
-Properties/Resources.resx
 
-# DO NOT ignore these WinForms essential files:
-# - Form1.Designer.cs (Form Designer code)
-# - UserControl1.Designer.cs (UserControl Designer code)
-# These are critical for the visual designer
+# WinForms compiled resources
+*.resources
+
+# WinForms temporary images/icons (nếu muốn track icons/images thì xóa phần này)
+# *.ico
+# *.png
+# *.jpg
+# *.jpeg
+# *.bmp
 
 # Setup project output
 Setup/Release/
@@ -141,12 +143,13 @@ appsettings.json.backup
 # Logs
 log/
 logs/
+*.log
 
 # Temp data for app runtime
 temp/
 tempData/
 cache/
 
-# User-generated runtime data (optional - adjust based on your needs)
-# uploads/
-# userdata/
+
+# Visual Studio cache
+.vs/

@@ -250,6 +250,12 @@
     <Compile Include="Views\forms\Invoice\frmInvoices.Designer.cs">
       <DependentUpon>frmInvoices.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\forms\Invoice\frmPayment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\forms\Invoice\frmPayment.Designer.cs">
+      <DependentUpon>frmPayment.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\forms\Main\frmDashboard.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -309,6 +315,12 @@
     </Compile>
     <Compile Include="Views\forms\Promotions\frmPromotions.Designer.cs">
       <DependentUpon>frmPromotions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\forms\Reports\frmSalesReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\forms\Reports\frmSalesReport.Designer.cs">
+      <DependentUpon>frmSalesReport.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\forms\Suppliers\frmSupplierList.cs">
       <SubType>Form</SubType>
@@ -398,6 +410,9 @@
     <EmbeddedResource Include="Views\forms\Promotions\frmPromotions.resx">
       <DependentUpon>frmPromotions.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\forms\Reports\frmSalesReport.resx">
+      <DependentUpon>frmSalesReport.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\forms\Suppliers\frmSupplierList.resx">
       <DependentUpon>frmSupplierList.cs</DependentUpon>
     </EmbeddedResource>
@@ -420,10 +435,14 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include=".gitignore" />
     <Content Include="Insert.sql" />
+    <Content Include="Resources\img\bar-chart.png" />
     <Content Include="Resources\img\bill.png" />
     <Content Include="Resources\img\fire.png" />
     <Content Include="Resources\img\high-volume.png" />
+    <Content Include="Resources\img\logo-removebg-preview.png" />
+    <Content Include="Resources\img\logo.png" />
     <Content Include="Resources\img\logout.png" />
     <Content Include="Resources\img\overview.png" />
     <Content Include="Resources\img\people.png" />
