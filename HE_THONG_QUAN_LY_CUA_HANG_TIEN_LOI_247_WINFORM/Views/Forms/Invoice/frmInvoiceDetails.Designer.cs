@@ -94,7 +94,7 @@
             this.lblTitle.ForeColor = System.Drawing.Color.White;
             this.lblTitle.Location = new System.Drawing.Point(12, 12);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(227, 32);
+            this.lblTitle.Size = new System.Drawing.Size(234, 32);
             this.lblTitle.TabIndex = 0;
             this.lblTitle.Text = "CHI TIẾT HÓA ĐƠN";
             // 
@@ -164,7 +164,7 @@
             this.dgvInvoiceDetails.Name = "dgvInvoiceDetails";
             this.dgvInvoiceDetails.RowHeadersVisible = false;
             this.dgvInvoiceDetails.RowTemplate.Height = 35;
-            this.dgvInvoiceDetails.Size = new System.Drawing.Size(830, 310);
+            this.dgvInvoiceDetails.Size = new System.Drawing.Size(830, 360);
             this.dgvInvoiceDetails.TabIndex = 0;
             this.dgvInvoiceDetails.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvInvoiceDetails_CellValueChanged);
             // 
@@ -328,7 +328,7 @@
             this.lblDiscount.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
             this.lblDiscount.Location = new System.Drawing.Point(15, 14);
             this.lblDiscount.Name = "lblDiscount";
-            this.lblDiscount.Size = new System.Drawing.Size(99, 17);
+            this.lblDiscount.Size = new System.Drawing.Size(89, 17);
             this.lblDiscount.TabIndex = 0;
             this.lblDiscount.Text = "Mã giảm giá:";
             // 
@@ -364,7 +364,7 @@
             // 
             // cmbCustomer
             // 
-            this.cmbCustomer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.cmbCustomer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbCustomer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbCustomer.Font = new System.Drawing.Font("Segoe UI", 9.75F);
@@ -380,7 +380,7 @@
             this.lblCustomer.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
             this.lblCustomer.Location = new System.Drawing.Point(15, 45);
             this.lblCustomer.Name = "lblCustomer";
-            this.lblCustomer.Size = new System.Drawing.Size(87, 17);
+            this.lblCustomer.Size = new System.Drawing.Size(84, 17);
             this.lblCustomer.TabIndex = 2;
             this.lblCustomer.Text = "Khách hàng:";
             // 
@@ -391,7 +391,7 @@
             this.lblInvoiceId.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
             this.lblInvoiceId.Location = new System.Drawing.Point(130, 15);
             this.lblInvoiceId.Name = "lblInvoiceId";
-            this.lblInvoiceId.Size = new System.Drawing.Size(75, 17);
+            this.lblInvoiceId.Size = new System.Drawing.Size(71, 17);
             this.lblInvoiceId.TabIndex = 1;
             this.lblInvoiceId.Text = "[Tự động]";
             // 
@@ -401,7 +401,7 @@
             this.lblInvoiceIdTitle.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
             this.lblInvoiceIdTitle.Location = new System.Drawing.Point(15, 15);
             this.lblInvoiceIdTitle.Name = "lblInvoiceIdTitle";
-            this.lblInvoiceIdTitle.Size = new System.Drawing.Size(93, 17);
+            this.lblInvoiceIdTitle.Size = new System.Drawing.Size(86, 17);
             this.lblInvoiceIdTitle.TabIndex = 0;
             this.lblInvoiceIdTitle.Text = "Mã hóa đơn:";
             // 
@@ -456,6 +456,7 @@
             this.dgvProducts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvProducts.Size = new System.Drawing.Size(526, 540);
             this.dgvProducts.TabIndex = 0;
+            this.dgvProducts.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProducts_CellContentClick);
             // 
             // colProductName
             // 
@@ -496,7 +497,7 @@
             // 
             // cmbCategory
             // 
-            this.cmbCategory.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.cmbCategory.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbCategory.Font = new System.Drawing.Font("Segoe UI", 9.75F);
@@ -513,13 +514,13 @@
             this.lblCategory.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
             this.lblCategory.Location = new System.Drawing.Point(15, 45);
             this.lblCategory.Name = "lblCategory";
-            this.lblCategory.Size = new System.Drawing.Size(79, 17);
+            this.lblCategory.Size = new System.Drawing.Size(75, 17);
             this.lblCategory.TabIndex = 2;
             this.lblCategory.Text = "Danh mục:";
             // 
             // txtSearch
             // 
-            this.txtSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.txtSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSearch.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             this.txtSearch.Location = new System.Drawing.Point(100, 12);
@@ -534,7 +535,7 @@
             this.lblSearch.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
             this.lblSearch.Location = new System.Drawing.Point(15, 15);
             this.lblSearch.Name = "lblSearch";
-            this.lblSearch.Size = new System.Drawing.Size(71, 17);
+            this.lblSearch.Size = new System.Drawing.Size(70, 17);
             this.lblSearch.TabIndex = 0;
             this.lblSearch.Text = "Tìm kiếm:";
             // 
