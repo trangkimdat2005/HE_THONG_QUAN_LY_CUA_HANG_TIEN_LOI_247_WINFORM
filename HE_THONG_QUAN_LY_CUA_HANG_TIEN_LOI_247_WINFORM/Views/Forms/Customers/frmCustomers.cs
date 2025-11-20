@@ -61,10 +61,18 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
             // Thiết lập trạng thái
             var statuses = new List<string> { "Active", "Inactive" };
             cmbStatus.DataSource = statuses;
-            cmbStatus.SelectedIndex = 0;
+            cmbStatus.SelectedIndex =0;
             
-            // Set default date
-            dtpBirthDate.Value = DateTime.Now.AddYears(-20);
+            // Set explicit Min/Max for birth date: at least13 years old, at most120 years
+            DateTime today = DateTime.Today;
+            dtpBirthDate.MaxDate = today.AddYears(-13);
+            dtpBirthDate.MinDate = today.AddYears(-120);
+
+            // Set default date within range
+            DateTime defaultDate = DateTime.Now.AddYears(-20);
+            if (defaultDate > dtpBirthDate.MaxDate) defaultDate = dtpBirthDate.MaxDate;
+            if (defaultDate < dtpBirthDate.MinDate) defaultDate = dtpBirthDate.MinDate;
+            dtpBirthDate.Value = defaultDate;
         }
 
         /// <summary>
@@ -285,8 +293,17 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
             txtEmail.Clear();
             txtAddress.Clear();
             rbMale.Checked = true;
-            dtpBirthDate.Value = DateTime.Now.AddYears(-20);
-            cmbStatus.SelectedIndex = 0;
+
+            // Ensure Min/Max are set and reset value
+            DateTime today = DateTime.Today;
+            dtpBirthDate.MaxDate = today.AddYears(-13);
+            dtpBirthDate.MinDate = today.AddYears(-120);
+            DateTime clearDate = DateTime.Now.AddYears(-20);
+            if (clearDate > dtpBirthDate.MaxDate) clearDate = dtpBirthDate.MaxDate;
+            if (clearDate < dtpBirthDate.MinDate) clearDate = dtpBirthDate.MinDate;
+            dtpBirthDate.Value = clearDate;
+
+            cmbStatus.SelectedIndex =0;
         }
 
         /// <summary>

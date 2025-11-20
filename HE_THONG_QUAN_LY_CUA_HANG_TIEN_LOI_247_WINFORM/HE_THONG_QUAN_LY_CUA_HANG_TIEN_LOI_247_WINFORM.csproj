@@ -117,6 +117,8 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\GoodsController.cs" />
+    <Compile Include="DTO\GoodDetailDto.cs" />
     <Compile Include="Models\Anh_SanPhamDonVi.cs" />
     <Compile Include="Models\AppDbContext.cs" />
     <Compile Include="Models\BaoCao.cs" />
@@ -186,6 +188,7 @@
     <Compile Include="Services\CategoryService.cs" />
     <Compile Include="Services\CustomerService.cs" />
     <Compile Include="Services\EventService.cs" />
+    <Compile Include="Services\GoodsService.cs" />
     <Compile Include="Services\InvoiceService.cs" />
     <Compile Include="Services\IQuanLyServices.cs" />
     <Compile Include="Services\MeasurementService.cs" />
@@ -283,6 +286,12 @@
     </Compile>
     <Compile Include="Views\forms\Invoice\frmInvoices.Designer.cs">
       <DependentUpon>frmInvoices.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\forms\Invoice\frmPayment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\forms\Invoice\frmPayment.Designer.cs">
+      <DependentUpon>frmPayment.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\forms\Main\frmDashboard.cs">
       <SubType>Form</SubType>
@@ -441,6 +450,9 @@
     <EmbeddedResource Include="Views\forms\Promotions\frmPromotions.resx">
       <DependentUpon>frmPromotions.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\forms\Reports\frmSalesReport.resx">
+      <DependentUpon>frmSalesReport.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\forms\Suppliers\frmSupplierList.resx">
       <DependentUpon>frmSupplierList.cs</DependentUpon>
     </EmbeddedResource>
@@ -465,9 +477,12 @@
   <ItemGroup>
     <Content Include=".gitignore" />
     <Content Include="Insert.sql" />
+    <Content Include="Resources\img\bar-chart.png" />
     <Content Include="Resources\img\bill.png" />
     <Content Include="Resources\img\fire.png" />
     <Content Include="Resources\img\high-volume.png" />
+    <Content Include="Resources\img\logo-removebg-preview.png" />
+    <Content Include="Resources\img\logo.png" />
     <Content Include="Resources\img\logout.png" />
     <Content Include="Resources\img\overview.png" />
     <Content Include="Resources\img\people.png" />

@@ -6,6 +6,7 @@ using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms.Pro
 using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms.Suppliers;
 using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Promotions;
 using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Views.Forms.Employees;
+using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Views.forms.Reports;
 using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Views.Forms.Inventory;
 using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Views.Forms.Products;
 using System;
@@ -228,7 +229,12 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
             pnlStorageSubmenu.Visible = false;
             SetActiveButton(btn_products, null);
         }
-
+        private void btn_reports_Click(object sender, EventArgs e)
+        {
+            LoadFormIntoPanel(new frmSalesReport());
+            HideSubMenus();
+            SetActiveButton(btn_reports, null);
+        }
         // --- Click cho các nút menu con của Sản phẩm ---
 
         private void btnSub_SanPham_Click(object sender, EventArgs e)
@@ -385,6 +391,6 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
             SetActiveButton(btn_inventory, btnSub_TonKho);
         }
 
-      
+  
     }
 }

@@ -6,8 +6,7 @@ using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Models;
 
 namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
 {
-
-    public class CategoryService
+    public class CategoryService 
     {
         private readonly AppDbContext _readContext;
         private readonly QuanLyServices _services;
@@ -15,7 +14,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
         public CategoryService()
         {
             _readContext = new AppDbContext();
-            _services = new QuanLyServices(); 
+            _services = new QuanLyServices();
         }
 
         #region Get/Search Operations
@@ -32,18 +31,12 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
                     {
                         Id = c.id,
                         Ten = c.ten,
-                        SoLuongSanPham = _readContext.SanPhamViTris.Count(vt =>
-                            !vt.isDelete &&
-                            _readContext.SanPhamDonVis.Any(dv =>
-                                dv.id == vt.sanPhamDonViId &&
-                                !dv.isDelete &&
-                                _readContext.SanPhamDanhMucs.Any(dm =>
-                                    dm.sanPhamId == dv.sanPhamId &&
-                                    dm.danhMucId == c.id &&
-                                    !dm.isDelete
-                                )
-                            )
-                        ),
+                        // Đếm tổng số SanPhamDonVi (đơn vị sản phẩm) có trong danh mục - đang kinh doanh
+                        SoLuongSanPham = (from dm in _readContext.SanPhamDanhMucs
+                                          where dm.danhMucId == c.id && !dm.isDelete
+                                          join spDv in _readContext.SanPhamDonVis on dm.sanPhamId equals spDv.sanPhamId
+                                          where !spDv.isDelete && spDv.trangThai == "available"
+                                          select spDv.id).Count(),
                         TrangThai = c.isDelete ? "Không hoạt động" : "Hoạt động"
                     })
                     .ToList();
@@ -59,25 +52,19 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
                 return _readContext.DanhMucs
                     .AsNoTracking()
                     .Where(c => !c.isDelete && (
-                       c.ten.ToLower().Contains(keyword) ||
-                       c.id.ToLower().Contains(keyword)))
+                        c.ten.ToLower().Contains(keyword) ||
+                        c.id.ToLower().Contains(keyword)))
                     .OrderBy(c => c.id)
                     .Select(c => new
                     {
                         Id = c.id,
                         Ten = c.ten,
-                        SoLuongSanPham = _readContext.SanPhamViTris.Count(vt =>
-                            !vt.isDelete &&
-                            _readContext.SanPhamDonVis.Any(dv =>
-                                dv.id == vt.sanPhamDonViId &&
-                                !dv.isDelete &&
-                                _readContext.SanPhamDanhMucs.Any(dm =>
-                                    dm.sanPhamId == dv.sanPhamId &&
-                                    dm.danhMucId == c.id &&
-                                    !dm.isDelete
-                                )
-                            )
-                        ),
+                        // Đếm tổng số SanPhamDonVi (đơn vị sản phẩm) có trong danh mục - đang kinh doanh
+                        SoLuongSanPham = (from dm in _readContext.SanPhamDanhMucs
+                                          where dm.danhMucId == c.id && !dm.isDelete
+                                          join spDv in _readContext.SanPhamDonVis on dm.sanPhamId equals spDv.sanPhamId
+                                          where !spDv.isDelete && spDv.trangThai == "available"
+                                          select spDv.id).Count(),
                         TrangThai = c.isDelete ? "Không hoạt động" : "Hoạt động"
                     })
                     .ToList();
@@ -90,20 +77,15 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
             return _readContext.DanhMucs.AsNoTracking().FirstOrDefault(c => c.id == id);
         }
 
+        // Hàm này lấy số lượng hiển thị lên Label bên phải
         public int GetProductCountFromLocation(string categoryId)
         {
-            return _readContext.SanPhamViTris.Count(vt =>
-                !vt.isDelete &&
-                _readContext.SanPhamDonVis.Any(dv =>
-                    dv.id == vt.sanPhamDonViId &&
-                    !dv.isDelete &&
-                    _readContext.SanPhamDanhMucs.Any(dm =>
-                        dm.sanPhamId == dv.sanPhamId &&
-                        dm.danhMucId == categoryId &&
-                        !dm.isDelete
-                    )
-                )
-            );
+            // Đếm tổng số SanPhamDonVi (đơn vị sản phẩm) có trong danh mục - đang kinh doanh
+            return (from dm in _readContext.SanPhamDanhMucs
+                    where dm.danhMucId == categoryId && !dm.isDelete
+                    join spDv in _readContext.SanPhamDonVis on dm.sanPhamId equals spDv.sanPhamId
+                    where !spDv.isDelete && spDv.trangThai == "available"
+                    select spDv.id).Count();
         }
 
         #endregion
@@ -121,7 +103,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
 
                     if (string.IsNullOrEmpty(category.id) || category.id == "Tự động tạo")
                     {
-                        category.id = _services.GenerateNewId<DanhMuc>("DM", 5);
+                        category.id = _services.GenerateNewId<DanhMuc>("DM", 6);
                     }
                     else
                     {
@@ -167,24 +149,19 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
                     var category = db.DanhMucs.Find(categoryId);
                     if (category == null) return (false, "Không tìm thấy danh mục.");
 
-                    int countInUse = db.SanPhamViTris.Count(vt =>
-                        !vt.isDelete &&
-                        db.SanPhamDonVis.Any(dv =>
-                            dv.id == vt.sanPhamDonViId &&
-                            !dv.isDelete &&
-                            db.SanPhamDanhMucs.Any(dm =>
-                                dm.sanPhamId == dv.sanPhamId &&
-                                dm.danhMucId == categoryId &&
-                                !dm.isDelete
-                            )
-                        )
-                    );
+                    // Kiểm tra nếu danh mục đang có đơn vị sản phẩm đang kinh doanh
+                    int countInUse = (from dm in db.SanPhamDanhMucs
+                                      where dm.danhMucId == categoryId && !dm.isDelete
+                                      join spDv in db.SanPhamDonVis on dm.sanPhamId equals spDv.sanPhamId
+                                      where !spDv.isDelete && spDv.trangThai == "available"
+                                      select spDv.id).Count();
 
                     if (countInUse > 0)
-                        return (false, $"Không thể xóa! Đang có {countInUse} lô hàng trong kho thuộc danh mục này.");
+                        return (false, $"Không thể xóa! Đang có {countInUse} sản phẩm thuộc danh mục này.");
 
                     category.isDelete = true;
 
+                    // Xóa mềm các liên kết (dù đã chặn ở trên nhưng cứ giữ để an toàn)
                     var links = db.SanPhamDanhMucs.Where(x => x.danhMucId == categoryId).ToList();
                     foreach (var link in links) link.isDelete = true;
 
@@ -201,7 +178,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
 
         public string GenerateNewCategoryId()
         {
-            return _services.GenerateNewId<DanhMuc>("DM", 5);
+            return _services.GenerateNewId<DanhMuc>("DM", 6);
         }
 
         #endregion

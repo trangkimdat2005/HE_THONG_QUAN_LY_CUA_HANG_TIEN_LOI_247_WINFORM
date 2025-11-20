@@ -26,11 +26,35 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Services
             }
         }
 
+        // Allow only digits; enforce first char '0' and max length10 when used for phone TextBox
         public static void TextBox_KhongNhapChu_KeyPress(object sender, KeyPressEventArgs e) // Thêm 'static'
         {
-            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            var txt = sender as TextBox;
+            // Allow control keys (Backspace etc.)
+            if (char.IsControl(e.KeyChar)) return;
+
+            // Only digits allowed
+            if (!char.IsDigit(e.KeyChar))
             {
                 e.Handled = true;
+                return;
+            }
+
+            if (txt != null)
+            {
+                // If first character, enforce it must be '0'
+                if (txt.Text.Length == 0 && e.KeyChar != '0')
+                {
+                    e.Handled = true;
+                    return;
+                }
+
+                // Limit to 10 digits
+                if (txt.Text.Length >= 10)
+                {
+                    e.Handled = true;
+                    return;
+                }
             }
         }
 
@@ -97,12 +121,13 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Services
             if (string.IsNullOrWhiteSpace(phone))
                 return;
 
-            string pattern = @"^0\d{9,10}$";
+            // Require exactly10 digits and start with0
+            string pattern = "^0\\d{9}$";
 
             if (!Regex.IsMatch(phone, pattern))
             {
                 MessageBox.Show(
-                    "Số điện thoại không hợp lệ!\nVí dụ đúng: 0987654321 (10–11 chữ số, bắt đầu bằng 0)",
+                    "Số điện thoại không hợp lệ!\nVí dụ đúng:0987654321 (tổng10 chữ số, bắt đầu bằng0)",
                     "Lỗi định dạng",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error
