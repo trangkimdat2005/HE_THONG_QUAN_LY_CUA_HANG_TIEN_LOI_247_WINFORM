@@ -462,7 +462,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="FIX_PRODUCTS_GUIDE.md" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -494,7 +493,6 @@
     <Content Include="Resources\img\user.png" />
     <Content Include="Resources\img\vector-logout-sign-icon-removebg-preview.png" />
     <Content Include="Resources\img\verified-user.png" />
-    <Content Include="TEST_PRODUCTS_DATABASE.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

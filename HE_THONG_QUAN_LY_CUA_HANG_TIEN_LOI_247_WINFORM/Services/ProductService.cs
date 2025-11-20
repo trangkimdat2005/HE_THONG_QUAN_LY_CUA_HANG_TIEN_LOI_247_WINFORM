@@ -67,30 +67,24 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
                     query = query.Where(spd => spd.SanPham.SanPhamDanhMucs.Any(dm => dm.danhMucId == categoryId && !dm.isDelete));
                 }
 
-                // 4. Map sang DTO để đổ vào DataGridView
-                // Đảm bảo đúng yêu cầu: SP từ frmGoods, Đơn vị từ frmMeasurements
                 var result = query.Select(spd => new ProductDetailDto
                 {
-                    Id = spd.id,                               // ID bảng SanPhamDonVi (để thao tác sửa/xóa)
+                    Id = spd.id,                            
 
-                    // --- Thông tin từ frmGoods (Bảng SanPham) ---
-                    MaSP = spd.SanPham.id,                     // Mã Sản Phẩm
-                    TenSanPham = spd.SanPham.ten,              // Tên Sản Phẩm
+                    MaSP = spd.SanPham.id,                     
+                    TenSanPham = spd.SanPham.ten,            
                     NhanHieu = spd.SanPham.NhanHieu != null ? spd.SanPham.NhanHieu.ten : "Chưa có",
 
-                    // Lấy danh mục đầu tiên (vì 1 SP có thể thuộc nhiều danh mục)
                     DanhMuc = spd.SanPham.SanPhamDanhMucs
                                 .Where(dm => !dm.isDelete)
                                 .Select(dm => dm.DanhMuc.ten)
                                 .FirstOrDefault() ?? "Chưa phân loại",
 
-                    // --- Thông tin từ frmMeasurements (Bảng DonViDoLuong) ---
-                    DonVi = spd.DonViDoLuong.ten,              // Tên Đơn vị tính
-                    DonViId = spd.donViId,                     // ID Đơn vị (ẩn nếu cần)
+                    DonVi = spd.DonViDoLuong.ten,          
+                    DonViId = spd.donViId,                
 
-                    // --- Thông tin riêng của bảng SanPhamDonVi ---
-                    GiaBan = spd.giaBan,                       // Giá bán
-                    TrangThai = spd.trangThai,                 // Trạng thái (VD: Đang kinh doanh)
+                    GiaBan = spd.giaBan,                      
+                    TrangThai = spd.trangThai,             
                     HeSoQuyDoi = spd.heSoQuyDoi
                 })
                 .OrderBy(x => x.TenSanPham) // Sắp xếp theo tên
@@ -104,7 +98,6 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
                 throw new Exception($"Lỗi lọc sản phẩm: {ex.Message}", ex);
             }
         }
-        // ------------------------------------------------------
 
         public List<SanPham> GetAllGoods(string keyword = null, string brandId = null, string categoryId = null)
         {
