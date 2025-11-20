@@ -244,11 +244,31 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Views.forms.Main
                     {
                         lblSalary.Text = employee.luongCoBan.ToString("N0") + " ₫";
                         
-                        // Cập nhật status badge
+                        // ✅ FIX: Cập nhật màu sắc cho status badge
                         lblStatusBadge.Text = employee.trangThai;
-                        lblStatusBadge.BackColor = employee.trangThai == "Đang làm việc" 
-                            ? Color.FromArgb(40, 167, 69)   // Xanh
-                            : Color.FromArgb(220, 53, 69);  // Đỏ
+                        
+                        // Kiểm tra trạng thái và set màu tương ứng
+                        if (employee.trangThai == "Đang làm việc" || employee.trangThai == "Hoạt động")
+                        {
+                            // Màu xanh lá cho trạng thái hoạt động
+                            lblStatusBadge.BackColor = Color.FromArgb(40, 167, 69);   // Green
+                            lblStatusBadge.ForeColor = Color.White;
+                        }
+                        else if (employee.trangThai == "Nghỉ việc" || employee.trangThai == "Tạm nghỉ")
+                        {
+                            // Màu đỏ cho trạng thái nghỉ việc
+                            lblStatusBadge.BackColor = Color.FromArgb(220, 53, 69);  // Red
+                            lblStatusBadge.ForeColor = Color.White;
+                        }
+                        else
+                        {
+                            // Màu vàng cam cho các trạng thái khác (nếu có)
+                            lblStatusBadge.BackColor = Color.FromArgb(255, 193, 7);  // Warning Yellow
+                            lblStatusBadge.ForeColor = Color.Black;
+                        }
+                        
+                        lblStatusBadge.Padding = new System.Windows.Forms.Padding(10, 5, 10, 5);
+                        lblStatusBadge.AutoSize = true;
                     }
                 }
             }

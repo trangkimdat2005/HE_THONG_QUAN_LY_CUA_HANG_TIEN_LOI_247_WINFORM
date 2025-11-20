@@ -70,7 +70,7 @@
             this.lblTitle.ForeColor = System.Drawing.Color.White;
             this.lblTitle.Location = new System.Drawing.Point(12, 9);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(232, 30);
+            this.lblTitle.Size = new System.Drawing.Size(277, 30);
             this.lblTitle.TabIndex = 0;
             this.lblTitle.Text = "THANH TOÁN ĐƠN HÀNG";
             // 
@@ -127,7 +127,7 @@
             this.lblDate.ForeColor = System.Drawing.Color.DimGray;
             this.lblDate.Location = new System.Drawing.Point(10, 325);
             this.lblDate.Name = "lblDate";
-            this.lblDate.Size = new System.Drawing.Size(108, 19);
+            this.lblDate.Size = new System.Drawing.Size(103, 19);
             this.lblDate.TabIndex = 2;
             this.lblDate.Text = "Ngày giao dịch:";
             // 
@@ -195,7 +195,7 @@
             this.lblVatNote.ForeColor = System.Drawing.Color.DimGray;
             this.lblVatNote.Location = new System.Drawing.Point(135, 100);
             this.lblVatNote.Name = "lblVatNote";
-            this.lblVatNote.Size = new System.Drawing.Size(166, 15);
+            this.lblVatNote.Size = new System.Drawing.Size(158, 15);
             this.lblVatNote.TabIndex = 2;
             this.lblVatNote.Text = "Đã bao gồm VAT và giảm giá";
             // 
@@ -217,7 +217,7 @@
             this.lblTotalLabel.ForeColor = System.Drawing.Color.DimGray;
             this.lblTotalLabel.Location = new System.Drawing.Point(15, 15);
             this.lblTotalLabel.Name = "lblTotalLabel";
-            this.lblTotalLabel.Size = new System.Drawing.Size(247, 20);
+            this.lblTotalLabel.Size = new System.Drawing.Size(256, 20);
             this.lblTotalLabel.TabIndex = 0;
             this.lblTotalLabel.Text = "$ TỔNG CỘNG PHẢI THANH TOÁN";
             // 
@@ -308,7 +308,7 @@
             this.lblChangeLabel.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.lblChangeLabel.Location = new System.Drawing.Point(0, 215);
             this.lblChangeLabel.Name = "lblChangeLabel";
-            this.lblChangeLabel.Size = new System.Drawing.Size(181, 19);
+            this.lblChangeLabel.Size = new System.Drawing.Size(176, 19);
             this.lblChangeLabel.TabIndex = 5;
             this.lblChangeLabel.Text = "Tiền Thối Lại (Trả Khách):";
             // 
@@ -326,7 +326,7 @@
             this.lblSuggestions.ForeColor = System.Drawing.Color.DimGray;
             this.lblSuggestions.Location = new System.Drawing.Point(0, 130);
             this.lblSuggestions.Name = "lblSuggestions";
-            this.lblSuggestions.Size = new System.Drawing.Size(87, 15);
+            this.lblSuggestions.Size = new System.Drawing.Size(90, 15);
             this.lblSuggestions.TabIndex = 3;
             this.lblSuggestions.Text = "Gợi ý mệnh giá:";
             // 
@@ -347,20 +347,21 @@
             this.lblCustomerPay.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.lblCustomerPay.Location = new System.Drawing.Point(0, 55);
             this.lblCustomerPay.Name = "lblCustomerPay";
-            this.lblCustomerPay.Size = new System.Drawing.Size(133, 19);
+            this.lblCustomerPay.Size = new System.Drawing.Size(136, 19);
             this.lblCustomerPay.TabIndex = 1;
             this.lblCustomerPay.Text = "Tiền Khách Đưa (*):";
             // 
             // lblRightHeader
             // 
             this.lblRightHeader.AutoSize = true;
+            this.lblRightHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.lblRightHeader.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
             this.lblRightHeader.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
             this.lblRightHeader.Location = new System.Drawing.Point(0, 0);
             this.lblRightHeader.Name = "lblRightHeader";
-            this.lblRightHeader.Size = new System.Drawing.Size(208, 25);
+            this.lblRightHeader.Size = new System.Drawing.Size(232, 25);
             this.lblRightHeader.TabIndex = 0;
-            this.lblRightHeader.Text = "💵 Thanh Toán Tiền Mặt";
+            this.lblRightHeader.Text = "THANH TOÁN TIỀN MẶT";
             // 
             // frmPayment
             // 

@@ -86,12 +86,30 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
             try { DisplayInvoices(_invoiceController.SearchInvoices(txtSearch.Text, dtpFromDate.Value, dtpToDate.Value, cmbStatus.Text)); } catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
 
-        private void btnCreateNew_Click(object sender, EventArgs e) { new frmInvoiceDetails().ShowDialog(); LoadInvoices(); }
-        private void btnView_Click(object sender, EventArgs e) { if (!string.IsNullOrEmpty(_selectedInvoiceId)) { new frmInvoiceDetails(_selectedInvoiceId).ShowDialog(); LoadInvoices(); } }
+        private void btnCreateNew_Click(object sender, EventArgs e) 
+        { 
+            var form = new frmInvoiceDetails();
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+                LoadInvoices(); // Refresh if invoice was created and paid
+            }
+        }
+        
+        private void btnView_Click(object sender, EventArgs e) 
+        { 
+            if (!string.IsNullOrEmpty(_selectedInvoiceId)) 
+            { 
+                var form = new frmInvoiceDetails(_selectedInvoiceId);
+                if (form.ShowDialog() == DialogResult.OK)
+                {
+                    LoadInvoices(); // Refresh if invoice was updated/paid
+                }
+            } 
+        }
         private void btnDelete_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(_selectedInvoiceId)) return;
-            if (MessageBox.Show("Xóa?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            if (MessageBox.Show("Xóa", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
                 var res = _invoiceController.DeleteInvoice(_selectedInvoiceId);
                 MessageBox.Show(res.Item2); if (res.Item1) LoadInvoices();
