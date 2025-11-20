@@ -1,5 +1,5 @@
 ﻿using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.DTO;
-using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Models; // Ensure this namespace has ProductDetailDto
+using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Models; 
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -36,42 +36,63 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
 
                 if (!string.IsNullOrWhiteSpace(keyword))
                 {
-                    keyword = keyword.ToLower();  // Chuyển keyword về chữ thường
-
-                    query = query.Where(p => (p.sanPhamId != null && p.sanPhamId.ToLower().Contains(keyword)) ||
-                                             (p.SanPham != null && p.SanPham.ten != null && p.SanPham.ten.ToLower().Contains(keyword))).ToList();
+                    keyword = keyword.ToLower();
+                    query = query.Where(p => 
+                        (p.sanPhamId != null && p.sanPhamId.ToLower().Contains(keyword)) ||
+                        (p.SanPham != null && p.SanPham.ten != null && p.SanPham.ten.ToLower().Contains(keyword))
+                    ).ToList();
                 }
-                if (!string.IsNullOrEmpty(brandId)) query = query.Where(p => p.SanPham.nhanHieuId == brandId).ToList();
+                
+                if (!string.IsNullOrEmpty(brandId))
+                {
+                    query = query.Where(p => p.SanPham.nhanHieuId == brandId).ToList();
+                }
+                
                 if (!string.IsNullOrEmpty(categoryId))
                 {
-                    query = query.Where(p => p.SanPham.SanPhamDanhMucs.Any(spdm => spdm.danhMucId == categoryId && !spdm.isDelete)).ToList();
+                    query = query.Where(p => 
+                        p.SanPham.SanPhamDanhMucs.Any(spdm => spdm.danhMucId == categoryId && !spdm.isDelete)
+                    ).ToList();
                 }
 
                 var result = query.Select(p => new
                 {
-                    p.sanPhamId,
-                    p.SanPham.ten,
-                    NhanHieuTen = p.SanPham.NhanHieu.ten,
-                    DonViTen = p.DonViDoLuong.ten,
-                    p.SanPham.moTa,
-                    p.isDelete,
-                    GiaInfo = p.giaBan,
-                    DanhMucTen = p.SanPham.SanPhamDanhMucs.Where(dm => !dm.isDelete).Select(dm => dm.DanhMuc.ten).FirstOrDefault()
+                    Id = p.id,                                 
+                    SanPhamId = p.sanPhamId,                 
+                    DonViId = p.donViId,                       
+                    TenSanPham = p.SanPham.ten,
+                    NhanHieuTen = p.SanPham.NhanHieu != null ? p.SanPham.NhanHieu.ten : "",
+                    DonViTen = p.DonViDoLuong != null ? p.DonViDoLuong.ten : "",
+                    MoTa = p.SanPham.moTa,
+                    GiaBan = p.giaBan,
+                    TrangThai = p.trangThai,
+                    IsDelete = p.isDelete,
+                    DanhMucTen = p.SanPham.SanPhamDanhMucs
+                        .Where(dm => !dm.isDelete)
+                        .Select(dm => dm.DanhMuc.ten)
+                        .FirstOrDefault()
                 }).ToList();
 
                 return result.Select(x => new ProductDetailDto
                 {
-                    Id = x.sanPhamId,
-                    Ten = x.ten,
+                    Id = x.Id,                                 
+                    SanPhamId = x.SanPhamId,                  
+                    DonViId = x.DonViId,                      
+                    Ten = x.TenSanPham,
+                    TenSanPham = x.TenSanPham,
                     NhanHieu = x.NhanHieuTen,
                     DanhMuc = x.DanhMucTen ?? "Chưa phân loại",
-                    MoTa = x.moTa,
-                    GiaBan = x.GiaInfo,
-                    DonVi =  x.DonViTen,
-                    TrangThai = x.isDelete ? "Ngừng kinh doanh" : "Đang kinh doanh"
-                }).OrderBy(x => x.Id).Take(1000).ToList();
+                    MoTa = x.MoTa,
+                    GiaBan = x.GiaBan,
+                    DonVi = x.DonViTen,
+                    TrangThai = x.IsDelete ? "Ngừng kinh doanh" : 
+                               (x.TrangThai ?? "Đang kinh doanh")
+                }).OrderBy(x => x.TenSanPham).Take(1000).ToList();
             }
-            catch (Exception ex) { throw new Exception($"Lỗi lọc: {ex.Message}"); }
+            catch (Exception ex) 
+            { 
+                throw new Exception($"Lỗi lọc: {ex.Message}"); 
+            }
         }
 
         public string GetProductCategoryId(string productId)
@@ -81,7 +102,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
                 .Select(x => x.danhMucId).FirstOrDefault();
         }
 
-        public string GenerateNewProductId() => _services.GenerateNewId<SanPham>("SP", 5);
+        public string GenerateNewProductId() => _services.GenerateNewId<SanPham>("SP", 6);
 
         #endregion
 
@@ -96,7 +117,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
                     if (db.SanPhams.Any(p => p.ten.ToLower() == product.ten.ToLower() && !p.isDelete))
                         return (false, "Tên sản phẩm đã tồn tại.", null);
 
-                    product.id = _services.GenerateNewId<SanPham>("SP", 5);
+                    product.id = _services.GenerateNewId<SanPham>("SP", 6);
                     product.isDelete = false;
                     db.SanPhams.Add(product);
 
