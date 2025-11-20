@@ -169,103 +169,153 @@
     <Compile Include="Helpers\Utils\ValidationHelper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Views\forms\Customers\frmCustomerList.cs" />
+    <Compile Include="Views\forms\Customers\frmCustomerList.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Views\forms\Customers\frmCustomerList.Designer.cs">
       <DependentUpon>frmCustomerList.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\forms\Customers\frmCustomers.cs" />
+    <Compile Include="Views\forms\Customers\frmCustomers.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Views\forms\Customers\frmCustomers.Designer.cs">
       <DependentUpon>frmCustomers.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\forms\Customers\frmMemberCards.cs" />
+    <Compile Include="Views\forms\Customers\frmMemberCards.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Views\forms\Customers\frmMemberCards.Designer.cs">
       <DependentUpon>frmMemberCards.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\forms\Customers\frmPurchaseHistory.cs" />
+    <Compile Include="Views\forms\Customers\frmPurchaseHistory.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Views\forms\Customers\frmPurchaseHistory.Designer.cs">
       <DependentUpon>frmPurchaseHistory.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\forms\Employees\frmEmployeeList.cs" />
+    <Compile Include="Views\forms\Employees\frmEmployeeList.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Views\forms\Employees\frmEmployeeList.Designer.cs">
       <DependentUpon>frmEmployeeList.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\forms\Employees\frmEmployees.cs" />
+    <Compile Include="Views\forms\Employees\frmEmployees.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Views\forms\Employees\frmEmployees.Designer.cs">
       <DependentUpon>frmEmployees.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\forms\Employees\frmShiftAssignment.cs" />
+    <Compile Include="Views\forms\Employees\frmShiftAssignment.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Views\forms\Employees\frmShiftAssignment.Designer.cs">
       <DependentUpon>frmShiftAssignment.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\forms\Employees\frmWorkSchedule.cs" />
+    <Compile Include="Views\forms\Employees\frmWorkSchedule.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Views\forms\Employees\frmWorkSchedule.Designer.cs">
       <DependentUpon>frmWorkSchedule.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\forms\Inventory\frmInventoryList.cs" />
+    <Compile Include="Views\forms\Inventory\frmInventoryList.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Views\forms\Inventory\frmInventoryList.Designer.cs">
       <DependentUpon>frmInventoryList.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\forms\Inventory\frmInventoryMain.cs" />
+    <Compile Include="Views\forms\Inventory\frmInventoryMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Views\forms\Inventory\frmInventoryMain.Designer.cs">
       <DependentUpon>frmInventoryMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\forms\Inventory\frmStockIn.cs" />
+    <Compile Include="Views\forms\Inventory\frmStockIn.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Views\forms\Inventory\frmStockIn.Designer.cs">
       <DependentUpon>frmStockIn.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\forms\Invoice\frmInvoiceDetails.cs" />
+    <Compile Include="Views\forms\Invoice\frmInvoiceDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Views\forms\Invoice\frmInvoiceDetails.Designer.cs">
       <DependentUpon>frmInvoiceDetails.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\forms\Invoice\frmInvoices.cs" />
+    <Compile Include="Views\forms\Invoice\frmInvoices.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Views\forms\Invoice\frmInvoices.Designer.cs">
       <DependentUpon>frmInvoices.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\forms\Main\frmDashboard.cs" />
+    <Compile Include="Views\forms\Main\frmDashboard.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Views\forms\Main\frmDashboard.Designer.cs">
       <DependentUpon>frmDashboard.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\forms\Main\frmLogin.cs" />
+    <Compile Include="Views\forms\Main\frmLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Views\forms\Main\frmLogin.Designer.cs">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\forms\Main\frmMain.cs" />
+    <Compile Include="Views\forms\Main\frmMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Views\forms\Main\frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\forms\Products\frmBrands.cs" />
+    <Compile Include="Views\forms\Products\frmBrands.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Views\forms\Products\frmBrands.Designer.cs">
       <DependentUpon>frmBrands.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\forms\Products\frmCategorys.cs" />
+    <Compile Include="Views\forms\Products\frmCategorys.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Views\forms\Products\frmCategorys.Designer.cs">
       <DependentUpon>frmCategorys.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\forms\Products\frmGoods.cs" />
+    <Compile Include="Views\forms\Products\frmGoods.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Views\forms\Products\frmGoods.Designer.cs">
       <DependentUpon>frmGoods.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\forms\Products\frmMeasurements.cs" />
+    <Compile Include="Views\forms\Products\frmMeasurements.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Views\forms\Products\frmMeasurements.Designer.cs">
       <DependentUpon>frmMeasurements.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\forms\Products\frmProducts.cs" />
+    <Compile Include="Views\forms\Products\frmProducts.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Views\forms\Products\frmProducts.Designer.cs">
       <DependentUpon>frmProducts.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\forms\Promotions\frmPromotionDetail.cs" />
+    <Compile Include="Views\forms\Promotions\frmPromotionDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Views\forms\Promotions\frmPromotionDetail.Designer.cs">
       <DependentUpon>frmPromotionDetail.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\forms\Promotions\frmPromotions.cs" />
+    <Compile Include="Views\forms\Promotions\frmPromotions.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Views\forms\Promotions\frmPromotions.Designer.cs">
       <DependentUpon>frmPromotions.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\forms\Suppliers\frmSupplierList.cs" />
+    <Compile Include="Views\forms\Suppliers\frmSupplierList.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Views\forms\Suppliers\frmSupplierList.Designer.cs">
       <DependentUpon>frmSupplierList.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\forms\Suppliers\frmTransactionHistory.cs" />
+    <Compile Include="Views\forms\Suppliers\frmTransactionHistory.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Views\forms\Suppliers\frmTransactionHistory.Designer.cs">
       <DependentUpon>frmTransactionHistory.cs</DependentUpon>
     </Compile>
@@ -293,6 +343,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\forms\Employees\frmEmployeeList.resx">
       <DependentUpon>frmEmployeeList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\forms\Employees\frmShiftAssignment.resx">
+      <DependentUpon>frmShiftAssignment.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\forms\Employees\frmWorkSchedule.resx">
       <DependentUpon>frmWorkSchedule.cs</DependentUpon>

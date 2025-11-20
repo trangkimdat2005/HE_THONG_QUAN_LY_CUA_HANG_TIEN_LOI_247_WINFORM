@@ -224,6 +224,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
             pnlEmployeeSubmenu.Visible = false;
             pnlCustomerSubmenu.Visible = false;
             pnlSupplierSubmenu.Visible = false;
+            pnlStorageSubmenu.Visible = false;
             SetActiveButton(btn_products, null);
         }
 
@@ -319,6 +320,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
             pnlProductSubmenu.Visible = false;
             pnlCustomerSubmenu.Visible = false;
             pnlSupplierSubmenu.Visible = false;
+            pnlStorageSubmenu.Visible = false;
             SetActiveButton(btn_employees, null);
         }
 
@@ -330,6 +332,8 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
             pnlProductSubmenu.Visible = false;
             pnlEmployeeSubmenu.Visible = false;
             pnlSupplierSubmenu.Visible = false;
+            pnlStorageSubmenu.Visible = false;
+
             SetActiveButton(btn_customers, null);
         }
 
@@ -348,6 +352,8 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
             pnlProductSubmenu.Visible = false;
             pnlEmployeeSubmenu.Visible = false;
             pnlCustomerSubmenu.Visible = false;
+            pnlStorageSubmenu.Visible = false;
+
             SetActiveButton(btn_suppliers, null);
         }
 
@@ -360,6 +366,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
             pnlEmployeeSubmenu.Visible = false;
             pnlCustomerSubmenu.Visible = false;
             pnlSupplierSubmenu.Visible = false;
+
             SetActiveButton(btn_inventory, null);
         }
 
