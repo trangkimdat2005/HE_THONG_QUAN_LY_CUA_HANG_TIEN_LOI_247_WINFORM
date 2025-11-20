@@ -2,14 +2,19 @@
 {
     partial class frmWorkSchedule
     {
-        // ... (phần mã không thay đổi)
+        private System.ComponentModel.IContainer components = null;
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
 
         #region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -65,9 +70,9 @@
             this.lblTitle.ForeColor = System.Drawing.Color.White;
             this.lblTitle.Location = new System.Drawing.Point(12, 12);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(306, 32);
+            this.lblTitle.Size = new System.Drawing.Size(328, 32);
             this.lblTitle.TabIndex = 0;
-            this.lblTitle.Text = "LỊCH LÀM VIỆC NHÂN VIÊN"; // Sửa: L?CH LÀM VI?C NHÂN VIÊN -> LỊCH LÀM VIỆC NHÂN VIÊN
+            this.lblTitle.Text = "LỊCH LÀM VIỆC NHÂN VIÊN";
             // 
             // pnlFilter
             // 
@@ -98,7 +103,7 @@
             this.btnViewSchedule.Name = "btnViewSchedule";
             this.btnViewSchedule.Size = new System.Drawing.Size(150, 35);
             this.btnViewSchedule.TabIndex = 6;
-            this.btnViewSchedule.Text = "Xem lịch"; // Sửa: ?? Xem l?ch -> Xem lịch
+            this.btnViewSchedule.Text = "Xem lịch";
             this.btnViewSchedule.UseVisualStyleBackColor = false;
             // 
             // dtpEndDate
@@ -116,9 +121,9 @@
             this.lblEndDate.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
             this.lblEndDate.Location = new System.Drawing.Point(850, 33);
             this.lblEndDate.Name = "lblEndDate";
-            this.lblEndDate.Size = new System.Drawing.Size(70, 17);
+            this.lblEndDate.Size = new System.Drawing.Size(71, 17);
             this.lblEndDate.TabIndex = 4;
-            this.lblEndDate.Text = "Đến ngày:"; // Sửa: ??n ngày: -> Đến ngày:
+            this.lblEndDate.Text = "Đến ngày:";
             // 
             // dtpStartDate
             // 
@@ -135,9 +140,9 @@
             this.lblStartDate.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
             this.lblStartDate.Location = new System.Drawing.Point(560, 33);
             this.lblStartDate.Name = "lblStartDate";
-            this.lblStartDate.Size = new System.Drawing.Size(60, 17);
+            this.lblStartDate.Size = new System.Drawing.Size(63, 17);
             this.lblStartDate.TabIndex = 2;
-            this.lblStartDate.Text = "Từ ngày:"; // Sửa: T? ngày: -> Từ ngày:
+            this.lblStartDate.Text = "Từ ngày:";
             // 
             // cmbEmployee
             // 
@@ -183,7 +188,7 @@
             this.btnExport.Name = "btnExport";
             this.btnExport.Size = new System.Drawing.Size(160, 40);
             this.btnExport.TabIndex = 3;
-            this.btnExport.Text = "Xuất Excel"; // Sửa: ?? Xu?t Excel -> Xuất Excel
+            this.btnExport.Text = "Xuất Excel";
             this.btnExport.UseVisualStyleBackColor = false;
             // 
             // btnDelete
@@ -196,7 +201,7 @@
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(147, 40);
             this.btnDelete.TabIndex = 2;
-            this.btnDelete.Text = "Xóa"; // Sửa: ??? Xóa -> Xóa
+            this.btnDelete.Text = "Xóa";
             this.btnDelete.UseVisualStyleBackColor = false;
             // 
             // btnEdit
@@ -209,7 +214,7 @@
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(160, 40);
             this.btnEdit.TabIndex = 1;
-            this.btnEdit.Text = "Chỉnh sửa"; // Sửa: ?? Ch?nh s?a -> Chỉnh sửa
+            this.btnEdit.Text = "Chỉnh sửa";
             this.btnEdit.UseVisualStyleBackColor = false;
             // 
             // btnAdd
@@ -222,8 +227,9 @@
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(160, 40);
             this.btnAdd.TabIndex = 0;
-            this.btnAdd.Text = "Thêm lịch"; // Sửa: ? Thêm l?ch -> Thêm lịch
+            this.btnAdd.Text = "Thêm lịch";
             this.btnAdd.UseVisualStyleBackColor = false;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // pnlGrid
             // 
@@ -265,6 +271,7 @@
             dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(152)))), ((int)(((byte)(219)))));
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvSchedule.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvSchedule.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvSchedule.EnableHeadersVisualStyles = false;
@@ -308,14 +315,14 @@
             // colStartTime
             // 
             this.colStartTime.FillWeight = 70F;
-            this.colStartTime.HeaderText = "Giờ bắt đầu"; // Sửa: Gi? b?t ??u -> Giờ bắt đầu
+            this.colStartTime.HeaderText = "Giờ bắt đầu";
             this.colStartTime.Name = "colStartTime";
             this.colStartTime.ReadOnly = true;
             // 
             // colEndTime
             // 
             this.colEndTime.FillWeight = 70F;
-            this.colEndTime.HeaderText = "Giờ kết thúc"; // Sửa: Gi? k?t thúc -> Giờ kết thúc
+            this.colEndTime.HeaderText = "Giờ kết thúc";
             this.colEndTime.Name = "colEndTime";
             this.colEndTime.ReadOnly = true;
             // 
@@ -343,9 +350,9 @@
             this.lblTotal.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.lblTotal.Location = new System.Drawing.Point(15, 10);
             this.lblTotal.Name = "lblTotal";
-            this.lblTotal.Size = new System.Drawing.Size(117, 19);
+            this.lblTotal.Size = new System.Drawing.Size(126, 19);
             this.lblTotal.TabIndex = 0;
-            this.lblTotal.Text = "Tổng số: 0 ca làm"; // Sửa: T?ng s?: 0 ca làm -> Tổng số: 0 ca làm
+            this.lblTotal.Text = "Tổng số: 0 ca làm";
             // 
             // frmWorkSchedule
             // 
@@ -360,7 +367,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmWorkSchedule";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Lịch làm việc"; // Sửa: L?ch làm vi?c -> Lịch làm việc
+            this.Text = "Lịch làm việc";
             this.pnlTop.ResumeLayout(false);
             this.pnlTop.PerformLayout();
             this.pnlFilter.ResumeLayout(false);

@@ -272,12 +272,6 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
             SetActiveButton(btn_employees, btnSub_PhanCong);
         }
 
-        private void btnSub_ChamCong_Click(object sender, EventArgs e)
-        {
-            LoadFormIntoPanel(new frmEmployees());
-            SetActiveButton(btn_employees, btnSub_ChamCong);
-        }
-
         // --- Click cho các nút menu con của Khách hàng ---
 
         private void btnSub_DanhSachKH_Click(object sender, EventArgs e)
@@ -373,7 +367,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
 
         private void btnSub_NhapKho_Click(object sender, EventArgs e)
         {
-            LoadFormIntoPanel(new frmStockIn());
+            LoadFormIntoPanel(new frmInventoryMain());
             SetActiveButton(btn_inventory, btnSub_NhapKho);
         }
 

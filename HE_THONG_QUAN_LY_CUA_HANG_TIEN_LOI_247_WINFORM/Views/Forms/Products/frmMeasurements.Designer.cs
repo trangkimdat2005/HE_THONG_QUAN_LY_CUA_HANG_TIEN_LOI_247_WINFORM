@@ -2,15 +2,8 @@
 {
     partial class frmMeasurements
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -22,29 +15,28 @@
 
         #region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.panelTop = new System.Windows.Forms.Panel();
+            this.pnlTop = new System.Windows.Forms.Panel();
             this.lblTitle = new System.Windows.Forms.Label();
-            this.panelSearch = new System.Windows.Forms.Panel();
+            this.pnlSearch = new System.Windows.Forms.Panel();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.btnSearch = new System.Windows.Forms.Button();
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.lblSearch = new System.Windows.Forms.Label();
-            this.panelButtons = new System.Windows.Forms.Panel();
+            this.pnlButtons = new System.Windows.Forms.Panel();
             this.btnExport = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
-            this.panelGrid = new System.Windows.Forms.Panel();
+            this.pnlMain = new System.Windows.Forms.Panel();
             this.dgvUnits = new System.Windows.Forms.DataGridView();
-            this.panelDetail = new System.Windows.Forms.Panel();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ten = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.kiHieu = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pnlDetail = new System.Windows.Forms.Panel();
             this.groupBoxDetail = new System.Windows.Forms.GroupBox();
             this.lblProductCount = new System.Windows.Forms.Label();
             this.txtSymbol = new System.Windows.Forms.TextBox();
@@ -55,30 +47,27 @@
             this.txtUnitId = new System.Windows.Forms.TextBox();
             this.lblUnitName = new System.Windows.Forms.Label();
             this.lblUnitId = new System.Windows.Forms.Label();
-            this.panelStatus = new System.Windows.Forms.Panel();
+            this.pnlBottom = new System.Windows.Forms.Panel();
             this.lblStatus = new System.Windows.Forms.Label();
-            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ten = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.kiHieu = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.panelTop.SuspendLayout();
-            this.panelSearch.SuspendLayout();
-            this.panelButtons.SuspendLayout();
-            this.panelGrid.SuspendLayout();
+            this.pnlTop.SuspendLayout();
+            this.pnlSearch.SuspendLayout();
+            this.pnlButtons.SuspendLayout();
+            this.pnlMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUnits)).BeginInit();
-            this.panelDetail.SuspendLayout();
+            this.pnlDetail.SuspendLayout();
             this.groupBoxDetail.SuspendLayout();
-            this.panelStatus.SuspendLayout();
+            this.pnlBottom.SuspendLayout();
             this.SuspendLayout();
             // 
-            // panelTop
+            // pnlTop
             // 
-            this.panelTop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
-            this.panelTop.Controls.Add(this.lblTitle);
-            this.panelTop.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelTop.Location = new System.Drawing.Point(0, 0);
-            this.panelTop.Name = "panelTop";
-            this.panelTop.Size = new System.Drawing.Size(1200, 60);
-            this.panelTop.TabIndex = 0;
+            this.pnlTop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
+            this.pnlTop.Controls.Add(this.lblTitle);
+            this.pnlTop.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlTop.Location = new System.Drawing.Point(0, 0);
+            this.pnlTop.Name = "pnlTop";
+            this.pnlTop.Size = new System.Drawing.Size(1200, 60);
+            this.pnlTop.TabIndex = 0;
             // 
             // lblTitle
             // 
@@ -91,20 +80,20 @@
             this.lblTitle.TabIndex = 0;
             this.lblTitle.Text = "QUẢN LÝ ĐƠN VỊ ĐO LƯỜNG";
             // 
-            // panelSearch
+            // pnlSearch
             // 
-            this.panelSearch.BackColor = System.Drawing.Color.White;
-            this.panelSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelSearch.Controls.Add(this.btnRefresh);
-            this.panelSearch.Controls.Add(this.btnSearch);
-            this.panelSearch.Controls.Add(this.txtSearch);
-            this.panelSearch.Controls.Add(this.lblSearch);
-            this.panelSearch.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelSearch.Location = new System.Drawing.Point(0, 60);
-            this.panelSearch.Name = "panelSearch";
-            this.panelSearch.Padding = new System.Windows.Forms.Padding(10);
-            this.panelSearch.Size = new System.Drawing.Size(1200, 70);
-            this.panelSearch.TabIndex = 1;
+            this.pnlSearch.BackColor = System.Drawing.Color.White;
+            this.pnlSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlSearch.Controls.Add(this.btnRefresh);
+            this.pnlSearch.Controls.Add(this.btnSearch);
+            this.pnlSearch.Controls.Add(this.txtSearch);
+            this.pnlSearch.Controls.Add(this.lblSearch);
+            this.pnlSearch.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlSearch.Location = new System.Drawing.Point(0, 60);
+            this.pnlSearch.Name = "pnlSearch";
+            this.pnlSearch.Padding = new System.Windows.Forms.Padding(10);
+            this.pnlSearch.Size = new System.Drawing.Size(1200, 70);
+            this.pnlSearch.TabIndex = 1;
             // 
             // btnRefresh
             // 
@@ -141,7 +130,6 @@
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(420, 25);
             this.txtSearch.TabIndex = 1;
-           // this.txtSearch.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSearch_KeyPress);
             // 
             // lblSearch
             // 
@@ -153,19 +141,19 @@
             this.lblSearch.TabIndex = 0;
             this.lblSearch.Text = "Tên đơn vị / Ký hiệu:";
             // 
-            // panelButtons
+            // pnlButtons
             // 
-            this.panelButtons.BackColor = System.Drawing.Color.White;
-            this.panelButtons.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelButtons.Controls.Add(this.btnExport);
-            this.panelButtons.Controls.Add(this.btnDelete);
-            this.panelButtons.Controls.Add(this.btnEdit);
-            this.panelButtons.Controls.Add(this.btnAdd);
-            this.panelButtons.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelButtons.Location = new System.Drawing.Point(0, 130);
-            this.panelButtons.Name = "panelButtons";
-            this.panelButtons.Size = new System.Drawing.Size(1200, 60);
-            this.panelButtons.TabIndex = 2;
+            this.pnlButtons.BackColor = System.Drawing.Color.White;
+            this.pnlButtons.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlButtons.Controls.Add(this.btnExport);
+            this.pnlButtons.Controls.Add(this.btnDelete);
+            this.pnlButtons.Controls.Add(this.btnEdit);
+            this.pnlButtons.Controls.Add(this.btnAdd);
+            this.pnlButtons.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlButtons.Location = new System.Drawing.Point(0, 130);
+            this.pnlButtons.Name = "pnlButtons";
+            this.pnlButtons.Size = new System.Drawing.Size(1200, 60);
+            this.pnlButtons.TabIndex = 2;
             // 
             // btnExport
             // 
@@ -223,15 +211,15 @@
             this.btnAdd.UseVisualStyleBackColor = false;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
-            // panelGrid
+            // pnlMain
             // 
-            this.panelGrid.Controls.Add(this.dgvUnits);
-            this.panelGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelGrid.Location = new System.Drawing.Point(0, 190);
-            this.panelGrid.Name = "panelGrid";
-            this.panelGrid.Padding = new System.Windows.Forms.Padding(10);
-            this.panelGrid.Size = new System.Drawing.Size(850, 490);
-            this.panelGrid.TabIndex = 3;
+            this.pnlMain.Controls.Add(this.dgvUnits);
+            this.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlMain.Location = new System.Drawing.Point(0, 190);
+            this.pnlMain.Name = "pnlMain";
+            this.pnlMain.Padding = new System.Windows.Forms.Padding(10);
+            this.pnlMain.Size = new System.Drawing.Size(850, 490);
+            this.pnlMain.TabIndex = 3;
             // 
             // dgvUnits
             // 
@@ -239,6 +227,7 @@
             this.dgvUnits.AllowUserToDeleteRows = false;
             this.dgvUnits.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvUnits.BackgroundColor = System.Drawing.Color.White;
+            this.dgvUnits.BorderStyle = System.Windows.Forms.BorderStyle.None;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
@@ -273,16 +262,37 @@
             this.dgvUnits.TabIndex = 0;
             this.dgvUnits.SelectionChanged += new System.EventHandler(this.dgvUnits_SelectionChanged);
             // 
-            // panelDetail
+            // id
             // 
-            this.panelDetail.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.panelDetail.Controls.Add(this.groupBoxDetail);
-            this.panelDetail.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panelDetail.Location = new System.Drawing.Point(850, 190);
-            this.panelDetail.Name = "panelDetail";
-            this.panelDetail.Padding = new System.Windows.Forms.Padding(10);
-            this.panelDetail.Size = new System.Drawing.Size(350, 490);
-            this.panelDetail.TabIndex = 4;
+            this.id.DataPropertyName = "id";
+            this.id.HeaderText = "Mã đơn vị";
+            this.id.Name = "id";
+            this.id.ReadOnly = true;
+            // 
+            // ten
+            // 
+            this.ten.DataPropertyName = "ten";
+            this.ten.HeaderText = "Tên đơn vị";
+            this.ten.Name = "ten";
+            this.ten.ReadOnly = true;
+            // 
+            // kiHieu
+            // 
+            this.kiHieu.DataPropertyName = "kyHieu";
+            this.kiHieu.HeaderText = "Ký hiệu";
+            this.kiHieu.Name = "kiHieu";
+            this.kiHieu.ReadOnly = true;
+            // 
+            // pnlDetail
+            // 
+            this.pnlDetail.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.pnlDetail.Controls.Add(this.groupBoxDetail);
+            this.pnlDetail.Dock = System.Windows.Forms.DockStyle.Right;
+            this.pnlDetail.Location = new System.Drawing.Point(850, 190);
+            this.pnlDetail.Name = "pnlDetail";
+            this.pnlDetail.Padding = new System.Windows.Forms.Padding(10);
+            this.pnlDetail.Size = new System.Drawing.Size(350, 490);
+            this.pnlDetail.TabIndex = 4;
             // 
             // groupBoxDetail
             // 
@@ -368,7 +378,6 @@
             this.txtUnitName.Name = "txtUnitName";
             this.txtUnitName.Size = new System.Drawing.Size(170, 25);
             this.txtUnitName.TabIndex = 3;
-           // this.txtUnitName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtUnitName_KeyPress);
             // 
             // txtUnitId
             // 
@@ -399,16 +408,16 @@
             this.lblUnitId.TabIndex = 0;
             this.lblUnitId.Text = "Mã đơn vị:";
             // 
-            // panelStatus
+            // pnlBottom
             // 
-            this.panelStatus.BackColor = System.Drawing.Color.White;
-            this.panelStatus.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelStatus.Controls.Add(this.lblStatus);
-            this.panelStatus.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelStatus.Location = new System.Drawing.Point(0, 680);
-            this.panelStatus.Name = "panelStatus";
-            this.panelStatus.Size = new System.Drawing.Size(1200, 35);
-            this.panelStatus.TabIndex = 5;
+            this.pnlBottom.BackColor = System.Drawing.Color.White;
+            this.pnlBottom.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlBottom.Controls.Add(this.lblStatus);
+            this.pnlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pnlBottom.Location = new System.Drawing.Point(0, 680);
+            this.pnlBottom.Name = "pnlBottom";
+            this.pnlBottom.Size = new System.Drawing.Size(1200, 35);
+            this.pnlBottom.TabIndex = 5;
             // 
             // lblStatus
             // 
@@ -420,71 +429,53 @@
             this.lblStatus.TabIndex = 0;
             this.lblStatus.Text = "Tổng số: 0";
             // 
-            // id
-            // 
-            this.id.HeaderText = "Mã đơn vị";
-            this.id.Name = "id";
-            this.id.ReadOnly = true;
-            // 
-            // ten
-            // 
-            this.ten.HeaderText = "Tên đơn vị";
-            this.ten.Name = "ten";
-            this.ten.ReadOnly = true;
-            // 
-            // kiHieu
-            // 
-            this.kiHieu.HeaderText = "Kí Hiệu";
-            this.kiHieu.Name = "kiHieu";
-            this.kiHieu.ReadOnly = true;
-            // 
             // frmMeasurements
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1200, 715);
-            this.Controls.Add(this.panelGrid);
-            this.Controls.Add(this.panelDetail);
-            this.Controls.Add(this.panelButtons);
-            this.Controls.Add(this.panelSearch);
-            this.Controls.Add(this.panelTop);
-            this.Controls.Add(this.panelStatus);
+            this.Controls.Add(this.pnlMain);
+            this.Controls.Add(this.pnlDetail);
+            this.Controls.Add(this.pnlButtons);
+            this.Controls.Add(this.pnlSearch);
+            this.Controls.Add(this.pnlTop);
+            this.Controls.Add(this.pnlBottom);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmMeasurements";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Quản lý đơn vị đo lường";
             this.Load += new System.EventHandler(this.frmMeasurements_Load);
-            this.panelTop.ResumeLayout(false);
-            this.panelTop.PerformLayout();
-            this.panelSearch.ResumeLayout(false);
-            this.panelSearch.PerformLayout();
-            this.panelButtons.ResumeLayout(false);
-            this.panelGrid.ResumeLayout(false);
+            this.pnlTop.ResumeLayout(false);
+            this.pnlTop.PerformLayout();
+            this.pnlSearch.ResumeLayout(false);
+            this.pnlSearch.PerformLayout();
+            this.pnlButtons.ResumeLayout(false);
+            this.pnlMain.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvUnits)).EndInit();
-            this.panelDetail.ResumeLayout(false);
+            this.pnlDetail.ResumeLayout(false);
             this.groupBoxDetail.ResumeLayout(false);
             this.groupBoxDetail.PerformLayout();
-            this.panelStatus.ResumeLayout(false);
-            this.panelStatus.PerformLayout();
+            this.pnlBottom.ResumeLayout(false);
+            this.pnlBottom.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Panel panelTop;
+        private System.Windows.Forms.Panel pnlTop;
         private System.Windows.Forms.Label lblTitle;
-        private System.Windows.Forms.Panel panelSearch;
+        private System.Windows.Forms.Panel pnlSearch;
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.TextBox txtSearch;
         private System.Windows.Forms.Label lblSearch;
-        private System.Windows.Forms.Panel panelButtons;
+        private System.Windows.Forms.Panel pnlButtons;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.Button btnAdd;
-        private System.Windows.Forms.Panel panelGrid;
+        private System.Windows.Forms.Panel pnlMain;
         private System.Windows.Forms.DataGridView dgvUnits;
-        private System.Windows.Forms.Panel panelDetail;
+        private System.Windows.Forms.Panel pnlDetail;
         private System.Windows.Forms.GroupBox groupBoxDetail;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnSave;
@@ -495,7 +486,7 @@
         private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.Button btnExport;
         private System.Windows.Forms.Label lblProductCount;
-        private System.Windows.Forms.Panel panelStatus;
+        private System.Windows.Forms.Panel pnlBottom;
         private System.Windows.Forms.Label lblStatus;
         private System.Windows.Forms.TextBox txtSymbol;
         private System.Windows.Forms.Label lblSymbol;

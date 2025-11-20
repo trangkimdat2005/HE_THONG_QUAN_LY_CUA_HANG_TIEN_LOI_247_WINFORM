@@ -18,6 +18,31 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
         {
             InitializeComponent();
             _invoiceController = new InvoiceController();
+            CustomizeInterface();
+        }
+
+        private void CustomizeInterface()
+        {
+            dgvInvoices.BorderStyle = BorderStyle.None;
+            dgvInvoices.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dgvInvoices.GridColor = Color.FromArgb(230, 230, 230);
+            dgvInvoices.RowHeadersVisible = false;
+            dgvInvoices.EnableHeadersVisualStyles = false;
+            dgvInvoices.ColumnHeadersHeight = 40;
+            dgvInvoices.RowTemplate.Height = 40;
+
+            dgvInvoices.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(41, 128, 185);
+            dgvInvoices.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgvInvoices.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            dgvInvoices.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+
+            dgvInvoices.DefaultCellStyle.SelectionBackColor = Color.FromArgb(211, 233, 252);
+            dgvInvoices.DefaultCellStyle.SelectionForeColor = Color.Black;
+            dgvInvoices.DefaultCellStyle.Font = new Font("Segoe UI", 10F);
+            dgvInvoices.DefaultCellStyle.Padding = new Padding(10, 0, 0, 0);
+
+            colTotalAmount.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            colStatus.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
         }
 
         private void frmInvoices_Load(object sender, EventArgs e)
@@ -28,177 +53,52 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
 
         private void InitializeUI()
         {
-            // Setup date pickers
             dtpFromDate.Value = DateTime.Now.AddMonths(-1);
             dtpToDate.Value = DateTime.Now;
-
-            // Setup status filter
             cmbStatus.Items.Clear();
-            cmbStatus.Items.AddRange(new object[] { "Tất cả", "Chờ thanh toán", "Đang thanh toán", "Đã thanh toán" });
+            cmbStatus.Items.AddRange(new object[] { "Tất cả", "Chưa thanh toán", "Đã thanh toán" });
             cmbStatus.SelectedIndex = 0;
-
-            // Setup DataGridView
-            dgvInvoices.AutoGenerateColumns = false;
-            dgvInvoices.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvInvoices.MultiSelect = false;
         }
 
         private void LoadInvoices()
         {
-            try
-            {
-                var invoices = _invoiceController.GetAllInvoices();
-                DisplayInvoices(invoices);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Lỗi khi tải danh sách hóa đơn: {ex.Message}", "Lỗi", 
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            try { var invoices = _invoiceController.GetAllInvoices(); DisplayInvoices(invoices); } catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
 
         private void DisplayInvoices(List<HoaDon> invoices)
         {
             dgvInvoices.Rows.Clear();
-
-            foreach (var invoice in invoices)
+            foreach (var i in invoices)
             {
-                int rowIndex = dgvInvoices.Rows.Add(
-                    invoice.id,
-                    invoice.ngayLap.ToString("dd/MM/yyyy HH:mm"),
-                    invoice.NhanVien?.hoTen ?? "N/A",
-                    invoice.KhachHang?.hoTen ?? "Khách lẻ",
-                    (invoice.tongTien ?? 0).ToString("N0") + " đ",
-                    invoice.trangThai
-                );
+                int idx = dgvInvoices.Rows.Add(i.id, i.ngayLap.ToString("dd/MM/yyyy HH:mm"), i.NhanVien?.hoTen ?? "N/A", i.KhachHang?.hoTen ?? "Khách lẻ", (i.tongTien ?? 0).ToString("N0") + " đ", i.trangThai);
 
-                // Set status badge color
-                var statusCell = dgvInvoices.Rows[rowIndex].Cells["colStatus"];
-                switch (invoice.trangThai)
-                {
-                    case "Đã thanh toán":
-                        statusCell.Style.BackColor = Color.FromArgb(76, 175, 80); // Green
-                        statusCell.Style.ForeColor = Color.White;
-                        break;
-                    case "Chưa thanh toán":
-                        statusCell.Style.BackColor = Color.FromArgb(228, 8, 10); //Red
-                        statusCell.Style.ForeColor = Color.Black;
-                        break;
-               
-                }
+                var cell = dgvInvoices.Rows[idx].Cells["colStatus"];
+                if (i.trangThai == "Đã thanh toán") { cell.Style.ForeColor = Color.Green; cell.Style.Font = new Font("Segoe UI", 10F, FontStyle.Bold); }
+                else if (i.trangThai == "Chưa thanh toán") { cell.Style.ForeColor = Color.Red; cell.Style.Font = new Font("Segoe UI", 10F, FontStyle.Bold); }
             }
-
             lblTotalInvoices.Text = $"Tổng số: {invoices.Count} hóa đơn";
         }
 
-        private void btnSearch_Click(object sender, EventArgs e)
-        {
-            SearchInvoices();
-        }
+        private void btnSearch_Click(object sender, EventArgs e) => SearchInvoices();
 
         private void SearchInvoices()
         {
-            try
-            {
-                var keyword = txtSearch.Text.Trim();
-                var fromDate = dtpFromDate.Value.Date;
-                var toDate = dtpToDate.Value.Date.AddDays(1).AddSeconds(-1);
-                var status = cmbStatus.SelectedItem?.ToString();
-
-                var invoices = _invoiceController.SearchInvoices(keyword, fromDate, toDate, status);
-                DisplayInvoices(invoices);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Lỗi khi tìm kiếm: {ex.Message}", "Lỗi", 
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            try { DisplayInvoices(_invoiceController.SearchInvoices(txtSearch.Text, dtpFromDate.Value, dtpToDate.Value, cmbStatus.Text)); } catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
 
-        private void btnCreateNew_Click(object sender, EventArgs e)
-        {
-            var frmDetail = new frmInvoiceDetails();
-            frmDetail.ShowDialog();
-            LoadInvoices();
-        }
-
-        private void btnView_Click(object sender, EventArgs e)
-        {
-            ViewSelectedInvoice();
-        }
-
-        private void ViewSelectedInvoice()
-        {
-            if (string.IsNullOrEmpty(_selectedInvoiceId))
-            {
-                MessageBox.Show("Vui lòng chọn hóa đơn để xem!", "Thông báo", 
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            var frmDetail = new frmInvoiceDetails(_selectedInvoiceId);
-            frmDetail.ShowDialog();
-            LoadInvoices(); // Refresh after viewing
-        }
-
+        private void btnCreateNew_Click(object sender, EventArgs e) { new frmInvoiceDetails().ShowDialog(); LoadInvoices(); }
+        private void btnView_Click(object sender, EventArgs e) { if (!string.IsNullOrEmpty(_selectedInvoiceId)) { new frmInvoiceDetails(_selectedInvoiceId).ShowDialog(); LoadInvoices(); } }
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            DeleteSelectedInvoice();
-        }
-
-        private void DeleteSelectedInvoice()
-        {
-            if (string.IsNullOrEmpty(_selectedInvoiceId))
+            if (string.IsNullOrEmpty(_selectedInvoiceId)) return;
+            if (MessageBox.Show("Xóa?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
-                MessageBox.Show("Vui lòng chọn hóa đơn để xóa!", "Thông báo", 
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            var result = MessageBox.Show("Bạn có chắc chắn muốn xóa hóa đơn này?", "Xác nhận", 
-                MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-            if (result == DialogResult.Yes)
-            {
-                var deleteResult = _invoiceController.DeleteInvoice(_selectedInvoiceId);
-                bool success = deleteResult.Item1;
-                string message = deleteResult.Item2;
-                
-                MessageBox.Show(message, success ? "Thành công" : "Lỗi", 
-                    MessageBoxButtons.OK, success ? MessageBoxIcon.Information : MessageBoxIcon.Error);
-
-                if (success)
-                {
-                    LoadInvoices();
-                }
+                var res = _invoiceController.DeleteInvoice(_selectedInvoiceId);
+                MessageBox.Show(res.Item2); if (res.Item1) LoadInvoices();
             }
         }
-
-        private void btnRefresh_Click(object sender, EventArgs e)
-        {
-            LoadInvoices();
-        }
-
-        private void dgvInvoices_SelectionChanged(object sender, EventArgs e)
-        {
-            if (dgvInvoices.CurrentRow != null && dgvInvoices.CurrentRow.Index >= 0)
-            {
-                _selectedInvoiceId = dgvInvoices.CurrentRow.Cells["colInvoiceId"].Value?.ToString();
-            }
-        }
-
-        private void dgvInvoices_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex >= 0)
-            {
-                ViewSelectedInvoice();
-            }
-        }
-
-        protected override void OnFormClosing(FormClosingEventArgs e)
-        {
-            base.OnFormClosing(e);
-            _invoiceController?.Dispose();
-        }
+        private void btnRefresh_Click(object sender, EventArgs e) => LoadInvoices();
+        private void dgvInvoices_SelectionChanged(object sender, EventArgs e) { if (dgvInvoices.CurrentRow != null) _selectedInvoiceId = dgvInvoices.CurrentRow.Cells["colInvoiceId"].Value?.ToString(); }
+        private void dgvInvoices_CellDoubleClick(object sender, DataGridViewCellEventArgs e) { if (e.RowIndex >= 0) btnView_Click(null, null); }
     }
 }

@@ -2,15 +2,8 @@
 {
     partial class frmCustomerList
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -22,10 +15,6 @@
 
         #region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -61,10 +50,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.pnlMain = new System.Windows.Forms.Panel();
             this.dgvCustomers = new System.Windows.Forms.DataGridView();
-            this.pnlBottom = new System.Windows.Forms.Panel();
-            this.btnClose = new System.Windows.Forms.Button();
-            this.btnViewHistory = new System.Windows.Forms.Button();
-            this.btnViewDetail = new System.Windows.Forms.Button();
             this.colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPhone = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -75,6 +60,9 @@
             this.colMemberRank = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPoints = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTotalPurchase = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pnlBottom = new System.Windows.Forms.Panel();
+            this.btnClose = new System.Windows.Forms.Button();
+            this.btnViewHistory = new System.Windows.Forms.Button();
             this.pnlTop.SuspendLayout();
             this.pnlSearch.SuspendLayout();
             this.pnlStatistics.SuspendLayout();
@@ -174,7 +162,7 @@
             // cmbMemberRank
             // 
             this.cmbMemberRank.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbMemberRank.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.cmbMemberRank.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.cmbMemberRank.FormattingEnabled = true;
             this.cmbMemberRank.Location = new System.Drawing.Point(860, 30);
             this.cmbMemberRank.Name = "cmbMemberRank";
@@ -185,17 +173,17 @@
             // lblMemberRank
             // 
             this.lblMemberRank.AutoSize = true;
-            this.lblMemberRank.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.lblMemberRank.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
             this.lblMemberRank.Location = new System.Drawing.Point(780, 33);
             this.lblMemberRank.Name = "lblMemberRank";
-            this.lblMemberRank.Size = new System.Drawing.Size(64, 17);
+            this.lblMemberRank.Size = new System.Drawing.Size(69, 17);
             this.lblMemberRank.TabIndex = 5;
             this.lblMemberRank.Text = "Hạng thẻ:";
             // 
             // cmbStatus
             // 
             this.cmbStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbStatus.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.cmbStatus.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.cmbStatus.FormattingEnabled = true;
             this.cmbStatus.Location = new System.Drawing.Point(610, 30);
             this.cmbStatus.Name = "cmbStatus";
@@ -206,16 +194,16 @@
             // lblStatus
             // 
             this.lblStatus.AutoSize = true;
-            this.lblStatus.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.lblStatus.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
             this.lblStatus.Location = new System.Drawing.Point(530, 33);
             this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(69, 17);
+            this.lblStatus.Size = new System.Drawing.Size(75, 17);
             this.lblStatus.TabIndex = 3;
             this.lblStatus.Text = "Trạng thái:";
             // 
             // btnSearch
             // 
-            this.btnSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
+            this.btnSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(204)))), ((int)(((byte)(113)))));
             this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSearch.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
             this.btnSearch.ForeColor = System.Drawing.Color.White;
@@ -229,7 +217,7 @@
             // 
             // txtSearch
             // 
-            this.txtSearch.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.txtSearch.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.txtSearch.Location = new System.Drawing.Point(100, 30);
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(300, 25);
@@ -239,10 +227,10 @@
             // lblSearch
             // 
             this.lblSearch.AutoSize = true;
-            this.lblSearch.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.lblSearch.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
             this.lblSearch.Location = new System.Drawing.Point(20, 33);
             this.lblSearch.Name = "lblSearch";
-            this.lblSearch.Size = new System.Drawing.Size(63, 17);
+            this.lblSearch.Size = new System.Drawing.Size(70, 17);
             this.lblSearch.TabIndex = 0;
             this.lblSearch.Text = "Tìm kiếm:";
             // 
@@ -263,7 +251,7 @@
             // 
             // pnlBronze
             // 
-            this.pnlBronze.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(127)))), ((int)(((byte)(50)))));
+            this.pnlBronze.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(211)))), ((int)(((byte)(84)))), ((int)(((byte)(0)))));
             this.pnlBronze.Controls.Add(this.lblBronzeMembers);
             this.pnlBronze.Controls.Add(this.label5);
             this.pnlBronze.Location = new System.Drawing.Point(1120, 15);
@@ -297,7 +285,7 @@
             // 
             // pnlSilver
             // 
-            this.pnlSilver.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(149)))), ((int)(((byte)(165)))), ((int)(((byte)(166)))));
+            this.pnlSilver.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(140)))), ((int)(((byte)(141)))));
             this.pnlSilver.Controls.Add(this.lblSilverMembers);
             this.pnlSilver.Controls.Add(this.label4);
             this.pnlSilver.Location = new System.Drawing.Point(845, 15);
@@ -448,6 +436,7 @@
             this.dgvCustomers.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvCustomers.BackgroundColor = System.Drawing.Color.White;
             this.dgvCustomers.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgvCustomers.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
@@ -478,6 +467,7 @@
             this.dgvCustomers.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvCustomers.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvCustomers.EnableHeadersVisualStyles = false;
+            this.dgvCustomers.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
             this.dgvCustomers.Location = new System.Drawing.Point(10, 10);
             this.dgvCustomers.MultiSelect = false;
             this.dgvCustomers.Name = "dgvCustomers";
@@ -490,64 +480,10 @@
             this.dgvCustomers.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCustomers_CellClick);
             this.dgvCustomers.SelectionChanged += new System.EventHandler(this.dgvCustomers_SelectionChanged);
             // 
-            // pnlBottom
-            // 
-            this.pnlBottom.BackColor = System.Drawing.Color.White;
-            this.pnlBottom.Controls.Add(this.btnClose);
-            this.pnlBottom.Controls.Add(this.btnViewHistory);
-            this.pnlBottom.Controls.Add(this.btnViewDetail);
-            this.pnlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlBottom.Location = new System.Drawing.Point(0, 700);
-            this.pnlBottom.Name = "pnlBottom";
-            this.pnlBottom.Padding = new System.Windows.Forms.Padding(10);
-            this.pnlBottom.Size = new System.Drawing.Size(1400, 60);
-            this.pnlBottom.TabIndex = 4;
-            // 
-            // btnClose
-            // 
-            this.btnClose.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(57)))), ((int)(((byte)(43)))));
-            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClose.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
-            this.btnClose.ForeColor = System.Drawing.Color.White;
-            this.btnClose.Location = new System.Drawing.Point(1270, 15);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(110, 35);
-            this.btnClose.TabIndex = 2;
-            this.btnClose.Text = "Đóng";
-            this.btnClose.UseVisualStyleBackColor = false;
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
-            // 
-            // btnViewHistory
-            // 
-            this.btnViewHistory.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(126)))), ((int)(((byte)(34)))));
-            this.btnViewHistory.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnViewHistory.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
-            this.btnViewHistory.ForeColor = System.Drawing.Color.White;
-            this.btnViewHistory.Location = new System.Drawing.Point(150, 15);
-            this.btnViewHistory.Name = "btnViewHistory";
-            this.btnViewHistory.Size = new System.Drawing.Size(130, 35);
-            this.btnViewHistory.TabIndex = 1;
-            this.btnViewHistory.Text = "Lịch sử mua";
-            this.btnViewHistory.UseVisualStyleBackColor = false;
-            this.btnViewHistory.Click += new System.EventHandler(this.btnViewHistory_Click);
-            // 
-            // btnViewDetail
-            // 
-            this.btnViewDetail.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(174)))), ((int)(((byte)(96)))));
-            this.btnViewDetail.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnViewDetail.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
-            this.btnViewDetail.ForeColor = System.Drawing.Color.White;
-            this.btnViewDetail.Location = new System.Drawing.Point(20, 15);
-            this.btnViewDetail.Name = "btnViewDetail";
-            this.btnViewDetail.Size = new System.Drawing.Size(120, 35);
-            this.btnViewDetail.TabIndex = 0;
-            this.btnViewDetail.Text = "Xem chi tiết";
-            this.btnViewDetail.UseVisualStyleBackColor = false;
-            this.btnViewDetail.Click += new System.EventHandler(this.btnViewDetail_Click);
-            // 
             // colId
             // 
             this.colId.DataPropertyName = "id";
+            this.colId.FillWeight = 80F;
             this.colId.HeaderText = "Mã KH";
             this.colId.Name = "colId";
             this.colId.ReadOnly = true;
@@ -555,6 +491,7 @@
             // colName
             // 
             this.colName.DataPropertyName = "hoTen";
+            this.colName.FillWeight = 120F;
             this.colName.HeaderText = "Họ tên";
             this.colName.Name = "colName";
             this.colName.ReadOnly = true;
@@ -569,6 +506,7 @@
             // colEmail
             // 
             this.colEmail.DataPropertyName = "email";
+            this.colEmail.FillWeight = 150F;
             this.colEmail.HeaderText = "Email";
             this.colEmail.Name = "colEmail";
             this.colEmail.ReadOnly = true;
@@ -576,6 +514,7 @@
             // colAddress
             // 
             this.colAddress.DataPropertyName = "diaChi";
+            this.colAddress.FillWeight = 150F;
             this.colAddress.HeaderText = "Địa chỉ";
             this.colAddress.Name = "colAddress";
             this.colAddress.ReadOnly = true;
@@ -614,6 +553,47 @@
             this.colTotalPurchase.HeaderText = "Tổng mua";
             this.colTotalPurchase.Name = "colTotalPurchase";
             this.colTotalPurchase.ReadOnly = true;
+            // 
+            // pnlBottom
+            // 
+            this.pnlBottom.BackColor = System.Drawing.Color.White;
+            this.pnlBottom.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlBottom.Controls.Add(this.btnClose);
+            this.pnlBottom.Controls.Add(this.btnViewHistory);
+            this.pnlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pnlBottom.Location = new System.Drawing.Point(0, 700);
+            this.pnlBottom.Name = "pnlBottom";
+            this.pnlBottom.Padding = new System.Windows.Forms.Padding(10);
+            this.pnlBottom.Size = new System.Drawing.Size(1400, 60);
+            this.pnlBottom.TabIndex = 4;
+            // 
+            // btnClose
+            // 
+            this.btnClose.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(57)))), ((int)(((byte)(43)))));
+            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClose.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
+            this.btnClose.ForeColor = System.Drawing.Color.White;
+            this.btnClose.Location = new System.Drawing.Point(1270, 15);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(110, 35);
+            this.btnClose.TabIndex = 2;
+            this.btnClose.Text = "Đóng";
+            this.btnClose.UseVisualStyleBackColor = false;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            // 
+            // btnViewHistory
+            // 
+            this.btnViewHistory.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(126)))), ((int)(((byte)(34)))));
+            this.btnViewHistory.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnViewHistory.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
+            this.btnViewHistory.ForeColor = System.Drawing.Color.White;
+            this.btnViewHistory.Location = new System.Drawing.Point(9, 15);
+            this.btnViewHistory.Name = "btnViewHistory";
+            this.btnViewHistory.Size = new System.Drawing.Size(130, 35);
+            this.btnViewHistory.TabIndex = 1;
+            this.btnViewHistory.Text = "Lịch sử mua";
+            this.btnViewHistory.UseVisualStyleBackColor = false;
+            this.btnViewHistory.Click += new System.EventHandler(this.btnViewHistory_Click);
             // 
             // frmCustomerList
             // 
@@ -682,7 +662,6 @@
         private System.Windows.Forms.Panel pnlMain;
         private System.Windows.Forms.DataGridView dgvCustomers;
         private System.Windows.Forms.Panel pnlBottom;
-        private System.Windows.Forms.Button btnViewDetail;
         private System.Windows.Forms.Button btnViewHistory;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.DataGridViewTextBoxColumn colId;

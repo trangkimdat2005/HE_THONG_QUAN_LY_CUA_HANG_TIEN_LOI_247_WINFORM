@@ -16,10 +16,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
     {
         private readonly ProductController _productController;
         private readonly AppDbContext _context;
-        private string _selectedProductId;
-        private bool _isAddMode = false;
         private string _imagePath = string.Empty;
-        private bool _isDataLoaded = false;
 
 
         [DllImport("user32.dll", CharSet = CharSet.Auto)]

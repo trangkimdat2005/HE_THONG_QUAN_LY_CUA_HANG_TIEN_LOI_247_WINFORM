@@ -22,8 +22,34 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
         {
             InitializeComponent();
             _customerController = new CustomerController();
+            CustomizeInterface();
         }
+        private void CustomizeInterface()
+        {
+            // Style GridView
+            dgvMemberCards.BorderStyle = BorderStyle.None;
+            dgvMemberCards.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dgvMemberCards.GridColor = Color.FromArgb(230, 230, 230);
+            dgvMemberCards.RowHeadersVisible = false;
+            dgvMemberCards.EnableHeadersVisualStyles = false;
+            dgvMemberCards.ColumnHeadersHeight = 40;
+            dgvMemberCards.RowTemplate.Height = 40;
 
+            dgvMemberCards.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(41, 128, 185); // Xanh Dương
+            dgvMemberCards.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgvMemberCards.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            dgvMemberCards.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+
+            dgvMemberCards.DefaultCellStyle.SelectionBackColor = Color.FromArgb(211, 233, 252); // Xanh Nhạt
+            dgvMemberCards.DefaultCellStyle.SelectionForeColor = Color.Black;
+            dgvMemberCards.DefaultCellStyle.Font = new Font("Segoe UI", 10F);
+            dgvMemberCards.DefaultCellStyle.Padding = new Padding(10, 0, 0, 0);
+
+            // Căn chỉnh cột
+            colPoints.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            colIssueDate.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            colRank.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+        }
         private void frmMemberCards_Load(object sender, EventArgs e)
         {
             LoadCustomersWithMemberCards();

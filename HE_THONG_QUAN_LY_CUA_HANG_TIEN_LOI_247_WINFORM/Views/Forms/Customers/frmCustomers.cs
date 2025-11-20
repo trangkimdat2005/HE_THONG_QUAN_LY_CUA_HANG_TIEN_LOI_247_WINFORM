@@ -24,8 +24,29 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
         {
             InitializeComponent();
             _customerController = new CustomerController();
+            CustomizeInterface();
         }
+        private void CustomizeInterface()
+        {
+            // Style GridView
+            dgvCustomers.BorderStyle = BorderStyle.None;
+            dgvCustomers.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dgvCustomers.GridColor = Color.FromArgb(230, 230, 230);
+            dgvCustomers.RowHeadersVisible = false;
+            dgvCustomers.EnableHeadersVisualStyles = false;
+            dgvCustomers.ColumnHeadersHeight = 40;
+            dgvCustomers.RowTemplate.Height = 40;
 
+            dgvCustomers.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(41, 128, 185); // Xanh Dương
+            dgvCustomers.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgvCustomers.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            dgvCustomers.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+
+            dgvCustomers.DefaultCellStyle.SelectionBackColor = Color.FromArgb(211, 233, 252); // Xanh Nhạt
+            dgvCustomers.DefaultCellStyle.SelectionForeColor = Color.Black;
+            dgvCustomers.DefaultCellStyle.Font = new Font("Segoe UI", 10F);
+            dgvCustomers.DefaultCellStyle.Padding = new Padding(10, 0, 0, 0);
+        }
         private void frmCustomers_Load(object sender, EventArgs e)
         {
             LoadCustomers();

@@ -167,242 +167,108 @@
     <Compile Include="Helpers\Utils\ImageHelper.cs" />
     <Compile Include="Helpers\Utils\StringHelper.cs" />
     <Compile Include="Helpers\Utils\ValidationHelper.cs" />
-    <Compile Include="Views\Forms\Customers\frmCustomerList.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Forms\Customers\frmCustomerList.Designer.cs">
-      <DependentUpon>frmCustomerList.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Forms\Customers\frmCustomers.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Forms\Customers\frmCustomers.Designer.cs">
-      <DependentUpon>frmCustomers.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Forms\Customers\frmMemberCards.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Forms\Customers\frmMemberCards.Designer.cs">
-      <DependentUpon>frmMemberCards.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Forms\Customers\frmPurchaseHistory.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Forms\Customers\frmPurchaseHistory.Designer.cs">
-      <DependentUpon>frmPurchaseHistory.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Forms\Employees\frmEmployeeList.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Forms\Employees\frmEmployeeList.Designer.cs">
-      <DependentUpon>frmEmployeeList.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Forms\Employees\frmEmployees.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Forms\Employees\frmEmployees.Designer.cs">
-      <DependentUpon>frmEmployees.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Forms\Employees\frmWorkSchedule.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Forms\Employees\frmWorkSchedule.Designer.cs">
-      <DependentUpon>frmWorkSchedule.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Forms\Inventory\frmGoodsIssue.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Forms\Inventory\frmGoodsIssue.Designer.cs">
-      <DependentUpon>frmGoodsIssue.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Forms\Inventory\frmGoodsReceived.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Forms\Inventory\frmGoodsReceived.Designer.cs">
-      <DependentUpon>frmGoodsReceived.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Forms\Inventory\frmInventoryList.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Forms\Inventory\frmInventoryList.Designer.cs">
-      <DependentUpon>frmInventoryList.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Forms\Inventory\frmInventoryMain.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Forms\Inventory\frmInventoryMain.Designer.cs">
-      <DependentUpon>frmInventoryMain.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Forms\Inventory\frmProductLocation.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Forms\Inventory\frmProductLocation.Designer.cs">
-      <DependentUpon>frmProductLocation.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Forms\Inventory\frmStockIn.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Forms\Inventory\frmStockIn.Designer.cs">
-      <DependentUpon>frmStockIn.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Forms\Inventory\frmStocktake.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Forms\Inventory\frmStocktake.Designer.cs">
-      <DependentUpon>frmStocktake.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Forms\Invoice\frmInvoiceDetails.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Forms\Invoice\frmInvoiceDetails.Designer.cs">
-      <DependentUpon>frmInvoiceDetails.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Forms\Invoice\frmInvoices.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Forms\Invoice\frmInvoices.Designer.cs">
-      <DependentUpon>frmInvoices.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Forms\Main\frmDashboard.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Forms\Main\frmDashboard.Designer.cs">
-      <DependentUpon>frmDashboard.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Forms\Main\frmLogin.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Forms\Main\frmLogin.Designer.cs">
-      <DependentUpon>frmLogin.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Forms\Main\frmMain.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Forms\Main\frmMain.Designer.cs">
-      <DependentUpon>frmMain.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Forms\Products\frmBrands.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Forms\Products\frmBrands.Designer.cs">
-      <DependentUpon>frmBrands.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Forms\Products\frmCategorys.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Forms\Products\frmCategorys.Designer.cs">
-      <DependentUpon>frmCategorys.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Forms\Products\frmGoods.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Forms\Products\frmGoods.Designer.cs">
-      <DependentUpon>frmGoods.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Forms\Products\frmMeasurements.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Forms\Products\frmMeasurements.Designer.cs">
-      <DependentUpon>frmMeasurements.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Forms\Products\frmProducts.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Forms\Products\frmProducts.Designer.cs">
-      <DependentUpon>frmProducts.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Forms\Products\frmProductsMain.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Forms\Products\frmProductsMain.Designer.cs">
-      <DependentUpon>frmProductsMain.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Forms\Promotions\frmPromotionDetail.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Forms\Promotions\frmPromotionDetail.Designer.cs">
-      <DependentUpon>frmPromotionDetail.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Forms\Suppliers\frmSupplierList.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Forms\Suppliers\frmSupplierList.Designer.cs">
-      <DependentUpon>frmSupplierList.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Forms\Suppliers\frmTransactionHistory.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Forms\Suppliers\frmTransactionHistory.Designer.cs">
-      <DependentUpon>frmTransactionHistory.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Forms\Promotions\frmPromotions.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Forms\Promotions\frmPromotions.Designer.cs">
-      <DependentUpon>frmPromotions.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Views\Forms\Customers\frmCustomerList.resx">
+    <Compile Include="Views\forms\Customers\frmCustomerList.cs" />
+    <Compile Include="Views\forms\Customers\frmCustomerList.Designer.cs">
       <DependentUpon>frmCustomerList.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Forms\Customers\frmCustomers.resx">
+    </Compile>
+    <Compile Include="Views\forms\Customers\frmCustomers.cs" />
+    <Compile Include="Views\forms\Customers\frmCustomers.Designer.cs">
       <DependentUpon>frmCustomers.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Forms\Customers\frmMemberCards.resx">
+    </Compile>
+    <Compile Include="Views\forms\Customers\frmMemberCards.cs" />
+    <Compile Include="Views\forms\Customers\frmMemberCards.Designer.cs">
       <DependentUpon>frmMemberCards.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Forms\Customers\frmPurchaseHistory.resx">
+    </Compile>
+    <Compile Include="Views\forms\Customers\frmPurchaseHistory.cs" />
+    <Compile Include="Views\forms\Customers\frmPurchaseHistory.Designer.cs">
       <DependentUpon>frmPurchaseHistory.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Forms\Employees\frmEmployeeList.resx">
+    </Compile>
+    <Compile Include="Views\forms\Employees\frmEmployeeList.cs" />
+    <Compile Include="Views\forms\Employees\frmEmployeeList.Designer.cs">
       <DependentUpon>frmEmployeeList.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Forms\Employees\frmEmployees.resx">
+    </Compile>
+    <Compile Include="Views\forms\Employees\frmEmployees.cs" />
+    <Compile Include="Views\forms\Employees\frmEmployees.Designer.cs">
       <DependentUpon>frmEmployees.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Forms\Inventory\frmStockIn.resx">
+    </Compile>
+    <Compile Include="Views\forms\Employees\frmShiftAssignment.cs" />
+    <Compile Include="Views\forms\Employees\frmShiftAssignment.Designer.cs">
+      <DependentUpon>frmShiftAssignment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\forms\Employees\frmWorkSchedule.cs" />
+    <Compile Include="Views\forms\Employees\frmWorkSchedule.Designer.cs">
+      <DependentUpon>frmWorkSchedule.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\forms\Inventory\frmInventoryList.cs" />
+    <Compile Include="Views\forms\Inventory\frmInventoryList.Designer.cs">
+      <DependentUpon>frmInventoryList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\forms\Inventory\frmInventoryMain.cs" />
+    <Compile Include="Views\forms\Inventory\frmInventoryMain.Designer.cs">
+      <DependentUpon>frmInventoryMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\forms\Inventory\frmStockIn.cs" />
+    <Compile Include="Views\forms\Inventory\frmStockIn.Designer.cs">
       <DependentUpon>frmStockIn.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Forms\Invoice\frmInvoiceDetails.resx">
+    </Compile>
+    <Compile Include="Views\forms\Invoice\frmInvoiceDetails.cs" />
+    <Compile Include="Views\forms\Invoice\frmInvoiceDetails.Designer.cs">
       <DependentUpon>frmInvoiceDetails.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Forms\Invoice\frmInvoices.resx">
+    </Compile>
+    <Compile Include="Views\forms\Invoice\frmInvoices.cs" />
+    <Compile Include="Views\forms\Invoice\frmInvoices.Designer.cs">
       <DependentUpon>frmInvoices.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Forms\Main\frmDashboard.resx">
+    </Compile>
+    <Compile Include="Views\forms\Main\frmDashboard.cs" />
+    <Compile Include="Views\forms\Main\frmDashboard.Designer.cs">
       <DependentUpon>frmDashboard.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Forms\Main\frmLogin.resx">
+    </Compile>
+    <Compile Include="Views\forms\Main\frmLogin.cs" />
+    <Compile Include="Views\forms\Main\frmLogin.Designer.cs">
       <DependentUpon>frmLogin.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Forms\Main\frmMain.resx">
+    </Compile>
+    <Compile Include="Views\forms\Main\frmMain.cs" />
+    <Compile Include="Views\forms\Main\frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Forms\Products\frmBrands.resx">
+    </Compile>
+    <Compile Include="Views\forms\Products\frmBrands.cs" />
+    <Compile Include="Views\forms\Products\frmBrands.Designer.cs">
       <DependentUpon>frmBrands.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Forms\Products\frmCategorys.resx">
+    </Compile>
+    <Compile Include="Views\forms\Products\frmCategorys.cs" />
+    <Compile Include="Views\forms\Products\frmCategorys.Designer.cs">
       <DependentUpon>frmCategorys.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Forms\Products\frmGoods.resx">
+    </Compile>
+    <Compile Include="Views\forms\Products\frmGoods.cs" />
+    <Compile Include="Views\forms\Products\frmGoods.Designer.cs">
       <DependentUpon>frmGoods.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Forms\Products\frmMeasurements.resx">
+    </Compile>
+    <Compile Include="Views\forms\Products\frmMeasurements.cs" />
+    <Compile Include="Views\forms\Products\frmMeasurements.Designer.cs">
       <DependentUpon>frmMeasurements.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Forms\Products\frmProducts.resx">
+    </Compile>
+    <Compile Include="Views\forms\Products\frmProducts.cs" />
+    <Compile Include="Views\forms\Products\frmProducts.Designer.cs">
       <DependentUpon>frmProducts.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Forms\Promotions\frmPromotionDetail.resx">
+    </Compile>
+    <Compile Include="Views\forms\Promotions\frmPromotionDetail.cs" />
+    <Compile Include="Views\forms\Promotions\frmPromotionDetail.Designer.cs">
       <DependentUpon>frmPromotionDetail.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Forms\Promotions\frmPromotions.resx">
+    </Compile>
+    <Compile Include="Views\forms\Promotions\frmPromotions.cs" />
+    <Compile Include="Views\forms\Promotions\frmPromotions.Designer.cs">
       <DependentUpon>frmPromotions.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Forms\Suppliers\frmSupplierList.resx">
+    </Compile>
+    <Compile Include="Views\forms\Suppliers\frmSupplierList.cs" />
+    <Compile Include="Views\forms\Suppliers\frmSupplierList.Designer.cs">
       <DependentUpon>frmSupplierList.cs</DependentUpon>
-    </EmbeddedResource>
+    </Compile>
+    <Compile Include="Views\forms\Suppliers\frmTransactionHistory.cs" />
+    <Compile Include="Views\forms\Suppliers\frmTransactionHistory.Designer.cs">
+      <DependentUpon>frmTransactionHistory.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -413,6 +279,75 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Views\forms\Customers\frmCustomerList.resx">
+      <DependentUpon>frmCustomerList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\forms\Customers\frmCustomers.resx">
+      <DependentUpon>frmCustomers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\forms\Customers\frmMemberCards.resx">
+      <DependentUpon>frmMemberCards.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\forms\Customers\frmPurchaseHistory.resx">
+      <DependentUpon>frmPurchaseHistory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\forms\Employees\frmEmployeeList.resx">
+      <DependentUpon>frmEmployeeList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\forms\Employees\frmWorkSchedule.resx">
+      <DependentUpon>frmWorkSchedule.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\forms\Inventory\frmInventoryList.resx">
+      <DependentUpon>frmInventoryList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\forms\Inventory\frmInventoryMain.resx">
+      <DependentUpon>frmInventoryMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\forms\Inventory\frmStockIn.resx">
+      <DependentUpon>frmStockIn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\forms\Invoice\frmInvoiceDetails.resx">
+      <DependentUpon>frmInvoiceDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\forms\Invoice\frmInvoices.resx">
+      <DependentUpon>frmInvoices.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\forms\Main\frmDashboard.resx">
+      <DependentUpon>frmDashboard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\forms\Main\frmLogin.resx">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\forms\Main\frmMain.resx">
+      <DependentUpon>frmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\forms\Products\frmBrands.resx">
+      <DependentUpon>frmBrands.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\forms\Products\frmCategorys.resx">
+      <DependentUpon>frmCategorys.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\forms\Products\frmGoods.resx">
+      <DependentUpon>frmGoods.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\forms\Products\frmMeasurements.resx">
+      <DependentUpon>frmMeasurements.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\forms\Products\frmProducts.resx">
+      <DependentUpon>frmProducts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\forms\Promotions\frmPromotionDetail.resx">
+      <DependentUpon>frmPromotionDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\forms\Promotions\frmPromotions.resx">
+      <DependentUpon>frmPromotions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\forms\Suppliers\frmSupplierList.resx">
+      <DependentUpon>frmSupplierList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\forms\Suppliers\frmTransactionHistory.resx">
+      <DependentUpon>frmTransactionHistory.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
