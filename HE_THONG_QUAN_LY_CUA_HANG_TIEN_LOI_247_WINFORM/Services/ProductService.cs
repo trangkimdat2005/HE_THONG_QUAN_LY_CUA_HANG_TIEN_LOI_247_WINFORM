@@ -1,5 +1,5 @@
 ﻿using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.DTO;
-using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Models; // Ensure this namespace has ProductDetailDto
+using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
 {
-    public class ProductService
+    public class ProductService : IDisposable
     {
         private readonly AppDbContext _readContext;
         private readonly QuanLyServices _services;
@@ -18,13 +18,15 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
             _services = new QuanLyServices();
         }
 
-        #region Get/Search Operations (Sử dụng AsNoTracking để đọc nhanh)
+        #region Get/Search Operations
 
-        public SanPham GetProductById(string id)
+        public SanPhamDonVi GetProductUnitById(string id)
         {
-            return _readContext.SanPhams.AsNoTracking()
-                .Include("SanPhamDonVis")
-                .Include("SanPhamDonVis.DonViDoLuong")
+            return _readContext.SanPhamDonVis.AsNoTracking()
+                .Include(x => x.SanPham)
+                .Include(x => x.SanPham.NhanHieu)
+                .Include(x => x.SanPham.SanPhamDanhMucs.Select(dm => dm.DanhMuc))
+                .Include(x => x.DonViDoLuong)
                 .FirstOrDefault(p => p.id == id && !p.isDelete);
         }
 
@@ -32,11 +34,40 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
         {
             try
             {
-                var query = _services.GetList<SanPhamDonVi>();
 
+                var query = _readContext.SanPhamDonVis.AsNoTracking()
+                    .Include(x => x.SanPham)
+                    .Include(x => x.SanPham.NhanHieu)
+                    .Include(x => x.SanPham.SanPhamDanhMucs.Select(dm => dm.DanhMuc))
+                    .Include(x => x.DonViDoLuong)
+                    .Where(spd => !spd.isDelete && !spd.SanPham.isDelete)
+                    .AsQueryable();
+
+                // 1. Lọc theo từ khóa (tìm theo ID hoặc tên sản phẩm)
                 if (!string.IsNullOrWhiteSpace(keyword))
                 {
-                    keyword = keyword.ToLower();  // Chuyển keyword về chữ thường
+                    keyword = keyword.ToLower();
+                    query = query.Where(spd =>
+                        spd.SanPham.id.ToLower().Contains(keyword) ||
+                        spd.SanPham.ten.ToLower().Contains(keyword) ||
+                        spd.id.ToLower().Contains(keyword));
+                }
+
+                // 2. Lọc theo Nhãn hiệu
+                if (!string.IsNullOrEmpty(brandId))
+                {
+                    query = query.Where(spd => spd.SanPham.nhanHieuId == brandId);
+                }
+
+                // 3. Lọc theo Danh mục (quan hệ n-n)
+                if (!string.IsNullOrEmpty(categoryId))
+                {
+                    query = query.Where(spd => spd.SanPham.SanPhamDanhMucs.Any(dm => dm.danhMucId == categoryId && !dm.isDelete));
+                        var query = _services.GetList<SanPhamDonVi>();
+
+                        if (!string.IsNullOrWhiteSpace(keyword))
+                        {
+                            keyword = keyword.ToLower();  // Chuyển keyword về chữ thường
 
                     query = query.Where(p => (p.sanPhamId != null && p.sanPhamId.ToLower().Contains(keyword)) ||
                                              (p.SanPham != null && p.SanPham.ten != null && p.SanPham.ten.ToLower().Contains(keyword))).ToList();
@@ -47,8 +78,36 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
                     query = query.Where(p => p.SanPham.SanPhamDanhMucs.Any(spdm => spdm.danhMucId == categoryId && !spdm.isDelete)).ToList();
                 }
 
-                var result = query.Select(p => new
+                // 4. Map sang DTO
+                return query.Select(spd => new ProductDetailDto
                 {
+
+                    Id = spd.id,                           // Mã SPDV
+                    SanPhamId = spd.sanPhamId,             // ID Sản phẩm
+                    DonViId = spd.donViId,                 // ID Đơn vị
+                    MaSP = spd.SanPham.id,                 // Mã SP từ frmGoods
+                    TenSanPham = spd.SanPham.ten,          // Tên SP từ frmGoods
+                    NhanHieu = spd.SanPham.NhanHieu != null ? spd.SanPham.NhanHieu.ten : "Chưa có", // Nhãn hiệu từ frmGoods
+                    
+                    // Danh mục từ frmGoods (lấy danh mục đầu tiên)
+                    DanhMuc = spd.SanPham.SanPhamDanhMucs
+                        .Where(dm => !dm.isDelete)
+                        .Select(dm => dm.DanhMuc.ten)
+                        .FirstOrDefault() ?? "Chưa phân loại",
+                    
+                    DonVi = spd.DonViDoLuong.ten,          // Đơn vị từ frmMeasurements
+                    HeSoQuyDoi = spd.heSoQuyDoi,           // Hệ số quy đổi
+                    GiaBan = spd.giaBan,                   // Giá bán từ SanPhamDonVi
+                    TrangThai = spd.trangThai,             // Trạng thái từ SanPhamDonVi
+                    MoTa = spd.SanPham.moTa                // Mô tả từ SanPham
+                })
+                .OrderBy(x => x.MaSP)
+                .ThenBy(x => x.DonVi)
+                .ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Lỗi lọc sản phẩm: {ex.Message}", ex);
                     p.sanPhamId,
                     p.SanPham.ten,
                     NhanHieuTen = p.SanPham.NhanHieu.ten,
@@ -71,120 +130,164 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
                     TrangThai = x.isDelete ? "Ngừng kinh doanh" : "Đang kinh doanh"
                 }).OrderBy(x => x.Id).Take(1000).ToList();
             }
-            catch (Exception ex) { throw new Exception($"Lỗi lọc: {ex.Message}"); }
         }
 
-        public string GetProductCategoryId(string productId)
+        public List<SanPham> GetAllGoods(string keyword = null, string brandId = null, string categoryId = null)
         {
-            return _readContext.SanPhamDanhMucs.AsNoTracking()
-                .Where(x => x.sanPhamId == productId && !x.isDelete)
-                .Select(x => x.danhMucId).FirstOrDefault();
+            try
+            {
+                var query = _readContext.SanPhams.AsNoTracking()
+                    .Where(sp => !sp.isDelete)
+                    .AsQueryable();
+
+                if (!string.IsNullOrWhiteSpace(keyword))
+                {
+                    keyword = keyword.ToLower();
+                    query = query.Where(sp => sp.id.ToLower().Contains(keyword) || sp.ten.ToLower().Contains(keyword));
+                }
+
+                if (!string.IsNullOrEmpty(brandId))
+                    query = query.Where(sp => sp.nhanHieuId == brandId);
+
+                if (!string.IsNullOrEmpty(categoryId))
+                    query = query.Where(sp => sp.SanPhamDanhMucs.Any(dm => dm.danhMucId == categoryId && !dm.isDelete));
+
+                return query.Include(x => x.NhanHieu).OrderBy(x => x.ten).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Lỗi lấy danh sách hàng hóa: {ex.Message}", ex);
+            }
         }
 
-        public string GenerateNewProductId() => _services.GenerateNewId<SanPham>("SP", 5);
+        public List<DonViDoLuong> GetAllUnits()
+        {
+            try
+            {
+                return _readContext.DonViDoLuongs.AsNoTracking()
+                    .Where(x => !x.isDelete)
+                    .OrderBy(x => x.ten)
+                    .ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Lỗi lấy danh sách đơn vị: {ex.Message}", ex);
+            }
+        }
+
+        public string GenerateNewProductUnitId()
+        {
+            return _services.GenerateNewId<SanPhamDonVi>("SPDV", 6);
+        }
 
         #endregion
 
-        #region CRUD Operations (Thêm, Sửa, Xóa)
+        #region CRUD Operations
 
-        public (bool success, string message, SanPham product) AddProduct(SanPham product, string categoryId = null)
+        public (bool success, string message, SanPhamDonVi result) AddProductUnit(SanPhamDonVi model)
         {
             using (var db = new AppDbContext())
             {
                 try
                 {
-                    if (db.SanPhams.Any(p => p.ten.ToLower() == product.ten.ToLower() && !p.isDelete))
-                        return (false, "Tên sản phẩm đã tồn tại.", null);
+                    // Kiểm tra sản phẩm có tồn tại không
+                    var good = db.SanPhams.FirstOrDefault(x => x.id == model.sanPhamId && !x.isDelete);
+                    if (good == null)
+                        return (false, "Hàng hóa không tồn tại!", null);
 
-                    product.id = _services.GenerateNewId<SanPham>("SP", 5);
-                    product.isDelete = false;
-                    db.SanPhams.Add(product);
+                    // Kiểm tra đơn vị có tồn tại không
+                    var unit = db.DonViDoLuongs.FirstOrDefault(x => x.id == model.donViId && !x.isDelete);
+                    if (unit == null)
+                        return (false, "Đơn vị không tồn tại!", null);
 
-                    if (!string.IsNullOrEmpty(categoryId))
-                    {
-                        db.SanPhamDanhMucs.Add(new SanPhamDanhMuc
-                        {
-                            id = Guid.NewGuid().ToString(),
-                            sanPhamId = product.id,
-                            danhMucId = categoryId,
-                            isDelete = false
-                        });
-                    }
+                    // Kiểm tra trùng: cùng sản phẩm + cùng đơn vị
+                    bool exists = db.SanPhamDonVis.Any(x => x.sanPhamId == model.sanPhamId &&
+                                                          x.donViId == model.donViId &&
+                                                          !x.isDelete);
+                    if (exists)
+                        return (false, "Sản phẩm với đơn vị này đã tồn tại!", null);
 
+                    // Tạo ID mới
+                    model.id = _services.GenerateNewId<SanPhamDonVi>("SPDV", 6);
+                    model.isDelete = false;
+                    
+                    if (string.IsNullOrEmpty(model.trangThai))
+                        model.trangThai = "Available";
+
+                    db.SanPhamDonVis.Add(model);
                     db.SaveChanges();
-                    return (true, $"Thêm thành công. Mã: {product.id}", product);
+
+                    return (true, $"Thêm thành công! Mã: {model.id}", model);
                 }
-                catch (Exception ex) { return (false, $"Lỗi thêm: {ex.Message}", null); }
+                catch (Exception ex)
+                {
+                    return (false, $"Lỗi thêm: {ex.Message}", null);
+                }
             }
         }
 
-        public (bool success, string message) UpdateProduct(SanPham product, string categoryId = null)
+        public (bool success, string message) UpdateProductUnit(SanPhamDonVi model)
         {
             using (var db = new AppDbContext())
             {
                 try
                 {
-                    var existingProduct = db.SanPhams.FirstOrDefault(p => p.id == product.id);
-                    if (existingProduct == null) return (false, "Không tìm thấy sản phẩm.");
+                    var item = db.SanPhamDonVis.FirstOrDefault(x => x.id == model.id);
+                    if (item == null)
+                        return (false, "Dữ liệu không tồn tại!");
 
-                    if (db.SanPhams.Any(p => p.ten.ToLower() == product.ten.ToLower() && p.id != product.id && !p.isDelete))
-                        return (false, "Tên sản phẩm đã tồn tại.");
+                    // Kiểm tra trùng khi sửa (trừ chính nó)
+                    bool exists = db.SanPhamDonVis.Any(x => x.sanPhamId == model.sanPhamId &&
+                                                          x.donViId == model.donViId &&
+                                                          x.id != model.id &&
+                                                          !x.isDelete);
+                    if (exists)
+                        return (false, "Đơn vị này đã có cho sản phẩm!");
 
-                    existingProduct.ten = product.ten;
-                    existingProduct.nhanHieuId = product.nhanHieuId;
-                    existingProduct.moTa = product.moTa;
+                    // Cập nhật
+                    item.sanPhamId = model.sanPhamId;
+                    item.donViId = model.donViId;
+                    item.giaBan = model.giaBan;
+                    item.heSoQuyDoi = model.heSoQuyDoi;
+                    item.trangThai = model.trangThai;
 
-                    var allLinks = db.SanPhamDanhMucs.Where(x => x.sanPhamId == product.id).ToList();
-                    foreach (var link in allLinks) link.isDelete = true;
-
-                    if (!string.IsNullOrEmpty(categoryId))
-                    {
-                        var matchLink = allLinks.FirstOrDefault(x => x.danhMucId == categoryId);
-                        if (matchLink != null) matchLink.isDelete = false;
-                        else
-                        {
-                            db.SanPhamDanhMucs.Add(new SanPhamDanhMuc
-                            {
-                                id = Guid.NewGuid().ToString(),
-                                sanPhamId = product.id,
-                                danhMucId = categoryId,
-                                isDelete = false
-                            });
-                        }
-                    }
                     db.SaveChanges();
-                    return (true, "Cập nhật thành công.");
+                    return (true, "Cập nhật thành công!");
                 }
-                catch (Exception ex) { return (false, $"Lỗi cập nhật: {ex.Message}"); }
+                catch (Exception ex)
+                {
+                    return (false, $"Lỗi cập nhật: {ex.Message}");
+                }
             }
         }
 
-        public (bool success, string message) DeleteProduct(string productId)
+        public (bool success, string message) DeleteProductUnit(string id)
         {
             using (var db = new AppDbContext())
             {
-                using (var transaction = db.Database.BeginTransaction())
+                using (var tran = db.Database.BeginTransaction())
                 {
                     try
                     {
-                        var product = db.SanPhams.FirstOrDefault(p => p.id == productId);
-                        if (product == null) return (false, "Không tìm thấy sản phẩm.");
+                        var item = db.SanPhamDonVis.FirstOrDefault(x => x.id == id);
+                        if (item == null)
+                            return (false, "Không tìm thấy dữ liệu!");
 
-                        product.isDelete = true;
+                        // Kiểm tra ràng buộc: Đã phát sinh giao dịch chưa?
+                        bool hasOrders = db.ChiTietHoaDons.Any(ct => ct.sanPhamDonViId == id && !ct.isDelete);
+                        if (hasOrders)
+                            return (false, "Không thể xóa! Sản phẩm này đã phát sinh giao dịch.");
 
-                        var units = db.SanPhamDonVis.Where(x => x.sanPhamId == productId).ToList();
-                        foreach (var unit in units) unit.isDelete = true;
-
-                        var links = db.SanPhamDanhMucs.Where(x => x.sanPhamId == productId).ToList();
-                        foreach (var link in links) link.isDelete = true;
-
+                        // Xóa mềm
+                        item.isDelete = true;
                         db.SaveChanges();
-                        transaction.Commit();
-                        return (true, "Xóa thành công.");
+                        tran.Commit();
+
+                        return (true, "Xóa thành công!");
                     }
                     catch (Exception ex)
                     {
-                        transaction.Rollback();
+                        tran.Rollback();
                         return (false, $"Lỗi xóa: {ex.Message}");
                     }
                 }

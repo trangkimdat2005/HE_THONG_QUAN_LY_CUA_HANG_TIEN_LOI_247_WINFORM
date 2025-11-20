@@ -121,7 +121,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
 
                     if (string.IsNullOrEmpty(category.id) || category.id == "Tự động tạo")
                     {
-                        category.id = _services.GenerateNewId<DanhMuc>("DM", 5);
+                        category.id = _services.GenerateNewId<DanhMuc>("DM", 6);
                     }
                     else
                     {
@@ -201,7 +201,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
 
         public string GenerateNewCategoryId()
         {
-            return _services.GenerateNewId<DanhMuc>("DM", 5);
+            return _services.GenerateNewId<DanhMuc>("DM", 6);
         }
 
         #endregion

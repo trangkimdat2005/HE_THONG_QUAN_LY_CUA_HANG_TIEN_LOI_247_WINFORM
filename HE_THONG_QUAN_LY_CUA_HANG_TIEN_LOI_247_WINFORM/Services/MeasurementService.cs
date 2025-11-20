@@ -21,7 +21,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
 
         public string GenerateNewMeasurementId()
         {
-            return _services.GenerateNewId<DonViDoLuong>("DV", 5);
+            return _services.GenerateNewId<DonViDoLuong>("DV", 6);
         }
 
         public dynamic GetAllMeasurements()
@@ -101,7 +101,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
                     // Sinh mã tự động nếu chưa có
                     if (string.IsNullOrEmpty(unit.id) || unit.id == "Tự động tạo")
                     {
-                        unit.id = _services.GenerateNewId<DonViDoLuong>("DV", 5);
+                        unit.id = _services.GenerateNewId<DonViDoLuong>("DV", 6);
                     }
 
                     unit.isDelete = false;
