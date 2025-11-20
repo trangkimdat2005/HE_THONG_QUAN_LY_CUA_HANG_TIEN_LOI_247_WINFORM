@@ -3,6 +3,7 @@ using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Models;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Reflection; 
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
@@ -31,18 +32,9 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
         {
             InitializeComponent();
             _brandController = new BrandController();
-
+            CustomizeInterface();
             SetPlaceholder(txtSearch, "Nhập tên hoặc mã nhãn hiệu để tìm...");
 
-            //this.Load += frmBrands_Load;
-            //if (btnAdd != null) this.btnAdd.Click += btnAdd_Click;
-            //if (btnEdit != null) this.btnEdit.Click += btnEdit_Click;
-            //if (btnDelete != null) this.btnDelete.Click += btnDelete_Click;
-            //if (btnSave != null) this.btnSave.Click += btnSave_Click;
-            //if (btnCancel != null) this.btnCancel.Click += btnCancel_Click;
-            //if (btnSearch != null) this.btnSearch.Click += btnSearch_Click;
-            //if (btnRefresh != null) this.btnRefresh.Click += btnRefresh_Click;
-            //if (btnExport != null) this.btnExport.Click += btnExport_Click;
 
             if (txtSearch != null)
             {
@@ -53,7 +45,30 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
             if (txtSearch != null) txtSearch.KeyPress += (s, e) => { if (e.KeyChar == 13) { btnSearch_Click(s, e); e.Handled = true; } };
             if (txtBrandName != null) txtBrandName.KeyPress += (s, e) => { if (e.KeyChar == 13) { btnSave_Click(s, e); e.Handled = true; } };
         }
+        private void CustomizeInterface()
+        {
+            // Style GridView
+            dgvBrands.BorderStyle = BorderStyle.None;
+            dgvBrands.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dgvBrands.GridColor = Color.FromArgb(230, 230, 230);
+            dgvBrands.RowHeadersVisible = false;
+            dgvBrands.EnableHeadersVisualStyles = false;
+            dgvBrands.ColumnHeadersHeight = 40;
+            dgvBrands.RowTemplate.Height = 40;
 
+            dgvBrands.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(41, 128, 185); // Xanh Dương
+            dgvBrands.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgvBrands.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            dgvBrands.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+
+            dgvBrands.DefaultCellStyle.SelectionBackColor = Color.FromArgb(211, 233, 252); // Xanh Nhạt
+            dgvBrands.DefaultCellStyle.SelectionForeColor = Color.Black;
+            dgvBrands.DefaultCellStyle.Font = new Font("Segoe UI", 10F);
+            dgvBrands.DefaultCellStyle.Padding = new Padding(10, 0, 0, 0);
+
+            // Căn giữa cột số lượng
+            colCount.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+        }
         private void frmBrands_Load(object sender, EventArgs e)
         {
             try

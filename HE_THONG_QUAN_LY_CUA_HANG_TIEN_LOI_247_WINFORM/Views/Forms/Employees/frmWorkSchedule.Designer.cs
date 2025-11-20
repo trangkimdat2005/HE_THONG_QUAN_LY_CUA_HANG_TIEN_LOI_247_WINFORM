@@ -70,7 +70,7 @@
             this.lblTitle.ForeColor = System.Drawing.Color.White;
             this.lblTitle.Location = new System.Drawing.Point(12, 12);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(306, 32);
+            this.lblTitle.Size = new System.Drawing.Size(328, 32);
             this.lblTitle.TabIndex = 0;
             this.lblTitle.Text = "LỊCH LÀM VIỆC NHÂN VIÊN";
             // 
@@ -121,7 +121,7 @@
             this.lblEndDate.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
             this.lblEndDate.Location = new System.Drawing.Point(850, 33);
             this.lblEndDate.Name = "lblEndDate";
-            this.lblEndDate.Size = new System.Drawing.Size(70, 17);
+            this.lblEndDate.Size = new System.Drawing.Size(71, 17);
             this.lblEndDate.TabIndex = 4;
             this.lblEndDate.Text = "Đến ngày:";
             // 
@@ -140,7 +140,7 @@
             this.lblStartDate.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
             this.lblStartDate.Location = new System.Drawing.Point(560, 33);
             this.lblStartDate.Name = "lblStartDate";
-            this.lblStartDate.Size = new System.Drawing.Size(60, 17);
+            this.lblStartDate.Size = new System.Drawing.Size(63, 17);
             this.lblStartDate.TabIndex = 2;
             this.lblStartDate.Text = "Từ ngày:";
             // 
@@ -229,6 +229,7 @@
             this.btnAdd.TabIndex = 0;
             this.btnAdd.Text = "Thêm lịch";
             this.btnAdd.UseVisualStyleBackColor = false;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // pnlGrid
             // 
@@ -349,7 +350,7 @@
             this.lblTotal.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.lblTotal.Location = new System.Drawing.Point(15, 10);
             this.lblTotal.Name = "lblTotal";
-            this.lblTotal.Size = new System.Drawing.Size(117, 19);
+            this.lblTotal.Size = new System.Drawing.Size(126, 19);
             this.lblTotal.TabIndex = 0;
             this.lblTotal.Text = "Tổng số: 0 ca làm";
             // 
