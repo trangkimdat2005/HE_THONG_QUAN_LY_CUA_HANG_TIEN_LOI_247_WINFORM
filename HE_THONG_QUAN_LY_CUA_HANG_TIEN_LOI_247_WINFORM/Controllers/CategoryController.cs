@@ -7,15 +7,17 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Controllers
     public class CategoryController : IDisposable
     {
         private readonly CategoryService _categoryService;
+        private readonly IQuanLyServices _quanLyServices;
 
         public CategoryController()
         {
             _categoryService = new CategoryService();
+            _quanLyServices = new QuanLyServices();
         }
 
         public dynamic GetAllCategories()
         {
-            return _categoryService.GetAllCategories();
+            return _quanLyServices.GetList<DanhMuc>();
         }
 
         public dynamic SearchCategories(string keyword)
