@@ -1,287 +1,296 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
-using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Models;
+using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Controllers;
 
 namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Promotions
 {
     public partial class frmPromotions : Form
     {
-        private AppDbContext _context;
-        private string _selectedPromotionId;
-        private bool _isDataLoaded = false;
+        private readonly PromotionController _promotionController;
+
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
+        private static extern Int32 SendMessage(IntPtr hWnd, int msg, int wParam, [MarshalAs(UnmanagedType.LPWStr)] string lParam);
+        private const int EM_SETCUEBANNER = 0x1501;
+
+        private void SetPlaceholder(TextBox txt, string text)
+        {
+            if (txt != null)
+            {
+                SendMessage(txt.Handle, EM_SETCUEBANNER, 0, text);
+            }
+        }
 
         public frmPromotions()
         {
             InitializeComponent();
-            _context = new AppDbContext();
-        }
+            _promotionController = new PromotionController();
 
-        private async void frmPromotions_Load(object sender, EventArgs e)
-        {
-            try
+            SetPlaceholder(txtSearch, "Nhập tên hoặc mã chương trình...");
+
+            this.Load += frmPromotions_Load;
+            
+            if (txtSearch != null)
             {
-                // Hiển thị loading message
-                dgvPromotions.DataSource = null;
-                lblTitle.Text = "QUẢN LÝ CHƯƠNG TRÌNH KHUYẾN MÃI - Đang tải dữ liệu...";
-
-                // Disable controls trong khi loading
-                DisableControlsWhileLoading();
-
-                // Load data async để không block UI
-                await LoadDataAsync();
-
-                _isDataLoaded = true;
-
-                lblTitle.Text = "QUẢN LÝ CHƯƠNG TRÌNH KHUYẾN MÃI";
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Lỗi khi tải dữ liệu: {ex.Message}", "Lỗi",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-                lblTitle.Text = "QUẢN LÝ CHƯƠNG TRÌNH KHUYẾN MÃI - Lỗi tải dữ liệu";
-            }
-            finally
-            {
-                EnableControlsAfterLoading();
-            }
-        }
-
-        private void DisableControlsWhileLoading()
-        {
-            panelSearch.Enabled = false;
-            panelButtons.Enabled = false;
-            dgvPromotions.Enabled = false;
-        }
-
-        private void EnableControlsAfterLoading()
-        {
-            panelSearch.Enabled = true;
-            panelButtons.Enabled = true;
-            dgvPromotions.Enabled = true;
-        }
-
-        private async Task LoadDataAsync()
-        {
-            await Task.Run(() =>
-            {
-                // Load promotions synchronously in background thread
-                this.Invoke((MethodInvoker)delegate
+                txtSearch.TextChanged += (s, e) => { PerformSearch(); };
+                txtSearch.KeyPress += (s, e) =>
                 {
-                    LoadPromotionTypes();
-                    LoadPromotions();
-                });
-            });
-        }
-
-        private void LoadPromotionTypes()
-        {
-            try
-            {
-                var types = new List<KeyValuePair<string, string>>
-                {
-                    new KeyValuePair<string, string>("", "-- Tất cả --"),
-                    new KeyValuePair<string, string>("Discount", "Giảm giá"),
-                    new KeyValuePair<string, string>("Gift", "Tặng quà"),
-                    new KeyValuePair<string, string>("BOGO", "Mua 1 tặng 1"),
-                    new KeyValuePair<string, string>("Loyalty", "Ưu đãi khách hàng")
+                    if (e.KeyChar == (char)Keys.Enter)
+                    {
+                        PerformSearch();
+                        e.Handled = true;
+                    }
                 };
+            }
+        }
 
-                cmbType.DataSource = types;
-                cmbType.DisplayMember = "Value";
-                cmbType.ValueMember = "Key";
+        private void frmPromotions_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                if (dgvPromotions != null)
+                {
+                    dgvPromotions.AutoGenerateColumns = false;
+                }
+                LoadPromotions();
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Lỗi khi tải danh sách loại khuyến mãi: {ex.Message}", "Lỗi",
+                MessageBox.Show($"Lỗi tải dữ liệu: {ex.Message}", "Lỗi",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void LoadPromotions()
         {
+            AutoScroll = true;
             try
             {
-                var query = _context.ChuongTrinhKhuyenMais
-                    .Where(p => !p.isDelete)
-                    .AsQueryable();
-
-                // Apply search filter
-                if (!string.IsNullOrWhiteSpace(txtSearch.Text))
-                {
-                    string searchText = txtSearch.Text.ToLower();
-                    query = query.Where(p => p.ten.ToLower().Contains(searchText) || 
-                                           p.moTa.ToLower().Contains(searchText));
-                }
-
-                // Apply type filter
-                if (cmbType.SelectedValue != null && !string.IsNullOrEmpty(cmbType.SelectedValue.ToString()))
-                {
-                    string type = cmbType.SelectedValue.ToString();
-                    if (!string.IsNullOrEmpty(type))
-                    {
-                        query = query.Where(p => p.loai == type);
-                    }
-                }
-
-                // Apply date filter
-                if (chkDateFilter.Checked)
-                {
-                    DateTime startDate = dtpStartDate.Value.Date;
-                    DateTime endDate = dtpEndDate.Value.Date;
-                    query = query.Where(p => p.ngayBatDau >= startDate && p.ngayKetThuc <= endDate);
-                }
-
-                // Take only 1000 records max to prevent performance issues
-                var promotions = query
-                    .Take(1000)
-                    .Select(p => new
-                    {
-                        p.id,
-                        p.ten,
-                        Loai = p.loai == "Discount" ? "Giảm giá" :
-                               p.loai == "Gift" ? "Tặng quà" :
-                               p.loai == "BOGO" ? "Mua 1 tặng 1" :
-                               p.loai == "Loyalty" ? "Ưu đãi khách hàng" : p.loai,
-                        p.ngayBatDau,
-                        p.ngayKetThuc,
-                        TrangThai = DateTime.Now < p.ngayBatDau ? "Chưa bắt đầu" :
-                                   DateTime.Now > p.ngayKetThuc ? "Đã kết thúc" : "Đang áp dụng",
-                        p.moTa
-                    })
-                    .OrderByDescending(p => p.ngayBatDau)
-                    .ToList();
-
+                var promotions = _promotionController.GetAllPromotions();
                 dgvPromotions.DataSource = promotions;
-
-                // Update status label
-                lblStatus.Text = $"Tổng số: {promotions.Count} chương trình";
+                MapDataGridViewColumns();
+                
+                if (lblStatus != null)
+                    lblStatus.Text = $"Tổng số: {promotions.Count} chương trình khuyến mãi";
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Lỗi khi tải danh sách chương trình khuyến mãi: {ex.Message}", "Lỗi",
+                MessageBox.Show($"Lỗi hiển thị dữ liệu: {ex.Message}", "Lỗi",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        private void dgvPromotions_SelectionChanged(object sender, EventArgs e)
+        private void MapDataGridViewColumns()
         {
-            if (dgvPromotions.CurrentRow != null && _isDataLoaded)
-            {
-                _selectedPromotionId = dgvPromotions.CurrentRow.Cells["colId"].Value?.ToString();
-            }
-        }
+            if (dgvPromotions.Columns.Count == 0) return;
 
-        private void btnAdd_Click(object sender, EventArgs e)
-        {
-            var detailForm = new frmPromotionDetail(null, _context);
-            detailForm.FormClosed += (s, args) =>
-            {
-                // Reload data after detail form is closed
-                LoadPromotions();
-            };
-            detailForm.ShowDialog();
-        }
+            if (dgvPromotions.Columns["colId"] != null)
+                dgvPromotions.Columns["colId"].DataPropertyName = "Id";
 
-        private void btnEdit_Click(object sender, EventArgs e)
-        {
-            if (dgvPromotions.CurrentRow == null || string.IsNullOrEmpty(_selectedPromotionId))
+            if (dgvPromotions.Columns["colName"] != null)
+                dgvPromotions.Columns["colName"].DataPropertyName = "Ten";
+
+            if (dgvPromotions.Columns["colType"] != null)
+                dgvPromotions.Columns["colType"].DataPropertyName = "Loai";
+
+            if (dgvPromotions.Columns["colStartDate"] != null)
             {
-                MessageBox.Show("Vui lòng chọn chương trình khuyến mãi cần chỉnh sửa!", "Thông báo",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
+                dgvPromotions.Columns["colStartDate"].DataPropertyName = "NgayBatDau";
+                dgvPromotions.Columns["colStartDate"].DefaultCellStyle.Format = "dd/MM/yyyy";
             }
 
-            var detailForm = new frmPromotionDetail(_selectedPromotionId, _context);
-            detailForm.FormClosed += (s, args) =>
+            if (dgvPromotions.Columns["colEndDate"] != null)
             {
-                // Reload data after detail form is closed
-                LoadPromotions();
-            };
-            detailForm.ShowDialog();
-        }
-
-        private void btnDelete_Click(object sender, EventArgs e)
-        {
-            if (dgvPromotions.CurrentRow == null || string.IsNullOrEmpty(_selectedPromotionId))
-            {
-                MessageBox.Show("Vui lòng chọn chương trình khuyến mãi cần xóa!", "Thông báo",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
+                dgvPromotions.Columns["colEndDate"].DataPropertyName = "NgayKetThuc";
+                dgvPromotions.Columns["colEndDate"].DefaultCellStyle.Format = "dd/MM/yyyy";
             }
 
-            var result = MessageBox.Show(
-                "Bạn có chắc chắn muốn xóa chương trình khuyến mãi này?",
-                "Xác nhận xóa",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question);
-
-            if (result == DialogResult.Yes)
+            if (dgvPromotions.Columns.Contains("colCodeCount"))
             {
-                try
+                dgvPromotions.Columns["colCodeCount"].DataPropertyName = "SoLuongMa";
+                dgvPromotions.Columns["colCodeCount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            }
+
+            if (dgvPromotions.Columns["colStatus"] != null)
+                dgvPromotions.Columns["colStatus"].DataPropertyName = "TrangThai";
+
+            if (dgvPromotions.Columns["colDescription"] != null)
+                dgvPromotions.Columns["colDescription"].DataPropertyName = "MoTa";
+        }
+
+        private void PerformSearch()
+        {
+            try
+            {
+                string keyword = txtSearch.Text.Trim();
+
+                if (string.IsNullOrEmpty(keyword))
                 {
-                    var promotion = _context.ChuongTrinhKhuyenMais.Find(_selectedPromotionId);
-                    if (promotion != null)
-                    {
-                        promotion.isDelete = true;
-                        _context.SaveChanges();
-                        MessageBox.Show("Xóa chương trình khuyến mãi thành công!", "Thông báo",
-                            MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        LoadPromotions();
-                    }
+                    LoadPromotions();
+                    return;
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Lỗi khi xóa chương trình khuyến mãi: {ex.Message}", "Lỗi",
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+
+                var searchResults = _promotionController.SearchPromotions(keyword);
+                dgvPromotions.DataSource = searchResults;
+                MapDataGridViewColumns();
+                
+                if (lblStatus != null)
+                    lblStatus.Text = $"Tìm thấy: {searchResults.Count} chương trình";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi tìm kiếm: {ex.Message}", "Lỗi",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            LoadPromotions();
+            PerformSearch();
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var frmDetail = new frmPromotionDetail();
+                DialogResult result = frmDetail.ShowDialog();
+
+                if (result == DialogResult.OK)
+                {
+                    LoadPromotions();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi mở form thêm mới: {ex.Message}", "Lỗi",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (dgvPromotions.CurrentRow == null)
+                {
+                    MessageBox.Show("Vui lòng chọn chương trình cần sửa!", "Thông báo",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                string promotionId = GetCurrentPromotionId();
+                if (string.IsNullOrEmpty(promotionId))
+                {
+                    MessageBox.Show("Không thể xác định mã chương trình!", "Lỗi",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                var frmDetail = new frmPromotionDetail(promotionId);
+                DialogResult result = frmDetail.ShowDialog();
+
+                if (result == DialogResult.OK)
+                {
+                    LoadPromotions();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi mở form sửa: {ex.Message}", "Lỗi",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (dgvPromotions.CurrentRow == null)
+                {
+                    MessageBox.Show("Vui lòng chọn chương trình cần xóa!", "Thông báo",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                string promotionId = GetCurrentPromotionId();
+                if (string.IsNullOrEmpty(promotionId))
+                {
+                    MessageBox.Show("Không thể xác định mã chương trình!", "Lỗi",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                if (MessageBox.Show("Bạn có chắc chắn muốn xóa chương trình này?", "Xác nhận",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    var (success, message) = _promotionController.DeletePromotion(promotionId);
+                    
+                    if (success)
+                    {
+                        MessageBox.Show(message, "Thành công",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        LoadPromotions();
+                    }
+                    else
+                    {
+                        MessageBox.Show(message, "Lỗi",
+                            MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi xóa chương trình: {ex.Message}", "Lỗi",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             txtSearch.Clear();
-            cmbType.SelectedIndex = 0;
-            chkDateFilter.Checked = false;
-            dtpStartDate.Value = DateTime.Now.AddMonths(-1);
-            dtpEndDate.Value = DateTime.Now.AddMonths(1);
             LoadPromotions();
         }
 
         private void btnExport_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Chức năng xuất Excel đang được phát triển!", "Thông báo",
+            MessageBox.Show("Chức năng đang phát triển!", "Thông báo",
                 MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-
-        private void btnViewDetail_Click(object sender, EventArgs e)
-        {
-            if (dgvPromotions.CurrentRow == null || string.IsNullOrEmpty(_selectedPromotionId))
-            {
-                MessageBox.Show("Vui lòng chọn chương trình khuyến mãi cần xem!", "Thông báo",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            var detailForm = new frmPromotionDetail(_selectedPromotionId, _context, true);
-            detailForm.ShowDialog();
         }
 
         private void chkDateFilter_CheckedChanged(object sender, EventArgs e)
         {
             dtpStartDate.Enabled = chkDateFilter.Checked;
             dtpEndDate.Enabled = chkDateFilter.Checked;
+        }
+
+        private void dgvPromotions_SelectionChanged(object sender, EventArgs e)
+        {
+            // Optional: Show detail info when row selected
+        }
+
+        private string GetCurrentPromotionId()
+        {
+            if (dgvPromotions.CurrentRow == null) return null;
+
+            var dataItem = dgvPromotions.CurrentRow.DataBoundItem;
+            if (dataItem != null)
+            {
+                var prop = dataItem.GetType().GetProperty("Id");
+                if (prop != null) return prop.GetValue(dataItem)?.ToString();
+            }
+
+            if (dgvPromotions.Columns["colId"] != null && dgvPromotions.CurrentRow.Cells["colId"].Value != null)
+                return dgvPromotions.CurrentRow.Cells["colId"].Value.ToString();
+
+            return null;
+        }
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            _promotionController?.Dispose();
+            base.OnFormClosing(e);
         }
     }
 }

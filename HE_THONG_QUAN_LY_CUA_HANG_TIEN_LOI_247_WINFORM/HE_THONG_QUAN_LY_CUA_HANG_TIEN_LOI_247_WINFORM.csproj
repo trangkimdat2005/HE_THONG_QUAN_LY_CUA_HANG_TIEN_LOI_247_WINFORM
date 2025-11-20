@@ -125,9 +125,12 @@
     </Compile>
     <Compile Include="Controllers\GoodsController.cs" />
     <Compile Include="Controllers\InventoryController.cs" />
+    <Compile Include="Controllers\PromotionController.cs" />
     <Compile Include="Controllers\StockInController.cs" />
     <Compile Include="DTO\GoodDetailDto.cs" />
     <Compile Include="DTO\InventoryDetailDto.cs" />
+    <Compile Include="DTO\PromoCodeDto.cs" />
+    <Compile Include="DTO\PromotionListDto.cs" />
     <Compile Include="Models\Anh_SanPhamDonVi.cs" />
     <Compile Include="Models\AppDbContext.cs" />
     <Compile Include="Models\BaoCao.cs" />
@@ -204,6 +207,7 @@
     <Compile Include="Services\IQuanLyServices.cs" />
     <Compile Include="Services\MeasurementService.cs" />
     <Compile Include="Services\ProductService.cs" />
+    <Compile Include="Services\PromotionService.cs" />
     <Compile Include="Services\QuanLyServices.cs" />
     <Compile Include="Controllers\BrandController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
