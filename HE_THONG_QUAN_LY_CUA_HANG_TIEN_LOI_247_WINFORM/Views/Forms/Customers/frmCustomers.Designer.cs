@@ -594,6 +594,15 @@
             this.groupBoxActions.ResumeLayout(false);
             this.groupBoxInfo.ResumeLayout(false);
             this.groupBoxInfo.PerformLayout();
+            // 
+            // Attach input constraints and validators from EventService
+            this.txtCustomerName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Services.EventService.TextBox_KhongNhapSo_KeyPress);
+            this.txtPhone.KeyPress += new System.Windows.Forms.KeyPressEventHandler(HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Services.EventService.TextBox_KhongNhapChu_KeyPress);
+            this.txtPhone.Validating += new System.ComponentModel.CancelEventHandler(HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Services.EventService.TextBox_SoDienThoai_Validating);
+            this.txtEmail.Validating += new System.ComponentModel.CancelEventHandler(HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Services.EventService.TextBox_Email_Validating);
+            // Setup birth date picker to allow reasonable age range (13-120)
+            HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Services.EventService.SetupDateTimePicker_AgeRange(this.dtpBirthDate,13,120);
+            // 
             this.ResumeLayout(false);
 
         }
