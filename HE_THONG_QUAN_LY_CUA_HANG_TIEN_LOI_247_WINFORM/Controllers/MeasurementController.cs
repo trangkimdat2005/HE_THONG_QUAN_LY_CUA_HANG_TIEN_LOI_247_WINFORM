@@ -17,7 +17,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Controllers
         {
             return _measurementService.GetAllMeasurements();
         }
-        
+
 
         public dynamic SearchMeasurements(string keyword)
         {
@@ -52,7 +52,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Controllers
 
         public (bool success, string message) DeleteMeasurement(string unitId)
         {
-             return _measurementService.DeleteMeasurement(unitId);
+            return _measurementService.DeleteMeasurement(unitId);
         }
 
         public void Dispose()
