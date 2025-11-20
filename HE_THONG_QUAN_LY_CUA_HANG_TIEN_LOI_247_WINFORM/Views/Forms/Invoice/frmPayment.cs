@@ -13,12 +13,11 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Views.forms.Invoice
 {
     public partial class frmPayment : Form
     {
-        // Properties đ? truy?n d? li?u ra ngoài
         public decimal TotalAmount { get; set; }
         public decimal CustomerPay { get; private set; }
         public decimal ReturnAmount { get; private set; }
         public string Note { get; private set; }
-        public string PaymentMethod { get; private set; } = "Ti?n m?t";
+        public string PaymentMethod { get; private set; } = "Tiền mặt";
 
         public frmPayment(decimal totalAmount)
         {
@@ -31,7 +30,6 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Views.forms.Invoice
 
         private void frmPayment_Load(object sender, EventArgs e)
         {
-            // Set d? li?u ban đ?u
             lblTotalAmount.Text = TotalAmount.ToString("N0") + " đ";
             txtDate.Text = DateTime.Now.ToString("dd/MM/yyyy HH:mm");
 
@@ -48,17 +46,14 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Views.forms.Invoice
         {
             flowSuggestions.Controls.Clear();
 
-            // Các m?nh giá g?i ?: Chính xác, Tr?n ch?c, Tr?n trăm, Tr?n 500
             var suggestions = new List<decimal>();
             suggestions.Add(TotalAmount); // Chính xác
 
-            // Logic g?i ? đơn gi?n (Làm tr?n lên)
             if (TotalAmount % 10000 != 0) suggestions.Add(Math.Ceiling(TotalAmount / 10000) * 10000);
             if (TotalAmount % 50000 != 0) suggestions.Add(Math.Ceiling(TotalAmount / 50000) * 50000);
             if (TotalAmount % 100000 != 0) suggestions.Add(Math.Ceiling(TotalAmount / 100000) * 100000);
             if (TotalAmount % 500000 != 0) suggestions.Add(Math.Ceiling(TotalAmount / 500000) * 500000);
 
-            // L?c trùng và s?p x?p
             suggestions = suggestions.Distinct().OrderBy(x => x).ToList();
 
             foreach (var amount in suggestions)
@@ -91,8 +86,8 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Views.forms.Invoice
         private void btnCash_Click(object sender, EventArgs e)
         {
             HighlightButton(btnCash);
-            PaymentMethod = "Ti?n m?t";
-            lblRightHeader.Text = "?? Thanh Toán Ti?n M?t";
+            PaymentMethod = "Tiền mặt";
+            lblRightHeader.Text = "Thanh Toán Tiền Mặt";
             txtCustomerPay.Enabled = true;
             txtCustomerPay.Focus();
         }
@@ -100,8 +95,8 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Views.forms.Invoice
         private void btnTransfer_Click(object sender, EventArgs e)
         {
             HighlightButton(btnTransfer);
-            PaymentMethod = "Chuy?n kho?n";
-            lblRightHeader.Text = "?? Thanh Toán Chuy?n Kho?n";
+            PaymentMethod = "Chuyển khoản";
+            lblRightHeader.Text = "Thanh Toán Chuyển Khoản";
             // Chuy?n kho?n th? m?c đ?nh khách tr? đúng s? ti?n
             txtCustomerPay.Text = TotalAmount.ToString("N0");
             txtCustomerPay.Enabled = false; // Không cho s?a
@@ -116,7 +111,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Views.forms.Invoice
         {
             if (string.IsNullOrEmpty(txtCustomerPay.Text))
             {
-                lblChangeAmount.Text = "Vui l?ng nh?p ti?n khách đưa";
+                lblChangeAmount.Text = "Vui lòng nhập tiền khách đưa";
                 lblChangeAmount.ForeColor = Color.Black;
                 return;
             }
@@ -136,13 +131,13 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Views.forms.Invoice
                 }
                 else
                 {
-                    lblChangeAmount.Text = "Thi?u " + Math.Abs(change).ToString("N0") + " đ";
+                    lblChangeAmount.Text = "Thiếu " + Math.Abs(change).ToString("N0") + " đ";
                     lblChangeAmount.ForeColor = Color.Red;
                 }
             }
             catch
             {
-                lblChangeAmount.Text = "S? ti?n không h?p l?";
+                lblChangeAmount.Text = "Số tiền không hợp lí";
             }
         }
 
@@ -157,48 +152,53 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Views.forms.Invoice
 
         private void btnComplete_Click(object sender, EventArgs e)
         {
-            // Validate l?i trư?c khi đóng
-            string cleanText = txtCustomerPay.Text.Replace(",", "").Replace(".", "").Replace(" đ", "").Trim();
-            decimal pay = 0;
-
-            if (!decimal.TryParse(cleanText, out pay))
+            // Validate input
+            if (string.IsNullOrWhiteSpace(txtCustomerPay.Text))
             {
-                MessageBox.Show("S? ti?n khách đưa không h?p l?!", "L?i", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Vui lòng nhập số tiền khách đưa!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Clean and parse the customer payment amount
+            // Remove formatting characters that might be present: commas, dots, đ symbol, spaces
+            string cleanText = txtCustomerPay.Text.Replace(",", "").Replace(".", "").Replace(" đ", "").Replace("đ", "").Trim();
+            
+            if (!decimal.TryParse(cleanText, out decimal pay))
+            {
+                MessageBox.Show("Số tiền khách đưa không hợp lệ!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             if (pay < TotalAmount)
             {
-                MessageBox.Show("Khách chưa tr? đ? ti?n!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Khách chưa trả đủ tiền!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            // Lưu d? li?u
             CustomerPay = pay;
             ReturnAmount = pay - TotalAmount;
             Note = txtNote.Text;
 
-            // If Owner is frmInvoiceDetails, call its save method to persist invoice + payment
             try
             {
+                // Use pattern matching 'is' to check type and assign variable in one step
                 if (this.Owner is frmInvoiceDetails parent)
                 {
                     parent.SaveInvoiceFromPayment(CustomerPay, PaymentMethod, Note);
-                    // parent will close this form's owner when done; ensure we set DialogResult accordingly
+
                     this.DialogResult = DialogResult.OK;
                     this.Close();
-                    return;
+                }
+                else
+                {
+                    // Handle case where Owner is NOT frmInvoiceDetails (e.g., during testing)
+                    MessageBox.Show("Form cha không hợp lệ (Owner is null or wrong type).");
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"L?i khi lưu hoá đơn t? form thanh toán: {ex.Message}", "L?i", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                MessageBox.Show($"Lỗi khi lưu hoá đơn: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
-            // fallback: just close with OK
-            this.DialogResult = DialogResult.OK;
-            this.Close();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

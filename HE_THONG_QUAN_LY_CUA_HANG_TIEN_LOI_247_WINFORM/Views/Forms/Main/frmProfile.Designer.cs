@@ -448,6 +448,7 @@
             this.lblStatusBadge.ForeColor = System.Drawing.Color.White;
             this.lblStatusBadge.Location = new System.Drawing.Point(190, 424);
             this.lblStatusBadge.Name = "lblStatusBadge";
+            this.lblStatusBadge.Padding = new System.Windows.Forms.Padding(10, 5, 10, 5);
             this.lblStatusBadge.Size = new System.Drawing.Size(73, 21);
             this.lblStatusBadge.TabIndex = 9;
             this.lblStatusBadge.Text = "Đã khoá";

@@ -41,8 +41,8 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Views.forms.Reports
             colTotalRevenue.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             colAction.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
-            // Chọn mặc định PageSize
-            cmbPageSize.SelectedIndex = 0;
+            //// Chọn mặc định PageSize
+            //cmbPageSize.SelectedIndex = 0;
         }
 
         private void LoadDummyData()
