@@ -1,72 +1,271 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Views.Forms.Inventory; // Import namespace chứa frmStockIn
+using System.Runtime.InteropServices; // <--- 1. Thêm thư viện này
+using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Controllers;
 
 namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms.Inventory
 {
     public partial class frmInventoryMain : Form
     {
+        private readonly StockInController _stockInController;
+
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
+        private static extern Int32 SendMessage(IntPtr hWnd, int msg, int wParam, [MarshalAs(UnmanagedType.LPWStr)] string lParam);
+        private const int EM_SETCUEBANNER = 0x1501;
+
+        private void SetPlaceholder(TextBox txt, string text)
+        {
+            if (txt != null)
+            {
+                SendMessage(txt.Handle, EM_SETCUEBANNER, 0, text);
+            }
+        }
         public frmInventoryMain()
         {
             InitializeComponent();
-            CustomizeInterface();
-            LoadDummyData(); // Tải dữ liệu giả lập
-        }
+            _stockInController = new StockInController();
 
-        private void CustomizeInterface()
-        {
-            // --- STYLE GRIDVIEW ---
+            SetPlaceholder(txtSearch, "Nhập mã phiếu hoặc tên nhà cung cấp...");
 
-            dgvImportList.RowTemplate.Height = 40;
-            dgvImportList.ColumnHeadersHeight = 45;
+            this.Load += frmInventoryMain_Load;
+            //if (btnSearch != null) btnSearch.Click += btnSearch_Click;
+            //if (btnAdd != null) btnAdd.Click += btnAdd_Click;
+            //if (btnDetail != null) btnDetail.Click += btnDetail_Click;
+            if (btnDelete != null) btnDelete.Click += btnDelete_Click;
 
-            dgvImportList.CellBorderStyle = DataGridViewCellBorderStyle.Single;
-            // --------------------
-
-            dgvImportList.GridColor = Color.FromArgb(230, 230, 230); // Màu kẻ lưới (xám nhạt)
-
-            // Font chữ
-            dgvImportList.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            dgvImportList.DefaultCellStyle.Font = new Font("Segoe UI", 10F, FontStyle.Regular);
-
- 
-        }
-
-        private void LoadDummyData()
-        {
-            dgvImportList.Rows.Add("PN001", "Công Ty Cổ Phần Vinamilk", "19/11/2025", "15,500,000 đ", "Nguyễn Văn A");
-            dgvImportList.Rows.Add("PN002", "Công Ty TNHH Cocacola VN", "18/11/2025", "8,200,000 đ", "Trần Thị B");
-            dgvImportList.Rows.Add("PN003", "Nhà Phân Phối Bánh Kẹo Kinh Đô", "15/11/2025", "5,100,000 đ", "Nguyễn Văn A");
-            dgvImportList.Rows.Add("PN004", "Unilever Việt Nam", "10/11/2025", "22,000,000 đ", "Lê Văn C");
-        }
-
-        // SỰ KIỆN: Bấm nút Nhập Hàng Mới
-        private void btnAdd_Click(object sender, EventArgs e)
-        {
-            // Khởi tạo form Nhập kho (frmStockIn)
-            frmStockIn stockInForm = new frmStockIn();
-
-            // Hiển thị form (ShowDialog để bắt buộc xử lý xong mới quay lại form này)
-            stockInForm.ShowDialog();
-        }
-
-        // SỰ KIỆN: Bấm nút Xem Chi Tiết
-        private void btnDetail_Click(object sender, EventArgs e)
-        {
-            if (dgvImportList.CurrentRow == null || dgvImportList.CurrentRow.IsNewRow)
+            if (txtSearch != null)
             {
-                MessageBox.Show("Vui lòng chọn một phiếu nhập để xem chi tiết!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
+                txtSearch.TextChanged += (s, e) => { PerformSearch(); };
+                txtSearch.KeyPress += (s, e) =>
+                {
+                    if (e.KeyChar == (char)Keys.Enter)
+                    {
+                        PerformSearch();
+                        e.Handled = true;
+                    }
+                };
+            }
+        }
+
+        private void frmInventoryMain_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                if (dgvImportList != null)
+                {
+                    dgvImportList.AutoGenerateColumns = false;
+                }
+                LoadImportReceipts();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi tải dữ liệu: {ex.Message}", "Lỗi",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        // Load danh sách phiếu nhập
+        private void LoadImportReceipts()
+        {
+            try
+            {
+                var receipts = _stockInController.GetAllImportReceipts();
+                dgvImportList.DataSource = receipts;
+
+                MapDataGridViewColumns();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi hiển thị dữ liệu: {ex.Message}", "Lỗi",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        // Map cột DataGridView
+        private void MapDataGridViewColumns()
+        {
+            if (dgvImportList.Columns.Count == 0) return;
+
+            if (dgvImportList.Columns["colId"] != null)
+                dgvImportList.Columns["colId"].DataPropertyName = "Id";
+
+            if (dgvImportList.Columns["colSupplier"] != null)
+                dgvImportList.Columns["colSupplier"].DataPropertyName = "NhaCungCap";
+
+            if (dgvImportList.Columns["colDate"] != null)
+            {
+                dgvImportList.Columns["colDate"].DataPropertyName = "NgayNhap";
+                dgvImportList.Columns["colDate"].DefaultCellStyle.Format = "dd/MM/yyyy";
             }
 
-            string selectedId = dgvImportList.CurrentRow.Cells[0].Value.ToString();
+            if (dgvImportList.Columns["colTotal"] != null)
+            {
+                dgvImportList.Columns["colTotal"].DataPropertyName = "TongTien";
+                dgvImportList.Columns["colTotal"].DefaultCellStyle.Format = "#,##0 đ";
+                dgvImportList.Columns["colTotal"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            }
 
-            // Mở lại frmStockIn nhưng ở chế độ xem (Bạn cần xử lý logic truyền ID vào constructor của frmStockIn sau này)
-            MessageBox.Show($"Đang mở chi tiết phiếu: {selectedId} \n(Chức năng này sẽ load lại dữ liệu lên form StockIn)", "Thông báo");
+            if (dgvImportList.Columns["colStatus"] != null)
+                dgvImportList.Columns["colStatus"].DataPropertyName = "NhanVien";
+        }
 
-            frmStockIn stockInForm = new frmStockIn();
-            stockInForm.ShowDialog();
+        // Tìm kiếm phiếu nhập
+        private void PerformSearch()
+        {
+            try
+            {
+                string keyword = txtSearch.Text.Trim();
+
+                if (string.IsNullOrEmpty(keyword))
+                {
+                    LoadImportReceipts();
+                    return;
+                }
+
+                var searchResults = _stockInController.SearchImportReceipts(keyword);
+                dgvImportList.DataSource = searchResults;
+                MapDataGridViewColumns();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi tìm kiếm: {ex.Message}", "Lỗi",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            PerformSearch();
+        }
+
+        // Mở form tạo phiếu nhập mới
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var frmStockIn = new Views.Forms.Inventory.frmStockIn();
+
+                DialogResult result = frmStockIn.ShowDialog();
+
+                if (result == DialogResult.OK)
+                {
+                    LoadImportReceipts();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi mở form nhập hàng: {ex.Message}", "Lỗi",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        // Xem chi tiết phiếu nhập
+        private void btnDetail_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (dgvImportList.CurrentRow == null)
+                {
+                    MessageBox.Show("Vui lòng chọn phiếu nhập để xem chi tiết!", "Thông báo",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                string phieuNhapId = GetCurrentReceiptId();
+                if (string.IsNullOrEmpty(phieuNhapId))
+                {
+                    MessageBox.Show("Không thể xác định mã phiếu nhập!", "Lỗi",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                var details = _stockInController.GetImportReceiptDetails(phieuNhapId);
+
+                string message = $"Chi tiết phiếu nhập: {phieuNhapId}\n\n";
+                if (details is System.Collections.IList list)
+                {
+                    foreach (var item in list)
+                    {
+                        var itemType = item.GetType();
+                        var sanPham = itemType.GetProperty("SanPham")?.GetValue(item);
+                        var soLuong = itemType.GetProperty("SoLuong")?.GetValue(item);
+                        var donGia = itemType.GetProperty("DonGia")?.GetValue(item);
+                        var thanhTien = itemType.GetProperty("ThanhTien")?.GetValue(item);
+
+                        message += $"{sanPham} - SL: {soLuong} - Giá: {donGia:N0}đ - Tổng: {thanhTien:N0}đ\n";
+                    }
+                }
+
+                MessageBox.Show(message, "Chi tiết phiếu nhập",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi xem chi tiết: {ex.Message}", "Lỗi",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (dgvImportList.CurrentRow == null)
+                {
+                    MessageBox.Show("Vui lòng chọn phiếu nhập cần xóa!", "Thông báo",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                string phieuNhapId = GetCurrentReceiptId();
+                if (string.IsNullOrEmpty(phieuNhapId)) return;
+
+                // 3. Xác nhận xóa
+                if (MessageBox.Show("Bạn có chắc chắn muốn xóa phiếu nhập này?",
+                    "Cảnh báo quan trọng",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    // 4. Gọi Controller xóa
+                    var result = _stockInController.DeleteImportReceipt(phieuNhapId);
+
+                    if (result.success)
+                    {
+                        MessageBox.Show(result.message, "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        LoadImportReceipts(); // Tải lại danh sách
+                    }
+                    else
+                    {
+                        MessageBox.Show(result.message, "Không thể xóa", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi xóa: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        // Lấy ID phiếu nhập hiện tại
+        private string GetCurrentReceiptId()
+        {
+            if (dgvImportList.CurrentRow == null) return null;
+
+            var dataItem = dgvImportList.CurrentRow.DataBoundItem;
+            if (dataItem != null)
+            {
+                var prop = dataItem.GetType().GetProperty("Id");
+                if (prop != null) return prop.GetValue(dataItem)?.ToString();
+            }
+
+            if (dgvImportList.Columns["colId"] != null && dgvImportList.CurrentRow.Cells["colId"].Value != null)
+                return dgvImportList.CurrentRow.Cells["colId"].Value.ToString();
+
+            return null;
+        }
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            _stockInController?.Dispose();
+            base.OnFormClosing(e);
         }
     }
 }

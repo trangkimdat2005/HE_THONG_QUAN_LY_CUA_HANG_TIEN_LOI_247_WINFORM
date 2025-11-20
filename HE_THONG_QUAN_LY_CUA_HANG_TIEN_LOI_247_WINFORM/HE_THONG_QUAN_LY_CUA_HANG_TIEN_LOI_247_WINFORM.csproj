@@ -118,7 +118,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\GoodsController.cs" />
+    <Compile Include="Controllers\InventoryController.cs" />
+    <Compile Include="Controllers\StockInController.cs" />
     <Compile Include="DTO\GoodDetailDto.cs" />
+    <Compile Include="DTO\InventoryDetailDto.cs" />
     <Compile Include="Models\Anh_SanPhamDonVi.cs" />
     <Compile Include="Models\AppDbContext.cs" />
     <Compile Include="Models\BaoCao.cs" />
@@ -189,6 +192,7 @@
     <Compile Include="Services\CustomerService.cs" />
     <Compile Include="Services\EventService.cs" />
     <Compile Include="Services\GoodsService.cs" />
+    <Compile Include="Services\InventoryService.cs" />
     <Compile Include="Services\InvoiceService.cs" />
     <Compile Include="Services\IQuanLyServices.cs" />
     <Compile Include="Services\MeasurementService.cs" />
@@ -209,6 +213,7 @@
     <Compile Include="Helpers\Utils\ValidationHelper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\StockInService.cs" />
     <Compile Include="Views\forms\Customers\frmCustomerList.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -459,6 +464,7 @@
     <EmbeddedResource Include="Views\forms\Suppliers\frmTransactionHistory.resx">
       <DependentUpon>frmTransactionHistory.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="DTO\InventoryDetailDto_README.md" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
