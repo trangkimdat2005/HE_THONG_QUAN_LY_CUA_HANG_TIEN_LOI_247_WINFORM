@@ -34,6 +34,13 @@
             this.panelContainer = new System.Windows.Forms.Panel();
             this.panelGrid = new System.Windows.Forms.Panel();
             this.dgvSuppliers = new System.Windows.Forms.DataGridView();
+            this.colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPhone = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colEmail = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAddress = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTaxCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelDetail = new System.Windows.Forms.Panel();
             this.groupBoxDetail = new System.Windows.Forms.GroupBox();
             this.lblReceiptCount = new System.Windows.Forms.Label();
@@ -53,13 +60,6 @@
             this.lblSupplierId = new System.Windows.Forms.Label();
             this.panelStatus = new System.Windows.Forms.Panel();
             this.lblStatus = new System.Windows.Forms.Label();
-            this.colStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colTaxCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colAddress = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colEmail = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPhone = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelTop.SuspendLayout();
             this.panelSearch.SuspendLayout();
             this.panelButtons.SuspendLayout();
@@ -290,7 +290,58 @@
             this.dgvSuppliers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvSuppliers.Size = new System.Drawing.Size(809, 450);
             this.dgvSuppliers.TabIndex = 0;
+            //this.dgvSuppliers.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSuppliers_CellContentClick);
             this.dgvSuppliers.SelectionChanged += new System.EventHandler(this.dgvSuppliers_SelectionChanged);
+            // 
+            // colId
+            // 
+            this.colId.DataPropertyName = "id";
+            this.colId.HeaderText = "Mã NCC";
+            this.colId.Name = "colId";
+            this.colId.ReadOnly = true;
+            // 
+            // colName
+            // 
+            this.colName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colName.DataPropertyName = "ten";
+            this.colName.HeaderText = "Tên nhà cung cấp";
+            this.colName.Name = "colName";
+            this.colName.ReadOnly = true;
+            // 
+            // colPhone
+            // 
+            this.colPhone.DataPropertyName = "soDienThoai";
+            this.colPhone.HeaderText = "Số điện thoại";
+            this.colPhone.Name = "colPhone";
+            this.colPhone.ReadOnly = true;
+            // 
+            // colEmail
+            // 
+            this.colEmail.DataPropertyName = "email";
+            this.colEmail.HeaderText = "Email";
+            this.colEmail.Name = "colEmail";
+            this.colEmail.ReadOnly = true;
+            // 
+            // colAddress
+            // 
+            this.colAddress.DataPropertyName = "diaChi";
+            this.colAddress.HeaderText = "Địa chỉ";
+            this.colAddress.Name = "colAddress";
+            this.colAddress.ReadOnly = true;
+            // 
+            // colTaxCode
+            // 
+            this.colTaxCode.DataPropertyName = "maSoThue";
+            this.colTaxCode.HeaderText = "Mã số thuế";
+            this.colTaxCode.Name = "colTaxCode";
+            this.colTaxCode.ReadOnly = true;
+            // 
+            // colStatus
+            // 
+            this.colStatus.DataPropertyName = "TrangThai";
+            this.colStatus.HeaderText = "Trạng thái";
+            this.colStatus.Name = "colStatus";
+            this.colStatus.ReadOnly = true;
             // 
             // panelDetail
             // 
@@ -448,7 +499,7 @@
             this.txtSupplierName.Name = "txtSupplierName";
             this.txtSupplierName.Size = new System.Drawing.Size(191, 25);
             this.txtSupplierName.TabIndex = 3;
-            this.txtSupplierName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSupplierName_KeyPress);
+            //this.txtSupplierName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSupplierName_KeyPress);
             // 
             // txtSupplierId
             // 
@@ -499,56 +550,6 @@
             this.lblStatus.Size = new System.Drawing.Size(73, 17);
             this.lblStatus.TabIndex = 0;
             this.lblStatus.Text = "Tổng số: 0";
-            // 
-            // colStatus
-            // 
-            this.colStatus.DataPropertyName = "TrangThai";
-            this.colStatus.HeaderText = "Trạng thái";
-            this.colStatus.Name = "colStatus";
-            this.colStatus.ReadOnly = true;
-            // 
-            // colTaxCode
-            // 
-            this.colTaxCode.DataPropertyName = "maSoThue";
-            this.colTaxCode.HeaderText = "Mã số thuế";
-            this.colTaxCode.Name = "colTaxCode";
-            this.colTaxCode.ReadOnly = true;
-            // 
-            // colAddress
-            // 
-            this.colAddress.DataPropertyName = "diaChi";
-            this.colAddress.HeaderText = "Địa chỉ";
-            this.colAddress.Name = "colAddress";
-            this.colAddress.ReadOnly = true;
-            // 
-            // colEmail
-            // 
-            this.colEmail.DataPropertyName = "email";
-            this.colEmail.HeaderText = "Email";
-            this.colEmail.Name = "colEmail";
-            this.colEmail.ReadOnly = true;
-            // 
-            // colPhone
-            // 
-            this.colPhone.DataPropertyName = "soDienThoai";
-            this.colPhone.HeaderText = "Số điện thoại";
-            this.colPhone.Name = "colPhone";
-            this.colPhone.ReadOnly = true;
-            // 
-            // colName
-            // 
-            this.colName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colName.DataPropertyName = "ten";
-            this.colName.HeaderText = "Tên nhà cung cấp";
-            this.colName.Name = "colName";
-            this.colName.ReadOnly = true;
-            // 
-            // colId
-            // 
-            this.colId.DataPropertyName = "id";
-            this.colId.HeaderText = "Mã NCC";
-            this.colId.Name = "colId";
-            this.colId.ReadOnly = true;
             // 
             // frmSupplierList
             // 
