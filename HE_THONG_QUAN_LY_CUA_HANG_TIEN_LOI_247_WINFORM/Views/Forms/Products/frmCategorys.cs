@@ -3,6 +3,7 @@ using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Models;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Reflection; // Cần cái này để dùng Reflection lấy ID
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
@@ -31,19 +32,9 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
         {
             InitializeComponent();
             _categoryController = new CategoryController();
-
+            CustomizeInterface();
             SetPlaceholder(txtSearch, "Nhập tên hoặc mã ký hiệu để tìm...");
 
-            //// --- ĐĂNG KÝ SỰ KIỆN THỦ CÔNG (Đảm bảo nút luôn chạy) ---
-            //this.Load += frmCategorys_Load;
-            //if (btnAdd != null) this.btnAdd.Click += btnAdd_Click;
-            //if (btnEdit != null) this.btnEdit.Click += btnEdit_Click;
-            //if (btnDelete != null) this.btnDelete.Click += btnDelete_Click;
-            //if (btnSave != null) this.btnSave.Click += btnSave_Click;
-            //if (btnCancel != null) this.btnCancel.Click += btnCancel_Click;
-            //if (btnSearch != null) this.btnSearch.Click += btnSearch_Click;
-            //if (btnRefresh != null) this.btnRefresh.Click += btnRefresh_Click;
-            //if (btnExport != null) this.btnExport.Click += btnExport_Click;
             if (txtSearch != null)
             {
                 txtSearch.TextChanged += (s, e) => { btnSearch_Click(null, null); };
@@ -53,7 +44,30 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
             if (txtSearch != null) txtSearch.KeyPress += (s, e) => { if (e.KeyChar == 13) { btnSearch_Click(s, e); e.Handled = true; } };
             if (txtCategoryName != null) txtCategoryName.KeyPress += (s, e) => { if (e.KeyChar == 13) { btnSave_Click(s, e); e.Handled = true; } };
         }
+        private void CustomizeInterface()
+        {
+            // Style GridView
+            dgvCategories.BorderStyle = BorderStyle.None;
+            dgvCategories.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dgvCategories.GridColor = Color.FromArgb(230, 230, 230);
+            dgvCategories.RowHeadersVisible = false;
+            dgvCategories.EnableHeadersVisualStyles = false;
+            dgvCategories.ColumnHeadersHeight = 40;
+            dgvCategories.RowTemplate.Height = 40;
 
+            dgvCategories.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(41, 128, 185); // Xanh Dương
+            dgvCategories.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgvCategories.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            dgvCategories.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+
+            dgvCategories.DefaultCellStyle.SelectionBackColor = Color.FromArgb(211, 233, 252); // Xanh Nhạt
+            dgvCategories.DefaultCellStyle.SelectionForeColor = Color.Black;
+            dgvCategories.DefaultCellStyle.Font = new Font("Segoe UI", 10F);
+            dgvCategories.DefaultCellStyle.Padding = new Padding(10, 0, 0, 0);
+
+            // Căn giữa cột số lượng
+            colCount.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+        }
         private void frmCategorys_Load(object sender, EventArgs e)
         {
             try

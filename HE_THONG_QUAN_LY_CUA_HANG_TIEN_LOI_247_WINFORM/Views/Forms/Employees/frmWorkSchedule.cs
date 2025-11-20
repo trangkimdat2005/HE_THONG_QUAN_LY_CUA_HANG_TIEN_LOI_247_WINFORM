@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Views.Forms.Employees;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -58,6 +59,15 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
             dgvSchedule.Rows.Add("SCH004", "Nguyễn Văn An", "21/11/2025", "Sáng", "06:00", "14:00", "");
 
             lblTotal.Text = $"Tổng số: {dgvSchedule.Rows.Count} ca làm";
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            //load form thêm ca làm việc
+            using (var frm = new frmShiftAssignment())
+            {
+                frm.ShowDialog();
+            }
         }
     }
 }

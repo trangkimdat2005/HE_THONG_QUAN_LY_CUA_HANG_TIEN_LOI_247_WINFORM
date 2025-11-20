@@ -50,5 +50,13 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
 
             lblTotal.Text = $"Tổng số: {dgvEmployees.Rows.Count} nhân viên";
         }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            //load form thêm nhân viên
+            frmEmployees addEmployeeForm = new frmEmployees();
+            addEmployeeForm.ShowDialog();
+
+        }
     }
 }
