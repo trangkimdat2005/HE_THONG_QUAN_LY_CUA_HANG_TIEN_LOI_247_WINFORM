@@ -106,16 +106,11 @@ docker-compose.override.yml
 # WINFORMS-SPECIFIC IGNORE
 # ============================
 
-# Resource Designer auto-generated
 # Resource Designer auto-generated (CHỈ ignore Resources.Designer.cs, KHÔNG ignore Form Designer.cs)
 *.resources
-*.resx.designer.cs
-*.designer.cs
 Properties/Resources.Designer.cs
 
 # WinForms temporary images/icons
-Properties/Resources.Designer.cs
-Properties/Resources.resx
 *.ico
 *.png
 *.jpg
