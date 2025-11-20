@@ -86,8 +86,32 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
             try { DisplayInvoices(_invoiceController.SearchInvoices(txtSearch.Text, dtpFromDate.Value, dtpToDate.Value, cmbStatus.Text)); } catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
 
-        private void btnCreateNew_Click(object sender, EventArgs e) { new frmInvoiceDetails().ShowDialog(); LoadInvoices(); }
-        private void btnView_Click(object sender, EventArgs e) { if (!string.IsNullOrEmpty(_selectedInvoiceId)) { new frmInvoiceDetails(_selectedInvoiceId).ShowDialog(); LoadInvoices(); } }
+        private void btnCreateNew_Click(object sender, EventArgs e)
+        {
+            var frmDetail = new frmInvoiceDetails();
+            frmDetail.ShowDialog();
+            LoadInvoices(); // Refresh after creating
+        }
+
+        private void btnView_Click(object sender, EventArgs e)
+        {
+            ViewSelectedInvoice();
+        }
+
+        private void ViewSelectedInvoice()
+        {
+            if (string.IsNullOrEmpty(_selectedInvoiceId))
+            {
+                MessageBox.Show("Vui lòng chọn hóa đơn để xem!", "Thông báo", 
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            var frmDetail = new frmInvoiceDetails(_selectedInvoiceId);
+            frmDetail.ShowDialog();
+            LoadInvoices(); // Refresh after viewing
+        }
+
         private void btnDelete_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(_selectedInvoiceId)) return;

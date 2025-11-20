@@ -150,7 +150,8 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
                 {
                     dgvProducts.Rows.Add(
                         product.Ten,
-                        product.GiaBan.ToString("N0") + " đ"
+                        product.GiaBan.ToString("N0") + " đ",
+                        product.DonVi
                     );
                 }
             }
@@ -441,6 +442,21 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
             _invoiceController?.Dispose();
             _productController?.Dispose();
             _categoryController?.Dispose();
+        }
+
+        private void dgvProducts_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && dgvProducts.Columns[e.ColumnIndex].Name == "colAdd")
+            {
+                DataGridViewRow row = dgvProducts.Rows[e.RowIndex];
+
+                string id = row.Cells["Id"].Value.ToString();
+                string name = row.Cells["Name"].Value.ToString();
+                string phone = row.Cells["Phone"].Value.ToString();
+                string address = row.Cells["Address"].Value.ToString();
+
+
+            }
         }
     }
 

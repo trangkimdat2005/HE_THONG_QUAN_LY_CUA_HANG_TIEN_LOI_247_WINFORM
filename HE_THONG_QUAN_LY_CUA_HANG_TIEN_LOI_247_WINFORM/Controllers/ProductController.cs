@@ -1,72 +1,82 @@
-﻿using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services;
+﻿using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services; // Gọi Service
 using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.DTO;
-using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Models; // <-- Đảm bảo namespace này đúng nơi chứa ProductDetailDto
+using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Controllers
 {
-    public class ProductController
+    public class ProductController : IDisposable
     {
-        private readonly ProductService _productService;
+        // Khai báo Service thay vì DbContext
+        private readonly ProductService _service;
 
         public ProductController()
         {
-            _productService = new ProductService();
+            _service = new ProductService();
         }
 
-        #region Get Data
+        #region Load Data for ComboBox
 
-        // SỬA QUAN TRỌNG: Trả về List<ProductDetailDto> (đúng tên file DTO bạn vừa tạo)
-        public List<ProductDetailDto> FilterProducts(string keyword = null, string brandId = null, string categoryId = null)
+        public dynamic GetAllGoods()
         {
-            // Gọi Service (Lưu ý: Bên Service cũng phải trả về List<ProductDetailDto> nhé)
-            return _productService.FilterProducts(keyword, brandId, categoryId);
+            // Service trả về List<SanPham>, ta select lấy id và ten để bind vào ComboBox
+            var data = _service.GetAllGoods();
+            return data.Select(x => new { id = x.id, ten = x.ten }).ToList();
         }
 
-        // Hàm này trả về Entity gốc (SanPham) để fill vào các ô nhập liệu khi sửa
-        public SanPham GetProductById(string id)
+        public dynamic GetAllUnits()
         {
-            return _productService.GetProductById(id);
+            // Service trả về List<DonViDoLuong>
+            var data = _service.GetAllUnits();
+            return data.Select(x => new { id = x.id, ten = x.ten }).ToList();
         }
 
-        public string GetProductCategoryId(string productId)
+        #endregion
+
+        #region Grid Operations
+
+        public List<ProductDetailDto> FilterProducts(string keyword, string brandId, string categoryId)
         {
-            return _productService.GetProductCategoryId(productId);
+            // Gọi thẳng service, mọi logic lọc đã nằm bên kia
+            return _service.FilterProducts(keyword, brandId, categoryId);
         }
 
-        public string GenerateNewProductId()
+        public SanPhamDonVi GetProductUnitById(string id)
         {
-            return _productService.GenerateNewProductId();
+            return _service.GetProductUnitById(id);
         }
 
         #endregion
 
         #region CRUD
 
-        public (bool success, string message, SanPham product) AddProduct(SanPham product, string categoryId)
+        public (bool success, string message, SanPhamDonVi result) AddProductUnit(SanPhamDonVi model)
         {
-            if (string.IsNullOrEmpty(product.ten))
-                return (false, "Tên sản phẩm không được để trống", null);
+            // Validation cơ bản nếu cần, sau đó đẩy sang Service
+            if (model.giaBan < 0) return (false, "Giá bán không được âm!", null);
 
-            return _productService.AddProduct(product, categoryId);
+            return _service.AddProductUnit(model);
         }
 
-        public (bool success, string message) UpdateProduct(SanPham product, string categoryId)
+        public (bool success, string message) UpdateProductUnit(SanPhamDonVi model)
         {
-            return _productService.UpdateProduct(product, categoryId);
+            if (model.giaBan < 0) return (false, "Giá bán không được âm!");
+
+            return _service.UpdateProductUnit(model);
         }
 
-        public (bool success, string message) DeleteProduct(string productId)
+        public (bool success, string message) DeleteProductUnit(string id)
         {
-            return _productService.DeleteProduct(productId);
+            return _service.DeleteProductUnit(id);
         }
 
         #endregion
 
         public void Dispose()
         {
-            _productService?.Dispose();
+            _service?.Dispose();
         }
     }
 }

@@ -28,23 +28,23 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
 
             if (lastBrand == null)
             {
-                return "NH001"; 
+                return "NH0001"; 
             }
 
             string lastId = lastBrand.id;
             string prefix = "NH";
 
             // Phòng trường hợp mã cũ không đúng chuẩn NHxxx
-            if (!lastId.StartsWith(prefix)) return "NH001";
+            if (!lastId.StartsWith(prefix)) return "NH0001";
 
             string numberPart = lastId.Substring(prefix.Length); 
 
             if (int.TryParse(numberPart, out int number))
             {
-                return prefix + (number + 1).ToString("D3"); 
+                return prefix + (number + 1).ToString("D4"); 
             }
 
-            return "NH001"; 
+            return "NH0001"; 
         }
 
         public dynamic GetAllBrands()
@@ -116,7 +116,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
 
                     if (string.IsNullOrEmpty(brand.id) || brand.id == "Tự động tạo")
                     {
-                        brand.id = _services.GenerateNewId<NhanHieu>("NH", 3);
+                        brand.id = _services.GenerateNewId<NhanHieu>("NH", 4);
                     }
 
                     brand.isDelete = false;
