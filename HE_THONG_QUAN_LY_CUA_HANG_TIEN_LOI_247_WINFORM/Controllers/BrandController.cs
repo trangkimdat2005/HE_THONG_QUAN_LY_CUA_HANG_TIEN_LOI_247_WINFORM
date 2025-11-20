@@ -4,7 +4,7 @@ using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Models;
 
 namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Controllers
 {
-    public class BrandController 
+    public class BrandController
     {
         private readonly BrandService _brandService;
 
@@ -41,10 +41,10 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Controllers
         public (bool success, string message, NhanHieu brand) AddBrand(NhanHieu brand)
         {
             return _brandService.AddBrand(brand);
-        } 
+        }
         public (bool success, string message) UpdateBrand(NhanHieu brand)
         {
-             return _brandService.UpdateBrand(brand);
+            return _brandService.UpdateBrand(brand);
         }
 
         public (bool success, string message) DeleteBrand(string brandId)

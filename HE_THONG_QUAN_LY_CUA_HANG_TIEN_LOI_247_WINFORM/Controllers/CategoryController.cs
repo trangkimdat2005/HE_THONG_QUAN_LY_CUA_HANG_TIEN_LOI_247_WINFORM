@@ -17,7 +17,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Controllers
 
         public dynamic GetAllCategories()
         {
-            return _quanLyServices.GetList<DanhMuc>();
+            return _categoryService.GetAllCategories();
         }
 
         public dynamic SearchCategories(string keyword)
@@ -49,10 +49,12 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Controllers
         {
             return _categoryService.DeleteCategory(categoryId);
         }
+        
         public string GenerateNewCategoryId()
         {
             return _categoryService.GenerateNewCategoryId();
         }
+        
         public void Dispose() => _categoryService?.Dispose();
     }
 }

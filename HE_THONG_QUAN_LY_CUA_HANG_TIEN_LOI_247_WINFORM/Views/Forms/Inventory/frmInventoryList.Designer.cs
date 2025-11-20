@@ -22,6 +22,7 @@
             this.panelTop = new System.Windows.Forms.Panel();
             this.lblTitle = new System.Windows.Forms.Label();
             this.panelSearch = new System.Windows.Forms.Panel();
+            this.lblProductName = new System.Windows.Forms.Label();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.btnSearch = new System.Windows.Forms.Button();
             this.txtSearch = new System.Windows.Forms.TextBox();
@@ -32,7 +33,6 @@
             this.colTenSP = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDVT = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSoLuong = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lblProductName = new System.Windows.Forms.Label();
             this.panelTop.SuspendLayout();
             this.panelSearch.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -74,13 +74,23 @@
             this.panelSearch.Size = new System.Drawing.Size(1000, 70);
             this.panelSearch.TabIndex = 1;
             // 
+            // lblProductName
+            // 
+            this.lblProductName.AutoSize = true;
+            this.lblProductName.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
+            this.lblProductName.Location = new System.Drawing.Point(28, 37);
+            this.lblProductName.Name = "lblProductName";
+            this.lblProductName.Size = new System.Drawing.Size(98, 17);
+            this.lblProductName.TabIndex = 4;
+            this.lblProductName.Text = "Tên sản phẩm:";
+            // 
             // btnRefresh
             // 
             this.btnRefresh.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(152)))), ((int)(((byte)(219)))));
             this.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRefresh.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
             this.btnRefresh.ForeColor = System.Drawing.Color.White;
-            this.btnRefresh.Location = new System.Drawing.Point(520, 18);
+            this.btnRefresh.Location = new System.Drawing.Point(714, 25);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(100, 35);
             this.btnRefresh.TabIndex = 3;
@@ -94,7 +104,7 @@
             this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSearch.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
             this.btnSearch.ForeColor = System.Drawing.Color.White;
-            this.btnSearch.Location = new System.Drawing.Point(410, 18);
+            this.btnSearch.Location = new System.Drawing.Point(579, 25);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(100, 35);
             this.btnSearch.TabIndex = 2;
@@ -105,9 +115,9 @@
             // txtSearch
             // 
             this.txtSearch.Font = new System.Drawing.Font("Segoe UI", 11F);
-            this.txtSearch.Location = new System.Drawing.Point(130, 21);
+            this.txtSearch.Location = new System.Drawing.Point(132, 33);
             this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(260, 27);
+            this.txtSearch.Size = new System.Drawing.Size(423, 27);
             this.txtSearch.TabIndex = 1;
             // 
             // lblSearch
@@ -195,16 +205,6 @@
             this.colSoLuong.Name = "colSoLuong";
             this.colSoLuong.ReadOnly = true;
             this.colSoLuong.Width = 150;
-            // 
-            // lblProductName
-            // 
-            this.lblProductName.AutoSize = true;
-            this.lblProductName.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
-            this.lblProductName.Location = new System.Drawing.Point(26, 25);
-            this.lblProductName.Name = "lblProductName";
-            this.lblProductName.Size = new System.Drawing.Size(98, 17);
-            this.lblProductName.TabIndex = 4;
-            this.lblProductName.Text = "Tên sản phẩm:";
             // 
             // frmInventoryList
             // 

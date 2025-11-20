@@ -18,7 +18,7 @@
 
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlTop = new System.Windows.Forms.Panel();
             this.lblTitle = new System.Windows.Forms.Label();
             this.pnlControls = new System.Windows.Forms.Panel();
@@ -28,6 +28,12 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.pnlGrid = new System.Windows.Forms.Panel();
             this.dgvShiftMatrix = new System.Windows.Forms.DataGridView();
+            this.btnPre = new System.Windows.Forms.Button();
+            this.btnNext = new System.Windows.Forms.Button();
+            this.dtpStart = new System.Windows.Forms.DateTimePicker();
+            this.dtpEnd = new System.Windows.Forms.DateTimePicker();
+            this.label2 = new System.Windows.Forms.Label();
+            this.btnAuto = new System.Windows.Forms.Button();
             this.colShiftName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMon = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.colTue = new System.Windows.Forms.DataGridViewCheckBoxColumn();
@@ -49,7 +55,7 @@
             this.pnlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlTop.Location = new System.Drawing.Point(0, 0);
             this.pnlTop.Name = "pnlTop";
-            this.pnlTop.Size = new System.Drawing.Size(1000, 60);
+            this.pnlTop.Size = new System.Drawing.Size(1350, 60);
             this.pnlTop.TabIndex = 0;
             // 
             // lblTitle
@@ -67,6 +73,12 @@
             // 
             this.pnlControls.BackColor = System.Drawing.Color.White;
             this.pnlControls.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlControls.Controls.Add(this.btnAuto);
+            this.pnlControls.Controls.Add(this.label2);
+            this.pnlControls.Controls.Add(this.dtpEnd);
+            this.pnlControls.Controls.Add(this.dtpStart);
+            this.pnlControls.Controls.Add(this.btnNext);
+            this.pnlControls.Controls.Add(this.btnPre);
             this.pnlControls.Controls.Add(this.label1);
             this.pnlControls.Controls.Add(this.cmbEmployee);
             this.pnlControls.Controls.Add(this.btnSave);
@@ -74,7 +86,7 @@
             this.pnlControls.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlControls.Location = new System.Drawing.Point(0, 60);
             this.pnlControls.Name = "pnlControls";
-            this.pnlControls.Size = new System.Drawing.Size(1000, 70);
+            this.pnlControls.Size = new System.Drawing.Size(1350, 70);
             this.pnlControls.TabIndex = 1;
             // 
             // label1
@@ -83,18 +95,18 @@
             this.label1.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.label1.Location = new System.Drawing.Point(20, 25);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(115, 19);
+            this.label1.Size = new System.Drawing.Size(71, 19);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Chọn nhân viên:";
+            this.label1.Text = "Chọn NV:";
             // 
             // cmbEmployee
             // 
             this.cmbEmployee.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbEmployee.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.cmbEmployee.FormattingEnabled = true;
-            this.cmbEmployee.Location = new System.Drawing.Point(150, 22);
+            this.cmbEmployee.Location = new System.Drawing.Point(94, 22);
             this.cmbEmployee.Name = "cmbEmployee";
-            this.cmbEmployee.Size = new System.Drawing.Size(300, 25);
+            this.cmbEmployee.Size = new System.Drawing.Size(189, 25);
             this.cmbEmployee.TabIndex = 1;
             // 
             // btnSave
@@ -104,7 +116,7 @@
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSave.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.btnSave.ForeColor = System.Drawing.Color.White;
-            this.btnSave.Location = new System.Drawing.Point(750, 17);
+            this.btnSave.Location = new System.Drawing.Point(1100, 17);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(120, 35);
             this.btnSave.TabIndex = 2;
@@ -119,7 +131,7 @@
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.btnCancel.ForeColor = System.Drawing.Color.White;
-            this.btnCancel.Location = new System.Drawing.Point(880, 17);
+            this.btnCancel.Location = new System.Drawing.Point(1230, 17);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(100, 35);
             this.btnCancel.TabIndex = 3;
@@ -135,7 +147,7 @@
             this.pnlGrid.Location = new System.Drawing.Point(0, 130);
             this.pnlGrid.Name = "pnlGrid";
             this.pnlGrid.Padding = new System.Windows.Forms.Padding(20);
-            this.pnlGrid.Size = new System.Drawing.Size(1000, 470);
+            this.pnlGrid.Size = new System.Drawing.Size(1350, 470);
             this.pnlGrid.TabIndex = 2;
             // 
             // dgvShiftMatrix
@@ -145,14 +157,14 @@
             this.dgvShiftMatrix.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvShiftMatrix.BackgroundColor = System.Drawing.Color.White;
             this.dgvShiftMatrix.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(152)))), ((int)(((byte)(219)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvShiftMatrix.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(152)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvShiftMatrix.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvShiftMatrix.ColumnHeadersHeight = 45;
             this.dgvShiftMatrix.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colShiftName,
@@ -171,12 +183,74 @@
             this.dgvShiftMatrix.RowHeadersVisible = false;
             this.dgvShiftMatrix.RowTemplate.Height = 40;
             this.dgvShiftMatrix.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dgvShiftMatrix.Size = new System.Drawing.Size(960, 430);
+            this.dgvShiftMatrix.Size = new System.Drawing.Size(1310, 430);
             this.dgvShiftMatrix.TabIndex = 0;
+            // 
+            // btnPre
+            // 
+            this.btnPre.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPre.Location = new System.Drawing.Point(301, 25);
+            this.btnPre.Name = "btnPre";
+            this.btnPre.Size = new System.Drawing.Size(85, 27);
+            this.btnPre.TabIndex = 5;
+            this.btnPre.Text = "Tuần trước";
+            this.btnPre.UseVisualStyleBackColor = true;
+            this.btnPre.Click += new System.EventHandler(this.btnPre_Click);
+            // 
+            // btnNext
+            // 
+            this.btnNext.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNext.Location = new System.Drawing.Point(654, 25);
+            this.btnNext.Name = "btnNext";
+            this.btnNext.Size = new System.Drawing.Size(85, 27);
+            this.btnNext.TabIndex = 6;
+            this.btnNext.Text = "Tuần sau";
+            this.btnNext.UseVisualStyleBackColor = true;
+            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
+            // 
+            // dtpStart
+            // 
+            this.dtpStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpStart.Location = new System.Drawing.Point(398, 27);
+            this.dtpStart.Name = "dtpStart";
+            this.dtpStart.Size = new System.Drawing.Size(114, 22);
+            this.dtpStart.TabIndex = 7;
+            // 
+            // dtpEnd
+            // 
+            this.dtpEnd.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpEnd.Location = new System.Drawing.Point(529, 27);
+            this.dtpEnd.Name = "dtpEnd";
+            this.dtpEnd.Size = new System.Drawing.Size(114, 22);
+            this.dtpEnd.TabIndex = 8;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(508, 31);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(10, 13);
+            this.label2.TabIndex = 9;
+            this.label2.Text = "-";
+            // 
+            // btnAuto
+            // 
+            this.btnAuto.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAuto.BackColor = System.Drawing.Color.DeepSkyBlue;
+            this.btnAuto.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAuto.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.btnAuto.ForeColor = System.Drawing.Color.White;
+            this.btnAuto.Location = new System.Drawing.Point(968, 18);
+            this.btnAuto.Name = "btnAuto";
+            this.btnAuto.Size = new System.Drawing.Size(120, 35);
+            this.btnAuto.TabIndex = 10;
+            this.btnAuto.Text = "Tự động";
+            this.btnAuto.UseVisualStyleBackColor = false;
+            this.btnAuto.Click += new System.EventHandler(this.btnAuto_Click);
             // 
             // colShiftName
             // 
-            this.colShiftName.FillWeight = 150F;
+            this.colShiftName.FillWeight = 400F;
             this.colShiftName.HeaderText = "Ca làm việc";
             this.colShiftName.Name = "colShiftName";
             this.colShiftName.ReadOnly = true;
@@ -220,7 +294,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1000, 600);
+            this.ClientSize = new System.Drawing.Size(1350, 600);
             this.Controls.Add(this.pnlGrid);
             this.Controls.Add(this.pnlControls);
             this.Controls.Add(this.pnlTop);
@@ -229,6 +303,7 @@
             this.Name = "frmShiftAssignment";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Phân công ca làm việc";
+            this.Load += new System.EventHandler(this.frmShiftAssignment_Load);
             this.pnlTop.ResumeLayout(false);
             this.pnlTop.PerformLayout();
             this.pnlControls.ResumeLayout(false);
@@ -250,6 +325,12 @@
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Panel pnlGrid;
         private System.Windows.Forms.DataGridView dgvShiftMatrix;
+        private System.Windows.Forms.Button btnNext;
+        private System.Windows.Forms.Button btnPre;
+        private System.Windows.Forms.DateTimePicker dtpStart;
+        private System.Windows.Forms.DateTimePicker dtpEnd;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button btnAuto;
         private System.Windows.Forms.DataGridViewTextBoxColumn colShiftName;
         private System.Windows.Forms.DataGridViewCheckBoxColumn colMon;
         private System.Windows.Forms.DataGridViewCheckBoxColumn colTue;

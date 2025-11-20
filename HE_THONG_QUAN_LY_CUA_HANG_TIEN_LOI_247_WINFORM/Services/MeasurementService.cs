@@ -9,7 +9,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
     public class MeasurementService
     {
         private readonly AppDbContext _readContext;
-        private readonly QuanLyServices _services; 
+        private readonly QuanLyServices _services;
 
         public MeasurementService()
         {
@@ -21,7 +21,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
 
         public string GenerateNewMeasurementId()
         {
-            return _services.GenerateNewId<DonViDoLuong>("DV", 5);
+            return _services.GenerateNewId<DonViDoLuong>("DV", 6);
         }
 
         public dynamic GetAllMeasurements()
@@ -31,13 +31,13 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
                 return _readContext.DonViDoLuongs
                     .AsNoTracking()
                     .Where(u => !u.isDelete)
-                    .OrderBy(u => u.id) 
+                    .OrderBy(u => u.id)
                     .Select(u => new
                     {
                         Id = u.id,
                         Ten = u.ten,
                         KyHieu = u.kyHieu,
-                        SoLuongSanPham = _readContext.SanPhamDonVis.Count(sp => sp.donViId == u.id && !sp.isDelete),
+                        SoLuongSanPham = _readContext.SanPhamDonVis.Count(sp => sp.donViId == u.id && !sp.isDelete && sp.trangThai == "available"),
                         TrangThai = u.isDelete ? "Không hoạt động" : "Hoạt động"
                     })
                     .ToList();
@@ -55,14 +55,14 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
                     .Where(u => !u.isDelete &&
                                (u.ten.ToLower().Contains(keyword) ||
                                 u.kyHieu.ToLower().Contains(keyword) ||
-                                u.id.ToLower().Contains(keyword))) 
+                                u.id.ToLower().Contains(keyword)))
                     .OrderBy(u => u.id)
                     .Select(u => new
                     {
                         Id = u.id,
                         Ten = u.ten,
                         KyHieu = u.kyHieu,
-                        SoLuongSanPham = _readContext.SanPhamDonVis.Count(sp => sp.donViId == u.id && !sp.isDelete),
+                        SoLuongSanPham = _readContext.SanPhamDonVis.Count(sp => sp.donViId == u.id && !sp.isDelete && sp.trangThai == "available"),
                         TrangThai = u.isDelete ? "Không hoạt động" : "Hoạt động"
                     })
                     .ToList();
@@ -77,7 +77,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
 
         public int GetProductCount(string unitId)
         {
-            return _readContext.SanPhamDonVis.Count(sp => sp.donViId == unitId && !sp.isDelete);
+            return _readContext.SanPhamDonVis.Count(sp => sp.donViId == unitId && !sp.isDelete && sp.trangThai == "available");
         }
 
         #endregion
@@ -101,7 +101,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
                     // Sinh mã tự động nếu chưa có
                     if (string.IsNullOrEmpty(unit.id) || unit.id == "Tự động tạo")
                     {
-                        unit.id = _services.GenerateNewId<DonViDoLuong>("DV", 5);
+                        unit.id = _services.GenerateNewId<DonViDoLuong>("DV", 6);
                     }
 
                     unit.isDelete = false;
@@ -149,8 +149,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
                     var unit = db.DonViDoLuongs.Find(unitId);
                     if (unit == null) return (false, "Không tìm thấy đơn vị.");
 
-                    // Kiểm tra ràng buộc
-                    int productCount = db.SanPhamDonVis.Count(sp => sp.donViId == unitId && !sp.isDelete);
+                    int productCount = db.SanPhamDonVis.Count(sp => sp.donViId == unitId && !sp.isDelete && sp.trangThai == "available");
                     if (productCount > 0)
                         return (false, $"Không thể xóa! Đang có {productCount} sản phẩm sử dụng đơn vị này.");
 

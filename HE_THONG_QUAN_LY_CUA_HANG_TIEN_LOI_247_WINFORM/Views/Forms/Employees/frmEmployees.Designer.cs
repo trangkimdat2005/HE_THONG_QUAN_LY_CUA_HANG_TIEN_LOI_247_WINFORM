@@ -2,8 +2,15 @@
 {
     partial class frmEmployees
     {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -15,14 +22,16 @@
 
         #region Windows Form Designer generated code
 
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
         private void InitializeComponent()
         {
             this.pnlTop = new System.Windows.Forms.Panel();
             this.lblTitle = new System.Windows.Forms.Label();
             this.pnlMain = new System.Windows.Forms.Panel();
             this.groupBoxInfo = new System.Windows.Forms.GroupBox();
-            this.dtpEndDate = new System.Windows.Forms.DateTimePicker();
-            this.lblEndDate = new System.Windows.Forms.Label();
             this.dtpStartDate = new System.Windows.Forms.DateTimePicker();
             this.lblStartDate = new System.Windows.Forms.Label();
             this.txtSalary = new System.Windows.Forms.TextBox();
@@ -49,10 +58,13 @@
             this.pnlButtons = new System.Windows.Forms.Panel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
+            this.lblAnh = new System.Windows.Forms.Label();
+            this.ptrbAnh = new System.Windows.Forms.PictureBox();
             this.pnlTop.SuspendLayout();
             this.pnlMain.SuspendLayout();
             this.groupBoxInfo.SuspendLayout();
             this.pnlButtons.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ptrbAnh)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlTop
@@ -72,7 +84,7 @@
             this.lblTitle.ForeColor = System.Drawing.Color.White;
             this.lblTitle.Location = new System.Drawing.Point(12, 12);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(319, 32);
+            this.lblTitle.Size = new System.Drawing.Size(291, 32);
             this.lblTitle.TabIndex = 0;
             this.lblTitle.Text = "THÔNG TIN NHÂN VIÊN";
             // 
@@ -84,13 +96,13 @@
             this.pnlMain.Location = new System.Drawing.Point(0, 60);
             this.pnlMain.Name = "pnlMain";
             this.pnlMain.Padding = new System.Windows.Forms.Padding(20);
-            this.pnlMain.Size = new System.Drawing.Size(900, 620);
+            this.pnlMain.Size = new System.Drawing.Size(900, 517);
             this.pnlMain.TabIndex = 1;
             // 
             // groupBoxInfo
             // 
-            this.groupBoxInfo.Controls.Add(this.dtpEndDate);
-            this.groupBoxInfo.Controls.Add(this.lblEndDate);
+            this.groupBoxInfo.Controls.Add(this.lblAnh);
+            this.groupBoxInfo.Controls.Add(this.ptrbAnh);
             this.groupBoxInfo.Controls.Add(this.dtpStartDate);
             this.groupBoxInfo.Controls.Add(this.lblStartDate);
             this.groupBoxInfo.Controls.Add(this.txtSalary);
@@ -119,65 +131,45 @@
             this.groupBoxInfo.Location = new System.Drawing.Point(20, 20);
             this.groupBoxInfo.Name = "groupBoxInfo";
             this.groupBoxInfo.Padding = new System.Windows.Forms.Padding(10);
-            this.groupBoxInfo.Size = new System.Drawing.Size(860, 580);
+            this.groupBoxInfo.Size = new System.Drawing.Size(860, 477);
             this.groupBoxInfo.TabIndex = 0;
             this.groupBoxInfo.TabStop = false;
             this.groupBoxInfo.Text = "Thông tin nhân viên";
-            // 
-            // dtpEndDate
-            // 
-            this.dtpEndDate.Font = new System.Drawing.Font("Segoe UI", 9.75F);
-            this.dtpEndDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpEndDate.Location = new System.Drawing.Point(600, 490);
-            this.dtpEndDate.Name = "dtpEndDate";
-            this.dtpEndDate.Size = new System.Drawing.Size(230, 25);
-            this.dtpEndDate.TabIndex = 24;
-            // 
-            // lblEndDate
-            // 
-            this.lblEndDate.AutoSize = true;
-            this.lblEndDate.Font = new System.Drawing.Font("Segoe UI", 9.75F);
-            this.lblEndDate.Location = new System.Drawing.Point(460, 493);
-            this.lblEndDate.Name = "lblEndDate";
-            this.lblEndDate.Size = new System.Drawing.Size(95, 17);
-            this.lblEndDate.TabIndex = 23;
-            this.lblEndDate.Text = "Ngày kết thúc:";
             // 
             // dtpStartDate
             // 
             this.dtpStartDate.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             this.dtpStartDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpStartDate.Location = new System.Drawing.Point(150, 490);
+            this.dtpStartDate.Location = new System.Drawing.Point(594, 413);
             this.dtpStartDate.Name = "dtpStartDate";
-            this.dtpStartDate.Size = new System.Drawing.Size(280, 25);
+            this.dtpStartDate.Size = new System.Drawing.Size(230, 25);
             this.dtpStartDate.TabIndex = 22;
             // 
             // lblStartDate
             // 
             this.lblStartDate.AutoSize = true;
             this.lblStartDate.Font = new System.Drawing.Font("Segoe UI", 9.75F);
-            this.lblStartDate.Location = new System.Drawing.Point(30, 493);
+            this.lblStartDate.Location = new System.Drawing.Point(454, 419);
             this.lblStartDate.Name = "lblStartDate";
-            this.lblStartDate.Size = new System.Drawing.Size(107, 17);
+            this.lblStartDate.Size = new System.Drawing.Size(92, 17);
             this.lblStartDate.TabIndex = 21;
             this.lblStartDate.Text = "Ngày vào làm:";
             // 
             // txtSalary
             // 
             this.txtSalary.Font = new System.Drawing.Font("Segoe UI", 9.75F);
-            this.txtSalary.Location = new System.Drawing.Point(150, 440);
+            this.txtSalary.Location = new System.Drawing.Point(144, 411);
             this.txtSalary.Name = "txtSalary";
-            this.txtSalary.Size = new System.Drawing.Size(680, 25);
+            this.txtSalary.Size = new System.Drawing.Size(280, 25);
             this.txtSalary.TabIndex = 20;
-            this.txtSalary.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // lblSalary
             // 
             this.lblSalary.AutoSize = true;
             this.lblSalary.Font = new System.Drawing.Font("Segoe UI", 9.75F);
-            this.lblSalary.Location = new System.Drawing.Point(30, 443);
+            this.lblSalary.Location = new System.Drawing.Point(24, 414);
             this.lblSalary.Name = "lblSalary";
-            this.lblSalary.Size = new System.Drawing.Size(76, 17);
+            this.lblSalary.Size = new System.Drawing.Size(75, 17);
             this.lblSalary.TabIndex = 19;
             this.lblSalary.Text = "Mức lương:";
             // 
@@ -186,7 +178,7 @@
             this.cmbPosition.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbPosition.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             this.cmbPosition.FormattingEnabled = true;
-            this.cmbPosition.Location = new System.Drawing.Point(150, 390);
+            this.cmbPosition.Location = new System.Drawing.Point(144, 361);
             this.cmbPosition.Name = "cmbPosition";
             this.cmbPosition.Size = new System.Drawing.Size(280, 25);
             this.cmbPosition.TabIndex = 18;
@@ -195,9 +187,9 @@
             // 
             this.lblPosition.AutoSize = true;
             this.lblPosition.Font = new System.Drawing.Font("Segoe UI", 9.75F);
-            this.lblPosition.Location = new System.Drawing.Point(30, 393);
+            this.lblPosition.Location = new System.Drawing.Point(24, 364);
             this.lblPosition.Name = "lblPosition";
-            this.lblPosition.Size = new System.Drawing.Size(62, 17);
+            this.lblPosition.Size = new System.Drawing.Size(57, 17);
             this.lblPosition.TabIndex = 17;
             this.lblPosition.Text = "Chức vụ:";
             // 
@@ -206,7 +198,7 @@
             this.cmbStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbStatus.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             this.cmbStatus.FormattingEnabled = true;
-            this.cmbStatus.Location = new System.Drawing.Point(600, 390);
+            this.cmbStatus.Location = new System.Drawing.Point(594, 361);
             this.cmbStatus.Name = "cmbStatus";
             this.cmbStatus.Size = new System.Drawing.Size(230, 25);
             this.cmbStatus.TabIndex = 16;
@@ -215,7 +207,7 @@
             // 
             this.lblStatus.AutoSize = true;
             this.lblStatus.Font = new System.Drawing.Font("Segoe UI", 9.75F);
-            this.lblStatus.Location = new System.Drawing.Point(460, 393);
+            this.lblStatus.Location = new System.Drawing.Point(454, 364);
             this.lblStatus.Name = "lblStatus";
             this.lblStatus.Size = new System.Drawing.Size(69, 17);
             this.lblStatus.TabIndex = 15;
@@ -225,7 +217,7 @@
             // 
             this.dtpBirthDate.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             this.dtpBirthDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpBirthDate.Location = new System.Drawing.Point(150, 290);
+            this.dtpBirthDate.Location = new System.Drawing.Point(144, 261);
             this.dtpBirthDate.Name = "dtpBirthDate";
             this.dtpBirthDate.Size = new System.Drawing.Size(280, 25);
             this.dtpBirthDate.TabIndex = 14;
@@ -234,7 +226,7 @@
             // 
             this.lblBirthDate.AutoSize = true;
             this.lblBirthDate.Font = new System.Drawing.Font("Segoe UI", 9.75F);
-            this.lblBirthDate.Location = new System.Drawing.Point(30, 293);
+            this.lblBirthDate.Location = new System.Drawing.Point(24, 264);
             this.lblBirthDate.Name = "lblBirthDate";
             this.lblBirthDate.Size = new System.Drawing.Size(69, 17);
             this.lblBirthDate.TabIndex = 13;
@@ -244,7 +236,7 @@
             // 
             this.rbFemale.AutoSize = true;
             this.rbFemale.Font = new System.Drawing.Font("Segoe UI", 9.75F);
-            this.rbFemale.Location = new System.Drawing.Point(710, 340);
+            this.rbFemale.Location = new System.Drawing.Point(704, 311);
             this.rbFemale.Name = "rbFemale";
             this.rbFemale.Size = new System.Drawing.Size(44, 21);
             this.rbFemale.TabIndex = 12;
@@ -256,7 +248,7 @@
             this.rbMale.AutoSize = true;
             this.rbMale.Checked = true;
             this.rbMale.Font = new System.Drawing.Font("Segoe UI", 9.75F);
-            this.rbMale.Location = new System.Drawing.Point(600, 340);
+            this.rbMale.Location = new System.Drawing.Point(594, 311);
             this.rbMale.Name = "rbMale";
             this.rbMale.Size = new System.Drawing.Size(54, 21);
             this.rbMale.TabIndex = 11;
@@ -268,7 +260,7 @@
             // 
             this.lblGender.AutoSize = true;
             this.lblGender.Font = new System.Drawing.Font("Segoe UI", 9.75F);
-            this.lblGender.Location = new System.Drawing.Point(460, 342);
+            this.lblGender.Location = new System.Drawing.Point(454, 313);
             this.lblGender.Name = "lblGender";
             this.lblGender.Size = new System.Drawing.Size(59, 17);
             this.lblGender.TabIndex = 10;
@@ -277,17 +269,17 @@
             // txtAddress
             // 
             this.txtAddress.Font = new System.Drawing.Font("Segoe UI", 9.75F);
-            this.txtAddress.Location = new System.Drawing.Point(150, 190);
+            this.txtAddress.Location = new System.Drawing.Point(144, 161);
             this.txtAddress.Multiline = true;
             this.txtAddress.Name = "txtAddress";
-            this.txtAddress.Size = new System.Drawing.Size(680, 80);
+            this.txtAddress.Size = new System.Drawing.Size(280, 80);
             this.txtAddress.TabIndex = 9;
             // 
             // lblAddress
             // 
             this.lblAddress.AutoSize = true;
             this.lblAddress.Font = new System.Drawing.Font("Segoe UI", 9.75F);
-            this.lblAddress.Location = new System.Drawing.Point(30, 193);
+            this.lblAddress.Location = new System.Drawing.Point(24, 164);
             this.lblAddress.Name = "lblAddress";
             this.lblAddress.Size = new System.Drawing.Size(50, 17);
             this.lblAddress.TabIndex = 8;
@@ -296,16 +288,16 @@
             // txtEmail
             // 
             this.txtEmail.Font = new System.Drawing.Font("Segoe UI", 9.75F);
-            this.txtEmail.Location = new System.Drawing.Point(150, 145);
+            this.txtEmail.Location = new System.Drawing.Point(150, 106);
             this.txtEmail.Name = "txtEmail";
-            this.txtEmail.Size = new System.Drawing.Size(680, 25);
+            this.txtEmail.Size = new System.Drawing.Size(280, 25);
             this.txtEmail.TabIndex = 7;
             // 
             // lblEmail
             // 
             this.lblEmail.AutoSize = true;
             this.lblEmail.Font = new System.Drawing.Font("Segoe UI", 9.75F);
-            this.lblEmail.Location = new System.Drawing.Point(30, 148);
+            this.lblEmail.Location = new System.Drawing.Point(30, 109);
             this.lblEmail.Name = "lblEmail";
             this.lblEmail.Size = new System.Drawing.Size(42, 17);
             this.lblEmail.TabIndex = 6;
@@ -314,16 +306,16 @@
             // txtPhone
             // 
             this.txtPhone.Font = new System.Drawing.Font("Segoe UI", 9.75F);
-            this.txtPhone.Location = new System.Drawing.Point(600, 100);
+            this.txtPhone.Location = new System.Drawing.Point(594, 103);
             this.txtPhone.Name = "txtPhone";
-            this.txtPhone.Size = new System.Drawing.Size(230, 25);
+            this.txtPhone.Size = new System.Drawing.Size(236, 25);
             this.txtPhone.TabIndex = 5;
             // 
             // lblPhone
             // 
             this.lblPhone.AutoSize = true;
             this.lblPhone.Font = new System.Drawing.Font("Segoe UI", 9.75F);
-            this.lblPhone.Location = new System.Drawing.Point(460, 103);
+            this.lblPhone.Location = new System.Drawing.Point(460, 106);
             this.lblPhone.Name = "lblPhone";
             this.lblPhone.Size = new System.Drawing.Size(88, 17);
             this.lblPhone.TabIndex = 4;
@@ -332,18 +324,18 @@
             // txtName
             // 
             this.txtName.Font = new System.Drawing.Font("Segoe UI", 9.75F);
-            this.txtName.Location = new System.Drawing.Point(150, 100);
+            this.txtName.Location = new System.Drawing.Point(594, 60);
             this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(280, 25);
+            this.txtName.Size = new System.Drawing.Size(236, 25);
             this.txtName.TabIndex = 3;
             // 
             // lblName
             // 
             this.lblName.AutoSize = true;
             this.lblName.Font = new System.Drawing.Font("Segoe UI", 9.75F);
-            this.lblName.Location = new System.Drawing.Point(30, 103);
+            this.lblName.Location = new System.Drawing.Point(462, 63);
             this.lblName.Name = "lblName";
-            this.lblName.Size = new System.Drawing.Size(77, 17);
+            this.lblName.Size = new System.Drawing.Size(67, 17);
             this.lblName.TabIndex = 2;
             this.lblName.Text = "Họ và tên:";
             // 
@@ -362,7 +354,7 @@
             this.lblId.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             this.lblId.Location = new System.Drawing.Point(30, 58);
             this.lblId.Name = "lblId";
-            this.lblId.Size = new System.Drawing.Size(94, 17);
+            this.lblId.Size = new System.Drawing.Size(89, 17);
             this.lblId.TabIndex = 0;
             this.lblId.Text = "Mã nhân viên:";
             // 
@@ -373,7 +365,7 @@
             this.pnlButtons.Controls.Add(this.btnCancel);
             this.pnlButtons.Controls.Add(this.btnSave);
             this.pnlButtons.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlButtons.Location = new System.Drawing.Point(0, 680);
+            this.pnlButtons.Location = new System.Drawing.Point(0, 577);
             this.pnlButtons.Name = "pnlButtons";
             this.pnlButtons.Padding = new System.Windows.Forms.Padding(10);
             this.pnlButtons.Size = new System.Drawing.Size(900, 60);
@@ -406,12 +398,33 @@
             this.btnSave.TabIndex = 0;
             this.btnSave.Text = "💾 Lưu";
             this.btnSave.UseVisualStyleBackColor = false;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // lblAnh
+            // 
+            this.lblAnh.AutoSize = true;
+            this.lblAnh.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.lblAnh.Location = new System.Drawing.Point(454, 164);
+            this.lblAnh.Name = "lblAnh";
+            this.lblAnh.Size = new System.Drawing.Size(84, 17);
+            this.lblAnh.TabIndex = 26;
+            this.lblAnh.Text = "Ảnh đại diện:";
+            // 
+            // ptrbAnh
+            // 
+            this.ptrbAnh.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ptrbAnh.Location = new System.Drawing.Point(594, 164);
+            this.ptrbAnh.Name = "ptrbAnh";
+            this.ptrbAnh.Size = new System.Drawing.Size(230, 122);
+            this.ptrbAnh.TabIndex = 25;
+            this.ptrbAnh.TabStop = false;
+            this.ptrbAnh.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // frmEmployees
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(900, 740);
+            this.ClientSize = new System.Drawing.Size(900, 637);
             this.Controls.Add(this.pnlMain);
             this.Controls.Add(this.pnlButtons);
             this.Controls.Add(this.pnlTop);
@@ -420,12 +433,14 @@
             this.Name = "frmEmployees";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Thông tin Nhân viên";
+            this.Load += new System.EventHandler(this.frmEmployees_Load);
             this.pnlTop.ResumeLayout(false);
             this.pnlTop.PerformLayout();
             this.pnlMain.ResumeLayout(false);
             this.groupBoxInfo.ResumeLayout(false);
             this.groupBoxInfo.PerformLayout();
             this.pnlButtons.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.ptrbAnh)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -436,8 +451,6 @@
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.Panel pnlMain;
         private System.Windows.Forms.GroupBox groupBoxInfo;
-        private System.Windows.Forms.DateTimePicker dtpEndDate;
-        private System.Windows.Forms.Label lblEndDate;
         private System.Windows.Forms.DateTimePicker dtpStartDate;
         private System.Windows.Forms.Label lblStartDate;
         private System.Windows.Forms.TextBox txtSalary;
@@ -464,5 +477,7 @@
         private System.Windows.Forms.Panel pnlButtons;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.Label lblAnh;
+        private System.Windows.Forms.PictureBox ptrbAnh;
     }
 }
