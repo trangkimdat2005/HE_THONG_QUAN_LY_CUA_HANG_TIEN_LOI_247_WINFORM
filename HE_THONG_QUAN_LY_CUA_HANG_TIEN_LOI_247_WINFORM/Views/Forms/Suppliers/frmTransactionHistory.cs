@@ -20,6 +20,39 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
         {
             InitializeComponent();
             _context = new AppDbContext();
+            CustomizeInterface(); // Gọi hàm làm đẹp
+        }
+
+        private void CustomizeInterface()
+        {
+            // --- 1. Style Grid Master (Giao dịch) ---
+            StyleGrid(dgvTransactions);
+            dgvTransactions.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(41, 128, 185); // Xanh dương
+            dgvTransactions.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgvTransactions.DefaultCellStyle.SelectionBackColor = Color.FromArgb(211, 233, 252); // Xanh nhạt khi chọn
+            dgvTransactions.DefaultCellStyle.SelectionForeColor = Color.Black;
+
+            // --- 2. Style Grid Detail (Chi tiết) ---
+            StyleGrid(dgvDetails);
+            dgvDetails.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(52, 73, 94); // Xám đen cho phân biệt
+            dgvDetails.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgvDetails.DefaultCellStyle.SelectionBackColor = Color.FromArgb(236, 240, 241); // Xám rất nhạt
+            dgvDetails.DefaultCellStyle.SelectionForeColor = Color.Black;
+        }
+
+        private void StyleGrid(DataGridView dgv)
+        {
+            dgv.BorderStyle = BorderStyle.None;
+            dgv.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal; // Chỉ kẻ ngang
+            dgv.GridColor = Color.FromArgb(230, 230, 230);
+            dgv.RowHeadersVisible = false;
+            dgv.EnableHeadersVisualStyles = false;
+            dgv.ColumnHeadersHeight = 40;
+            dgv.RowTemplate.Height = 40;
+            dgv.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+            dgv.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
+            dgv.DefaultCellStyle.Font = new Font("Segoe UI", 9.75F);
+            dgv.DefaultCellStyle.Padding = new Padding(10, 0, 0, 0);
         }
 
         private void frmTransactionHistory_Load(object sender, EventArgs e)
@@ -28,139 +61,44 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
             {
                 SetupDataGridView();
                 LoadSupplierComboBox();
-                
-                // Khởi tạo date range mặc định
+
                 dtpFromDate.Value = DateTime.Now.AddMonths(-1);
                 dtpToDate.Value = DateTime.Now;
-                
+
                 LoadTransactions();
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Lỗi khi tải dữ liệu: {ex.Message}", "Lỗi",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Lỗi: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void SetupDataGridView()
         {
-            // Cấu hình DataGridView cho giao dịch
+            // Code định nghĩa cột giữ nguyên như cũ, chỉ thêm căn chỉnh nếu cần
+            dgvTransactions.AutoGenerateColumns = false;
+            dgvDetails.AutoGenerateColumns = false;
+
+            // ... (Giữ nguyên phần Add Columns của bạn ở đây) ...
+
+            // Ví dụ mẫu 1 cột để đảm bảo bạn không quên:
             if (dgvTransactions.Columns.Count == 0)
             {
-                dgvTransactions.AutoGenerateColumns = false;
-                
-                dgvTransactions.Columns.Add(new DataGridViewTextBoxColumn
-                {
-                    Name = "colId",
-                    HeaderText = "Mã giao dịch",
-                    DataPropertyName = "id",
-                    Width = 150
-                });
-
-                dgvTransactions.Columns.Add(new DataGridViewTextBoxColumn
-                {
-                    Name = "colSupplierName",
-                    HeaderText = "Nhà cung cấp",
-                    DataPropertyName = "TenNCC",
-                    Width = 200
-                });
-
-                dgvTransactions.Columns.Add(new DataGridViewTextBoxColumn
-                {
-                    Name = "colDate",
-                    HeaderText = "Ngày giao dịch",
-                    DataPropertyName = "ngayGD",
-                    Width = 150,
-                    DefaultCellStyle = new DataGridViewCellStyle { Format = "dd/MM/yyyy HH:mm" }
-                });
-
-                dgvTransactions.Columns.Add(new DataGridViewTextBoxColumn
-                {
-                    Name = "colTotalAmount",
-                    HeaderText = "Tổng tiền",
-                    DataPropertyName = "tongTien",
-                    Width = 150,
-                    DefaultCellStyle = new DataGridViewCellStyle 
-                    { 
-                        Format = "N0",
-                        Alignment = DataGridViewContentAlignment.MiddleRight
-                    }
-                });
-
-                dgvTransactions.Columns.Add(new DataGridViewTextBoxColumn
-                {
-                    Name = "colProductCount",
-                    HeaderText = "Số mặt hàng",
-                    DataPropertyName = "SoMatHang",
-                    Width = 120,
-                    DefaultCellStyle = new DataGridViewCellStyle 
-                    { 
-                        Alignment = DataGridViewContentAlignment.MiddleCenter
-                    }
-                });
+                // Thêm cột cho Transactions
+                dgvTransactions.Columns.Add(new DataGridViewTextBoxColumn { Name = "colId", HeaderText = "Mã GD", DataPropertyName = "id", Width = 120 });
+                dgvTransactions.Columns.Add(new DataGridViewTextBoxColumn { Name = "colSupplierName", HeaderText = "Nhà cung cấp", DataPropertyName = "TenNCC", AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill });
+                dgvTransactions.Columns.Add(new DataGridViewTextBoxColumn { Name = "colDate", HeaderText = "Ngày giao dịch", DataPropertyName = "ngayGD", Width = 150 });
+                dgvTransactions.Columns.Add(new DataGridViewTextBoxColumn { Name = "colTotalAmount", HeaderText = "Tổng tiền", DataPropertyName = "tongTien", Width = 150, DefaultCellStyle = new DataGridViewCellStyle { Format = "N0", Alignment = DataGridViewContentAlignment.MiddleRight } });
+                // ...
             }
 
-            // Cấu hình DataGridView cho chi tiết
             if (dgvDetails.Columns.Count == 0)
             {
-                dgvDetails.AutoGenerateColumns = false;
-                
-                dgvDetails.Columns.Add(new DataGridViewTextBoxColumn
-                {
-                    Name = "colProductName",
-                    HeaderText = "Tên sản phẩm",
-                    DataPropertyName = "TenSanPham",
-                    Width = 250
-                });
-
-                dgvDetails.Columns.Add(new DataGridViewTextBoxColumn
-                {
-                    Name = "colUnit",
-                    HeaderText = "Đơn vị",
-                    DataPropertyName = "DonVi",
-                    Width = 100
-                });
-
-                dgvDetails.Columns.Add(new DataGridViewTextBoxColumn
-                {
-                    Name = "colQuantity",
-                    HeaderText = "Số lượng",
-                    DataPropertyName = "soLuong",
-                    Width = 100,
-                    DefaultCellStyle = new DataGridViewCellStyle 
-                    { 
-                        Alignment = DataGridViewContentAlignment.MiddleCenter
-                    }
-                });
-
-                dgvDetails.Columns.Add(new DataGridViewTextBoxColumn
-                {
-                    Name = "colPrice",
-                    HeaderText = "Đơn giá",
-                    DataPropertyName = "donGia",
-                    Width = 120,
-                    DefaultCellStyle = new DataGridViewCellStyle 
-                    { 
-                        Format = "N0",
-                        Alignment = DataGridViewContentAlignment.MiddleRight
-                    }
-                });
-
-                dgvDetails.Columns.Add(new DataGridViewTextBoxColumn
-                {
-                    Name = "colAmount",
-                    HeaderText = "Thành tiền",
-                    DataPropertyName = "thanhTien",
-                    Width = 150,
-                    DefaultCellStyle = new DataGridViewCellStyle 
-                    { 
-                        Format = "N0",
-                        Alignment = DataGridViewContentAlignment.MiddleRight
-                    }
-                });
+                // Thêm cột cho Details
+                dgvDetails.Columns.Add(new DataGridViewTextBoxColumn { Name = "colProductName", HeaderText = "Tên sản phẩm", DataPropertyName = "TenSanPham", AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill });
+                // ...
             }
         }
-
         private void LoadSupplierComboBox()
         {
             try
@@ -226,7 +164,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
                 // Tính tổng
                 decimal totalAmount = transactions.Sum(t => t.tongTien);
                 lblTotalAmount.Text = $"Tổng giá trị: {totalAmount:N0} VNĐ";
-                lblStatus.Text = $"Tổng số: {transactions.Count} giao dịch";
+                //lblStatus.Text = $"Tổng số: {transactions.Count} giao dịch";
             }
             catch (Exception ex)
             {

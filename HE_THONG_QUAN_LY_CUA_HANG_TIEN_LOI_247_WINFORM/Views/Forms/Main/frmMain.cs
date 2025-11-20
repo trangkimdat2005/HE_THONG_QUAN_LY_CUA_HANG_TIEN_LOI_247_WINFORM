@@ -224,6 +224,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
             pnlEmployeeSubmenu.Visible = false;
             pnlCustomerSubmenu.Visible = false;
             pnlSupplierSubmenu.Visible = false;
+            pnlStorageSubmenu.Visible = false;
             SetActiveButton(btn_products, null);
         }
 
@@ -270,12 +271,6 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
         {
             LoadFormIntoPanel(new frmWorkSchedule());
             SetActiveButton(btn_employees, btnSub_PhanCong);
-        }
-
-        private void btnSub_ChamCong_Click(object sender, EventArgs e)
-        {
-            LoadFormIntoPanel(new frmEmployees());
-            SetActiveButton(btn_employees, btnSub_ChamCong);
         }
 
         // --- Click cho các nút menu con của Khách hàng ---
@@ -325,6 +320,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
             pnlProductSubmenu.Visible = false;
             pnlCustomerSubmenu.Visible = false;
             pnlSupplierSubmenu.Visible = false;
+            pnlStorageSubmenu.Visible = false;
             SetActiveButton(btn_employees, null);
         }
 
@@ -336,6 +332,8 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
             pnlProductSubmenu.Visible = false;
             pnlEmployeeSubmenu.Visible = false;
             pnlSupplierSubmenu.Visible = false;
+            pnlStorageSubmenu.Visible = false;
+
             SetActiveButton(btn_customers, null);
         }
 
@@ -354,6 +352,8 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
             pnlProductSubmenu.Visible = false;
             pnlEmployeeSubmenu.Visible = false;
             pnlCustomerSubmenu.Visible = false;
+            pnlStorageSubmenu.Visible = false;
+
             SetActiveButton(btn_suppliers, null);
         }
 
@@ -366,6 +366,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
             pnlEmployeeSubmenu.Visible = false;
             pnlCustomerSubmenu.Visible = false;
             pnlSupplierSubmenu.Visible = false;
+
             SetActiveButton(btn_inventory, null);
         }
 
@@ -373,7 +374,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
 
         private void btnSub_NhapKho_Click(object sender, EventArgs e)
         {
-            LoadFormIntoPanel(new frmStockIn());
+            LoadFormIntoPanel(new frmInventoryMain());
             SetActiveButton(btn_inventory, btnSub_NhapKho);
         }
 

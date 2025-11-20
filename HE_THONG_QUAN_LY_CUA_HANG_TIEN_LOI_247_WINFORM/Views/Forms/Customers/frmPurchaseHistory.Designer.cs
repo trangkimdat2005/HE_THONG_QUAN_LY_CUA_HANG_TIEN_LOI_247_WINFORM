@@ -2,15 +2,8 @@
 {
     partial class frmPurchaseHistory
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -22,10 +15,6 @@
 
         #region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -108,36 +97,38 @@
             this.pnlCustomerInfo.Location = new System.Drawing.Point(0, 60);
             this.pnlCustomerInfo.Name = "pnlCustomerInfo";
             this.pnlCustomerInfo.Padding = new System.Windows.Forms.Padding(10);
-            this.pnlCustomerInfo.Size = new System.Drawing.Size(1200, 80);
+            this.pnlCustomerInfo.Size = new System.Drawing.Size(1200, 70);
             this.pnlCustomerInfo.TabIndex = 1;
             // 
             // lblPhone
             // 
             this.lblPhone.AutoSize = true;
-            this.lblPhone.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.lblPhone.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold);
             this.lblPhone.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
-            this.lblPhone.Location = new System.Drawing.Point(850, 40);
+            this.lblPhone.Location = new System.Drawing.Point(850, 25);
             this.lblPhone.Name = "lblPhone";
-            this.lblPhone.Size = new System.Drawing.Size(0, 19);
+            this.lblPhone.Size = new System.Drawing.Size(33, 20);
             this.lblPhone.TabIndex = 5;
+            this.lblPhone.Text = "---";
             // 
             // lblCustomerName
             // 
             this.lblCustomerName.AutoSize = true;
-            this.lblCustomerName.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.lblCustomerName.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold);
             this.lblCustomerName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
-            this.lblCustomerName.Location = new System.Drawing.Point(550, 40);
+            this.lblCustomerName.Location = new System.Drawing.Point(550, 25);
             this.lblCustomerName.Name = "lblCustomerName";
-            this.lblCustomerName.Size = new System.Drawing.Size(0, 19);
+            this.lblCustomerName.Size = new System.Drawing.Size(33, 20);
             this.lblCustomerName.TabIndex = 4;
+            this.lblCustomerName.Text = "---";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 9.75F);
-            this.label2.Location = new System.Drawing.Point(750, 40);
+            this.label2.Location = new System.Drawing.Point(750, 28);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(94, 17);
+            this.label2.Size = new System.Drawing.Size(88, 17);
             this.label2.TabIndex = 3;
             this.label2.Text = "Số điện thoại:";
             // 
@@ -145,20 +136,20 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 9.75F);
-            this.label1.Location = new System.Drawing.Point(450, 40);
+            this.label1.Location = new System.Drawing.Point(450, 28);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(94, 17);
+            this.label1.Size = new System.Drawing.Size(101, 17);
             this.label1.TabIndex = 2;
             this.label1.Text = "Tên khách hàng:";
             // 
             // cmbCustomers
             // 
             this.cmbCustomers.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbCustomers.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.cmbCustomers.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.cmbCustomers.FormattingEnabled = true;
-            this.cmbCustomers.Location = new System.Drawing.Point(130, 35);
+            this.cmbCustomers.Location = new System.Drawing.Point(140, 25);
             this.cmbCustomers.Name = "cmbCustomers";
-            this.cmbCustomers.Size = new System.Drawing.Size(300, 25);
+            this.cmbCustomers.Size = new System.Drawing.Size(280, 25);
             this.cmbCustomers.TabIndex = 1;
             this.cmbCustomers.SelectedIndexChanged += new System.EventHandler(this.cmbCustomers_SelectedIndexChanged);
             // 
@@ -166,46 +157,46 @@
             // 
             this.lblSelectCustomer.AutoSize = true;
             this.lblSelectCustomer.Font = new System.Drawing.Font("Segoe UI", 9.75F);
-            this.lblSelectCustomer.Location = new System.Drawing.Point(20, 38);
+            this.lblSelectCustomer.Location = new System.Drawing.Point(20, 28);
             this.lblSelectCustomer.Name = "lblSelectCustomer";
-            this.lblSelectCustomer.Size = new System.Drawing.Size(104, 17);
+            this.lblSelectCustomer.Size = new System.Drawing.Size(114, 17);
             this.lblSelectCustomer.TabIndex = 0;
             this.lblSelectCustomer.Text = "Chọn khách hàng:";
             // 
             // pnlFilter
             // 
-            this.pnlFilter.BackColor = System.Drawing.Color.White;
+            this.pnlFilter.BackColor = System.Drawing.Color.WhiteSmoke;
             this.pnlFilter.Controls.Add(this.btnFilter);
             this.pnlFilter.Controls.Add(this.dtpToDate);
             this.pnlFilter.Controls.Add(this.label4);
             this.pnlFilter.Controls.Add(this.dtpFromDate);
             this.pnlFilter.Controls.Add(this.label3);
             this.pnlFilter.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlFilter.Location = new System.Drawing.Point(0, 140);
+            this.pnlFilter.Location = new System.Drawing.Point(0, 130);
             this.pnlFilter.Name = "pnlFilter";
             this.pnlFilter.Padding = new System.Windows.Forms.Padding(10);
-            this.pnlFilter.Size = new System.Drawing.Size(1200, 70);
+            this.pnlFilter.Size = new System.Drawing.Size(1200, 60);
             this.pnlFilter.TabIndex = 2;
             // 
             // btnFilter
             // 
-            this.btnFilter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
+            this.btnFilter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(204)))), ((int)(((byte)(113)))));
             this.btnFilter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnFilter.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
             this.btnFilter.ForeColor = System.Drawing.Color.White;
-            this.btnFilter.Location = new System.Drawing.Point(620, 20);
+            this.btnFilter.Location = new System.Drawing.Point(620, 15);
             this.btnFilter.Name = "btnFilter";
-            this.btnFilter.Size = new System.Drawing.Size(100, 35);
+            this.btnFilter.Size = new System.Drawing.Size(100, 30);
             this.btnFilter.TabIndex = 4;
-            this.btnFilter.Text = "Lọc";
+            this.btnFilter.Text = "Lọc dữ liệu";
             this.btnFilter.UseVisualStyleBackColor = false;
             this.btnFilter.Click += new System.EventHandler(this.btnFilter_Click);
             // 
             // dtpToDate
             // 
-            this.dtpToDate.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.dtpToDate.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.dtpToDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpToDate.Location = new System.Drawing.Point(420, 25);
+            this.dtpToDate.Location = new System.Drawing.Point(420, 18);
             this.dtpToDate.Name = "dtpToDate";
             this.dtpToDate.Size = new System.Drawing.Size(180, 25);
             this.dtpToDate.TabIndex = 3;
@@ -214,17 +205,17 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Segoe UI", 9.75F);
-            this.label4.Location = new System.Drawing.Point(340, 28);
+            this.label4.Location = new System.Drawing.Point(340, 22);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(74, 17);
+            this.label4.Size = new System.Drawing.Size(67, 17);
             this.label4.TabIndex = 2;
             this.label4.Text = "Đến ngày:";
             // 
             // dtpFromDate
             // 
-            this.dtpFromDate.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.dtpFromDate.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.dtpFromDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpFromDate.Location = new System.Drawing.Point(100, 25);
+            this.dtpFromDate.Location = new System.Drawing.Point(100, 18);
             this.dtpFromDate.Name = "dtpFromDate";
             this.dtpFromDate.Size = new System.Drawing.Size(180, 25);
             this.dtpFromDate.TabIndex = 1;
@@ -233,9 +224,9 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 9.75F);
-            this.label3.Location = new System.Drawing.Point(20, 28);
+            this.label3.Location = new System.Drawing.Point(20, 22);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(64, 17);
+            this.label3.Size = new System.Drawing.Size(60, 17);
             this.label3.TabIndex = 0;
             this.label3.Text = "Từ ngày:";
             // 
@@ -245,9 +236,9 @@
             this.pnlStatistics.Controls.Add(this.pnlTotalAmount);
             this.pnlStatistics.Controls.Add(this.pnlTotalCount);
             this.pnlStatistics.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlStatistics.Location = new System.Drawing.Point(0, 210);
+            this.pnlStatistics.Location = new System.Drawing.Point(0, 190);
             this.pnlStatistics.Name = "pnlStatistics";
-            this.pnlStatistics.Padding = new System.Windows.Forms.Padding(10);
+            this.pnlStatistics.Padding = new System.Windows.Forms.Padding(20, 10, 20, 10);
             this.pnlStatistics.Size = new System.Drawing.Size(1200, 90);
             this.pnlStatistics.TabIndex = 3;
             // 
@@ -282,7 +273,7 @@
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(560, 25);
             this.label6.TabIndex = 0;
-            this.label6.Text = "TỔNG TIỀN";
+            this.label6.Text = "TỔNG TIỀN ĐÃ MUA";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // pnlTotalCount
@@ -323,10 +314,10 @@
             // 
             this.pnlMain.Controls.Add(this.dgvPurchaseHistory);
             this.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlMain.Location = new System.Drawing.Point(0, 300);
+            this.pnlMain.Location = new System.Drawing.Point(0, 280);
             this.pnlMain.Name = "pnlMain";
-            this.pnlMain.Padding = new System.Windows.Forms.Padding(10);
-            this.pnlMain.Size = new System.Drawing.Size(1200, 330);
+            this.pnlMain.Padding = new System.Windows.Forms.Padding(20, 0, 20, 0);
+            this.pnlMain.Size = new System.Drawing.Size(1200, 350);
             this.pnlMain.TabIndex = 4;
             // 
             // dgvPurchaseHistory
@@ -336,6 +327,7 @@
             this.dgvPurchaseHistory.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvPurchaseHistory.BackgroundColor = System.Drawing.Color.White;
             this.dgvPurchaseHistory.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgvPurchaseHistory.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
@@ -362,14 +354,15 @@
             this.dgvPurchaseHistory.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvPurchaseHistory.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvPurchaseHistory.EnableHeadersVisualStyles = false;
-            this.dgvPurchaseHistory.Location = new System.Drawing.Point(10, 10);
+            this.dgvPurchaseHistory.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
+            this.dgvPurchaseHistory.Location = new System.Drawing.Point(20, 0);
             this.dgvPurchaseHistory.MultiSelect = false;
             this.dgvPurchaseHistory.Name = "dgvPurchaseHistory";
             this.dgvPurchaseHistory.ReadOnly = true;
             this.dgvPurchaseHistory.RowHeadersVisible = false;
             this.dgvPurchaseHistory.RowTemplate.Height = 35;
             this.dgvPurchaseHistory.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvPurchaseHistory.Size = new System.Drawing.Size(1180, 310);
+            this.dgvPurchaseHistory.Size = new System.Drawing.Size(1160, 350);
             this.dgvPurchaseHistory.TabIndex = 0;
             this.dgvPurchaseHistory.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPurchaseHistory_CellClick);
             // 

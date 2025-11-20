@@ -2,15 +2,8 @@
 {
     partial class frmPromotions
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -22,10 +15,6 @@
 
         #region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -71,20 +60,20 @@
             // 
             // panelTop
             // 
-            this.panelTop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(126)))), ((int)(((byte)(34)))));
+            this.panelTop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
             this.panelTop.Controls.Add(this.lblTitle);
             this.panelTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelTop.Location = new System.Drawing.Point(0, 0);
             this.panelTop.Name = "panelTop";
-            this.panelTop.Size = new System.Drawing.Size(1400, 60);
+            this.panelTop.Size = new System.Drawing.Size(1200, 60);
             this.panelTop.TabIndex = 0;
             // 
             // lblTitle
             // 
             this.lblTitle.AutoSize = true;
-            this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold);
             this.lblTitle.ForeColor = System.Drawing.Color.White;
-            this.lblTitle.Location = new System.Drawing.Point(12, 12);
+            this.lblTitle.Location = new System.Drawing.Point(12, 14);
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(486, 32);
             this.lblTitle.TabIndex = 0;
@@ -108,15 +97,14 @@
             this.panelSearch.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelSearch.Location = new System.Drawing.Point(0, 60);
             this.panelSearch.Name = "panelSearch";
-            this.panelSearch.Padding = new System.Windows.Forms.Padding(10);
-            this.panelSearch.Size = new System.Drawing.Size(1400, 100);
+            this.panelSearch.Size = new System.Drawing.Size(1200, 100);
             this.panelSearch.TabIndex = 1;
             // 
             // chkDateFilter
             // 
             this.chkDateFilter.AutoSize = true;
             this.chkDateFilter.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
-            this.chkDateFilter.Location = new System.Drawing.Point(15, 63);
+            this.chkDateFilter.Location = new System.Drawing.Point(20, 63);
             this.chkDateFilter.Name = "chkDateFilter";
             this.chkDateFilter.Size = new System.Drawing.Size(140, 21);
             this.chkDateFilter.TabIndex = 10;
@@ -127,28 +115,28 @@
             // dtpEndDate
             // 
             this.dtpEndDate.Enabled = false;
-            this.dtpEndDate.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.dtpEndDate.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.dtpEndDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpEndDate.Location = new System.Drawing.Point(540, 60);
             this.dtpEndDate.Name = "dtpEndDate";
-            this.dtpEndDate.Size = new System.Drawing.Size(200, 25);
+            this.dtpEndDate.Size = new System.Drawing.Size(150, 25);
             this.dtpEndDate.TabIndex = 9;
             // 
             // dtpStartDate
             // 
             this.dtpStartDate.Enabled = false;
-            this.dtpStartDate.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.dtpStartDate.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.dtpStartDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpStartDate.Location = new System.Drawing.Point(260, 60);
             this.dtpStartDate.Name = "dtpStartDate";
-            this.dtpStartDate.Size = new System.Drawing.Size(200, 25);
+            this.dtpStartDate.Size = new System.Drawing.Size(150, 25);
             this.dtpStartDate.TabIndex = 8;
             // 
             // lblEndDate
             // 
             this.lblEndDate.AutoSize = true;
             this.lblEndDate.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
-            this.lblEndDate.Location = new System.Drawing.Point(470, 63);
+            this.lblEndDate.Location = new System.Drawing.Point(460, 64);
             this.lblEndDate.Name = "lblEndDate";
             this.lblEndDate.Size = new System.Drawing.Size(70, 17);
             this.lblEndDate.TabIndex = 7;
@@ -158,7 +146,7 @@
             // 
             this.lblStartDate.AutoSize = true;
             this.lblStartDate.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
-            this.lblStartDate.Location = new System.Drawing.Point(190, 63);
+            this.lblStartDate.Location = new System.Drawing.Point(190, 64);
             this.lblStartDate.Name = "lblStartDate";
             this.lblStartDate.Size = new System.Drawing.Size(64, 17);
             this.lblStartDate.TabIndex = 6;
@@ -170,7 +158,7 @@
             this.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRefresh.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
             this.btnRefresh.ForeColor = System.Drawing.Color.White;
-            this.btnRefresh.Location = new System.Drawing.Point(1210, 20);
+            this.btnRefresh.Location = new System.Drawing.Point(1080, 20);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(100, 35);
             this.btnRefresh.TabIndex = 5;
@@ -184,7 +172,7 @@
             this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSearch.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
             this.btnSearch.ForeColor = System.Drawing.Color.White;
-            this.btnSearch.Location = new System.Drawing.Point(1090, 20);
+            this.btnSearch.Location = new System.Drawing.Point(970, 20);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(100, 35);
             this.btnSearch.TabIndex = 4;
@@ -195,7 +183,7 @@
             // cmbType
             // 
             this.cmbType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbType.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.cmbType.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.cmbType.FormattingEnabled = true;
             this.cmbType.Location = new System.Drawing.Point(580, 25);
             this.cmbType.Name = "cmbType";
@@ -204,7 +192,7 @@
             // 
             // txtSearch
             // 
-            this.txtSearch.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.txtSearch.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.txtSearch.Location = new System.Drawing.Point(170, 25);
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(350, 25);
@@ -214,7 +202,7 @@
             // 
             this.lblType.AutoSize = true;
             this.lblType.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
-            this.lblType.Location = new System.Drawing.Point(530, 28);
+            this.lblType.Location = new System.Drawing.Point(535, 28);
             this.lblType.Name = "lblType";
             this.lblType.Size = new System.Drawing.Size(39, 17);
             this.lblType.TabIndex = 1;
@@ -224,7 +212,7 @@
             // 
             this.lblSearch.AutoSize = true;
             this.lblSearch.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
-            this.lblSearch.Location = new System.Drawing.Point(15, 28);
+            this.lblSearch.Location = new System.Drawing.Point(17, 28);
             this.lblSearch.Name = "lblSearch";
             this.lblSearch.Size = new System.Drawing.Size(146, 17);
             this.lblSearch.TabIndex = 0;
@@ -242,7 +230,7 @@
             this.panelButtons.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelButtons.Location = new System.Drawing.Point(0, 160);
             this.panelButtons.Name = "panelButtons";
-            this.panelButtons.Size = new System.Drawing.Size(1400, 60);
+            this.panelButtons.Size = new System.Drawing.Size(1200, 60);
             this.panelButtons.TabIndex = 2;
             // 
             // btnViewDetail
@@ -321,8 +309,8 @@
             this.panelGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelGrid.Location = new System.Drawing.Point(0, 220);
             this.panelGrid.Name = "panelGrid";
-            this.panelGrid.Padding = new System.Windows.Forms.Padding(10);
-            this.panelGrid.Size = new System.Drawing.Size(1400, 490);
+            this.panelGrid.Padding = new System.Windows.Forms.Padding(20);
+            this.panelGrid.Size = new System.Drawing.Size(1200, 440);
             this.panelGrid.TabIndex = 3;
             // 
             // dgvPromotions
@@ -331,8 +319,10 @@
             this.dgvPromotions.AllowUserToDeleteRows = false;
             this.dgvPromotions.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvPromotions.BackgroundColor = System.Drawing.Color.White;
+            this.dgvPromotions.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgvPromotions.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(126)))), ((int)(((byte)(34)))));
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
             dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
@@ -352,20 +342,21 @@
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F);
             dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(156)))), ((int)(((byte)(18)))));
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(211)))), ((int)(((byte)(233)))), ((int)(((byte)(252)))));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvPromotions.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvPromotions.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvPromotions.EnableHeadersVisualStyles = false;
-            this.dgvPromotions.Location = new System.Drawing.Point(10, 10);
+            this.dgvPromotions.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
+            this.dgvPromotions.Location = new System.Drawing.Point(20, 20);
             this.dgvPromotions.MultiSelect = false;
             this.dgvPromotions.Name = "dgvPromotions";
             this.dgvPromotions.ReadOnly = true;
             this.dgvPromotions.RowHeadersVisible = false;
-            this.dgvPromotions.RowTemplate.Height = 35;
+            this.dgvPromotions.RowTemplate.Height = 40;
             this.dgvPromotions.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvPromotions.Size = new System.Drawing.Size(1380, 470);
+            this.dgvPromotions.Size = new System.Drawing.Size(1160, 400);
             this.dgvPromotions.TabIndex = 0;
             this.dgvPromotions.SelectionChanged += new System.EventHandler(this.dgvPromotions_SelectionChanged);
             // 
@@ -431,9 +422,9 @@
             this.panelBottom.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelBottom.Controls.Add(this.lblStatus);
             this.panelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelBottom.Location = new System.Drawing.Point(0, 710);
+            this.panelBottom.Location = new System.Drawing.Point(0, 660);
             this.panelBottom.Name = "panelBottom";
-            this.panelBottom.Size = new System.Drawing.Size(1400, 40);
+            this.panelBottom.Size = new System.Drawing.Size(1200, 40);
             this.panelBottom.TabIndex = 4;
             // 
             // lblStatus
@@ -450,7 +441,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1400, 750);
+            this.ClientSize = new System.Drawing.Size(1200, 700);
             this.Controls.Add(this.panelGrid);
             this.Controls.Add(this.panelBottom);
             this.Controls.Add(this.panelButtons);
@@ -471,7 +462,6 @@
             this.panelBottom.ResumeLayout(false);
             this.panelBottom.PerformLayout();
             this.ResumeLayout(false);
-
         }
 
         #endregion

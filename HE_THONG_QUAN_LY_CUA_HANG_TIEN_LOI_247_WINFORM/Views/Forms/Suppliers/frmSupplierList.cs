@@ -21,8 +21,29 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
         {
             InitializeComponent();
             _context = new AppDbContext();
+            CustomizeInterface();
         }
+        private void CustomizeInterface()
+        {
+            // Style GridView
+            dgvSuppliers.BorderStyle = BorderStyle.None;
+            dgvSuppliers.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dgvSuppliers.GridColor = Color.FromArgb(230, 230, 230);
+            dgvSuppliers.RowHeadersVisible = false;
+            dgvSuppliers.EnableHeadersVisualStyles = false;
+            dgvSuppliers.ColumnHeadersHeight = 40;
+            dgvSuppliers.RowTemplate.Height = 40;
 
+            dgvSuppliers.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(41, 128, 185); // Xanh Dương
+            dgvSuppliers.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgvSuppliers.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            dgvSuppliers.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+
+            dgvSuppliers.DefaultCellStyle.SelectionBackColor = Color.FromArgb(211, 233, 252); // Xanh Nhạt
+            dgvSuppliers.DefaultCellStyle.SelectionForeColor = Color.Black;
+            dgvSuppliers.DefaultCellStyle.Font = new Font("Segoe UI", 10F);
+            dgvSuppliers.DefaultCellStyle.Padding = new Padding(10, 0, 0, 0);
+        }
         private void frmSupplierList_Load(object sender, EventArgs e)
         {
             try
