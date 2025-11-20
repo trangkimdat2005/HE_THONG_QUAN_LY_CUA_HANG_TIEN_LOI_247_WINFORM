@@ -29,12 +29,9 @@
             this.lblStartDate = new System.Windows.Forms.Label();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.btnSearch = new System.Windows.Forms.Button();
-            this.cmbType = new System.Windows.Forms.ComboBox();
             this.txtSearch = new System.Windows.Forms.TextBox();
-            this.lblType = new System.Windows.Forms.Label();
             this.lblSearch = new System.Windows.Forms.Label();
             this.panelButtons = new System.Windows.Forms.Panel();
-            this.btnViewDetail = new System.Windows.Forms.Button();
             this.btnExport = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
@@ -75,7 +72,7 @@
             this.lblTitle.ForeColor = System.Drawing.Color.White;
             this.lblTitle.Location = new System.Drawing.Point(12, 14);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(486, 32);
+            this.lblTitle.Size = new System.Drawing.Size(474, 32);
             this.lblTitle.TabIndex = 0;
             this.lblTitle.Text = "QUẢN LÝ CHƯƠNG TRÌNH KHUYẾN MÃI";
             // 
@@ -90,9 +87,7 @@
             this.panelSearch.Controls.Add(this.lblStartDate);
             this.panelSearch.Controls.Add(this.btnRefresh);
             this.panelSearch.Controls.Add(this.btnSearch);
-            this.panelSearch.Controls.Add(this.cmbType);
             this.panelSearch.Controls.Add(this.txtSearch);
-            this.panelSearch.Controls.Add(this.lblType);
             this.panelSearch.Controls.Add(this.lblSearch);
             this.panelSearch.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelSearch.Location = new System.Drawing.Point(0, 60);
@@ -138,7 +133,7 @@
             this.lblEndDate.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
             this.lblEndDate.Location = new System.Drawing.Point(460, 64);
             this.lblEndDate.Name = "lblEndDate";
-            this.lblEndDate.Size = new System.Drawing.Size(70, 17);
+            this.lblEndDate.Size = new System.Drawing.Size(71, 17);
             this.lblEndDate.TabIndex = 7;
             this.lblEndDate.Text = "Đến ngày:";
             // 
@@ -148,7 +143,7 @@
             this.lblStartDate.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
             this.lblStartDate.Location = new System.Drawing.Point(190, 64);
             this.lblStartDate.Name = "lblStartDate";
-            this.lblStartDate.Size = new System.Drawing.Size(64, 17);
+            this.lblStartDate.Size = new System.Drawing.Size(63, 17);
             this.lblStartDate.TabIndex = 6;
             this.lblStartDate.Text = "Từ ngày:";
             // 
@@ -180,16 +175,6 @@
             this.btnSearch.UseVisualStyleBackColor = false;
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
-            // cmbType
-            // 
-            this.cmbType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbType.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.cmbType.FormattingEnabled = true;
-            this.cmbType.Location = new System.Drawing.Point(580, 25);
-            this.cmbType.Name = "cmbType";
-            this.cmbType.Size = new System.Drawing.Size(250, 25);
-            this.cmbType.TabIndex = 3;
-            // 
             // txtSearch
             // 
             this.txtSearch.Font = new System.Drawing.Font("Segoe UI", 10F);
@@ -198,23 +183,13 @@
             this.txtSearch.Size = new System.Drawing.Size(350, 25);
             this.txtSearch.TabIndex = 2;
             // 
-            // lblType
-            // 
-            this.lblType.AutoSize = true;
-            this.lblType.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
-            this.lblType.Location = new System.Drawing.Point(535, 28);
-            this.lblType.Name = "lblType";
-            this.lblType.Size = new System.Drawing.Size(39, 17);
-            this.lblType.TabIndex = 1;
-            this.lblType.Text = "Loại:";
-            // 
             // lblSearch
             // 
             this.lblSearch.AutoSize = true;
             this.lblSearch.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
             this.lblSearch.Location = new System.Drawing.Point(17, 28);
             this.lblSearch.Name = "lblSearch";
-            this.lblSearch.Size = new System.Drawing.Size(146, 17);
+            this.lblSearch.Size = new System.Drawing.Size(161, 17);
             this.lblSearch.TabIndex = 0;
             this.lblSearch.Text = "Tên chương trình/Mô tả:";
             // 
@@ -222,7 +197,6 @@
             // 
             this.panelButtons.BackColor = System.Drawing.Color.White;
             this.panelButtons.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelButtons.Controls.Add(this.btnViewDetail);
             this.panelButtons.Controls.Add(this.btnExport);
             this.panelButtons.Controls.Add(this.btnDelete);
             this.panelButtons.Controls.Add(this.btnEdit);
@@ -232,20 +206,6 @@
             this.panelButtons.Name = "panelButtons";
             this.panelButtons.Size = new System.Drawing.Size(1200, 60);
             this.panelButtons.TabIndex = 2;
-            // 
-            // btnViewDetail
-            // 
-            this.btnViewDetail.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(152)))), ((int)(((byte)(219)))));
-            this.btnViewDetail.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnViewDetail.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            this.btnViewDetail.ForeColor = System.Drawing.Color.White;
-            this.btnViewDetail.Location = new System.Drawing.Point(520, 10);
-            this.btnViewDetail.Name = "btnViewDetail";
-            this.btnViewDetail.Size = new System.Drawing.Size(120, 40);
-            this.btnViewDetail.TabIndex = 4;
-            this.btnViewDetail.Text = "Xem chi tiết";
-            this.btnViewDetail.UseVisualStyleBackColor = false;
-            this.btnViewDetail.Click += new System.EventHandler(this.btnViewDetail_Click);
             // 
             // btnExport
             // 
@@ -379,7 +339,6 @@
             // colType
             // 
             this.colType.DataPropertyName = "Loai";
-            this.colType.FillWeight = 100F;
             this.colType.HeaderText = "Loại";
             this.colType.Name = "colType";
             this.colType.ReadOnly = true;
@@ -462,6 +421,7 @@
             this.panelBottom.ResumeLayout(false);
             this.panelBottom.PerformLayout();
             this.ResumeLayout(false);
+
         }
 
         #endregion
@@ -470,9 +430,7 @@
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.Panel panelSearch;
         private System.Windows.Forms.Button btnSearch;
-        private System.Windows.Forms.ComboBox cmbType;
         private System.Windows.Forms.TextBox txtSearch;
-        private System.Windows.Forms.Label lblType;
         private System.Windows.Forms.Label lblSearch;
         private System.Windows.Forms.Panel panelButtons;
         private System.Windows.Forms.Button btnDelete;
@@ -494,7 +452,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colEndDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colStatus;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDescription;
-        private System.Windows.Forms.Button btnViewDetail;
         private System.Windows.Forms.Panel panelBottom;
         private System.Windows.Forms.Label lblStatus;
     }
