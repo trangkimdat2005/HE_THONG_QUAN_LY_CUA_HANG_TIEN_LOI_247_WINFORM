@@ -199,7 +199,7 @@
             this.cboSupplier.Name = "cboSupplier";
             this.cboSupplier.Size = new System.Drawing.Size(370, 25);
             this.cboSupplier.TabIndex = 1;
-            this.cboSupplier.SelectedIndexChanged += new System.EventHandler(this.cboSupplier_SelectedIndexChanged);
+            //this.cboSupplier.SelectedIndexChanged += new System.EventHandler(this.cboSupplier_SelectedIndexChanged);
             // 
             // label1
             // 

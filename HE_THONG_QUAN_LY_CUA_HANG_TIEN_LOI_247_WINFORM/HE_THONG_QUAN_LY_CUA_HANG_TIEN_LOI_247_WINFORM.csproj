@@ -492,6 +492,7 @@
     <EmbeddedResource Include="Views\forms\Suppliers\frmTransactionHistory.resx">
       <DependentUpon>frmTransactionHistory.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="content\net40\App.config" />
     <None Include="DTO\InventoryDetailDto_README.md" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

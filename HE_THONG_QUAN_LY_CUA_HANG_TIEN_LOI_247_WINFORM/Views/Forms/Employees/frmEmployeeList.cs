@@ -267,5 +267,10 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
         {
             ExportToExcel(dgvEmployees);
         }
+
+        private void dgvEmployees_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

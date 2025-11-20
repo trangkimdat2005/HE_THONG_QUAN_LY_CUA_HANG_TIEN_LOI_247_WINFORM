@@ -48,13 +48,6 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Services
                     e.Handled = true;
                     return;
                 }
-
-                // Limit to 10 digits
-                if (txt.Text.Length >= 10)
-                {
-                    e.Handled = true;
-                    return;
-                }
             }
         }
 
