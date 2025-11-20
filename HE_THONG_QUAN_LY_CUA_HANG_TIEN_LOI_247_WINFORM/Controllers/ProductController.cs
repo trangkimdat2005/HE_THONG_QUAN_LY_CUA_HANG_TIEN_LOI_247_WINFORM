@@ -1,4 +1,4 @@
-﻿using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services; // Gọi Service
+﻿using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services;
 using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.DTO;
 using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Models;
 using System;
@@ -9,7 +9,6 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Controllers
 {
     public class ProductController : IDisposable
     {
-        // Khai báo Service thay vì DbContext
         private readonly ProductService _service;
 
         public ProductController()
@@ -19,16 +18,14 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Controllers
 
         #region Load Data for ComboBox
 
-        public dynamic GetAllGoods()
+        public object GetAllGoods()
         {
-            // Service trả về List<SanPham>, ta select lấy id và ten để bind vào ComboBox
             var data = _service.GetAllGoods();
             return data.Select(x => new { id = x.id, ten = x.ten }).ToList();
         }
 
-        public dynamic GetAllUnits()
+        public object GetAllUnits()
         {
-            // Service trả về List<DonViDoLuong>
             var data = _service.GetAllUnits();
             return data.Select(x => new { id = x.id, ten = x.ten }).ToList();
         }
@@ -39,7 +36,6 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Controllers
 
         public List<ProductDetailDto> FilterProducts(string keyword, string brandId, string categoryId)
         {
-            // Gọi thẳng service, mọi logic lọc đã nằm bên kia
             return _service.FilterProducts(keyword, brandId, categoryId);
         }
 
@@ -54,15 +50,22 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Controllers
 
         public (bool success, string message, SanPhamDonVi result) AddProductUnit(SanPhamDonVi model)
         {
-            // Validation cơ bản nếu cần, sau đó đẩy sang Service
-            if (model.giaBan < 0) return (false, "Giá bán không được âm!", null);
+            if (model.giaBan < 0)
+                return (false, "Giá bán không được âm!", null);
+
+            if (model.heSoQuyDoi <= 0)
+                return (false, "Hệ số quy đổi phải lớn hơn 0!", null);
 
             return _service.AddProductUnit(model);
         }
 
         public (bool success, string message) UpdateProductUnit(SanPhamDonVi model)
         {
-            if (model.giaBan < 0) return (false, "Giá bán không được âm!");
+            if (model.giaBan < 0)
+                return (false, "Giá bán không được âm!");
+
+            if (model.heSoQuyDoi <= 0)
+                return (false, "Hệ số quy đổi phải lớn hơn 0!");
 
             return _service.UpdateProductUnit(model);
         }

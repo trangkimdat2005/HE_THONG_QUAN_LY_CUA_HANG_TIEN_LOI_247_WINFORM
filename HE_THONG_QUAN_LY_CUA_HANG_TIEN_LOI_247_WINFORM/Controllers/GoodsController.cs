@@ -1,4 +1,4 @@
-using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services;
+﻿using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services;
 using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.DTO;
 using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Models;
 using System;
@@ -25,7 +25,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Controllers
             }
             catch (Exception ex)
             {
-                throw new Exception($"Controller - L?i l?y danh s�ch: {ex.Message}", ex);
+                throw new Exception($"Controller - Lỗi lấy danh sách: {ex.Message}", ex);
             }
         }
 
@@ -34,13 +34,13 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Controllers
             try
             {
                 if (string.IsNullOrEmpty(id))
-                    throw new ArgumentException("M� h�ng h�a kh�ng ???c ?? tr?ng");
+                    throw new ArgumentException("Mã hàng hóa không được bỏ trống");
 
                 return _goodsService.GetGoodById(id);
             }
             catch (Exception ex)
             {
-                throw new Exception($"Controller - L?i l?y chi ti?t: {ex.Message}", ex);
+                throw new Exception($"Controller - Lỗi lấy chi tiết: {ex.Message}", ex);
             }
         }
 
@@ -52,7 +52,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Controllers
             }
             catch (Exception ex)
             {
-                throw new Exception($"Controller - L?i l?y danh m?c: {ex.Message}", ex);
+                throw new Exception($"Controller - Lỗi lấy danh mục: {ex.Message}", ex);
             }
         }
 
@@ -64,7 +64,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Controllers
             }
             catch (Exception ex)
             {
-                throw new Exception($"Controller - L?i l?y nh�n hi?u: {ex.Message}", ex);
+                throw new Exception($"Controller - Lỗi lấy nhãn hiệu: {ex.Message}", ex);
             }
         }
 
@@ -76,7 +76,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Controllers
             }
             catch (Exception ex)
             {
-                throw new Exception($"Controller - L?i l?y danh m?c: {ex.Message}", ex);
+                throw new Exception($"Controller - Lỗi lấy danh mục: {ex.Message}", ex);
             }
         }
 
@@ -90,19 +90,19 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Controllers
             {
 
                 if (product == null)
-                    return (false, "Th�ng tin h�ng h�a kh�ng h?p l?", null);
+                    return (false, "Thông tin hàng hóa không họp lệ", null);
 
                 if (string.IsNullOrWhiteSpace(product.ten))
-                    return (false, "T�n h�ng h�a kh�ng ???c ?? tr?ng", null);
+                    return (false, "Tên hàng hóa không được bỏ trống", null);
 
                 if (string.IsNullOrEmpty(product.nhanHieuId))
-                    return (false, "Vui l�ng ch?n nh�n hi?u", null);
+                    return (false, "Vui lòng chọn nhãn hiệu", null);
 
                 return _goodsService.AddGood(product, categoryId);
             }
             catch (Exception ex)
             {
-                return (false, $"Controller - L?i th�m: {ex.Message}", null);
+                return (false, $"Controller - Lỗi thêm: {ex.Message}", null);
             }
         }
 
@@ -111,22 +111,22 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Controllers
             try
             {
                 if (product == null)
-                    return (false, "Th�ng tin h�ng h�a kh�ng h?p l?");
+                    return (false, "Thông tin hàng hóa không hợp lệ");
 
                 if (string.IsNullOrEmpty(product.id))
-                    return (false, "M� h�ng h�a kh�ng h?p l?");
+                    return (false, "Mã hàng hóa không hợp lệ");
 
                 if (string.IsNullOrWhiteSpace(product.ten))
-                    return (false, "T�n h�ng h�a kh�ng ???c ?? tr?ng");
+                    return (false, "Tên hàng hóa không được bỏ trống");
 
                 if (string.IsNullOrEmpty(product.nhanHieuId))
-                    return (false, "Vui l�ng ch?n nh�n hi?u");
+                    return (false, "Vui lòng chọn nhãn hiệu");
 
                 return _goodsService.UpdateGood(product, categoryId);
             }
             catch (Exception ex)
             {
-                return (false, $"Controller - L?i c?p nh?t: {ex.Message}");
+                return (false, $"Controller - Lỗi cập nhật: {ex.Message}");
             }
         }
 
@@ -135,13 +135,13 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Controllers
             try
             {
                 if (string.IsNullOrEmpty(productId))
-                    return (false, "M� h�ng h�a kh�ng h?p l?");
+                    return (false, "Mã hàng hóa không hợp lệ");
 
                 return _goodsService.DeleteGood(productId);
             }
             catch (Exception ex)
             {
-                return (false, $"Controller - L?i x�a: {ex.Message}");
+                return (false, $"Controller - Lỗi xóa: {ex.Message}");
             }
         }
 
@@ -155,7 +155,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Controllers
             }
             catch (Exception ex)
             {
-                throw new Exception($"Controller - L?i sinh m�: {ex.Message}", ex);
+                throw new Exception($"Controller - Lỗi sinh mã: {ex.Message}", ex);
             }
         }
 

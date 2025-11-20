@@ -20,6 +20,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
 
         #region Get/Search Operations
 
+        // Hàm lấy chi tiết 1 sản phẩm đơn vị để hiển thị lên form edit
         public SanPhamDonVi GetProductUnitById(string id)
         {
             return _readContext.SanPhamDonVis.AsNoTracking()
@@ -30,20 +31,21 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
                 .FirstOrDefault(p => p.id == id && !p.isDelete);
         }
 
+        // -------------- PHẦN QUAN TRỌNG ĐÃ SỬA ----------------
         public List<ProductDetailDto> FilterProducts(string keyword = null, string brandId = null, string categoryId = null)
         {
             try
             {
-
+                // Khởi tạo query từ bảng trung gian SanPhamDonVi
                 var query = _readContext.SanPhamDonVis.AsNoTracking()
                     .Include(x => x.SanPham)
                     .Include(x => x.SanPham.NhanHieu)
                     .Include(x => x.SanPham.SanPhamDanhMucs.Select(dm => dm.DanhMuc))
                     .Include(x => x.DonViDoLuong)
-                    .Where(spd => !spd.isDelete && !spd.SanPham.isDelete)
+                    .Where(spd => !spd.isDelete && !spd.SanPham.isDelete) // Lọc các sản phẩm chưa bị xóa
                     .AsQueryable();
 
-                // 1. Lọc theo từ khóa (tìm theo ID hoặc tên sản phẩm)
+                // 1. Lọc theo từ khóa (tìm theo Mã SP, Tên SP hoặc Mã SPDV)
                 if (!string.IsNullOrWhiteSpace(keyword))
                 {
                     keyword = keyword.ToLower();
@@ -53,84 +55,56 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
                         spd.id.ToLower().Contains(keyword));
                 }
 
-                // 2. Lọc theo Nhãn hiệu
+                // 2. Lọc theo Nhãn hiệu (của Sản phẩm)
                 if (!string.IsNullOrEmpty(brandId))
                 {
                     query = query.Where(spd => spd.SanPham.nhanHieuId == brandId);
                 }
 
-                // 3. Lọc theo Danh mục (quan hệ n-n)
+                // 3. Lọc theo Danh mục (quan hệ n-n của Sản phẩm)
                 if (!string.IsNullOrEmpty(categoryId))
                 {
                     query = query.Where(spd => spd.SanPham.SanPhamDanhMucs.Any(dm => dm.danhMucId == categoryId && !dm.isDelete));
-                        var query = _services.GetList<SanPhamDonVi>();
-
-                        if (!string.IsNullOrWhiteSpace(keyword))
-                        {
-                            keyword = keyword.ToLower();  // Chuyển keyword về chữ thường
-
-                    query = query.Where(p => (p.sanPhamId != null && p.sanPhamId.ToLower().Contains(keyword)) ||
-                                             (p.SanPham != null && p.SanPham.ten != null && p.SanPham.ten.ToLower().Contains(keyword))).ToList();
-                }
-                if (!string.IsNullOrEmpty(brandId)) query = query.Where(p => p.SanPham.nhanHieuId == brandId).ToList();
-                if (!string.IsNullOrEmpty(categoryId))
-                {
-                    query = query.Where(p => p.SanPham.SanPhamDanhMucs.Any(spdm => spdm.danhMucId == categoryId && !spdm.isDelete)).ToList();
                 }
 
-                // 4. Map sang DTO
-                return query.Select(spd => new ProductDetailDto
+                // 4. Map sang DTO để đổ vào DataGridView
+                // Đảm bảo đúng yêu cầu: SP từ frmGoods, Đơn vị từ frmMeasurements
+                var result = query.Select(spd => new ProductDetailDto
                 {
+                    Id = spd.id,                               // ID bảng SanPhamDonVi (để thao tác sửa/xóa)
 
-                    Id = spd.id,                           // Mã SPDV
-                    SanPhamId = spd.sanPhamId,             // ID Sản phẩm
-                    DonViId = spd.donViId,                 // ID Đơn vị
-                    MaSP = spd.SanPham.id,                 // Mã SP từ frmGoods
-                    TenSanPham = spd.SanPham.ten,          // Tên SP từ frmGoods
-                    NhanHieu = spd.SanPham.NhanHieu != null ? spd.SanPham.NhanHieu.ten : "Chưa có", // Nhãn hiệu từ frmGoods
-                    
-                    // Danh mục từ frmGoods (lấy danh mục đầu tiên)
+                    // --- Thông tin từ frmGoods (Bảng SanPham) ---
+                    MaSP = spd.SanPham.id,                     // Mã Sản Phẩm
+                    TenSanPham = spd.SanPham.ten,              // Tên Sản Phẩm
+                    NhanHieu = spd.SanPham.NhanHieu != null ? spd.SanPham.NhanHieu.ten : "Chưa có",
+
+                    // Lấy danh mục đầu tiên (vì 1 SP có thể thuộc nhiều danh mục)
                     DanhMuc = spd.SanPham.SanPhamDanhMucs
-                        .Where(dm => !dm.isDelete)
-                        .Select(dm => dm.DanhMuc.ten)
-                        .FirstOrDefault() ?? "Chưa phân loại",
-                    
-                    DonVi = spd.DonViDoLuong.ten,          // Đơn vị từ frmMeasurements
-                    HeSoQuyDoi = spd.heSoQuyDoi,           // Hệ số quy đổi
-                    GiaBan = spd.giaBan,                   // Giá bán từ SanPhamDonVi
-                    TrangThai = spd.trangThai,             // Trạng thái từ SanPhamDonVi
-                    MoTa = spd.SanPham.moTa                // Mô tả từ SanPham
+                                .Where(dm => !dm.isDelete)
+                                .Select(dm => dm.DanhMuc.ten)
+                                .FirstOrDefault() ?? "Chưa phân loại",
+
+                    // --- Thông tin từ frmMeasurements (Bảng DonViDoLuong) ---
+                    DonVi = spd.DonViDoLuong.ten,              // Tên Đơn vị tính
+                    DonViId = spd.donViId,                     // ID Đơn vị (ẩn nếu cần)
+
+                    // --- Thông tin riêng của bảng SanPhamDonVi ---
+                    GiaBan = spd.giaBan,                       // Giá bán
+                    TrangThai = spd.trangThai,                 // Trạng thái (VD: Đang kinh doanh)
+                    HeSoQuyDoi = spd.heSoQuyDoi
                 })
-                .OrderBy(x => x.MaSP)
+                .OrderBy(x => x.TenSanPham) // Sắp xếp theo tên
                 .ThenBy(x => x.DonVi)
                 .ToList();
+
+                return result;
             }
             catch (Exception ex)
             {
                 throw new Exception($"Lỗi lọc sản phẩm: {ex.Message}", ex);
-                    p.sanPhamId,
-                    p.SanPham.ten,
-                    NhanHieuTen = p.SanPham.NhanHieu.ten,
-                    DonViTen = p.DonViDoLuong.ten,
-                    p.SanPham.moTa,
-                    p.isDelete,
-                    GiaInfo = p.giaBan,
-                    DanhMucTen = p.SanPham.SanPhamDanhMucs.Where(dm => !dm.isDelete).Select(dm => dm.DanhMuc.ten).FirstOrDefault()
-                }).ToList();
-
-                return result.Select(x => new ProductDetailDto
-                {
-                    Id = x.sanPhamId,
-                    Ten = x.ten,
-                    NhanHieu = x.NhanHieuTen,
-                    DanhMuc = x.DanhMucTen ?? "Chưa phân loại",
-                    MoTa = x.moTa,
-                    GiaBan = x.GiaInfo,
-                    DonVi =  x.DonViTen,
-                    TrangThai = x.isDelete ? "Ngừng kinh doanh" : "Đang kinh doanh"
-                }).OrderBy(x => x.Id).Take(1000).ToList();
             }
         }
+        // ------------------------------------------------------
 
         public List<SanPham> GetAllGoods(string keyword = null, string brandId = null, string categoryId = null)
         {
@@ -190,29 +164,20 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
             {
                 try
                 {
-                    // Kiểm tra sản phẩm có tồn tại không
                     var good = db.SanPhams.FirstOrDefault(x => x.id == model.sanPhamId && !x.isDelete);
-                    if (good == null)
-                        return (false, "Hàng hóa không tồn tại!", null);
+                    if (good == null) return (false, "Hàng hóa không tồn tại!", null);
 
-                    // Kiểm tra đơn vị có tồn tại không
                     var unit = db.DonViDoLuongs.FirstOrDefault(x => x.id == model.donViId && !x.isDelete);
-                    if (unit == null)
-                        return (false, "Đơn vị không tồn tại!", null);
+                    if (unit == null) return (false, "Đơn vị không tồn tại!", null);
 
-                    // Kiểm tra trùng: cùng sản phẩm + cùng đơn vị
                     bool exists = db.SanPhamDonVis.Any(x => x.sanPhamId == model.sanPhamId &&
-                                                          x.donViId == model.donViId &&
-                                                          !x.isDelete);
-                    if (exists)
-                        return (false, "Sản phẩm với đơn vị này đã tồn tại!", null);
+                                                            x.donViId == model.donViId &&
+                                                            !x.isDelete);
+                    if (exists) return (false, "Sản phẩm với đơn vị này đã tồn tại!", null);
 
-                    // Tạo ID mới
                     model.id = _services.GenerateNewId<SanPhamDonVi>("SPDV", 6);
                     model.isDelete = false;
-                    
-                    if (string.IsNullOrEmpty(model.trangThai))
-                        model.trangThai = "Available";
+                    if (string.IsNullOrEmpty(model.trangThai)) model.trangThai = "Đang kinh doanh";
 
                     db.SanPhamDonVis.Add(model);
                     db.SaveChanges();
@@ -233,18 +198,15 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
                 try
                 {
                     var item = db.SanPhamDonVis.FirstOrDefault(x => x.id == model.id);
-                    if (item == null)
-                        return (false, "Dữ liệu không tồn tại!");
+                    if (item == null) return (false, "Dữ liệu không tồn tại!");
 
-                    // Kiểm tra trùng khi sửa (trừ chính nó)
                     bool exists = db.SanPhamDonVis.Any(x => x.sanPhamId == model.sanPhamId &&
-                                                          x.donViId == model.donViId &&
-                                                          x.id != model.id &&
-                                                          !x.isDelete);
-                    if (exists)
-                        return (false, "Đơn vị này đã có cho sản phẩm!");
+                                                            x.donViId == model.donViId &&
+                                                            x.id != model.id &&
+                                                            !x.isDelete);
+                    if (exists) return (false, "Đơn vị này đã có cho sản phẩm!");
 
-                    // Cập nhật
+                    // Cập nhật các trường
                     item.sanPhamId = model.sanPhamId;
                     item.donViId = model.donViId;
                     item.giaBan = model.giaBan;
@@ -270,15 +232,11 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
                     try
                     {
                         var item = db.SanPhamDonVis.FirstOrDefault(x => x.id == id);
-                        if (item == null)
-                            return (false, "Không tìm thấy dữ liệu!");
+                        if (item == null) return (false, "Không tìm thấy dữ liệu!");
 
-                        // Kiểm tra ràng buộc: Đã phát sinh giao dịch chưa?
                         bool hasOrders = db.ChiTietHoaDons.Any(ct => ct.sanPhamDonViId == id && !ct.isDelete);
-                        if (hasOrders)
-                            return (false, "Không thể xóa! Sản phẩm này đã phát sinh giao dịch.");
+                        if (hasOrders) return (false, "Không thể xóa! Sản phẩm này đã phát sinh giao dịch.");
 
-                        // Xóa mềm
                         item.isDelete = true;
                         db.SaveChanges();
                         tran.Commit();
