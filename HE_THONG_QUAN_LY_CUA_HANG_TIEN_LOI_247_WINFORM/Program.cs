@@ -11,7 +11,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM
     {
         /// <summary>
         /// The main entry point for the application.
-        /// </summary>
+        /// </summary>hsgdjasvbxa
         [STAThread]
         static void Main()
         {
