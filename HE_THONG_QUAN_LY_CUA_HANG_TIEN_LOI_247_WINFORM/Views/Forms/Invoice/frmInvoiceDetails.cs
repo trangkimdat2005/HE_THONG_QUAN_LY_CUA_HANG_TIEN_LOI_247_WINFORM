@@ -24,10 +24,11 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
         private CustomerController _customerController;
         private ProductController _productController;
         private CategoryController _categoryController;
-        
+
         private string _invoiceId;
         private List<ChiTietHoaDon> _invoiceDetails;
         private bool _isEditMode = false;
+        private readonly IQuanLyServices _quanLyServices = new QuanLyServices();
 
         // store applied promo ids and computed promo value per row
         private Dictionary<int, List<string>> _appliedPromosPerRow = new Dictionary<int, List<string>>();
@@ -42,6 +43,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
             _category_controller = new CategoryController();
             _invoiceDetails = new List<ChiTietHoaDon>();
             CustomizeInterface();
+            _quanLyServices = new QuanLyServices();
         }
 
         // Note: small naming fixes to match original fields
@@ -52,30 +54,32 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
         {
             // Style cho bảng Chi tiết hóa đơn (Bên trái)
             StyleGrid(dgvInvoiceDetails);
-            dgvInvoiceDetails.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(41,128,185); // Xanh Dương
+            dgvInvoiceDetails.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(41, 128, 185); // Xanh Dương
 
             // Style cho bảng Sản phẩm (Bên phải)
             StyleGrid(dgvProducts);
-            dgvProducts.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(39,174,96); // Xanh Lá
+            dgvProducts.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(39, 174, 96); // Xanh Lá
+
+
         }
         private void StyleGrid(DataGridView dgv)
         {
             dgv.BorderStyle = BorderStyle.None;
             dgv.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
-            dgv.GridColor = Color.FromArgb(230,230,230);
+            dgv.GridColor = Color.FromArgb(230, 230, 230);
             dgv.RowHeadersVisible = false;
             dgv.EnableHeadersVisualStyles = false;
-            dgv.ColumnHeadersHeight =40;
-            dgv.RowTemplate.Height =40;
+            dgv.ColumnHeadersHeight = 40;
+            dgv.RowTemplate.Height = 40;
 
             dgv.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-            dgv.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI",10F, FontStyle.Bold);
+            dgv.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             dgv.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
 
-            dgv.DefaultCellStyle.SelectionBackColor = Color.FromArgb(211,233,252);
+            dgv.DefaultCellStyle.SelectionBackColor = Color.FromArgb(211, 233, 252);
             dgv.DefaultCellStyle.SelectionForeColor = Color.Black;
-            dgv.DefaultCellStyle.Font = new Font("Segoe UI",10F);
-            dgv.DefaultCellStyle.Padding = new Padding(5,0,0,0);
+            dgv.DefaultCellStyle.Font = new Font("Segoe UI", 10F);
+            dgv.DefaultCellStyle.Padding = new Padding(5, 0, 0, 0);
         }
         public frmInvoiceDetails(string invoiceId) : this()
         {
@@ -101,7 +105,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
             // Setup DataGridViews
             dgvInvoiceDetails.AutoGenerateColumns = false;
             dgvProducts.AutoGenerateColumns = false;
-            
+
             // Disable payment button initially
             btnPayment.Enabled = false;
         }
@@ -111,19 +115,19 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
             try
             {
                 var customers = _customerController.GetAllCustomers();
-                
+
                 cmbCustomer.DataSource = customers;
                 cmbCustomer.DisplayMember = "hoTen";
                 cmbCustomer.ValueMember = "id";
-                
-                if (customers.Count >0)
+
+                if (customers.Count > 0)
                 {
-                    cmbCustomer.SelectedIndex =0;
+                    cmbCustomer.SelectedIndex = 0;
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Lỗi khi tải danh sách khách hàng: {ex.Message}", "Lỗi", 
+                MessageBox.Show($"Lỗi khi tải danh sách khách hàng: {ex.Message}", "Lỗi",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -133,10 +137,10 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
             try
             {
                 var categories = _categoryController.GetAllCategories();
-                
+
                 var categoryList = new List<ComboItem>();
                 categoryList.Add(new ComboItem { id = "", ten = "Tất cả" });
-                
+
                 foreach (var cat in categories)
                 {
                     string cid = null;
@@ -148,15 +152,15 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
 
                     categoryList.Add(new ComboItem { id = cid ?? "", ten = cten ?? "" });
                 }
-                
+
                 cmbCategory.DataSource = categoryList;
                 cmbCategory.DisplayMember = "ten";
                 cmbCategory.ValueMember = "id";
-                cmbCategory.SelectedIndex =0;
+                cmbCategory.SelectedIndex = 0;
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Lỗi khi tải danh mục: {ex.Message}", "Lỗi", 
+                MessageBox.Show($"Lỗi khi tải danh mục: {ex.Message}", "Lỗi",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -166,7 +170,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
             try
             {
                 var products = _productController.FilterProducts(keyword, null, categoryId);
-                
+
                 dgvProducts.Rows.Clear();
                 foreach (var product in products)
                 {
@@ -182,7 +186,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Lỗi khi tải sản phẩm: {ex.Message}", "Lỗi", 
+                MessageBox.Show($"Lỗi khi tải sản phẩm: {ex.Message}", "Lỗi",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -194,7 +198,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
                 var invoice = _invoiceController.GetInvoiceById(_invoiceId);
                 if (invoice == null)
                 {
-                    MessageBox.Show("Không tìm thấy hóa đơn!", "Lỗi", 
+                    MessageBox.Show("Không tìm thấy hóa đơn!", "Lỗi",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                     this.Close();
                     return;
@@ -217,7 +221,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Lỗi khi tải hóa đơn: {ex.Message}", "Lỗi", 
+                MessageBox.Show($"Lỗi khi tải hóa đơn: {ex.Message}", "Lỗi",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -264,7 +268,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
                         null // promo cell will be populated to combobox later when user clicks
                     );
 
-                    int rowIndex = dgvInvoiceDetails.Rows.Count -1;
+                    int rowIndex = dgvInvoiceDetails.Rows.Count - 1;
                     // populate promo options for this row
                     if (!string.IsNullOrEmpty(sanPhamDonViId))
                         PopulatePromoComboForRow(rowIndex, sanPhamDonViId);
@@ -280,9 +284,9 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
                 var productName = dgvProducts.CurrentRow.Cells["colProductName"].Value?.ToString();
                 var unitName = dgvProducts.CurrentRow.Cells["colUnitProduct"].Value?.ToString();
                 var priceStr = dgvProducts.CurrentRow.Cells["colPrice"].Value?.ToString();
-                
+
                 if (string.IsNullOrEmpty(productName)) return;
-                
+
                 var price = decimal.Parse(priceStr.Replace(" đ", "").Replace(",", ""));
 
                 // resolve sanPhamDonViId
@@ -298,7 +302,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
 
                 // check existing
                 var existingRow = -1;
-                for (int i =0; i < dgvInvoiceDetails.Rows.Count; i++)
+                for (int i = 0; i < dgvInvoiceDetails.Rows.Count; i++)
                 {
                     if (dgvInvoiceDetails.Rows[i].Cells["colProduct"].Value?.ToString() == productName
                         && dgvInvoiceDetails.Rows[i].Cells["colUnitInvoice"].Value?.ToString() == unitName)
@@ -307,11 +311,11 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
                     }
                 }
 
-                if (existingRow >=0)
+                if (existingRow >= 0)
                 {
                     var currentQty = int.Parse(dgvInvoiceDetails.Rows[existingRow].Cells["colQuantity"].Value.ToString());
-                    dgvInvoiceDetails.Rows[existingRow].Cells["colQuantity"].Value = currentQty +1;
-                    var newTotal = (currentQty +1) * price;
+                    dgvInvoiceDetails.Rows[existingRow].Cells["colQuantity"].Value = currentQty + 1;
+                    var newTotal = (currentQty + 1) * price;
                     dgvInvoiceDetails.Rows[existingRow].Cells["colTotal"].Value = newTotal.ToString("N0") + " đ";
                 }
                 else
@@ -326,7 +330,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
                         null
                     );
 
-                    int newRow = dgvInvoiceDetails.Rows.Count -1;
+                    int newRow = dgvInvoiceDetails.Rows.Count - 1;
                     if (!string.IsNullOrEmpty(sanPhamDonViId))
                         PopulatePromoComboForRow(newRow, sanPhamDonViId);
                 }
@@ -346,14 +350,14 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
 
         private void dgvInvoiceDetails_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >=0 && e.ColumnIndex == dgvInvoiceDetails.Columns["colQuantity"].Index)
+            if (e.RowIndex >= 0 && e.ColumnIndex == dgvInvoiceDetails.Columns["colQuantity"].Index)
             {
                 UpdateRowTotal(e.RowIndex);
                 CalculateTotal();
             }
 
             // handle promo selection change if combobox cell changed
-            if (e.RowIndex >=0 && dgvInvoiceDetails.Columns[e.ColumnIndex].Name == "colPromo")
+            if (e.RowIndex >= 0 && dgvInvoiceDetails.Columns[e.ColumnIndex].Name == "colPromo")
             {
                 try
                 {
@@ -365,7 +369,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
                         if (string.IsNullOrEmpty(selectedId))
                         {
                             if (_appliedPromosPerRow.ContainsKey(e.RowIndex)) _appliedPromosPerRow.Remove(e.RowIndex);
-                            _promoValuePerRow[e.RowIndex] =0;
+                            _promoValuePerRow[e.RowIndex] = 0;
                             UpdateRowTotal(e.RowIndex);
                             CalculateTotal();
                             return;
@@ -378,13 +382,13 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
                             {
                                 var unitPrice = decimal.Parse(row.Cells["colUnitPrice"].Value.ToString().Replace(" đ", "").Replace(",", ""));
                                 var qty = int.Parse(row.Cells["colQuantity"].Value?.ToString() ?? "0");
-                                decimal applied =0;
-                                if (mk.giaTri >0 && mk.giaTri <1) applied = unitPrice * qty * mk.giaTri; else applied = mk.giaTri;
+                                decimal applied = 0;
+                                if (mk.giaTri > 0 && mk.giaTri < 1) applied = unitPrice * qty * mk.giaTri; else applied = mk.giaTri;
                                 _promoValuePerRow[e.RowIndex] = applied;
                                 _appliedPromosPerRow[e.RowIndex] = new List<string> { mk.code };
 
                                 var newTotal = (unitPrice * qty) - applied;
-                                if (newTotal <0) newTotal =0;
+                                if (newTotal < 0) newTotal = 0;
                                 row.Cells["colTotal"].Value = newTotal.ToString("N0") + " đ";
                                 CalculateTotal();
                             }
@@ -403,12 +407,12 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
                 var quantity = int.Parse(row.Cells["colQuantity"].Value?.ToString() ?? "0");
                 var priceStr = row.Cells["colUnitPrice"].Value?.ToString() ?? "0";
                 var price = decimal.Parse(priceStr.Replace(" đ", "").Replace(",", ""));
-                
-                decimal promo =0;
+
+                decimal promo = 0;
                 if (_promoValuePerRow.TryGetValue(rowIndex, out decimal pv)) promo = pv;
 
                 var total = quantity * price - promo;
-                if (total <0) total =0;
+                if (total < 0) total = 0;
                 row.Cells["colTotal"].Value = total.ToString("N0") + " đ";
             }
             catch { }
@@ -416,8 +420,8 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
 
         private void CalculateTotal()
         {
-            decimal subtotal =0;
-            
+            decimal subtotal = 0;
+
             foreach (DataGridViewRow row in dgvInvoiceDetails.Rows)
             {
                 if (row.Cells["colTotal"].Value != null)
@@ -440,7 +444,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
             lblDiscountValue.Text = discount.ToString("N0") + " đ";
             lblTotal.Text = total.ToString("N0") + " đ";
 
-            btnPayment.Enabled = dgvInvoiceDetails.Rows.Count >0;
+            btnPayment.Enabled = dgvInvoiceDetails.Rows.Count > 0;
         }
 
         private void btnApplyDiscount_Click(object sender, EventArgs e)
@@ -464,7 +468,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            var result = MessageBox.Show("Bạn có chắc chắn muốn hủy?", "Xác nhận", 
+            var result = MessageBox.Show("Bạn có chắc chắn muốn hủy?", "Xác nhận",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (result == DialogResult.Yes)
@@ -483,96 +487,385 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
         {
             try
             {
-                if (cmbCustomer.SelectedValue == null)
+                if (dgvInvoiceDetails.Rows.Count == 0)
                 {
-                    MessageBox.Show("Vui lòng chọn khách hàng!", "Thông báo", 
-                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Hóa đơn chưa có sản phẩm", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
-                if (dgvInvoiceDetails.Rows.Count ==0)
+                // Calculate total from UI (already considers discount)
+                var totalText = lblTotal.Text.Replace(" đ", "").Replace(",", "").Trim();
+                if (!decimal.TryParse(totalText, out decimal totalAmount))
                 {
-                    MessageBox.Show("Vui lòng thêm sản phẩm vào hóa đơn!", "Thông báo", 
-                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Không thể xác định tổng tiền", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
-                var invoice = new HoaDon
-                {
-                    khachHangId = cmbCustomer.SelectedValue.ToString(),
-                    nhanVienId = "NV001",
-                    ngayLap = DateTime.Now,
-                    trangThai = "Chờ thanh toán"
-                };
+                // Open external payment form to collect payment info
+                var paymentForm = new HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Views.forms.Invoice.frmPayment(totalAmount);
+                // set owner so child can call back to this form to perform saving
+                paymentForm.Owner = this;
+                paymentForm.ShowDialog();
+                // saving will be performed by paymentForm via SaveInvoiceFromPayment on Owner
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi xử lý thanh toán: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
 
-                var details = new List<ChiTietHoaDon>();
+        // Called by child payment form to perform DB save when user confirms payment
+        public void SaveInvoiceFromPayment(decimal customerPay, string paymentMethodName, string note)
+        {
+            try
+            {
                 using (var ctx = new AppDbContext())
                 {
-                    for (int i =0; i < dgvInvoiceDetails.Rows.Count; i++)
+                    // BẮT ĐẦU TRANSACTION để đảm bảo toàn vẹn dữ liệu
+                    using (var transaction = ctx.Database.BeginTransaction())
                     {
-                        var row = dgvInvoiceDetails.Rows[i];
-                        var sanPhamDonViId = row.Cells["colSanPhamId"].Value?.ToString();
-                        var qty = int.Parse(row.Cells["colQuantity"].Value?.ToString() ?? "0");
-                        var unitPrice = decimal.Parse(row.Cells["colUnitPrice"].Value.ToString().Replace(" đ", "").Replace(",", ""));
-                        decimal promoValue =0;
-                        if (_promoValuePerRow.TryGetValue(i, out decimal pv)) promoValue = pv;
-
-                        if (string.IsNullOrEmpty(sanPhamDonViId))
+                        try
                         {
-                            MessageBox.Show("Không xác định được mã sản phẩm cho một hàng trong hóa đơn.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            return;
+                            HoaDon invoice;
+                            bool isNewInvoice = string.IsNullOrEmpty(_invoiceId);
+
+                            // VALIDATE PAYMENT METHOD FIRST
+                            string paymentMethodId = null;
+                            var allMethods = ctx.KenhThanhToans
+                                .Where(k => !k.isDelete)
+                                .ToList();
+
+                            var method = allMethods.FirstOrDefault(k =>
+                                (k.tenKenh ?? "").IndexOf(paymentMethodName ?? "", StringComparison.CurrentCultureIgnoreCase) >= 0
+                            );
+
+                            if (method != null)
+                            {
+                                paymentMethodId = method.id;
+                            }
+                            else
+                            {
+                                var anyMethod = allMethods.FirstOrDefault();
+                                if (anyMethod != null)
+                                {
+                                    paymentMethodId = anyMethod.id;
+                                    paymentMethodName = anyMethod.tenKenh;
+                                }
+                            }
+
+                            if (string.IsNullOrEmpty(paymentMethodId))
+                            {
+                                MessageBox.Show("Không tìm thấy phương thức thanh toán trong hệ thống.\nVui lòng thêm phương thức thanh toán trước khi tạo hóa đơn.",
+                                    "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return;
+                            }
+
+                            if (isNewInvoice)
+                            {
+                                // CREATE NEW INVOICE
+                                var newInvoiceId = _quanLyServices.GenerateNewId<HoaDon>("HD", 6);
+
+                                // ✅ FIX: Kiểm tra ID có tồn tại chưa
+                                int retryCount = 0;
+                                while (ctx.HoaDons.Any(h => h.id == newInvoiceId) && retryCount < 10)
+                                {
+                                    newInvoiceId = _quanLyServices.GenerateNewId<HoaDon>("HD", 6);
+                                    retryCount++;
+                                }
+
+                                if (string.IsNullOrEmpty(newInvoiceId) || ctx.HoaDons.Any(h => h.id == newInvoiceId))
+                                {
+                                    MessageBox.Show("Không thể tạo mã hóa đơn duy nhất", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    return;
+                                }
+
+                                // ✅ FIX: Build details TRƯỚC để tính tongTien
+                                var details = BuildInvoiceDetails(newInvoiceId);
+                                if (details == null)
+                                {
+                                    transaction.Rollback();
+                                    return;
+                                }
+
+                                // ✅ FIX: Tính tongTien từ details
+                                decimal calculatedTotal = details.Sum(d => d.tongTien);
+
+                                invoice = new HoaDon()
+                                {
+                                    id = newInvoiceId,
+                                    ngayLap = DateTime.Now,
+                                    khachHangId = cmbCustomer.SelectedValue?.ToString() ?? "",
+                                    nhanVienId = _quanLyServices.GetList<NhanVien>().FirstOrDefault()?.id ?? "NV001",
+                                    isDelete = false,
+                                    trangThai = "Chưa thanh toán",
+                                    tongTien = calculatedTotal // ✅ Set tongTien từ details
+                                };
+
+                                ctx.HoaDons.Add(invoice);
+                                ctx.ChiTietHoaDons.AddRange(details);
+
+                                // ✅ FIX: Lưu invoice trước, sau đó mới lưu _invoiceId
+                                ctx.SaveChanges();
+                                _invoiceId = newInvoiceId; // Cập nhật _invoiceId sau khi lưu thành công
+                            }
+                            else
+                            {
+                                // UPDATE EXISTING INVOICE
+                                invoice = ctx.HoaDons.FirstOrDefault(h => h.id == _invoiceId && !h.isDelete);
+                                if (invoice == null)
+                                {
+                                    MessageBox.Show($"Không tìm thấy hóa đơn {_invoiceId}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    transaction.Rollback();
+                                    return;
+                                }
+
+                                if (invoice.trangThai == "Đã thanh toán")
+                                {
+                                    MessageBox.Show("Hóa đơn này đã được thanh toán rồi!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    transaction.Rollback();
+                                    return;
+                                }
+
+                                // Update invoice info
+                                invoice.khachHangId = cmbCustomer.SelectedValue?.ToString() ?? invoice.khachHangId;
+                                invoice.ngayLap = DateTime.Now;
+
+                                // Remove old details
+                                var oldDetails = ctx.ChiTietHoaDons.Where(d => d.hoaDonId == _invoiceId).ToList();
+                                ctx.ChiTietHoaDons.RemoveRange(oldDetails);
+
+                                var newDetails = BuildInvoiceDetails(_invoiceId);
+                                if (newDetails == null)
+                                {
+                                    transaction.Rollback();
+                                    return;
+                                }
+
+                                ctx.ChiTietHoaDons.AddRange(newDetails);
+                                ctx.SaveChanges();
+                            }
+
+                            // ✅ FIX: Tạo ID giao dịch unique hơn
+                            string transactionId;
+                            int maxRetry = 10;
+                            int retryCounter = 0;
+
+                            do
+                            {
+                                transactionId = "GD" + DateTime.Now.ToString("yyMMddHHmmss") + new Random().Next(1000, 9999);
+                                retryCounter++;
+                            }
+                            while (ctx.GiaoDichThanhToans.Any(g => g.id == transactionId) && retryCounter < maxRetry);
+
+                            // Create payment transaction
+                            var payment = new GiaoDichThanhToan
+                            {
+                                id = transactionId,
+                                hoaDonId = invoice.id,
+                                soTien = customerPay,
+                                ngayGD = DateTime.Now,
+                                kenhThanhToanId = paymentMethodId,
+                                moTa = string.IsNullOrEmpty(note) ? $"Thanh toán hóa đơn {invoice.id} qua {paymentMethodName}" : note,
+                                isDelete = false
+                            };
+
+                            ctx.GiaoDichThanhToans.Add(payment);
+
+                            // Update invoice status to paid
+                            invoice.trangThai = "Đã thanh toán";
+                            ctx.Entry(invoice).State = EntityState.Modified;
+
+                            ctx.SaveChanges();
+
+                            // Save promo details if any
+                            var promoDetails = BuildPromoDetails(invoice.id);
+                            if (promoDetails != null && promoDetails.Count > 0)
+                            {
+                                if (!isNewInvoice)
+                                {
+                                    var oldPromos = ctx.ChiTietHoaDonKhuyenMais.Where(p => p.hoaDonId == invoice.id).ToList();
+                                    ctx.ChiTietHoaDonKhuyenMais.RemoveRange(oldPromos);
+                                }
+
+                                foreach (var pd in promoDetails)
+                                {
+                                    pd.id = _quanLyServices.GenerateNewId<ChiTietHoaDonKhuyenMai>("CTHD", 8) ?? Guid.NewGuid().ToString();
+                                    ctx.ChiTietHoaDonKhuyenMais.Add(pd);
+                                }
+
+                                ctx.SaveChanges();
+                            }
+
+                            // ✅ COMMIT TRANSACTION
+                            transaction.Commit();
+
+                            // Reload để lấy tongTien từ trigger
+                            ctx.Entry(invoice).Reload();
+
+                            MessageBox.Show($"Thanh toán thành công!\n\nMã hóa đơn: {invoice.id}\nTổng tiền: {invoice.tongTien?.ToString("N0") ?? "0"} đ\nPhương thức: {paymentMethodName}",
+                                "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                            // ✅ FIX: Set DialogResult TRƯỚC KHI close
+                            this.DialogResult = DialogResult.OK;
+
+                            // ✅ FIX: Đóng form trong Invoke để đảm bảo thread-safe
+                            this.BeginInvoke(new Action(() => {
+                                this.Close();
+                            }));
                         }
-
-                        details.Add(new ChiTietHoaDon
+                        catch (System.Data.Entity.Validation.DbEntityValidationException ex)
                         {
-                            hoaDonId = null,
-                            sanPhamDonViId = sanPhamDonViId,
-                            soLuong = qty,
-                            donGia = unitPrice,
-                            giamGia = promoValue >0 ? (decimal?)promoValue : null,
-                            isDelete = false,
-                            tongTien = (unitPrice * qty) - promoValue
-                        });
+                            transaction.Rollback();
+                            var errorMessages = new System.Text.StringBuilder();
+                            foreach (var validationErrors in ex.EntityValidationErrors)
+                            {
+                                foreach (var validationError in validationErrors.ValidationErrors)
+                                {
+                                    errorMessages.AppendLine($"- {validationError.PropertyName}: {validationError.ErrorMessage}");
+                                }
+                            }
+                            MessageBox.Show($"Lỗi validation:\n{errorMessages.ToString()}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                        catch (System.Data.Entity.Infrastructure.DbUpdateException ex)
+                        {
+                            transaction.Rollback();
+                            var innerException = ex.InnerException;
+                            var errorDetails = new System.Text.StringBuilder();
+                            errorDetails.AppendLine("Lỗi database:");
+
+                            while (innerException != null)
+                            {
+                                errorDetails.AppendLine($"\n{innerException.Message}");
+                                innerException = innerException.InnerException;
+                            }
+
+                            MessageBox.Show(errorDetails.ToString(), "Lỗi Database", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                        catch (Exception ex)
+                        {
+                            transaction.Rollback();
+                            throw;
+                        }
                     }
-                }
-
-                var createResult = _invoiceController.CreateInvoice(invoice, details);
-                bool success = createResult.Item1;
-                string message = createResult.Item2;
-                string invoiceId = createResult.Item3;
-
-                if (!success)
-                {
-                    MessageBox.Show(message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-
-                // Persist promo details
-                var promoDetails = BuildPromoDetails(invoiceId);
-                if (promoDetails.Any())
-                {
-                    using (var ctx = new AppDbContext())
-                    {
-                        ctx.ChiTietHoaDonKhuyenMais.AddRange(promoDetails);
-                        ctx.SaveChanges();
-                    }
-                }
-
-                var frmPayment = new frmPayment(invoiceId);
-                var paymentResult = frmPayment.ShowDialog();
-
-                if (paymentResult == DialogResult.OK)
-                {
-                    MessageBox.Show("Thanh toán thành công!", "Thành công",
-                        MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    this.DialogResult = DialogResult.OK;
-                    this.Close();
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Lỗi: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                var innerMsg = ex.InnerException != null ? $"\nChi tiết: {ex.InnerException.Message}" : "";
+                MessageBox.Show($"Lỗi khi lưu hóa đơn:\n{ex.Message}{innerMsg}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        // Helper method to build invoice details from DataGridView
+        private List<ChiTietHoaDon> BuildInvoiceDetails(string invoiceId)
+        {
+            var details = new List<ChiTietHoaDon>();
+
+            for (int i = 0; i < dgvInvoiceDetails.Rows.Count; i++)
+            {
+                var row = dgvInvoiceDetails.Rows[i];
+                var sanPhamDonViId = row.Cells["colSanPhamId"].Value?.ToString();
+
+                // ✅ FIX: Thêm logging để debug
+                var productName = row.Cells["colProduct"].Value?.ToString();
+                var unitName = row.Cells["colUnitInvoice"].Value?.ToString();
+                
+                if (string.IsNullOrEmpty(sanPhamDonViId))
+                {
+                    try
+                    {
+                        using (var ctx = new AppDbContext())
+                        {
+                            var spdv = ctx.SanPhamDonVis
+                                .Include(s => s.SanPham)
+                                .Include(s => s.DonViDoLuong)
+                                .FirstOrDefault(s => 
+                                    s.SanPham.ten == productName && 
+                                    s.DonViDoLuong.ten == unitName && 
+                                    !s.isDelete);
+                    
+                            if (spdv != null)
+                            {
+                                sanPhamDonViId = spdv.id;
+                            }
+                            else
+                            {
+                                // ✅ FIX: Debug log khi không tìm thấy
+                                MessageBox.Show(
+                                    $"❌ Dòng {i + 1}: Không tìm thấy SanPhamDonVi\n" +
+                                    $"- Sản phẩm: {productName}\n" +
+                                    $"- Đơn vị: {unitName}\n\n" +
+                                    $"Có thể sản phẩm đã bị xóa hoặc không tồn tại trong DB.",
+                                    "Lỗi dữ liệu",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Warning
+                                );
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"❌ Lỗi truy vấn SanPhamDonVi:\n{ex.Message}", "Lỗi");
+                    }
+                }
+
+                if (string.IsNullOrEmpty(sanPhamDonViId))
+                {
+                    MessageBox.Show(
+                        $"❌ Dòng {i + 1}: Không xác định được đơn vị sản phẩm\n" +
+                        $"- Sản phẩm: {productName}\n" +
+                        $"- Đơn vị: {unitName}",
+                        "Lỗi",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning
+                    );
+                    return null;
+                }
+
+                int qty = 0;
+                decimal unitPrice = 0m;
+                decimal promoValue = 0m;
+
+                int.TryParse(row.Cells["colQuantity"].Value?.ToString() ?? "0", out qty);
+                decimal.TryParse((row.Cells["colUnitPrice"].Value?.ToString() ?? "0").Replace(" đ", "").Replace(",", ""), out unitPrice);
+                if (!_promoValuePerRow.TryGetValue(i, out promoValue)) promoValue = 0m;
+
+                var lineTotal = (unitPrice * qty) - promoValue;
+                if (lineTotal < 0) lineTotal = 0m;
+
+                // ✅ FIX: Kiểm tra duplicate TRƯỚC KHI thêm
+                if (details.Any(d => d.sanPhamDonViId == sanPhamDonViId))
+                {
+                    MessageBox.Show(
+                        $"❌ Dòng {i + 1}: Sản phẩm '{productName}' bị trùng lặp\n\n" +
+                        $"Chi tiết hóa đơn không được chứa cùng một sản phẩm-đơn vị nhiều lần.",
+                        "Lỗi",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning
+                    );
+                    return null;
+                }
+
+                details.Add(new ChiTietHoaDon
+                {
+                    hoaDonId = invoiceId,
+                    sanPhamDonViId = sanPhamDonViId,
+                    soLuong = qty,
+                    donGia = unitPrice,
+                    giamGia = null,
+                    tongTien = lineTotal,
+                    isDelete = false
+                });
+            }
+
+            // Validate that we have at least one detail
+            if (details.Count == 0)
+            {
+                MessageBox.Show("❌ Hóa đơn phải có ít nhất một sản phẩm", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return null;
+            }
+
+            return details;
         }
 
         private void SetReadOnlyMode()
@@ -581,7 +874,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
             dgvProducts.Enabled = false;
             SetDiscountControlEnabled(false);
             btnPayment.Enabled = false;
-            
+
             if (dgvInvoiceDetails.Columns.Contains("colRemove"))
             {
                 dgvInvoiceDetails.Columns["colRemove"].Visible = false;
@@ -598,7 +891,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
 
         private void dgvProducts_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex <0) return;
+            if (e.RowIndex < 0) return;
 
             if (e.ColumnIndex == dgvProducts.Columns["colAdd"].Index)
             {
@@ -609,7 +902,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
 
         private void dgvInvoiceDetails_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex <0) return;
+            if (e.RowIndex < 0) return;
             var colName = dgvInvoiceDetails.Columns[e.ColumnIndex].Name;
 
             if (colName == "colPromo")
@@ -631,8 +924,8 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
                     if (_appliedPromosPerRow.ContainsKey(e.RowIndex)) _appliedPromosPerRow.Remove(e.RowIndex);
                     if (_promoValuePerRow.ContainsKey(e.RowIndex)) _promoValuePerRow.Remove(e.RowIndex);
                     // shift keys greater than removed index
-                    _appliedPromosPerRow = _appliedPromosPerRow.ToDictionary(k => k.Key > e.RowIndex ? k.Key -1 : k.Key, v => v.Value);
-                    _promoValuePerRow = _promoValuePerRow.ToDictionary(k => k.Key > e.RowIndex ? k.Key -1 : k.Key, v => v.Value);
+                    _appliedPromosPerRow = _appliedPromosPerRow.ToDictionary(k => k.Key > e.RowIndex ? k.Key - 1 : k.Key, v => v.Value);
+                    _promoValuePerRow = _promoValuePerRow.ToDictionary(k => k.Key > e.RowIndex ? k.Key - 1 : k.Key, v => v.Value);
                     CalculateTotal();
                 }
                 catch { }
@@ -644,7 +937,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
         {
             try
             {
-                if (rowIndex <0 || rowIndex >= dgvInvoiceDetails.Rows.Count) return;
+                if (rowIndex < 0 || rowIndex >= dgvInvoiceDetails.Rows.Count) return;
 
                 var comboCell = new DataGridViewComboBoxCell();
 
@@ -688,9 +981,9 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
                     }
                 }
 
-                var list = promos.Select(p => new { Id = p.Id, Display = p.Code + " (" + (p.GiaTri <1 ? (p.GiaTri *100).ToString("0") + "%" : p.GiaTri.ToString("N0") + " đ") + ")" }).ToList();
+                var list = promos.Select(p => new { Id = p.Id, Display = p.Code + " (" + (p.GiaTri < 1 ? (p.GiaTri * 100).ToString("0") + "%" : p.GiaTri.ToString("N0") + " đ") + ")" }).ToList();
 
-                if (list == null || list.Count ==0)
+                if (list == null || list.Count == 0)
                 {
                     // no promos - show single disabled item
                     comboCell.Items.Clear();
@@ -718,9 +1011,9 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
         private List<ChiTietHoaDonKhuyenMai> BuildPromoDetails(string invoiceId)
         {
             var promoDetails = new List<ChiTietHoaDonKhuyenMai>();
-            for (int i =0; i < dgvInvoiceDetails.Rows.Count; i++)
+            for (int i = 0; i < dgvInvoiceDetails.Rows.Count; i++)
             {
-                if (!_appliedPromosPerRow.ContainsKey(i) || _appliedPromosPerRow[i].Count ==0) continue;
+                if (!_appliedPromosPerRow.ContainsKey(i) || _appliedPromosPerRow[i].Count == 0) continue;
                 var row = dgvInvoiceDetails.Rows[i];
                 var sanPhamDonViId = row.Cells["colSanPhamId"].Value?.ToString();
                 foreach (var code in _appliedPromosPerRow[i])
@@ -731,7 +1024,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
                         if (mk == null) continue;
                         var unitPrice = decimal.Parse(row.Cells["colUnitPrice"].Value.ToString().Replace(" đ", "").Replace(",", ""));
                         var qty = int.Parse(row.Cells["colQuantity"].Value?.ToString() ?? "0");
-                        var appliedValue = mk.giaTri >0 && mk.giaTri <1 ? unitPrice * qty * mk.giaTri : mk.giaTri;
+                        var appliedValue = mk.giaTri > 0 && mk.giaTri < 1 ? unitPrice * qty * mk.giaTri : mk.giaTri;
                         promoDetails.Add(new ChiTietHoaDonKhuyenMai
                         {
                             hoaDonId = invoiceId,
@@ -805,28 +1098,28 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
         private void InitializeComponent()
         {
             this.Text = "Thanh toán";
-            this.Size = new Size(450,320);
+            this.Size = new Size(450, 320);
             this.StartPosition = FormStartPosition.CenterParent;
             this.FormBorderStyle = FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.BackColor = Color.White;
 
-            var pnlTop = new Panel { Dock = DockStyle.Top, Height =60, BackColor = Color.FromArgb(41,128,185) };
-            var lblTitle = new Label { Text = "💳 THANH TOÁN HÓA ĐƠN", Location = new Point(20,15), AutoSize = true, Font = new Font("Segoe UI",16, FontStyle.Bold), ForeColor = Color.White };
+            var pnlTop = new Panel { Dock = DockStyle.Top, Height = 60, BackColor = Color.FromArgb(41, 128, 185) };
+            var lblTitle = new Label { Text = "💳 THANH TOÁN HÓA ĐƠN", Location = new Point(20, 15), AutoSize = true, Font = new Font("Segoe UI", 16, FontStyle.Bold), ForeColor = Color.White };
             pnlTop.Controls.Add(lblTitle);
 
-            var lblPaymentMethod = new Label { Text = "Phương thức thanh toán:", Location = new Point(30,90), AutoSize = true, Font = new Font("Segoe UI",10, FontStyle.Bold) };
-            cmbPaymentMethod = new ComboBox { Location = new Point(220,87), Width =200, DropDownStyle = ComboBoxStyle.DropDownList, Font = new Font("Segoe UI",10) };
+            var lblPaymentMethod = new Label { Text = "Phương thức thanh toán:", Location = new Point(30, 90), AutoSize = true, Font = new Font("Segoe UI", 10, FontStyle.Bold) };
+            cmbPaymentMethod = new ComboBox { Location = new Point(220, 87), Width = 200, DropDownStyle = ComboBoxStyle.DropDownList, Font = new Font("Segoe UI", 10) };
 
-            var lblAmountLabel = new Label { Text = "Tổng tiền:", Location = new Point(30,130), AutoSize = true, Font = new Font("Segoe UI",10, FontStyle.Bold) };
-            lblTotal = new Label { Location = new Point(220,128), AutoSize = true, Font = new Font("Segoe UI",14, FontStyle.Bold), ForeColor = Color.FromArgb(231,76,60) };
+            var lblAmountLabel = new Label { Text = "Tổng tiền:", Location = new Point(30, 130), AutoSize = true, Font = new Font("Segoe UI", 10, FontStyle.Bold) };
+            lblTotal = new Label { Location = new Point(220, 128), AutoSize = true, Font = new Font("Segoe UI", 14, FontStyle.Bold), ForeColor = Color.FromArgb(231, 76, 60) };
 
-            var lblAmountPaid = new Label { Text = "Số tiền thanh toán:", Location = new Point(30,170), AutoSize = true, Font = new Font("Segoe UI",10, FontStyle.Bold) };
-            txtAmount = new TextBox { Location = new Point(220,167), Width =200, Font = new Font("Segoe UI",10) };
+            var lblAmountPaid = new Label { Text = "Số tiền thanh toán:", Location = new Point(30, 170), AutoSize = true, Font = new Font("Segoe UI", 10, FontStyle.Bold) };
+            txtAmount = new TextBox { Location = new Point(220, 167), Width = 200, Font = new Font("Segoe UI", 10) };
 
-            btnConfirm = new Button { Text = "✓ Xác nhận", Location = new Point(140,230), Size = new Size(130,40), BackColor = Color.FromArgb(46,204,113), ForeColor = Color.White, FlatStyle = FlatStyle.Flat, Font = new Font("Segoe UI",10, FontStyle.Bold) };
-            btnCancel = new Button { Text = "✗ Hủy", Location = new Point(280,230), Size = new Size(100,40), BackColor = Color.FromArgb(231,76,60), ForeColor = Color.White, FlatStyle = FlatStyle.Flat, Font = new Font("Segoe UI",10, FontStyle.Bold) };
+            btnConfirm = new Button { Text = "✅ Xác nhận", Location = new Point(140, 230), Size = new Size(130, 40), BackColor = Color.FromArgb(46, 204, 113), ForeColor = Color.White, FlatStyle = FlatStyle.Flat, Font = new Font("Segoe UI", 10, FontStyle.Bold) };
+            btnCancel = new Button { Text = "❌ Hủy", Location = new Point(280, 230), Size = new Size(100, 40), BackColor = Color.FromArgb(231, 76, 60), ForeColor = Color.White, FlatStyle = FlatStyle.Flat, Font = new Font("Segoe UI", 10, FontStyle.Bold) };
 
             btnConfirm.Click += btnConfirm_Click;
             btnCancel.Click += (s, e) => this.DialogResult = DialogResult.Cancel;
@@ -853,8 +1146,8 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
                 var invoice = _invoiceController.GetInvoiceById(_invoiceId);
                 if (invoice != null)
                 {
-                    lblTotal.Text = (invoice.tongTien ??0).ToString("N0") + " đ";
-                    txtAmount.Text = (invoice.tongTien ??0).ToString("N0");
+                    lblTotal.Text = (invoice.tongTien ?? 0).ToString("N0") + " đ";
+                    txtAmount.Text = (invoice.tongTien ?? 0).ToString("N0");
                 }
             }
             catch { }
@@ -870,7 +1163,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
                     return;
                 }
 
-                if (!decimal.TryParse(txtAmount.Text.Replace(",", ""), out decimal amount) || amount <=0)
+                if (!decimal.TryParse(txtAmount.Text.Replace(",", ""), out decimal amount) || amount <= 0)
                 {
                     MessageBox.Show("Vui lòng nhập số tiền hợp lệ!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;

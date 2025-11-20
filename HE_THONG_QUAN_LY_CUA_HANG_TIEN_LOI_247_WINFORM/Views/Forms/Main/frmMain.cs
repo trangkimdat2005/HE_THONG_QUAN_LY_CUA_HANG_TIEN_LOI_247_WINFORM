@@ -9,6 +9,10 @@ using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Views.Forms.Employees;
 using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Views.forms.Reports;
 using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Views.Forms.Inventory;
 using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Views.Forms.Products;
+using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Views.forms.Main;
+using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Utils;
+using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Models;
+using System.Data.Entity;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,7 +22,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms.Main
 {
@@ -29,37 +32,214 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
         // Cache forms để tránh khởi tạo lại nhiều lần
         private Dictionary<Type, Form> formCache = new Dictionary<Type, Form>();
 
+        // Menu dropdown cho account
+        private ContextMenuStrip accountMenu;
+        private System.Windows.Forms.ToolTip accountTooltip;
+
         public frmMain()
         {
             InitializeComponent();
 
             // Phóng to cửa sổ khi khởi động (vẫn có title bar và nút minimize/maximize/close)
             this.WindowState = FormWindowState.Maximized;
-            // Giữ nguyên FormBorderStyle để có title bar
-            // this.FormBorderStyle = FormBorderStyle.Sizable; // Mặc định đã có sẵn
+            
+            // Khởi tạo account menu và tooltip
+            InitializeAccountMenu();
+            InitializeAccountTooltip();
         }
 
         private void frmMain_Load(object sender, EventArgs e)
         {
+            // Hiển thị thông tin user đã đăng nhập
+            UpdateUserInfo();
+            
             // Load Dashboard mặc định khi mở chương trình
             LoadFormIntoPanel(new frmDashboard());
             SetActiveButton(btn_dashboard, null); // Highlight nút Dashboard
         }
 
-        private void btn_logout_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Khởi tạo tooltip cho nút account
+        /// </summary>
+        private void InitializeAccountTooltip()
         {
-            // Cleanup cached forms
-            foreach (var form in formCache.Values)
+            accountTooltip = new System.Windows.Forms.ToolTip();
+            accountTooltip.AutoPopDelay = 5000;
+            accountTooltip.InitialDelay = 500;
+            accountTooltip.ReshowDelay = 500;
+            accountTooltip.ShowAlways = true;
+        }
+
+        /// <summary>
+        /// Khởi tạo menu dropdown cho nút account
+        /// </summary>
+        private void InitializeAccountMenu()
+        {
+            accountMenu = new ContextMenuStrip();
+            accountMenu.ShowImageMargin = true;
+            accountMenu.AutoSize = true;
+            
+            // Menu item: Thông tin tài khoản
+            ToolStripMenuItem profileItem = new ToolStripMenuItem("👤 Thông tin tài khoản");
+            profileItem.Click += ProfileItem_Click;
+            profileItem.Font = new Font("Segoe UI", 10F);
+            
+            //// Menu item: Đổi mật khẩu
+            //ToolStripMenuItem changePasswordItem = new ToolStripMenuItem("🔑 Đổi mật khẩu");
+            //changePasswordItem.Click += ChangePasswordItem_Click;
+            //changePasswordItem.Font = new Font("Segoe UI", 10F);
+            
+            // Menu item: Cài đặt
+            ToolStripMenuItem settingsItem = new ToolStripMenuItem("⚙️ Cài đặt");
+            settingsItem.Click += SettingsItem_Click;
+            settingsItem.Font = new Font("Segoe UI", 10F);
+            
+            // Separator
+            ToolStripSeparator separator = new ToolStripSeparator();
+            
+            // Menu item: Đăng xuất
+            ToolStripMenuItem logoutItem = new ToolStripMenuItem("🚪 Đăng xuất");
+            logoutItem.Click += LogoutItem_Click;
+            logoutItem.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            logoutItem.ForeColor = Color.Red;
+            
+            // Thêm vào menu
+            accountMenu.Items.Add(profileItem);
+            //accountMenu.Items.Add(changePasswordItem);
+            accountMenu.Items.Add(settingsItem);
+            accountMenu.Items.Add(separator);
+            accountMenu.Items.Add(logoutItem);
+            
+            // Style cho menu
+            accountMenu.RenderMode = ToolStripRenderMode.Professional;
+            accountMenu.Renderer = new ToolStripProfessionalRenderer(new MenuColorTable());
+        }
+
+        /// <summary>
+        /// Cập nhật thông tin user hiển thị trên header
+        /// </summary>
+        private void UpdateUserInfo()
+        {
+            var session = UserSession.Instance;
+            if (session.IsLoggedIn)
             {
-                if (form != null && !form.IsDisposed)
+                // Hiển thị tên viết tắt trên button
+                btn_account.Text = session.GetDisplayName();
+                
+                // Set tooltip với thông tin đầy đủ
+                string tooltipText = $"👤 {session.EmployeeName}\n" +
+                                   $"💼 {session.Position}\n" +
+                                   $"📧 {session.Email ?? "Chưa có email"}\n" +
+                                   $"📱 {session.PhoneNumber}\n" +
+                                   $"🎭 {session.Role}";
+                
+                accountTooltip.SetToolTip(btn_account, tooltipText);
+            }
+            else
+            {
+                btn_account.Text = "👤";
+                accountTooltip.SetToolTip(btn_account, "Chưa đăng nhập");
+            }
+        }
+
+        private void ProfileItem_Click(object sender, EventArgs e)
+        {
+            var session = UserSession.Instance;
+            if (!session.IsLoggedIn)
+            {
+                MessageBox.Show("Bạn chưa đăng nhập!", "Thông báo", 
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Mở form Profile
+            frmProfile profileForm = new frmProfile();
+            profileForm.ShowDialog();
+        }
+
+        //private void ChangePasswordItem_Click(object sender, EventArgs e)
+        //{
+        //    // TODO: Mở form đổi mật khẩu
+        //    MessageBox.Show("Chức năng đổi mật khẩu đang được phát triển!", 
+        //        "Thông báo", 
+        //        MessageBoxButtons.OK, 
+        //        MessageBoxIcon.Information);
+        //}
+
+        private void SettingsItem_Click(object sender, EventArgs e)
+        {
+            // TODO: Mở form cài đặt
+            MessageBox.Show("Chức năng cài đặt đang được phát triển!", 
+                "Thông báo", 
+                MessageBoxButtons.OK, 
+                MessageBoxIcon.Information);
+        }
+
+        private void LogoutItem_Click(object sender, EventArgs e)
+        {
+            var result = MessageBox.Show(
+                "Bạn có chắc chắn muốn đăng xuất?\n\n" +
+                "Tất cả dữ liệu chưa lưu sẽ bị mất!",
+                "⚠️ Xác nhận đăng xuất",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question
+            );
+
+            if (result == DialogResult.Yes)
+            {
+                Logout();
+            }
+        }
+
+        /// <summary>
+        /// Xử lý đăng xuất
+        /// </summary>
+        private void Logout()
+        {
+            try
+            {
+                // Cleanup cached forms
+                foreach (var form in formCache.Values)
                 {
-                    form.Dispose();
+                    if (form != null && !form.IsDisposed)
+                    {
+                        form.Dispose();
+                    }
+                }
+                formCache.Clear();
+                
+                // Xóa session
+                UserSession.Instance.ClearSession();
+                
+                // Đóng form main
+                this.Hide();
+                
+                // Hiển thị lại form login
+                frmLogin loginForm = new frmLogin();
+                if (loginForm.ShowDialog() == DialogResult.OK)
+                {
+                    // Nếu đăng nhập thành công, hiển thị lại main form
+                    UpdateUserInfo();
+                    LoadFormIntoPanel(new frmDashboard());
+                    SetActiveButton(btn_dashboard, null);
+                    this.Show();
+                }
+                else
+                {
+                    // Nếu không đăng nhập, đóng ứng dụng
+                    Application.Exit();
                 }
             }
-            formCache.Clear();
-            
-            // Thêm code đăng xuất ở đây
-            this.Close();
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi đăng xuất: {ex.Message}", "Lỗi", 
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btn_logout_Click(object sender, EventArgs e)
+        {
+            LogoutItem_Click(sender, e);
         }
 
         // Ẩn tất cả các menu con
@@ -391,6 +571,106 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
             SetActiveButton(btn_inventory, btnSub_TonKho);
         }
 
-  
+        private void btn_show_Click(object sender, EventArgs e)
+        {
+            //load side bar
+            if(pnlSidebar.Visible == true)
+                pnlSidebar.Visible = false;
+            else
+                pnlSidebar.Visible = true;
+            HideSubMenus();
+
+        }
+
+        private void flpMenu_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void panelHeader_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void guna2PictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void btn_account_Click(object sender, EventArgs e)
+        {
+            // Hiển thị menu dropdown tại vị trí nút account
+            Point menuLocation = btn_account.PointToScreen(new Point(0, btn_account.Height));
+            accountMenu.Show(menuLocation);
+        }
+
+        private void pnlSidebar_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void pnlProductSubmenu_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void pnlEmployeeSubmenu_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void pnlCustomerSubmenu_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void pnlSupplierSubmenu_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void pnlStorageSubmenu_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void pnlUserInfo_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void guna2PictureBox2_Click(object sender, EventArgs e)
+        {
+
+        }
+    }
+
+    // Custom color table cho menu
+    public class MenuColorTable : ProfessionalColorTable
+    {
+        public override Color MenuItemSelected
+        {
+            get { return Color.FromArgb(230, 240, 255); }
+        }
+
+        public override Color MenuItemSelectedGradientBegin
+        {
+            get { return Color.FromArgb(230, 240, 255); }
+        }
+
+        public override Color MenuItemSelectedGradientEnd
+        {
+            get { return Color.FromArgb(210, 230, 255); }
+        }
+
+        public override Color MenuItemBorder
+        {
+            get { return Color.FromArgb(94, 148, 255); }
+        }
     }
 }

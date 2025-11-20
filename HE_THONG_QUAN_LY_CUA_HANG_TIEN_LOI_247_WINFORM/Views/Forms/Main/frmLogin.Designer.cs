@@ -36,12 +36,12 @@
             this.guna2DragControl1 = new Guna.UI2.WinForms.Guna2DragControl(this.components);
             this.guna2ShadowForm1 = new Guna.UI2.WinForms.Guna2ShadowForm(this.components);
             this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
-            this.taikhoantxt = new Guna.UI2.WinForms.Guna2TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btn_login = new Guna.UI2.WinForms.Guna2Button();
             this.btn_ShowPassword = new Guna.UI2.WinForms.Guna2CheckBox();
-            this.matkhautxt = new Guna.UI2.WinForms.Guna2TextBox();
             this.lbl_ForgotPassword = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.taikhoantxt = new Guna.UI2.WinForms.Guna2TextBox();
+            this.matkhautxt = new Guna.UI2.WinForms.Guna2TextBox();
             this.pnl_Logo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Logo)).BeginInit();
             this.guna2Panel1.SuspendLayout();
@@ -53,7 +53,7 @@
             this.pnl_Logo.Controls.Add(this.pictureBox_Logo);
             this.pnl_Logo.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnl_Logo.Location = new System.Drawing.Point(0, 0);
-            this.pnl_Logo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnl_Logo.Margin = new System.Windows.Forms.Padding(2);
             this.pnl_Logo.Name = "pnl_Logo";
             this.pnl_Logo.Size = new System.Drawing.Size(339, 442);
             this.pnl_Logo.TabIndex = 0;
@@ -65,7 +65,7 @@
             this.pictureBox_Logo.Image = global::HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Properties.Resources.logo;
             this.pictureBox_Logo.ImageRotate = 0F;
             this.pictureBox_Logo.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox_Logo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBox_Logo.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox_Logo.Name = "pictureBox_Logo";
             this.pictureBox_Logo.Size = new System.Drawing.Size(339, 442);
             this.pictureBox_Logo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -78,8 +78,8 @@
             this.guna2ControlBox1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.guna2ControlBox1.FillColor = System.Drawing.Color.White;
             this.guna2ControlBox1.IconColor = System.Drawing.Color.DimGray;
-            this.guna2ControlBox1.Location = new System.Drawing.Point(717, 0);
-            this.guna2ControlBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.guna2ControlBox1.Location = new System.Drawing.Point(745, 0);
+            this.guna2ControlBox1.Margin = new System.Windows.Forms.Padding(2);
             this.guna2ControlBox1.Name = "guna2ControlBox1";
             this.guna2ControlBox1.Size = new System.Drawing.Size(34, 24);
             this.guna2ControlBox1.TabIndex = 7;
@@ -91,8 +91,8 @@
             this.guna2ControlBox2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.guna2ControlBox2.FillColor = System.Drawing.Color.White;
             this.guna2ControlBox2.IconColor = System.Drawing.Color.DimGray;
-            this.guna2ControlBox2.Location = new System.Drawing.Point(683, 0);
-            this.guna2ControlBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.guna2ControlBox2.Location = new System.Drawing.Point(711, 0);
+            this.guna2ControlBox2.Margin = new System.Windows.Forms.Padding(2);
             this.guna2ControlBox2.Name = "guna2ControlBox2";
             this.guna2ControlBox2.Size = new System.Drawing.Size(34, 24);
             this.guna2ControlBox2.TabIndex = 8;
@@ -105,6 +105,7 @@
             // 
             // guna2Panel1
             // 
+            this.guna2Panel1.AllowDrop = true;
             this.guna2Panel1.Controls.Add(this.label1);
             this.guna2Panel1.Controls.Add(this.btn_login);
             this.guna2Panel1.Controls.Add(this.btn_ShowPassword);
@@ -114,38 +115,15 @@
             this.guna2Panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.guna2Panel1.Location = new System.Drawing.Point(339, 0);
             this.guna2Panel1.Name = "guna2Panel1";
-            this.guna2Panel1.Size = new System.Drawing.Size(412, 442);
+            this.guna2Panel1.Size = new System.Drawing.Size(440, 442);
             this.guna2Panel1.TabIndex = 9;
-            // 
-            // taikhoantxt
-            // 
-            this.taikhoantxt.Animated = true;
-            this.taikhoantxt.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(221)))), ((int)(((byte)(226)))));
-            this.taikhoantxt.BorderRadius = 8;
-            this.taikhoantxt.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.taikhoantxt.DefaultText = "";
-            this.taikhoantxt.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.taikhoantxt.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.taikhoantxt.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.taikhoantxt.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.taikhoantxt.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.taikhoantxt.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.taikhoantxt.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
-            this.taikhoantxt.Location = new System.Drawing.Point(86, 134);
-            this.taikhoantxt.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.taikhoantxt.Name = "taikhoantxt";
-            this.taikhoantxt.PlaceholderText = "Tên đăng nhập";
-            this.taikhoantxt.SelectedText = "";
-            this.taikhoantxt.Size = new System.Drawing.Size(262, 37);
-            this.taikhoantxt.TabIndex = 8;
-            this.taikhoantxt.TextOffset = new System.Drawing.Point(5, 0);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.label1.Location = new System.Drawing.Point(48, 58);
+            this.label1.Location = new System.Drawing.Point(50, 58);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(327, 37);
@@ -192,6 +170,43 @@
             this.btn_ShowPassword.UncheckedState.BorderThickness = 0;
             this.btn_ShowPassword.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
             // 
+            // lbl_ForgotPassword
+            // 
+            this.lbl_ForgotPassword.BackColor = System.Drawing.Color.Transparent;
+            this.lbl_ForgotPassword.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lbl_ForgotPassword.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_ForgotPassword.ForeColor = System.Drawing.Color.DimGray;
+            this.lbl_ForgotPassword.Location = new System.Drawing.Point(86, 266);
+            this.lbl_ForgotPassword.Margin = new System.Windows.Forms.Padding(2);
+            this.lbl_ForgotPassword.Name = "lbl_ForgotPassword";
+            this.lbl_ForgotPassword.Size = new System.Drawing.Size(90, 17);
+            this.lbl_ForgotPassword.TabIndex = 11;
+            this.lbl_ForgotPassword.Text = "Quên mật khẩu?";
+            this.lbl_ForgotPassword.TextAlignment = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // taikhoantxt
+            // 
+            this.taikhoantxt.Animated = true;
+            this.taikhoantxt.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(221)))), ((int)(((byte)(226)))));
+            this.taikhoantxt.BorderRadius = 8;
+            this.taikhoantxt.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.taikhoantxt.DefaultText = "";
+            this.taikhoantxt.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.taikhoantxt.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.taikhoantxt.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.taikhoantxt.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.taikhoantxt.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.taikhoantxt.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.taikhoantxt.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+            this.taikhoantxt.Location = new System.Drawing.Point(86, 134);
+            this.taikhoantxt.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.taikhoantxt.Name = "taikhoantxt";
+            this.taikhoantxt.PlaceholderText = "Tên đăng nhập";
+            this.taikhoantxt.SelectedText = "";
+            this.taikhoantxt.Size = new System.Drawing.Size(262, 37);
+            this.taikhoantxt.TabIndex = 8;
+            this.taikhoantxt.TextOffset = new System.Drawing.Point(5, 0);
+            // 
             // matkhautxt
             // 
             this.matkhautxt.Animated = true;
@@ -216,32 +231,18 @@
             this.matkhautxt.TabIndex = 9;
             this.matkhautxt.TextOffset = new System.Drawing.Point(5, 0);
             // 
-            // lbl_ForgotPassword
-            // 
-            this.lbl_ForgotPassword.BackColor = System.Drawing.Color.Transparent;
-            this.lbl_ForgotPassword.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lbl_ForgotPassword.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_ForgotPassword.ForeColor = System.Drawing.Color.DimGray;
-            this.lbl_ForgotPassword.Location = new System.Drawing.Point(86, 261);
-            this.lbl_ForgotPassword.Margin = new System.Windows.Forms.Padding(2);
-            this.lbl_ForgotPassword.Name = "lbl_ForgotPassword";
-            this.lbl_ForgotPassword.Size = new System.Drawing.Size(90, 17);
-            this.lbl_ForgotPassword.TabIndex = 11;
-            this.lbl_ForgotPassword.Text = "Quên mật khẩu?";
-            this.lbl_ForgotPassword.TextAlignment = System.Drawing.ContentAlignment.TopRight;
-            // 
             // frmLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(751, 442);
+            this.ClientSize = new System.Drawing.Size(779, 442);
             this.Controls.Add(this.guna2Panel1);
             this.Controls.Add(this.guna2ControlBox2);
             this.Controls.Add(this.guna2ControlBox1);
             this.Controls.Add(this.pnl_Logo);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "frmLogin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Đăng nhập hệ thống";

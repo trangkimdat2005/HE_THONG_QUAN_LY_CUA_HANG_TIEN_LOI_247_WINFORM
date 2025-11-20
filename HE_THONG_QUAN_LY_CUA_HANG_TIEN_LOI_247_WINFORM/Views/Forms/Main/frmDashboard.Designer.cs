@@ -107,9 +107,8 @@
             this.guna2Panel1.Controls.Add(this.lblTitle);
             this.guna2Panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.guna2Panel1.Location = new System.Drawing.Point(0, 0);
-            this.guna2Panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.guna2Panel1.Name = "guna2Panel1";
-            this.guna2Panel1.Size = new System.Drawing.Size(1761, 98);
+            this.guna2Panel1.Size = new System.Drawing.Size(1321, 65);
             this.guna2Panel1.TabIndex = 0;
             // 
             // btnRefresh
@@ -123,10 +122,9 @@
             this.btnRefresh.FillColor = System.Drawing.Color.White;
             this.btnRefresh.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.btnRefresh.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.btnRefresh.Location = new System.Drawing.Point(1641, 25);
-            this.btnRefresh.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnRefresh.Location = new System.Drawing.Point(1231, 20);
             this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(93, 49);
+            this.btnRefresh.Size = new System.Drawing.Size(70, 40);
             this.btnRefresh.TabIndex = 2;
             this.btnRefresh.Text = "🔄";
             this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
@@ -136,10 +134,9 @@
             this.lblDateTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblDateTime.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.lblDateTime.ForeColor = System.Drawing.Color.White;
-            this.lblDateTime.Location = new System.Drawing.Point(1228, 34);
-            this.lblDateTime.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblDateTime.Location = new System.Drawing.Point(921, 28);
             this.lblDateTime.Name = "lblDateTime";
-            this.lblDateTime.Size = new System.Drawing.Size(400, 31);
+            this.lblDateTime.Size = new System.Drawing.Size(300, 25);
             this.lblDateTime.TabIndex = 1;
             this.lblDateTime.Text = "16/11/2025 14:30:00";
             this.lblDateTime.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -149,10 +146,9 @@
             this.lblTitle.AutoSize = true;
             this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold);
             this.lblTitle.ForeColor = System.Drawing.Color.White;
-            this.lblTitle.Location = new System.Drawing.Point(27, 22);
-            this.lblTitle.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblTitle.Location = new System.Drawing.Point(20, 18);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(550, 54);
+            this.lblTitle.Size = new System.Drawing.Size(444, 45);
             this.lblTitle.TabIndex = 0;
             this.lblTitle.Text = "📊 TỔNG QUAN HỆ THỐNG";
             // 
@@ -163,11 +159,10 @@
             this.flowLayoutPanelKPI.Controls.Add(this.pnlCustomers);
             this.flowLayoutPanelKPI.Controls.Add(this.pnlAlerts);
             this.flowLayoutPanelKPI.Dock = System.Windows.Forms.DockStyle.Top;
-            this.flowLayoutPanelKPI.Location = new System.Drawing.Point(0, 98);
-            this.flowLayoutPanelKPI.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.flowLayoutPanelKPI.Location = new System.Drawing.Point(0, 65);
             this.flowLayoutPanelKPI.Name = "flowLayoutPanelKPI";
-            this.flowLayoutPanelKPI.Padding = new System.Windows.Forms.Padding(27, 25, 27, 12);
-            this.flowLayoutPanelKPI.Size = new System.Drawing.Size(1761, 197);
+            this.flowLayoutPanelKPI.Padding = new System.Windows.Forms.Padding(20, 20, 20, 10);
+            this.flowLayoutPanelKPI.Size = new System.Drawing.Size(1321, 132);
             this.flowLayoutPanelKPI.TabIndex = 1;
             // 
             // pnlRevenue
@@ -177,24 +172,22 @@
             this.pnlRevenue.Controls.Add(this.lblRevenueValue);
             this.pnlRevenue.Controls.Add(this.lblRevenueTitle);
             this.pnlRevenue.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(214)))), ((int)(((byte)(234)))), ((int)(((byte)(248)))));
-            this.pnlRevenue.Location = new System.Drawing.Point(31, 29);
-            this.pnlRevenue.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlRevenue.Location = new System.Drawing.Point(23, 23);
             this.pnlRevenue.Name = "pnlRevenue";
             this.pnlRevenue.ShadowDecoration.BorderRadius = 10;
             this.pnlRevenue.ShadowDecoration.Color = System.Drawing.Color.Gainsboro;
             this.pnlRevenue.ShadowDecoration.Depth = 10;
             this.pnlRevenue.ShadowDecoration.Enabled = true;
-            this.pnlRevenue.Size = new System.Drawing.Size(407, 148);
+            this.pnlRevenue.Size = new System.Drawing.Size(305, 100);
             this.pnlRevenue.TabIndex = 0;
             // 
             // lblRevenueValue
             // 
             this.lblRevenueValue.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Bold);
             this.lblRevenueValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
-            this.lblRevenueValue.Location = new System.Drawing.Point(20, 74);
-            this.lblRevenueValue.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblRevenueValue.Location = new System.Drawing.Point(15, 45);
             this.lblRevenueValue.Name = "lblRevenueValue";
-            this.lblRevenueValue.Size = new System.Drawing.Size(293, 49);
+            this.lblRevenueValue.Size = new System.Drawing.Size(220, 40);
             this.lblRevenueValue.TabIndex = 1;
             this.lblRevenueValue.Text = "250.000.000đ";
             // 
@@ -202,10 +195,9 @@
             // 
             this.lblRevenueTitle.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
             this.lblRevenueTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
-            this.lblRevenueTitle.Location = new System.Drawing.Point(20, 25);
-            this.lblRevenueTitle.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblRevenueTitle.Location = new System.Drawing.Point(15, 20);
             this.lblRevenueTitle.Name = "lblRevenueTitle";
-            this.lblRevenueTitle.Size = new System.Drawing.Size(293, 31);
+            this.lblRevenueTitle.Size = new System.Drawing.Size(220, 25);
             this.lblRevenueTitle.TabIndex = 0;
             this.lblRevenueTitle.Text = "💰 DOANH THU HÔM NAY";
             // 
@@ -216,24 +208,22 @@
             this.pnlOrders.Controls.Add(this.lblOrdersValue);
             this.pnlOrders.Controls.Add(this.lblOrdersTitle);
             this.pnlOrders.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(214)))), ((int)(((byte)(234)))), ((int)(((byte)(248)))));
-            this.pnlOrders.Location = new System.Drawing.Point(446, 29);
-            this.pnlOrders.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlOrders.Location = new System.Drawing.Point(334, 23);
             this.pnlOrders.Name = "pnlOrders";
             this.pnlOrders.ShadowDecoration.BorderRadius = 10;
             this.pnlOrders.ShadowDecoration.Color = System.Drawing.Color.Gainsboro;
             this.pnlOrders.ShadowDecoration.Depth = 10;
             this.pnlOrders.ShadowDecoration.Enabled = true;
-            this.pnlOrders.Size = new System.Drawing.Size(407, 148);
+            this.pnlOrders.Size = new System.Drawing.Size(305, 100);
             this.pnlOrders.TabIndex = 1;
             // 
             // lblOrdersValue
             // 
             this.lblOrdersValue.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Bold);
             this.lblOrdersValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
-            this.lblOrdersValue.Location = new System.Drawing.Point(20, 74);
-            this.lblOrdersValue.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblOrdersValue.Location = new System.Drawing.Point(15, 45);
             this.lblOrdersValue.Name = "lblOrdersValue";
-            this.lblOrdersValue.Size = new System.Drawing.Size(293, 49);
+            this.lblOrdersValue.Size = new System.Drawing.Size(220, 40);
             this.lblOrdersValue.TabIndex = 1;
             this.lblOrdersValue.Text = "124 đơn";
             // 
@@ -241,10 +231,9 @@
             // 
             this.lblOrdersTitle.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
             this.lblOrdersTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
-            this.lblOrdersTitle.Location = new System.Drawing.Point(20, 25);
-            this.lblOrdersTitle.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblOrdersTitle.Location = new System.Drawing.Point(15, 20);
             this.lblOrdersTitle.Name = "lblOrdersTitle";
-            this.lblOrdersTitle.Size = new System.Drawing.Size(293, 31);
+            this.lblOrdersTitle.Size = new System.Drawing.Size(220, 25);
             this.lblOrdersTitle.TabIndex = 0;
             this.lblOrdersTitle.Text = "🛒 ĐƠN HÀNG HÔM NAY";
             // 
@@ -255,24 +244,22 @@
             this.pnlCustomers.Controls.Add(this.lblCustomersValue);
             this.pnlCustomers.Controls.Add(this.lblCustomersTitle);
             this.pnlCustomers.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(214)))), ((int)(((byte)(234)))), ((int)(((byte)(248)))));
-            this.pnlCustomers.Location = new System.Drawing.Point(861, 29);
-            this.pnlCustomers.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlCustomers.Location = new System.Drawing.Point(645, 23);
             this.pnlCustomers.Name = "pnlCustomers";
             this.pnlCustomers.ShadowDecoration.BorderRadius = 10;
             this.pnlCustomers.ShadowDecoration.Color = System.Drawing.Color.Gainsboro;
             this.pnlCustomers.ShadowDecoration.Depth = 10;
             this.pnlCustomers.ShadowDecoration.Enabled = true;
-            this.pnlCustomers.Size = new System.Drawing.Size(407, 148);
+            this.pnlCustomers.Size = new System.Drawing.Size(305, 100);
             this.pnlCustomers.TabIndex = 2;
             // 
             // lblCustomersValue
             // 
             this.lblCustomersValue.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Bold);
             this.lblCustomersValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
-            this.lblCustomersValue.Location = new System.Drawing.Point(20, 74);
-            this.lblCustomersValue.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblCustomersValue.Location = new System.Drawing.Point(18, 45);
             this.lblCustomersValue.Name = "lblCustomersValue";
-            this.lblCustomersValue.Size = new System.Drawing.Size(293, 49);
+            this.lblCustomersValue.Size = new System.Drawing.Size(220, 40);
             this.lblCustomersValue.TabIndex = 1;
             this.lblCustomersValue.Text = "1,234";
             // 
@@ -280,10 +267,9 @@
             // 
             this.lblCustomersTitle.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
             this.lblCustomersTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
-            this.lblCustomersTitle.Location = new System.Drawing.Point(20, 25);
-            this.lblCustomersTitle.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblCustomersTitle.Location = new System.Drawing.Point(15, 20);
             this.lblCustomersTitle.Name = "lblCustomersTitle";
-            this.lblCustomersTitle.Size = new System.Drawing.Size(293, 31);
+            this.lblCustomersTitle.Size = new System.Drawing.Size(220, 25);
             this.lblCustomersTitle.TabIndex = 0;
             this.lblCustomersTitle.Text = "👥 KHÁCH HÀNG";
             // 
@@ -294,24 +280,22 @@
             this.pnlAlerts.Controls.Add(this.lblAlertsValue);
             this.pnlAlerts.Controls.Add(this.lblAlertsTitle);
             this.pnlAlerts.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(230)))), ((int)(((byte)(232)))));
-            this.pnlAlerts.Location = new System.Drawing.Point(1276, 29);
-            this.pnlAlerts.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlAlerts.Location = new System.Drawing.Point(956, 23);
             this.pnlAlerts.Name = "pnlAlerts";
             this.pnlAlerts.ShadowDecoration.BorderRadius = 10;
             this.pnlAlerts.ShadowDecoration.Color = System.Drawing.Color.Gainsboro;
             this.pnlAlerts.ShadowDecoration.Depth = 10;
             this.pnlAlerts.ShadowDecoration.Enabled = true;
-            this.pnlAlerts.Size = new System.Drawing.Size(422, 148);
+            this.pnlAlerts.Size = new System.Drawing.Size(316, 100);
             this.pnlAlerts.TabIndex = 3;
             // 
             // lblAlertsValue
             // 
             this.lblAlertsValue.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Bold);
             this.lblAlertsValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(53)))), ((int)(((byte)(69)))));
-            this.lblAlertsValue.Location = new System.Drawing.Point(20, 74);
-            this.lblAlertsValue.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblAlertsValue.Location = new System.Drawing.Point(15, 45);
             this.lblAlertsValue.Name = "lblAlertsValue";
-            this.lblAlertsValue.Size = new System.Drawing.Size(293, 49);
+            this.lblAlertsValue.Size = new System.Drawing.Size(220, 40);
             this.lblAlertsValue.TabIndex = 1;
             this.lblAlertsValue.Text = "5 sản phẩm";
             // 
@@ -319,10 +303,9 @@
             // 
             this.lblAlertsTitle.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
             this.lblAlertsTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(53)))), ((int)(((byte)(69)))));
-            this.lblAlertsTitle.Location = new System.Drawing.Point(20, 25);
-            this.lblAlertsTitle.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblAlertsTitle.Location = new System.Drawing.Point(15, 20);
             this.lblAlertsTitle.Name = "lblAlertsTitle";
-            this.lblAlertsTitle.Size = new System.Drawing.Size(293, 31);
+            this.lblAlertsTitle.Size = new System.Drawing.Size(220, 25);
             this.lblAlertsTitle.TabIndex = 0;
             this.lblAlertsTitle.Text = "⚠️ CẢNH BÁO TỒN KHO";
             // 
@@ -334,10 +317,9 @@
             this.pnlShiftInfo.Controls.Add(this.lblShiftName);
             this.pnlShiftInfo.Controls.Add(this.lblShiftInfo);
             this.pnlShiftInfo.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlShiftInfo.Location = new System.Drawing.Point(0, 1310);
-            this.pnlShiftInfo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlShiftInfo.Location = new System.Drawing.Point(0, 850);
             this.pnlShiftInfo.Name = "pnlShiftInfo";
-            this.pnlShiftInfo.Size = new System.Drawing.Size(1761, 62);
+            this.pnlShiftInfo.Size = new System.Drawing.Size(1321, 44);
             this.pnlShiftInfo.TabIndex = 4;
             // 
             // lblShiftEmployees
@@ -345,10 +327,9 @@
             this.lblShiftEmployees.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblShiftEmployees.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.lblShiftEmployees.ForeColor = System.Drawing.Color.Black;
-            this.lblShiftEmployees.Location = new System.Drawing.Point(1095, 18);
-            this.lblShiftEmployees.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblShiftEmployees.Location = new System.Drawing.Point(821, 15);
             this.lblShiftEmployees.Name = "lblShiftEmployees";
-            this.lblShiftEmployees.Size = new System.Drawing.Size(640, 25);
+            this.lblShiftEmployees.Size = new System.Drawing.Size(480, 20);
             this.lblShiftEmployees.TabIndex = 3;
             this.lblShiftEmployees.Text = "👤 Nhân viên: Nguyễn Văn A, Trần Thị B";
             this.lblShiftEmployees.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -357,10 +338,9 @@
             // 
             this.lblShiftTime.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.lblShiftTime.ForeColor = System.Drawing.Color.Black;
-            this.lblShiftTime.Location = new System.Drawing.Point(533, 18);
-            this.lblShiftTime.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblShiftTime.Location = new System.Drawing.Point(400, 15);
             this.lblShiftTime.Name = "lblShiftTime";
-            this.lblShiftTime.Size = new System.Drawing.Size(400, 25);
+            this.lblShiftTime.Size = new System.Drawing.Size(300, 20);
             this.lblShiftTime.TabIndex = 2;
             this.lblShiftTime.Text = "🕐 Thời gian: 06:00 - 14:00";
             this.lblShiftTime.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -369,10 +349,9 @@
             // 
             this.lblShiftName.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.lblShiftName.ForeColor = System.Drawing.Color.Black;
-            this.lblShiftName.Location = new System.Drawing.Point(267, 18);
-            this.lblShiftName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblShiftName.Location = new System.Drawing.Point(200, 15);
             this.lblShiftName.Name = "lblShiftName";
-            this.lblShiftName.Size = new System.Drawing.Size(200, 25);
+            this.lblShiftName.Size = new System.Drawing.Size(150, 20);
             this.lblShiftName.TabIndex = 1;
             this.lblShiftName.Text = "Ca 1 (Sáng)";
             this.lblShiftName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -381,10 +360,9 @@
             // 
             this.lblShiftInfo.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.lblShiftInfo.ForeColor = System.Drawing.Color.Black;
-            this.lblShiftInfo.Location = new System.Drawing.Point(27, 18);
-            this.lblShiftInfo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblShiftInfo.Location = new System.Drawing.Point(20, 15);
             this.lblShiftInfo.Name = "lblShiftInfo";
-            this.lblShiftInfo.Size = new System.Drawing.Size(240, 25);
+            this.lblShiftInfo.Size = new System.Drawing.Size(180, 20);
             this.lblShiftInfo.TabIndex = 0;
             this.lblShiftInfo.Text = "🕒 Ca làm việc hiện tại:";
             // 
@@ -393,11 +371,10 @@
             this.pnlMainArea.Controls.Add(this.pnlGridsRow);
             this.pnlMainArea.Controls.Add(this.pnlChartsRow);
             this.pnlMainArea.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlMainArea.Location = new System.Drawing.Point(0, 295);
-            this.pnlMainArea.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlMainArea.Location = new System.Drawing.Point(0, 197);
             this.pnlMainArea.Name = "pnlMainArea";
-            this.pnlMainArea.Padding = new System.Windows.Forms.Padding(27, 25, 27, 12);
-            this.pnlMainArea.Size = new System.Drawing.Size(1761, 1015);
+            this.pnlMainArea.Padding = new System.Windows.Forms.Padding(20, 20, 20, 10);
+            this.pnlMainArea.Size = new System.Drawing.Size(1321, 653);
             this.pnlMainArea.TabIndex = 5;
             // 
             // pnlGridsRow
@@ -407,11 +384,10 @@
             this.pnlGridsRow.Controls.Add(this.panel2);
             this.pnlGridsRow.Controls.Add(this.pnlAlertsList);
             this.pnlGridsRow.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlGridsRow.Location = new System.Drawing.Point(27, 517);
-            this.pnlGridsRow.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlGridsRow.Location = new System.Drawing.Point(20, 420);
             this.pnlGridsRow.Name = "pnlGridsRow";
-            this.pnlGridsRow.Padding = new System.Windows.Forms.Padding(0, 12, 0, 0);
-            this.pnlGridsRow.Size = new System.Drawing.Size(1707, 486);
+            this.pnlGridsRow.Padding = new System.Windows.Forms.Padding(0, 10, 0, 0);
+            this.pnlGridsRow.Size = new System.Drawing.Size(1281, 223);
             this.pnlGridsRow.TabIndex = 1;
             // 
             // pnlRecentActivities
@@ -422,14 +398,13 @@
             this.pnlRecentActivities.Controls.Add(this.lblRecentActivities);
             this.pnlRecentActivities.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlRecentActivities.FillColor = System.Drawing.Color.White;
-            this.pnlRecentActivities.Location = new System.Drawing.Point(867, 12);
-            this.pnlRecentActivities.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlRecentActivities.Location = new System.Drawing.Point(650, 10);
             this.pnlRecentActivities.Name = "pnlRecentActivities";
             this.pnlRecentActivities.ShadowDecoration.BorderRadius = 10;
             this.pnlRecentActivities.ShadowDecoration.Color = System.Drawing.Color.Gainsboro;
             this.pnlRecentActivities.ShadowDecoration.Depth = 10;
             this.pnlRecentActivities.ShadowDecoration.Enabled = true;
-            this.pnlRecentActivities.Size = new System.Drawing.Size(840, 474);
+            this.pnlRecentActivities.Size = new System.Drawing.Size(631, 213);
             this.pnlRecentActivities.TabIndex = 2;
             // 
             // dgvRecentActivities
@@ -458,13 +433,12 @@
             this.dgvRecentActivities.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvRecentActivities.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvRecentActivities.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            this.dgvRecentActivities.Location = new System.Drawing.Point(0, 49);
-            this.dgvRecentActivities.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dgvRecentActivities.Location = new System.Drawing.Point(0, 40);
             this.dgvRecentActivities.Name = "dgvRecentActivities";
             this.dgvRecentActivities.ReadOnly = true;
             this.dgvRecentActivities.RowHeadersVisible = false;
             this.dgvRecentActivities.RowHeadersWidth = 51;
-            this.dgvRecentActivities.Size = new System.Drawing.Size(840, 425);
+            this.dgvRecentActivities.Size = new System.Drawing.Size(631, 173);
             this.dgvRecentActivities.TabIndex = 1;
             this.dgvRecentActivities.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
             this.dgvRecentActivities.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -495,10 +469,9 @@
             this.lblRecentActivities.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
             this.lblRecentActivities.ForeColor = System.Drawing.Color.Black;
             this.lblRecentActivities.Location = new System.Drawing.Point(0, 0);
-            this.lblRecentActivities.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblRecentActivities.Name = "lblRecentActivities";
-            this.lblRecentActivities.Padding = new System.Windows.Forms.Padding(13, 0, 0, 0);
-            this.lblRecentActivities.Size = new System.Drawing.Size(840, 49);
+            this.lblRecentActivities.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.lblRecentActivities.Size = new System.Drawing.Size(631, 40);
             this.lblRecentActivities.TabIndex = 0;
             this.lblRecentActivities.Text = "📋 HOẠT ĐỘNG GẦN ĐÂY";
             this.lblRecentActivities.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -506,10 +479,9 @@
             // panel2
             // 
             this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel2.Location = new System.Drawing.Point(840, 12);
-            this.panel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel2.Location = new System.Drawing.Point(630, 10);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(27, 474);
+            this.panel2.Size = new System.Drawing.Size(20, 213);
             this.panel2.TabIndex = 1;
             // 
             // pnlAlertsList
@@ -520,14 +492,13 @@
             this.pnlAlertsList.Controls.Add(this.lblAlertsList);
             this.pnlAlertsList.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlAlertsList.FillColor = System.Drawing.Color.White;
-            this.pnlAlertsList.Location = new System.Drawing.Point(0, 12);
-            this.pnlAlertsList.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlAlertsList.Location = new System.Drawing.Point(0, 10);
             this.pnlAlertsList.Name = "pnlAlertsList";
             this.pnlAlertsList.ShadowDecoration.BorderRadius = 10;
             this.pnlAlertsList.ShadowDecoration.Color = System.Drawing.Color.Gainsboro;
             this.pnlAlertsList.ShadowDecoration.Depth = 10;
             this.pnlAlertsList.ShadowDecoration.Enabled = true;
-            this.pnlAlertsList.Size = new System.Drawing.Size(840, 474);
+            this.pnlAlertsList.Size = new System.Drawing.Size(630, 213);
             this.pnlAlertsList.TabIndex = 0;
             // 
             // dgvAlerts
@@ -556,13 +527,12 @@
             this.dgvAlerts.DefaultCellStyle = dataGridViewCellStyle6;
             this.dgvAlerts.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvAlerts.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            this.dgvAlerts.Location = new System.Drawing.Point(0, 49);
-            this.dgvAlerts.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dgvAlerts.Location = new System.Drawing.Point(0, 40);
             this.dgvAlerts.Name = "dgvAlerts";
             this.dgvAlerts.ReadOnly = true;
             this.dgvAlerts.RowHeadersVisible = false;
             this.dgvAlerts.RowHeadersWidth = 51;
-            this.dgvAlerts.Size = new System.Drawing.Size(840, 425);
+            this.dgvAlerts.Size = new System.Drawing.Size(630, 173);
             this.dgvAlerts.TabIndex = 1;
             this.dgvAlerts.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
             this.dgvAlerts.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -593,10 +563,9 @@
             this.lblAlertsList.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
             this.lblAlertsList.ForeColor = System.Drawing.Color.Black;
             this.lblAlertsList.Location = new System.Drawing.Point(0, 0);
-            this.lblAlertsList.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblAlertsList.Name = "lblAlertsList";
-            this.lblAlertsList.Padding = new System.Windows.Forms.Padding(13, 0, 0, 0);
-            this.lblAlertsList.Size = new System.Drawing.Size(840, 49);
+            this.lblAlertsList.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.lblAlertsList.Size = new System.Drawing.Size(630, 40);
             this.lblAlertsList.TabIndex = 0;
             this.lblAlertsList.Text = "⚠️ CẢNH BÁO TỒN KHO";
             this.lblAlertsList.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -608,10 +577,9 @@
             this.pnlChartsRow.Controls.Add(this.panel1);
             this.pnlChartsRow.Controls.Add(this.pnlTopProducts);
             this.pnlChartsRow.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlChartsRow.Location = new System.Drawing.Point(27, 25);
-            this.pnlChartsRow.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlChartsRow.Location = new System.Drawing.Point(20, 20);
             this.pnlChartsRow.Name = "pnlChartsRow";
-            this.pnlChartsRow.Size = new System.Drawing.Size(1707, 492);
+            this.pnlChartsRow.Size = new System.Drawing.Size(1281, 400);
             this.pnlChartsRow.TabIndex = 0;
             // 
             // pnlRevenueChart
@@ -623,13 +591,12 @@
             this.pnlRevenueChart.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlRevenueChart.FillColor = System.Drawing.Color.White;
             this.pnlRevenueChart.Location = new System.Drawing.Point(0, 0);
-            this.pnlRevenueChart.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlRevenueChart.Name = "pnlRevenueChart";
             this.pnlRevenueChart.ShadowDecoration.BorderRadius = 10;
             this.pnlRevenueChart.ShadowDecoration.Color = System.Drawing.Color.Gainsboro;
             this.pnlRevenueChart.ShadowDecoration.Depth = 10;
             this.pnlRevenueChart.ShadowDecoration.Enabled = true;
-            this.pnlRevenueChart.Size = new System.Drawing.Size(1080, 492);
+            this.pnlRevenueChart.Size = new System.Drawing.Size(811, 400);
             this.pnlRevenueChart.TabIndex = 2;
             // 
             // chartRevenue
@@ -642,14 +609,13 @@
             this.chartRevenue.ChartAreas.Add(chartArea1);
             legend1.Name = "Legend1";
             this.chartRevenue.Legends.Add(legend1);
-            this.chartRevenue.Location = new System.Drawing.Point(0, 49);
-            this.chartRevenue.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chartRevenue.Location = new System.Drawing.Point(0, 40);
             this.chartRevenue.Name = "chartRevenue";
             series1.ChartArea = "ChartArea1";
             series1.Legend = "Legend1";
             series1.Name = "Doanh thu";
             this.chartRevenue.Series.Add(series1);
-            this.chartRevenue.Size = new System.Drawing.Size(1080, 443);
+            this.chartRevenue.Size = new System.Drawing.Size(811, 360);
             this.chartRevenue.TabIndex = 1;
             this.chartRevenue.Text = "chart1";
             // 
@@ -660,10 +626,9 @@
             this.lblRevenueChart.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
             this.lblRevenueChart.ForeColor = System.Drawing.Color.Black;
             this.lblRevenueChart.Location = new System.Drawing.Point(0, 0);
-            this.lblRevenueChart.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblRevenueChart.Name = "lblRevenueChart";
-            this.lblRevenueChart.Padding = new System.Windows.Forms.Padding(13, 0, 0, 0);
-            this.lblRevenueChart.Size = new System.Drawing.Size(1080, 49);
+            this.lblRevenueChart.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.lblRevenueChart.Size = new System.Drawing.Size(811, 40);
             this.lblRevenueChart.TabIndex = 0;
             this.lblRevenueChart.Text = "📈 DOANH THU 7 NGÀY GẦN NHẤT";
             this.lblRevenueChart.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -671,10 +636,9 @@
             // panel1
             // 
             this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel1.Location = new System.Drawing.Point(1080, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel1.Location = new System.Drawing.Point(811, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(27, 492);
+            this.panel1.Size = new System.Drawing.Size(20, 400);
             this.panel1.TabIndex = 1;
             // 
             // pnlTopProducts
@@ -685,14 +649,13 @@
             this.pnlTopProducts.Controls.Add(this.lblTopProducts);
             this.pnlTopProducts.Dock = System.Windows.Forms.DockStyle.Right;
             this.pnlTopProducts.FillColor = System.Drawing.Color.White;
-            this.pnlTopProducts.Location = new System.Drawing.Point(1107, 0);
-            this.pnlTopProducts.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlTopProducts.Location = new System.Drawing.Point(831, 0);
             this.pnlTopProducts.Name = "pnlTopProducts";
             this.pnlTopProducts.ShadowDecoration.BorderRadius = 10;
             this.pnlTopProducts.ShadowDecoration.Color = System.Drawing.Color.Gainsboro;
             this.pnlTopProducts.ShadowDecoration.Depth = 10;
             this.pnlTopProducts.ShadowDecoration.Enabled = true;
-            this.pnlTopProducts.Size = new System.Drawing.Size(600, 492);
+            this.pnlTopProducts.Size = new System.Drawing.Size(450, 400);
             this.pnlTopProducts.TabIndex = 0;
             // 
             // chartTopProducts
@@ -705,14 +668,13 @@
             this.chartTopProducts.ChartAreas.Add(chartArea2);
             legend2.Name = "Legend1";
             this.chartTopProducts.Legends.Add(legend2);
-            this.chartTopProducts.Location = new System.Drawing.Point(0, 49);
-            this.chartTopProducts.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chartTopProducts.Location = new System.Drawing.Point(0, 40);
             this.chartTopProducts.Name = "chartTopProducts";
             series2.ChartArea = "ChartArea1";
             series2.Legend = "Legend1";
             series2.Name = "Số lượng";
             this.chartTopProducts.Series.Add(series2);
-            this.chartTopProducts.Size = new System.Drawing.Size(600, 443);
+            this.chartTopProducts.Size = new System.Drawing.Size(450, 360);
             this.chartTopProducts.TabIndex = 1;
             this.chartTopProducts.Text = "chart2";
             // 
@@ -723,26 +685,24 @@
             this.lblTopProducts.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
             this.lblTopProducts.ForeColor = System.Drawing.Color.Black;
             this.lblTopProducts.Location = new System.Drawing.Point(0, 0);
-            this.lblTopProducts.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTopProducts.Name = "lblTopProducts";
-            this.lblTopProducts.Padding = new System.Windows.Forms.Padding(13, 0, 0, 0);
-            this.lblTopProducts.Size = new System.Drawing.Size(600, 49);
+            this.lblTopProducts.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.lblTopProducts.Size = new System.Drawing.Size(450, 40);
             this.lblTopProducts.TabIndex = 0;
             this.lblTopProducts.Text = "🔥 TOP 5 SẢN PHẨM BÁN CHẠY";
             this.lblTopProducts.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // frmDashboard
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(249)))), ((int)(((byte)(250)))));
-            this.ClientSize = new System.Drawing.Size(1761, 1372);
+            this.ClientSize = new System.Drawing.Size(1321, 894);
             this.Controls.Add(this.pnlMainArea);
             this.Controls.Add(this.pnlShiftInfo);
             this.Controls.Add(this.flowLayoutPanelKPI);
             this.Controls.Add(this.guna2Panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "frmDashboard";
             this.Text = "Dashboard";
             this.Load += new System.EventHandler(this.frmDashboard_Load);

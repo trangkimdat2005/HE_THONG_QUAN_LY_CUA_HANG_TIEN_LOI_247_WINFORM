@@ -26,14 +26,6 @@
             this.splitContainer = new System.Windows.Forms.SplitContainer();
             this.panelLeft = new System.Windows.Forms.Panel();
             this.dgvInvoiceDetails = new System.Windows.Forms.DataGridView();
-            this.colSanPhamId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colUnitInvoice = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colUnitPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPromo = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.colRemove = new System.Windows.Forms.DataGridViewButtonColumn();
             this.panelTotal = new System.Windows.Forms.Panel();
             this.lblTotal = new System.Windows.Forms.Label();
             this.lblTotalTitle = new System.Windows.Forms.Label();
@@ -63,6 +55,14 @@
             this.pnlButtons = new System.Windows.Forms.Panel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnPayment = new System.Windows.Forms.Button();
+            this.colSanPhamId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colUnitInvoice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colUnitPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPromo = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.colRemove = new System.Windows.Forms.DataGridViewButtonColumn();
             this.pnlTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
@@ -113,7 +113,7 @@
             // 
             this.splitContainer.Panel2.Controls.Add(this.panelRight);
             this.splitContainer.Size = new System.Drawing.Size(1400, 640);
-            this.splitContainer.SplitterDistance = 850;
+            this.splitContainer.SplitterDistance = 961;
             this.splitContainer.TabIndex = 1;
             // 
             // panelLeft
@@ -126,7 +126,7 @@
             this.panelLeft.Location = new System.Drawing.Point(0, 0);
             this.panelLeft.Name = "panelLeft";
             this.panelLeft.Padding = new System.Windows.Forms.Padding(10);
-            this.panelLeft.Size = new System.Drawing.Size(850, 640);
+            this.panelLeft.Size = new System.Drawing.Size(961, 640);
             this.panelLeft.TabIndex = 0;
             // 
             // dgvInvoiceDetails
@@ -167,66 +167,10 @@
             this.dgvInvoiceDetails.Name = "dgvInvoiceDetails";
             this.dgvInvoiceDetails.RowHeadersVisible = false;
             this.dgvInvoiceDetails.RowTemplate.Height = 35;
-            this.dgvInvoiceDetails.Size = new System.Drawing.Size(830, 410);
+            this.dgvInvoiceDetails.Size = new System.Drawing.Size(941, 410);
             this.dgvInvoiceDetails.TabIndex = 0;
             this.dgvInvoiceDetails.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvInvoiceDetails_CellContentClick);
             this.dgvInvoiceDetails.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvInvoiceDetails_CellValueChanged);
-            // 
-            // colSanPhamId
-            // 
-            this.colSanPhamId.HeaderText = "SanPhamId";
-            this.colSanPhamId.Name = "colSanPhamId";
-            this.colSanPhamId.Visible = false;
-            // 
-            // colProduct
-            // 
-            this.colProduct.HeaderText = "Sản phẩm";
-            this.colProduct.Name = "colProduct";
-            this.colProduct.ReadOnly = true;
-            // 
-            // colUnitInvoice
-            // 
-            this.colUnitInvoice.FillWeight = 60F;
-            this.colUnitInvoice.HeaderText = "Đơn vị";
-            this.colUnitInvoice.Name = "colUnitInvoice";
-            this.colUnitInvoice.ReadOnly = true;
-            // 
-            // colQuantity
-            // 
-            this.colQuantity.FillWeight = 80F;
-            this.colQuantity.HeaderText = "Số lượng";
-            this.colQuantity.Name = "colQuantity";
-            // 
-            // colUnitPrice
-            // 
-            this.colUnitPrice.FillWeight = 90F;
-            this.colUnitPrice.HeaderText = "Đơn giá";
-            this.colUnitPrice.Name = "colUnitPrice";
-            this.colUnitPrice.ReadOnly = true;
-            // 
-            // colTotal
-            // 
-            this.colTotal.FillWeight = 90F;
-            this.colTotal.HeaderText = "Thành tiền";
-            this.colTotal.Name = "colTotal";
-            this.colTotal.ReadOnly = true;
-            // 
-            // colPromo
-            // 
-            this.colPromo.FillWeight = 50F;
-            this.colPromo.HeaderText = "KM";
-            this.colPromo.Name = "colPromo";
-            this.colPromo.Text = "Chọn";
-            this.colPromo.UseColumnTextForButtonValue = false;
-            this.colPromo.Width = 140; // widen promo column
-            // 
-            // colRemove
-            // 
-            this.colRemove.HeaderText = "X";
-            this.colRemove.Name = "colRemove";
-            this.colRemove.Text = "X";
-            this.colRemove.UseColumnTextForButtonValue = true;
-            this.colRemove.Width = 50;
             // 
             // panelTotal
             // 
@@ -242,7 +186,7 @@
             this.panelTotal.Location = new System.Drawing.Point(10, 500);
             this.panelTotal.Name = "panelTotal";
             this.panelTotal.Padding = new System.Windows.Forms.Padding(10);
-            this.panelTotal.Size = new System.Drawing.Size(830, 130);
+            this.panelTotal.Size = new System.Drawing.Size(941, 130);
             this.panelTotal.TabIndex = 1;
             // 
             // lblTotal
@@ -250,7 +194,7 @@
             this.lblTotal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblTotal.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold);
             this.lblTotal.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(76)))), ((int)(((byte)(60)))));
-            this.lblTotal.Location = new System.Drawing.Point(570, 80);
+            this.lblTotal.Location = new System.Drawing.Point(681, 80);
             this.lblTotal.Name = "lblTotal";
             this.lblTotal.Size = new System.Drawing.Size(240, 32);
             this.lblTotal.TabIndex = 5;
@@ -262,7 +206,7 @@
             this.lblTotalTitle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblTotalTitle.AutoSize = true;
             this.lblTotalTitle.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
-            this.lblTotalTitle.Location = new System.Drawing.Point(440, 85);
+            this.lblTotalTitle.Location = new System.Drawing.Point(551, 85);
             this.lblTotalTitle.Name = "lblTotalTitle";
             this.lblTotalTitle.Size = new System.Drawing.Size(114, 25);
             this.lblTotalTitle.TabIndex = 4;
@@ -272,7 +216,7 @@
             // 
             this.lblDiscountValue.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblDiscountValue.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold);
-            this.lblDiscountValue.Location = new System.Drawing.Point(570, 50);
+            this.lblDiscountValue.Location = new System.Drawing.Point(681, 50);
             this.lblDiscountValue.Name = "lblDiscountValue";
             this.lblDiscountValue.Size = new System.Drawing.Size(240, 20);
             this.lblDiscountValue.TabIndex = 3;
@@ -284,7 +228,7 @@
             this.lblDiscountTitle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblDiscountTitle.AutoSize = true;
             this.lblDiscountTitle.Font = new System.Drawing.Font("Segoe UI", 11F);
-            this.lblDiscountTitle.Location = new System.Drawing.Point(470, 50);
+            this.lblDiscountTitle.Location = new System.Drawing.Point(581, 50);
             this.lblDiscountTitle.Name = "lblDiscountTitle";
             this.lblDiscountTitle.Size = new System.Drawing.Size(72, 20);
             this.lblDiscountTitle.TabIndex = 2;
@@ -294,7 +238,7 @@
             // 
             this.lblSubtotal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblSubtotal.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold);
-            this.lblSubtotal.Location = new System.Drawing.Point(570, 20);
+            this.lblSubtotal.Location = new System.Drawing.Point(681, 20);
             this.lblSubtotal.Name = "lblSubtotal";
             this.lblSubtotal.Size = new System.Drawing.Size(240, 20);
             this.lblSubtotal.TabIndex = 1;
@@ -306,7 +250,7 @@
             this.lblSubtotalTitle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblSubtotalTitle.AutoSize = true;
             this.lblSubtotalTitle.Font = new System.Drawing.Font("Segoe UI", 11F);
-            this.lblSubtotalTitle.Location = new System.Drawing.Point(470, 20);
+            this.lblSubtotalTitle.Location = new System.Drawing.Point(581, 20);
             this.lblSubtotalTitle.Name = "lblSubtotalTitle";
             this.lblSubtotalTitle.Size = new System.Drawing.Size(70, 20);
             this.lblSubtotalTitle.TabIndex = 0;
@@ -325,7 +269,7 @@
             this.pnlInvoiceInfo.Location = new System.Drawing.Point(10, 10);
             this.pnlInvoiceInfo.Name = "pnlInvoiceInfo";
             this.pnlInvoiceInfo.Padding = new System.Windows.Forms.Padding(10);
-            this.pnlInvoiceInfo.Size = new System.Drawing.Size(830, 80);
+            this.pnlInvoiceInfo.Size = new System.Drawing.Size(941, 80);
             this.pnlInvoiceInfo.TabIndex = 3;
             // 
             // btnAddCustomer
@@ -335,7 +279,7 @@
             this.btnAddCustomer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAddCustomer.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.btnAddCustomer.ForeColor = System.Drawing.Color.White;
-            this.btnAddCustomer.Location = new System.Drawing.Point(690, 40);
+            this.btnAddCustomer.Location = new System.Drawing.Point(801, 40);
             this.btnAddCustomer.Name = "btnAddCustomer";
             this.btnAddCustomer.Size = new System.Drawing.Size(120, 28);
             this.btnAddCustomer.TabIndex = 4;
@@ -351,7 +295,7 @@
             this.cmbCustomer.FormattingEnabled = true;
             this.cmbCustomer.Location = new System.Drawing.Point(130, 42);
             this.cmbCustomer.Name = "cmbCustomer";
-            this.cmbCustomer.Size = new System.Drawing.Size(550, 25);
+            this.cmbCustomer.Size = new System.Drawing.Size(661, 25);
             this.cmbCustomer.TabIndex = 3;
             // 
             // lblCustomer
@@ -394,7 +338,7 @@
             this.panelRight.Location = new System.Drawing.Point(0, 0);
             this.panelRight.Name = "panelRight";
             this.panelRight.Padding = new System.Windows.Forms.Padding(10);
-            this.panelRight.Size = new System.Drawing.Size(546, 640);
+            this.panelRight.Size = new System.Drawing.Size(435, 640);
             this.panelRight.TabIndex = 0;
             // 
             // dgvProducts
@@ -437,7 +381,7 @@
             this.dgvProducts.RowHeadersVisible = false;
             this.dgvProducts.RowTemplate.Height = 40;
             this.dgvProducts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvProducts.Size = new System.Drawing.Size(526, 540);
+            this.dgvProducts.Size = new System.Drawing.Size(415, 540);
             this.dgvProducts.TabIndex = 0;
             this.dgvProducts.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProducts_CellContentClick);
             // 
@@ -495,7 +439,7 @@
             this.pnlProductSearch.Location = new System.Drawing.Point(10, 10);
             this.pnlProductSearch.Name = "pnlProductSearch";
             this.pnlProductSearch.Padding = new System.Windows.Forms.Padding(10);
-            this.pnlProductSearch.Size = new System.Drawing.Size(526, 80);
+            this.pnlProductSearch.Size = new System.Drawing.Size(415, 80);
             this.pnlProductSearch.TabIndex = 1;
             // 
             // cmbCategory
@@ -507,7 +451,7 @@
             this.cmbCategory.FormattingEnabled = true;
             this.cmbCategory.Location = new System.Drawing.Point(100, 42);
             this.cmbCategory.Name = "cmbCategory";
-            this.cmbCategory.Size = new System.Drawing.Size(410, 25);
+            this.cmbCategory.Size = new System.Drawing.Size(299, 25);
             this.cmbCategory.TabIndex = 3;
             this.cmbCategory.SelectedIndexChanged += new System.EventHandler(this.cmbCategory_SelectedIndexChanged);
             // 
@@ -528,7 +472,7 @@
             this.txtSearch.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             this.txtSearch.Location = new System.Drawing.Point(100, 12);
             this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(410, 25);
+            this.txtSearch.Size = new System.Drawing.Size(299, 25);
             this.txtSearch.TabIndex = 1;
             this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
             // 
@@ -585,6 +529,61 @@
             this.btnPayment.UseVisualStyleBackColor = false;
             this.btnPayment.Click += new System.EventHandler(this.btnPayment_Click);
             // 
+            // colSanPhamId
+            // 
+            this.colSanPhamId.HeaderText = "SanPhamId";
+            this.colSanPhamId.Name = "colSanPhamId";
+            this.colSanPhamId.Visible = false;
+            // 
+            // colProduct
+            // 
+            this.colProduct.HeaderText = "Sản phẩm";
+            this.colProduct.Name = "colProduct";
+            this.colProduct.ReadOnly = true;
+            // 
+            // colUnitInvoice
+            // 
+            this.colUnitInvoice.FillWeight = 60F;
+            this.colUnitInvoice.HeaderText = "Đơn vị";
+            this.colUnitInvoice.Name = "colUnitInvoice";
+            this.colUnitInvoice.ReadOnly = true;
+            // 
+            // colQuantity
+            // 
+            this.colQuantity.FillWeight = 50F;
+            this.colQuantity.HeaderText = "Số lượng";
+            this.colQuantity.Name = "colQuantity";
+            // 
+            // colUnitPrice
+            // 
+            this.colUnitPrice.FillWeight = 50F;
+            this.colUnitPrice.HeaderText = "Đơn giá";
+            this.colUnitPrice.Name = "colUnitPrice";
+            this.colUnitPrice.ReadOnly = true;
+            // 
+            // colTotal
+            // 
+            this.colTotal.FillWeight = 90F;
+            this.colTotal.HeaderText = "Thành tiền";
+            this.colTotal.Name = "colTotal";
+            this.colTotal.ReadOnly = true;
+            // 
+            // colPromo
+            // 
+            this.colPromo.FillWeight = 100F;
+            this.colPromo.HeaderText = "Khuyết mãi";
+            this.colPromo.Name = "colPromo";
+            this.colPromo.Text = "Chọn";
+            // 
+            // colRemove
+            //
+            this.colRemove.FillWeight = 25F;
+            this.colRemove.HeaderText = "Xoá";
+            this.colRemove.Name = "colRemove";
+            this.colRemove.Text = "Xoá";
+      
+            this.colRemove.UseColumnTextForButtonValue = true;
+            // 
             // frmInvoiceDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -627,14 +626,6 @@
         private System.Windows.Forms.SplitContainer splitContainer;
         private System.Windows.Forms.Panel panelLeft;
         private System.Windows.Forms.DataGridView dgvInvoiceDetails;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colProduct;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colUnitInvoice;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colQuantity;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colUnitPrice;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colTotal;
-        private System.Windows.Forms.DataGridViewButtonColumn colPromo;
-        private System.Windows.Forms.DataGridViewButtonColumn colRemove;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colSanPhamId;
         private System.Windows.Forms.Panel panelTotal;
         private System.Windows.Forms.Label lblTotal;
         private System.Windows.Forms.Label lblTotalTitle;
@@ -664,5 +655,13 @@
         private System.Windows.Forms.Panel pnlButtons;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnPayment;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSanPhamId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colProduct;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colUnitInvoice;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colQuantity;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colUnitPrice;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTotal;
+        private System.Windows.Forms.DataGridViewButtonColumn colPromo;
+        private System.Windows.Forms.DataGridViewButtonColumn colRemove;
     }
 }
