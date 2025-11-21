@@ -378,5 +378,9 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
             _stockInController?.Dispose();
             base.OnFormClosing(e);
         }
+
+        private void panelControls_Paint(object sender, PaintEventArgs e)
+        {
+        }
     }
 }
