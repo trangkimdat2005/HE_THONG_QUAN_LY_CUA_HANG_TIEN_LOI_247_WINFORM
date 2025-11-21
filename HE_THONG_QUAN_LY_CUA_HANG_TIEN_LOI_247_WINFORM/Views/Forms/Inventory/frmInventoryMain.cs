@@ -31,7 +31,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
 
             this.Load += frmInventoryMain_Load;
             //if (btnSearch != null) btnSearch.Click += btnSearch_Click;
-            //if (btnAdd != null) btnAdd.Click += btnAdd_Click;
+            if (btnAdd != null) btnAdd.Click += btnAdd_Click;
             //if (btnDetail != null) btnDetail.Click += btnDetail_Click;
             if (btnDelete != null) btnDelete.Click += btnDelete_Click;
 

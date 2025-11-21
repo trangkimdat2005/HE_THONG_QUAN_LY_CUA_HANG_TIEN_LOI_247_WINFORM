@@ -249,7 +249,7 @@
             this.btn_dashboard.PressedDepth = 50;
             this.btn_dashboard.Size = new System.Drawing.Size(305, 50);
             this.btn_dashboard.TabIndex = 3;
-            this.btn_dashboard.Text = "Overview";
+            this.btn_dashboard.Text = "Bảng điều khiển";
             this.btn_dashboard.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.btn_dashboard.UseTransparentBackground = true;
             this.btn_dashboard.Click += new System.EventHandler(this.btn_dashboard_Click);
@@ -918,6 +918,7 @@
             this.btn_reports.Text = "Báo cáo";
             this.btn_reports.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.btn_reports.UseTransparentBackground = true;
+            this.btn_reports.Visible = false;
             this.btn_reports.Click += new System.EventHandler(this.btn_reports_Click);
             // 
             // pnlUserInfo

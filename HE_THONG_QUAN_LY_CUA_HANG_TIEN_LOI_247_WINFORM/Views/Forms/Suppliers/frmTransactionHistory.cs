@@ -83,7 +83,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
                 SetupDataGridView();
                 LoadSupplierComboBox();
 
-                dtpFromDate.Value = DateTime.Now.AddMonths(-1);
+                dtpFromDate.Value = DateTime.Now.AddMonths(-12);
                 dtpToDate.Value = DateTime.Now;
 
                 LoadTransactions();
@@ -250,7 +250,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             cboSupplier.SelectedIndex = 0;
-            dtpFromDate.Value = DateTime.Now.AddMonths(-1);
+            dtpFromDate.Value = DateTime.Now.AddMonths(-12);
             dtpToDate.Value = DateTime.Now;
             LoadTransactions();
         }
@@ -319,6 +319,11 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
             {
                 MessageBox.Show($"Lỗi xuất Excel: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void dtpFromDate_ValueChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
