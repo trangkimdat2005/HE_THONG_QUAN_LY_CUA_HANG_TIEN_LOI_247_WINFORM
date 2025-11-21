@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using System.Linq;
 using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Controllers;
 using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Models;
+using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Utils; // <-- Thêm using cho UserSession
 
 namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Views.Forms.Inventory
 {
@@ -14,7 +15,6 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Views.Forms.Inventory
         private List<ImportDetailItem> _detailList;
         private decimal _totalAmount = 0;
 
-        // Class để lưu chi tiết phiếu nhập tạm
         private class ImportDetailItem
         {
             public string SanPhamDonViId { get; set; }
@@ -59,6 +59,9 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Views.Forms.Inventory
                 dtpDate.Value = DateTime.Now;
                 dtpExpiry.Value = DateTime.Now.AddMonths(6);
 
+                // ✅ TỰ ĐỘNG CHỌN NHÂN VIÊN ĐANG ĐĂNG NHẬP
+                SetCurrentEmployee();
+
                 UpdateTotal();
             }
             catch (Exception ex)
@@ -68,9 +71,46 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Views.Forms.Inventory
             }
         }
 
+        /// <summary>
+        /// Tự động chọn nhân viên đang đăng nhập và disable ComboBox
+        /// </summary>
+        private void SetCurrentEmployee()
+        {
+            try
+            {
+                var session = UserSession.Instance;
+                
+                if (!session.IsLoggedIn || string.IsNullOrEmpty(session.EmployeeId))
+                {
+                    MessageBox.Show("Không tìm thấy thông tin nhân viên đăng nhập!\nVui lòng đăng nhập lại.", 
+                        "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                if (cboStaff != null)
+                {
+                    cboStaff.SelectedValue = session.EmployeeId;
+                    
+                    cboStaff.Enabled = false;
+                    
+                    cboStaff.BackColor = Color.FromArgb(240, 240, 240); 
+                    
+                    ToolTip tooltip = new ToolTip();
+                    tooltip.SetToolTip(cboStaff, 
+                        $"Nhân viên: {session.EmployeeName}\n" +
+                        $"Chức vụ: {session.Position}\n" +
+                        $"(Tự động lấy từ tài khoản đăng nhập)");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi thiết lập nhân viên: {ex.Message}", "Lỗi",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         private void SetupDataGridView()
         {
-            // Style cho GridView
             dgvDetail.BackgroundColor = Color.White;
             dgvDetail.BorderStyle = BorderStyle.None;
             dgvDetail.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
@@ -78,21 +118,18 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Views.Forms.Inventory
             dgvDetail.RowHeadersVisible = false;
             dgvDetail.EnableHeadersVisualStyles = false;
 
-            // Header Style
             dgvDetail.ColumnHeadersHeight = 45;
             dgvDetail.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(41, 128, 185);
             dgvDetail.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
             dgvDetail.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
             dgvDetail.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
 
-            // Row Style
             dgvDetail.RowTemplate.Height = 40;
             dgvDetail.DefaultCellStyle.SelectionBackColor = Color.FromArgb(235, 245, 255);
             dgvDetail.DefaultCellStyle.SelectionForeColor = Color.Black;
             dgvDetail.DefaultCellStyle.Font = new Font("Segoe UI", 9.75F);
             dgvDetail.DefaultCellStyle.Padding = new Padding(5, 0, 0, 0);
 
-            // Căn chỉnh cột
             if (colQty != null) colQty.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             if (colPrice != null) colPrice.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             if (colTotal != null) colTotal.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
@@ -149,9 +186,6 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Views.Forms.Inventory
             }
         }
 
-        /// <summary>
-        /// Auto-load nhà cung cấp khi chọn sản phẩm
-        /// </summary>
         private void cboProduct_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cboProduct.SelectedValue == null || cboProduct.SelectedIndex == -1)
@@ -171,7 +205,6 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Views.Forms.Inventory
             }
             catch
             {
-                // Im lặng nếu không tìm thấy NCC
             }
         }
 
@@ -179,7 +212,6 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Views.Forms.Inventory
         {
             try
             {
-                // Validation - BẮT BUỘC NHẬP HẾT TẤT CẢ
                 if (cboSupplier.SelectedValue == null)
                 {
                     MessageBox.Show("Vui lòng chọn nhà cung cấp trước khi thêm sản phẩm!", "Thông báo",
@@ -190,9 +222,8 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Views.Forms.Inventory
 
                 if (cboStaff.SelectedValue == null)
                 {
-                    MessageBox.Show("Vui lòng chọn nhân viên trước khi thêm sản phẩm!", "Thông báo",
-                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    cboStaff.Focus();
+                    MessageBox.Show("Không tìm thấy thông tin nhân viên!\nVui lòng đăng nhập lại.", "Lỗi",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
@@ -263,7 +294,6 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Views.Forms.Inventory
                 UpdateTotal();
                 ClearInput();
 
-                // KHÔNG HIỂN thị message box - Chỉ im lặng thêm vào grid
             }
             catch (Exception ex)
             {
@@ -305,7 +335,6 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Views.Forms.Inventory
 
         private void dgvDetail_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            // Xử lý nút Xóa
             if (e.ColumnIndex == colDelete.Index && e.RowIndex >= 0)
             {
                 if (MessageBox.Show("Bạn có chắc muốn xóa sản phẩm này?", "Xác nhận",
@@ -332,9 +361,8 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Views.Forms.Inventory
 
                 if (cboStaff.SelectedValue == null)
                 {
-                    MessageBox.Show("Vui lòng chọn nhân viên!", "Thông báo",
-                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    cboStaff.Focus();
+                    MessageBox.Show("Không tìm thấy thông tin nhân viên!\nVui lòng đăng nhập lại.", "Lỗi",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
@@ -366,7 +394,12 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Views.Forms.Inventory
 
                 if (success)
                 {
-                    MessageBox.Show($"✓ Lưu phiếu nhập thành công!\nMã: {phieuNhapId} - Tổng: {_totalAmount:N0}đ",
+                    var session = UserSession.Instance;
+                    MessageBox.Show(
+                        $" Lưu phiếu nhập thành công!\n\n" +
+                        $"Mã phiếu: {phieuNhapId}\n" +
+                        $"Người nhập: {session.EmployeeName}\n" +
+                        $"Tổng tiền: {_totalAmount:N0} đ",
                         "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     this.DialogResult = DialogResult.OK;

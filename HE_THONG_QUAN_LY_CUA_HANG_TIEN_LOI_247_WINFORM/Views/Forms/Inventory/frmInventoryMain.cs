@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-using System.Runtime.InteropServices; // <--- 1. Thêm thư viện này
+using System.Runtime.InteropServices;
 using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Controllers;
 
 namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms.Inventory
@@ -27,6 +27,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
             _stockInController = new StockInController();
 
             SetPlaceholder(txtSearch, "Nhập mã phiếu hoặc tên nhà cung cấp...");
+            if (btnExport != null) btnExport.Click += btnExport_Click;
 
             this.Load += frmInventoryMain_Load;
             //if (btnSearch != null) btnSearch.Click += btnSearch_Click;
@@ -260,6 +261,116 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
                 return dgvImportList.CurrentRow.Cells["colId"].Value.ToString();
 
             return null;
+        }
+
+        private void btnExport_Click(object sender, EventArgs e)
+        {
+            ExportToExcel(dgvImportList);
+        }
+
+        private void ExportToExcel(DataGridView dgv)
+        {
+            if (dgv.Rows.Count == 0)
+            {
+                MessageBox.Show("Không có dữ liệu để xuất!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            try
+            {
+                using (SaveFileDialog sfd = new SaveFileDialog())
+                {
+                    sfd.Filter = "Excel Workbook|*.xlsx";
+                    sfd.FileName = "DanhSachPhieuNhap_" + DateTime.Now.ToString("ddMMyyy_HHmmss") + ".xlsx";
+
+
+                    if (sfd.ShowDialog() == DialogResult.OK)
+                    {
+                        using (var workbook = new ClosedXML.Excel.XLWorkbook())
+                        {
+                            var worksheet = workbook.Worksheets.Add("Phiếu Nhập Hàng");
+
+
+                            // Header (dòng 4)
+                            int headerRow = 1;
+                            for (int i = 0; i < dgv.Columns.Count; i++)
+                            {
+                                worksheet.Cell(headerRow, i + 1).Value = dgv.Columns[i].HeaderText;
+                                worksheet.Cell(headerRow, i + 1).Style.Font.Bold = true;
+                                worksheet.Cell(headerRow, i + 1).Style.Fill.BackgroundColor = ClosedXML.Excel.XLColor.LightGreen;
+                                worksheet.Cell(headerRow, i + 1).Style.Alignment.Horizontal = ClosedXML.Excel.XLAlignmentHorizontalValues.Center;
+                            }
+
+                            // Data
+                            decimal totalAmount = 0;
+                            for (int i = 0; i < dgv.Rows.Count; i++)
+                            {
+                                for (int j = 0; j < dgv.Columns.Count; j++)
+                                {
+                                    var cell = worksheet.Cell(i + headerRow + 1, j + 1);
+                                    var cellValue = dgv.Rows[i].Cells[j].Value;
+                                    
+                                    if (cellValue != null)
+                                    {
+                                        cell.Value = cellValue.ToString();
+
+                                        // Format cột tiền
+                                        if (dgv.Columns[j].Name == "colTotal")
+                                        {
+                                            string cleanValue = cellValue.ToString().Replace(" đ", "").Replace(",", "");
+                                            if (decimal.TryParse(cleanValue, out decimal amount))
+                                            {
+                                                cell.Value = (double)amount;
+                                                cell.Style.NumberFormat.Format = "#,##0";
+                                                cell.Style.Alignment.Horizontal = ClosedXML.Excel.XLAlignmentHorizontalValues.Right;
+                                                totalAmount += amount;
+                                            }
+                                        }
+                                        // Format cột ngày
+                                        else if (dgv.Columns[j].Name == "colDate")
+                                        {
+                                            if (DateTime.TryParse(cellValue.ToString(), out DateTime date))
+                                            {
+                                                cell.Value = date;
+                                                cell.Style.DateFormat.Format = "dd/MM/yyyy";
+                                                cell.Style.Alignment.Horizontal = ClosedXML.Excel.XLAlignmentHorizontalValues.Center;
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        cell.Value = "";
+                                    }
+                                }
+                            }
+
+                            // Tổng cộng
+                            int totalRow = dgv.Rows.Count + headerRow + 1;
+                            worksheet.Cell(totalRow, 4).Value = "TỔNG CỘNG:";
+                            worksheet.Cell(totalRow, 4).Style.Font.Bold = true;
+                            worksheet.Cell(totalRow, 4).Style.Alignment.Horizontal = ClosedXML.Excel.XLAlignmentHorizontalValues.Right;
+
+                            worksheet.Cell(totalRow, 5).Value = (double)totalAmount;
+                            worksheet.Cell(totalRow, 5).Style.Font.Bold = true;
+                            worksheet.Cell(totalRow, 5).Style.NumberFormat.Format = "#,##0";
+                            worksheet.Cell(totalRow, 5).Style.Alignment.Horizontal = ClosedXML.Excel.XLAlignmentHorizontalValues.Right;
+                            worksheet.Cell(totalRow, 5).Style.Fill.BackgroundColor = ClosedXML.Excel.XLColor.LightYellow;
+
+                            // Auto-fit columns
+                            worksheet.Columns().AdjustToContents();
+
+                            workbook.SaveAs(sfd.FileName);
+                        }
+
+                        MessageBox.Show("Xuất file Excel thành công!\nĐường dẫn: " + sfd.FileName, 
+                            "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi xuất file: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         protected override void OnFormClosing(FormClosingEventArgs e)

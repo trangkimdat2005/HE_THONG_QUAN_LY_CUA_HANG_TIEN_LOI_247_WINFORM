@@ -33,6 +33,7 @@
             this.colTenSP = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDVT = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSoLuong = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnExport = new System.Windows.Forms.Button();
             this.panelTop.SuspendLayout();
             this.panelSearch.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -46,7 +47,7 @@
             this.panelTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelTop.Location = new System.Drawing.Point(0, 0);
             this.panelTop.Name = "panelTop";
-            this.panelTop.Size = new System.Drawing.Size(1000, 60);
+            this.panelTop.Size = new System.Drawing.Size(1163, 60);
             this.panelTop.TabIndex = 0;
             // 
             // lblTitle
@@ -63,6 +64,7 @@
             // panelSearch
             // 
             this.panelSearch.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.panelSearch.Controls.Add(this.btnExport);
             this.panelSearch.Controls.Add(this.lblProductName);
             this.panelSearch.Controls.Add(this.btnRefresh);
             this.panelSearch.Controls.Add(this.btnSearch);
@@ -71,7 +73,7 @@
             this.panelSearch.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelSearch.Location = new System.Drawing.Point(0, 60);
             this.panelSearch.Name = "panelSearch";
-            this.panelSearch.Size = new System.Drawing.Size(1000, 70);
+            this.panelSearch.Size = new System.Drawing.Size(1163, 70);
             this.panelSearch.TabIndex = 1;
             // 
             // lblProductName
@@ -137,7 +139,7 @@
             this.panel1.Location = new System.Drawing.Point(0, 130);
             this.panel1.Name = "panel1";
             this.panel1.Padding = new System.Windows.Forms.Padding(20);
-            this.panel1.Size = new System.Drawing.Size(1000, 470);
+            this.panel1.Size = new System.Drawing.Size(1163, 470);
             this.panel1.TabIndex = 2;
             // 
             // dgvInventory
@@ -175,7 +177,7 @@
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
             this.dgvInventory.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvInventory.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvInventory.Size = new System.Drawing.Size(960, 430);
+            this.dgvInventory.Size = new System.Drawing.Size(1123, 430);
             this.dgvInventory.TabIndex = 3;
             // 
             // colMaSP
@@ -206,11 +208,24 @@
             this.colSoLuong.ReadOnly = true;
             this.colSoLuong.Width = 150;
             // 
+            // btnExport
+            // 
+            this.btnExport.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(89)))), ((int)(((byte)(182)))));
+            this.btnExport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExport.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.btnExport.ForeColor = System.Drawing.Color.White;
+            this.btnExport.Location = new System.Drawing.Point(835, 25);
+            this.btnExport.Name = "btnExport";
+            this.btnExport.Size = new System.Drawing.Size(120, 35);
+            this.btnExport.TabIndex = 5;
+            this.btnExport.Text = "Xuất Excel";
+            this.btnExport.UseVisualStyleBackColor = false;
+            // 
             // frmInventoryList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1000, 600);
+            this.ClientSize = new System.Drawing.Size(1163, 600);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panelSearch);
             this.Controls.Add(this.panelTop);
@@ -242,5 +257,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colDVT;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSoLuong;
         private System.Windows.Forms.Label lblProductName;
+        private System.Windows.Forms.Button btnExport;
     }
 }
