@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms.Bills;
+using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Config;
 
 namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Views.forms.Invoice
 {
@@ -87,8 +88,23 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Views.forms.Invoice
         {
             HighlightButton(btnCash);
             PaymentMethod = "Tiền mặt";
-            lblRightHeader.Text = "Thanh Toán Tiền Mặt";
+            lblRightHeader.Text = "THANH TOÁN TIỀN MẶT";
+            
+            // Ẩn QR Code panel
+            pnlQRCode.Visible = false;
+            
+            // Hiện lại các control cho tiền mặt
+            lblCustomerPay.Visible = true;
+            txtCustomerPay.Visible = true;
+            lblSuggestions.Visible = true;
+            flowSuggestions.Visible = true;
+            lblChangeLabel.Visible = true;
+            lblChangeAmount.Visible = true;
+            lblNote.Visible = true;
+            txtNote.Visible = true;
+            
             txtCustomerPay.Enabled = true;
+            txtCustomerPay.Clear();
             txtCustomerPay.Focus();
         }
 
@@ -96,10 +112,97 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Views.forms.Invoice
         {
             HighlightButton(btnTransfer);
             PaymentMethod = "Chuyển khoản";
-            lblRightHeader.Text = "Thanh Toán Chuyển Khoản";
-            // Chuy?n kho?n th? m?c đ?nh khách tr? đúng s? ti?n
+            lblRightHeader.Text = "THANH TOÁN CHUYỂN KHOẢN";
+
+            // Ẩn các control cho tiền mặt
+            lblCustomerPay.Visible = false;
+            txtCustomerPay.Visible = false;
+            lblSuggestions.Visible = false;
+            flowSuggestions.Visible = false;
+            lblChangeLabel.Visible = false;
+            lblChangeAmount.Visible = false;
+            lblNote.Visible = false;
+            txtNote.Visible = false;
+            
+            // Hiện QR Code panel
+            pnlQRCode.Visible = true;
+            
+            // Set số tiền khách đưa = tổng tiền
             txtCustomerPay.Text = TotalAmount.ToString("N0");
-            txtCustomerPay.Enabled = false; // Không cho s?a
+            
+            //// Hiển thị thông tin ngân hàng
+            //lblBankInfo.Text = $"Ngân hàng: {PaymentConfig.BankName}\r\n" +
+            //                  $"STK: {PaymentConfig.AccountNumber}\r\n" +
+            //                  $"Chủ TK: {PaymentConfig.AccountName}";
+            
+            // Tạo QR Code
+            GenerateQRCode();
+        }
+
+        /// <summary>
+        /// Tạo QR Code theo chuẩn VietQR
+        /// </summary>
+        private void GenerateQRCode()
+        {
+            try
+            {
+                // Tạo mô tả giao dịch
+                string description = $"Thanh toan don hang {DateTime.Now:ddMMyyyyHHmmss}";
+                
+                // Sử dụng PaymentConfig để tạo URL
+                string qrUrl = PaymentConfig.GenerateQRUrl(TotalAmount, description);
+                
+                // Download và hiển thị QR code
+                using (var webClient = new System.Net.WebClient())
+                {
+                    byte[] imageBytes = webClient.DownloadData(qrUrl);
+                    using (var ms = new System.IO.MemoryStream(imageBytes))
+                    {
+                        picQRCode.Image = Image.FromStream(ms);
+                    }
+                }
+                
+                lblQRInstruction.Text = "✅ Quét mã QR bằng ứng dụng Mobile Banking để thanh toán\n" +
+                                       $"💰 Số tiền: {TotalAmount.ToString("N0")} VNĐ";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    $"Không thể tạo mã QR!\n\n{ex.Message}\n\nVui lòng chuyển khoản thủ công theo thông tin bên trên.",
+                    "Cảnh báo",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
+                
+                // Hiển thị placeholder
+                ShowQRPlaceholder();
+            }
+        }
+
+        /// <summary>
+        /// Hiển thị placeholder khi không tạo được QR
+        /// </summary>
+        private void ShowQRPlaceholder()
+        {
+            var bmp = new Bitmap(200, 200);
+            using (var g = Graphics.FromImage(bmp))
+            {
+                g.Clear(Color.White);
+                
+                // Vẽ border
+                g.DrawRectangle(new Pen(Color.LightGray, 2), 0, 0, 199, 199);
+                
+                // Vẽ text
+                g.DrawString("QR Code\nđang tải...\n\nVui lòng chuyển khoản\ntheo thông tin trên", 
+                    new Font("Segoe UI", 10, FontStyle.Bold), 
+                    Brushes.Gray, 
+                    new RectangleF(0, 0, 200, 200),
+                    new StringFormat { 
+                        Alignment = StringAlignment.Center, 
+                        LineAlignment = StringAlignment.Center 
+                    });
+            }
+            picQRCode.Image = bmp;
         }
 
         private void txtCustomerPay_TextChanged(object sender, EventArgs e)
@@ -118,7 +221,6 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Views.forms.Invoice
 
             try
             {
-                // X? l? chu?i ti?n t? (b? d?u ph?y, ch? đ)
                 string cleanText = txtCustomerPay.Text.Replace(",", "").Replace(".", "").Replace(" đ", "").Trim();
                 decimal pay = decimal.Parse(cleanText);
 
@@ -152,31 +254,54 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Views.forms.Invoice
 
         private void btnComplete_Click(object sender, EventArgs e)
         {
-            // Validate input
-            if (string.IsNullOrWhiteSpace(txtCustomerPay.Text))
+            // Validate for cash payment
+            if (PaymentMethod == "Tiền mặt")
             {
-                MessageBox.Show("Vui lòng nhập số tiền khách đưa!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
+                if (string.IsNullOrWhiteSpace(txtCustomerPay.Text))
+                {
+                    MessageBox.Show("Vui lòng nhập số tiền khách đưa!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                string cleanText = txtCustomerPay.Text.Replace(",", "").Replace(".", "").Replace(" đ", "").Replace("đ", "").Trim();
+                
+                if (!decimal.TryParse(cleanText, out decimal pay))
+                {
+                    MessageBox.Show("Số tiền khách đưa không hợp lệ!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                if (pay < TotalAmount)
+                {
+                    MessageBox.Show("Khách chưa trả đủ tiền!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                CustomerPay = pay;
+                ReturnAmount = pay - TotalAmount;
+            }
+            else
+            {
+                // Chuyển khoản - Xác nhận đã nhận được tiền
+                var result = MessageBox.Show(
+                    $"✅ Xác nhận đã nhận được {TotalAmount.ToString("N0")} đ qua chuyển khoản?\n\n" +
+                    $"🏦 Ngân hàng: {PaymentConfig.BankName}\n" +
+                    $"📱 STK: {PaymentConfig.AccountNumber}\n\n" +
+                    "Lưu ý: Vui lòng kiểm tra kỹ trước khi xác nhận!",
+                    "Xác nhận thanh toán chuyển khoản",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question
+                );
+
+                if (result != DialogResult.Yes)
+                {
+                    return;
+                }
+
+                CustomerPay = TotalAmount;
+                ReturnAmount = 0;
             }
 
-            // Clean and parse the customer payment amount
-            // Remove formatting characters that might be present: commas, dots, đ symbol, spaces
-            string cleanText = txtCustomerPay.Text.Replace(",", "").Replace(".", "").Replace(" đ", "").Replace("đ", "").Trim();
-            
-            if (!decimal.TryParse(cleanText, out decimal pay))
-            {
-                MessageBox.Show("Số tiền khách đưa không hợp lệ!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            if (pay < TotalAmount)
-            {
-                MessageBox.Show("Khách chưa trả đủ tiền!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            CustomerPay = pay;
-            ReturnAmount = pay - TotalAmount;
             Note = txtNote.Text;
 
             try
@@ -205,6 +330,11 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Views.forms.Invoice
         {
             this.DialogResult = DialogResult.Cancel;
             this.Close();
+        }
+
+        private void pnlQRCode_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }
