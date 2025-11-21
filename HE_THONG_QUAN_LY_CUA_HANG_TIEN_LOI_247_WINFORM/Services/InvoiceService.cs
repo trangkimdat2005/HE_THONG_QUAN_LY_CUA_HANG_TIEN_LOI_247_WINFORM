@@ -1,4 +1,4 @@
-using System;
+Ôªøusing System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -7,7 +7,7 @@ using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Models;
 namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
 {
     /// <summary>
-    /// Service x? l˝ logic nghi?p v? cho HÛa ??n
+    /// Service x? l√Ω logic nghi?p v? cho H√≥a ??n
     /// </summary>
     public class InvoiceService : IDisposable
     {
@@ -19,7 +19,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
         }
 
         /// <summary>
-        /// L?y t?t c? hÛa ??n
+        /// L?y t?t c? h√≥a ??n
         /// </summary>
         public List<HoaDon> GetAllInvoices()
         {
@@ -32,7 +32,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
         }
 
         /// <summary>
-        /// L?y hÛa ??n theo ID
+        /// L?y h√≥a ??n theo ID
         /// </summary>
         public HoaDon GetInvoiceById(string id)
         {
@@ -43,7 +43,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
         }
 
         /// <summary>
-        /// TÏm ki?m hÛa ??n
+        /// T√¨m ki?m h√≥a ??n
         /// </summary>
         public List<HoaDon> SearchInvoices(string keyword, DateTime? fromDate, DateTime? toDate, string status)
         {
@@ -74,7 +74,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
             }
 
             // Filter by status
-            if (!string.IsNullOrEmpty(status) && status != "T?t c?")
+            if (!string.IsNullOrEmpty(status) && status != "T·∫•t c·∫£")
             {
                 query = query.Where(h => h.trangThai == status);
             }
@@ -83,7 +83,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
         }
 
         /// <summary>
-        /// T?o hÛa ??n m?i
+        /// T?o h√≥a ??n m?i
         /// </summary>
         public Tuple<bool, string, string> CreateInvoice(HoaDon invoice, List<ChiTietHoaDon> details)
         {
@@ -99,7 +99,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
 
                     // Set default values
                     invoice.ngayLap = DateTime.Now;
-                    invoice.trangThai = "Ch? thanh to·n";
+                    invoice.trangThai = "Ch·ªù thanh to√°n";
                     invoice.isDelete = false;
 
                     // Calculate total
@@ -121,18 +121,18 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
                     _context.SaveChanges();
                     transaction.Commit();
 
-                    return Tuple.Create(true, "T?o hÛa ??n th‡nh cÙng", invoice.id);
+                    return Tuple.Create(true, "T·∫°o h√≥a ƒë∆°n th√†nh c√¥ng", invoice.id);
                 }
                 catch (Exception ex)
                 {
                     transaction.Rollback();
-                    return Tuple.Create(false, $"L?i: {ex.Message}", (string)null);
+                    return Tuple.Create(false, $"L·ªói: {ex.Message}", (string)null);
                 }
             }
         }
 
         /// <summary>
-        /// C?p nh?t hÛa ??n
+        /// C?p nh?t h√≥a ??n
         /// </summary>
         public Tuple<bool, string> UpdateInvoice(HoaDon invoice, List<ChiTietHoaDon> details)
         {
@@ -142,7 +142,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
                 {
                     var existingInvoice = _context.HoaDons.FirstOrDefault(h => h.id == invoice.id);
                     if (existingInvoice == null)
-                        return Tuple.Create(false, "KhÙng tÏm th?y hÛa ??n");
+                        return Tuple.Create(false, "Kh√¥ng t√¨m th·∫•y h√≥a ƒë∆°n");
 
                     // Update invoice info
                     existingInvoice.khachHangId = invoice.khachHangId;
@@ -169,18 +169,18 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
                     _context.SaveChanges();
                     transaction.Commit();
 
-                    return Tuple.Create(true, "C?p nh?t hÛa ??n th‡nh cÙng");
+                    return Tuple.Create(true, "C·∫≠p nh·∫≠t h√≥a ƒë∆°n th√†nh c√¥ng");
                 }
                 catch (Exception ex)
                 {
                     transaction.Rollback();
-                    return Tuple.Create(false, $"L?i: {ex.Message}");
+                    return Tuple.Create(false, $"L·ªói: {ex.Message}");
                 }
             }
         }
 
         /// <summary>
-        /// XÛa hÛa ??n (soft delete)
+        /// X√≥a h√≥a ??n (soft delete)
         /// </summary>
         public Tuple<bool, string> DeleteInvoice(string id)
         {
@@ -188,11 +188,11 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
             {
                 var invoice = _context.HoaDons.FirstOrDefault(h => h.id == id);
                 if (invoice == null)
-                    return Tuple.Create(false, "KhÙng tÏm th?y hÛa ??n");
+                    return Tuple.Create(false, "Kh√¥ng t√¨m th·∫•y h√≥a ƒë∆°n");
 
                 // Only allow deleting unpaid invoices
-                if (invoice.trangThai == "?„ thanh to·n")
-                    return Tuple.Create(false, "KhÙng th? xÛa hÛa ??n ?„ thanh to·n");
+                if (invoice.trangThai == "ƒê√£ thanh to√°n")
+                    return Tuple.Create(false, "Kh√¥ng th·ªÉ x√≥a h√≥a ƒê∆°n ƒê√£ thanh to√°n");
 
                 invoice.isDelete = true;
 
@@ -204,16 +204,16 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
                 }
 
                 _context.SaveChanges();
-                return Tuple.Create(true, "XÛa hÛa ??n th‡nh cÙng");
+                return Tuple.Create(true, "X√≥a h√≥a ƒë∆°n th√†nh c√¥ng");
             }
             catch (Exception ex)
             {
-                return Tuple.Create(false, $"L?i: {ex.Message}");
+                return Tuple.Create(false, $"L·ªói: {ex.Message}");
             }
         }
 
         /// <summary>
-        /// L?y chi ti?t hÛa ??n
+        /// L·∫•y chi ti·∫øt ho√° ƒë∆°n
         /// </summary>
         public List<ChiTietHoaDon> GetInvoiceDetails(string invoiceId)
         {
@@ -223,7 +223,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
         }
 
         /// <summary>
-        /// Thanh to·n hÛa ??n
+        /// Thanh to√°n h√≥a ƒë∆°n
         /// </summary>
         public Tuple<bool, string> ProcessPayment(string invoiceId, string paymentMethodId, decimal amount, string description)
         {
@@ -233,11 +233,11 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
                 {
                     var invoice = _context.HoaDons.FirstOrDefault(h => h.id == invoiceId);
                     if (invoice == null)
-                        return Tuple.Create(false, "KhÙng tÏm th?y hÛa ??n");
+                        return Tuple.Create(false, "Kh√¥ng t√¨m th·∫•y h√≥a ƒë∆°n");
 
                     // Check if already paid
-                    if (invoice.trangThai == "?„ thanh to·n")
-                        return Tuple.Create(false, "HÛa ??n ?„ ???c thanh to·n");
+                    if (invoice.trangThai == "?√£ thanh to√°n")
+                        return Tuple.Create(false, "H√≥a ƒë∆°n ƒë√£ ƒë∆∞·ª£cc thanh to√°n");
 
                     // Calculate total paid
                     var totalPaid = _context.GiaoDichThanhToans
@@ -263,28 +263,28 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
                     // Update invoice status
                     if (totalPaid >= invoice.tongTien)
                     {
-                        invoice.trangThai = "?„ thanh to·n";
+                        invoice.trangThai = "ƒê√£ thanh to√°n";
                     }
                     else
                     {
-                        invoice.trangThai = "?ang thanh to·n";
+                        invoice.trangThai = "ƒêang thanh to√°n";
                     }
 
                     _context.SaveChanges();
                     transaction.Commit();
 
-                    return Tuple.Create(true, "Thanh to·n th‡nh cÙng");
+                    return Tuple.Create(true, "Thanh to√°n th√†nh c√¥ng");
                 }
                 catch (Exception ex)
                 {
                     transaction.Rollback();
-                    return Tuple.Create(false, $"L?i: {ex.Message}");
+                    return Tuple.Create(false, $"L·ªói: {ex.Message}");
                 }
             }
         }
 
         /// <summary>
-        /// L?y l?ch s? thanh to·n
+        /// L?y l?ch s? thanh to√°n
         /// </summary>
         public List<GiaoDichThanhToan> GetPaymentHistory(string invoiceId)
         {
@@ -296,18 +296,18 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
         }
 
         /// <summary>
-        /// L?y danh s·ch ph??ng th?c thanh to·n
+        /// L?y danh s√°ch ph??ng th?c thanh to√°n
         /// </summary>
         public List<KenhThanhToan> GetPaymentMethods()
         {
             return _context.KenhThanhToans
-                .Where(k => !k.isDelete && k.trangThai == "Ho?t ??ng")
+                .Where(k => !k.isDelete && k.trangThai == "Ho·∫°t ƒê·ªông")
                 .OrderBy(k => k.tenKenh)
                 .ToList();
         }
 
         /// <summary>
-        /// T?o m„ hÛa ??n t? ??ng
+        /// T?o m√£ h√≥a ??n t? ??ng
         /// </summary>
         public string GenerateNewInvoiceId()
         {
@@ -326,7 +326,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
         }
 
         /// <summary>
-        /// T?o m„ giao d?ch thanh to·n
+        /// T?o m√£ giao d?ch thanh to√°n
         /// </summary>
         private string GeneratePaymentId()
         {

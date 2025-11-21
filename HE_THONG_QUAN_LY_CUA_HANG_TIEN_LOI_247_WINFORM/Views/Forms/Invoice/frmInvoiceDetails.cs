@@ -210,6 +210,10 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
 
                 // Load invoice details
                 _invoiceDetails = _invoiceController.GetInvoiceDetails(_invoiceId);
+                
+                // ✅ FIX: Load applied promotions BEFORE displaying
+                LoadAppliedPromotions();
+                
                 DisplayInvoiceDetails();
                 CalculateTotal();
 
@@ -226,14 +230,91 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
             }
         }
 
+        /// <summary>
+        /// ✅ Load khuyến mãi đã áp dụng từ database
+        /// </summary>
+        private void LoadAppliedPromotions()
+        {
+            try
+            {
+                _appliedPromosPerRow.Clear();
+                _promoValuePerRow.Clear();
+
+                using (var ctx = new AppDbContext())
+                {
+                    // Lấy tất cả khuyến mãi đã áp dụng cho hóa đơn này
+                    var appliedPromos = ctx.ChiTietHoaDonKhuyenMais
+                        .Include(c => c.MaKhuyenMai)
+                        .Where(c => c.hoaDonId == _invoiceId && !c.isDelete)
+                        .ToList();
+
+                    if (appliedPromos == null || appliedPromos.Count == 0)
+                    {
+                        return; // Không có khuyến mãi
+                    }
+
+                    // Nhóm theo sanPhamDonViId để map với từng dòng trong chi tiết hóa đơn
+                    var promoGroups = appliedPromos.GroupBy(p => p.sanPhamDonViId).ToList();
+
+                    foreach (var group in promoGroups)
+                    {
+                        var sanPhamDonViId = group.Key;
+                        
+                        // Tìm row index cho sản phẩm này
+                        int rowIndex = FindRowIndexBySanPhamDonViId(sanPhamDonViId);
+                        
+                        if (rowIndex >= 0)
+                        {
+                            // Lưu các mã khuyến mãi cho row này
+                            var promoCodes = new List<string>();
+                            decimal totalPromoValue = 0m;
+
+                            foreach (var promo in group)
+                            {
+                                if (promo.MaKhuyenMai != null)
+                                {
+                                    promoCodes.Add(promo.MaKhuyenMai.code);
+                                    totalPromoValue += promo.giaTriApDung;
+                                }
+                            }
+
+                            _appliedPromosPerRow[rowIndex] = promoCodes;
+                            _promoValuePerRow[rowIndex] = totalPromoValue;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log error nhưng không fail cả quá trình load
+                System.Diagnostics.Debug.WriteLine($"Error loading applied promotions: {ex.Message}");
+            }
+        }
+
+        /// <summary>
+        /// Helper: Tìm row index theo SanPhamDonViId
+        /// </summary>
+        private int FindRowIndexBySanPhamDonViId(string sanPhamDonViId)
+        {
+            for (int i = 0; i < _invoiceDetails.Count; i++)
+            {
+                if (_invoiceDetails[i].sanPhamDonViId == sanPhamDonViId)
+                {
+                    return i;
+                }
+            }
+            return -1;
+        }
+
         private void DisplayInvoiceDetails()
         {
             dgvInvoiceDetails.Rows.Clear();
 
             using (var ctx = new AppDbContext())
             {
-                foreach (var detail in _invoiceDetails)
+                for (int i = 0; i < _invoiceDetails.Count; i++)
                 {
+                    var detail = _invoiceDetails[i];
                     string productName = detail.sanPhamDonViId;
                     string unitName = "";
                     string sanPhamDonViId = detail.sanPhamDonViId;
@@ -255,7 +336,16 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
                     catch { }
 
                     var unitPriceStr = detail.donGia.ToString("N0") + " đ";
-                    var totalStr = (detail.soLuong * detail.donGia).ToString("N0") + " đ";
+                    
+                    // ✅ FIX: Tính tổng tiền có áp dụng khuyến mãi (nếu có)
+                    decimal lineTotal = detail.soLuong * detail.donGia;
+                    if (_promoValuePerRow.ContainsKey(i))
+                    {
+                        lineTotal -= _promoValuePerRow[i];
+                        if (lineTotal < 0) lineTotal = 0;
+                    }
+                    
+                    var totalStr = lineTotal.ToString("N0") + " đ";
 
                     // Add row: hidden sanPhamDonViId in first column
                     dgvInvoiceDetails.Rows.Add(
@@ -265,13 +355,41 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
                         detail.soLuong,
                         unitPriceStr,
                         totalStr,
-                        null // promo cell will be populated to combobox later when user clicks
+                        null // promo cell sẽ được populate sau
                     );
 
                     int rowIndex = dgvInvoiceDetails.Rows.Count - 1;
-                    // populate promo options for this row
+                    
+                    // Populate promo options cho row này
                     if (!string.IsNullOrEmpty(sanPhamDonViId))
+                    {
                         PopulatePromoComboForRow(rowIndex, sanPhamDonViId);
+                        
+                        // ✅ FIX: Set giá trị khuyến mãi đã chọn (nếu có)
+                        if (_appliedPromosPerRow.ContainsKey(i) && _appliedPromosPerRow[i].Count > 0)
+                        {
+                            try
+                            {
+                                var promoCode = _appliedPromosPerRow[i][0]; // Lấy mã khuyến mãi đầu tiên
+                                
+                                // Tìm ID của MaKhuyenMai theo code
+                                var maKM = ctx.MaKhuyenMais.FirstOrDefault(m => m.code == promoCode && !m.isDelete);
+                                if (maKM != null)
+                                {
+                                    var comboCell = dgvInvoiceDetails.Rows[rowIndex].Cells["colPromo"] as DataGridViewComboBoxCell;
+                                    if (comboCell != null && comboCell.Items.Count > 0)
+                                    {
+                                        // Set giá trị đã chọn
+                                        comboCell.Value = maKM.id;
+                                    }
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                System.Diagnostics.Debug.WriteLine($"Error setting promo value for row {rowIndex}: {ex.Message}");
+                            }
+                        }
+                    }
                 }
             }
         }

@@ -31,6 +31,9 @@
             this.lblTotalAmount = new System.Windows.Forms.Label();
             this.lblTotalLabel = new System.Windows.Forms.Label();
             this.pnlRight = new System.Windows.Forms.Panel();
+            this.pnlQRCode = new System.Windows.Forms.Panel();
+            this.picQRCode = new System.Windows.Forms.PictureBox();
+            this.lblQRInstruction = new System.Windows.Forms.Label();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnComplete = new System.Windows.Forms.Button();
             this.txtNote = new System.Windows.Forms.TextBox();
@@ -51,6 +54,8 @@
             this.grpMethod.SuspendLayout();
             this.pnlTotalBox.SuspendLayout();
             this.pnlRight.SuspendLayout();
+            this.pnlQRCode.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picQRCode)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlHeader
@@ -223,6 +228,7 @@
             // 
             // pnlRight
             // 
+            this.pnlRight.Controls.Add(this.pnlQRCode);
             this.pnlRight.Controls.Add(this.btnCancel);
             this.pnlRight.Controls.Add(this.btnComplete);
             this.pnlRight.Controls.Add(this.txtNote);
@@ -239,6 +245,40 @@
             this.pnlRight.Name = "pnlRight";
             this.pnlRight.Size = new System.Drawing.Size(436, 491);
             this.pnlRight.TabIndex = 0;
+            // 
+            // pnlQRCode
+            // 
+            this.pnlQRCode.BackColor = System.Drawing.Color.White;
+            this.pnlQRCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlQRCode.Controls.Add(this.picQRCode);
+            this.pnlQRCode.Controls.Add(this.lblQRInstruction);
+            this.pnlQRCode.Location = new System.Drawing.Point(0, 55);
+            this.pnlQRCode.Name = "pnlQRCode";
+            this.pnlQRCode.Size = new System.Drawing.Size(430, 320);
+            this.pnlQRCode.TabIndex = 11;
+            this.pnlQRCode.Visible = false;
+            this.pnlQRCode.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlQRCode_Paint);
+            // 
+            // picQRCode
+            // 
+            this.picQRCode.BackColor = System.Drawing.Color.White;
+            this.picQRCode.Location = new System.Drawing.Point(79, 24);
+            this.picQRCode.Name = "picQRCode";
+            this.picQRCode.Size = new System.Drawing.Size(276, 243);
+            this.picQRCode.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picQRCode.TabIndex = 0;
+            this.picQRCode.TabStop = false;
+            // 
+            // lblQRInstruction
+            // 
+            this.lblQRInstruction.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Italic);
+            this.lblQRInstruction.ForeColor = System.Drawing.Color.DimGray;
+            this.lblQRInstruction.Location = new System.Drawing.Point(10, 270);
+            this.lblQRInstruction.Name = "lblQRInstruction";
+            this.lblQRInstruction.Size = new System.Drawing.Size(410, 40);
+            this.lblQRInstruction.TabIndex = 2;
+            this.lblQRInstruction.Text = "Quét mã QR bằng ứng dụng Mobile Banking để thanh toán";
+            this.lblQRInstruction.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // btnCancel
             // 
@@ -390,6 +430,8 @@
             this.pnlTotalBox.PerformLayout();
             this.pnlRight.ResumeLayout(false);
             this.pnlRight.PerformLayout();
+            this.pnlQRCode.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.picQRCode)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -421,5 +463,8 @@
         private System.Windows.Forms.TextBox txtNote;
         private System.Windows.Forms.Button btnComplete;
         private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Panel pnlQRCode;
+        private System.Windows.Forms.PictureBox picQRCode;
+        private System.Windows.Forms.Label lblQRInstruction;
     }
 }
