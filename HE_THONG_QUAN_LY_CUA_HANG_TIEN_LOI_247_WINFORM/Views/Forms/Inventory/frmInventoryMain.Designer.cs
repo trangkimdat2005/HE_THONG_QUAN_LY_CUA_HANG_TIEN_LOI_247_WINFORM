@@ -21,6 +21,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelTop = new System.Windows.Forms.Panel();
             this.lblTitle = new System.Windows.Forms.Label();
+            this.panelGrid = new System.Windows.Forms.Panel();
             this.panelControls = new System.Windows.Forms.Panel();
             this.btnExport = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
@@ -28,7 +29,7 @@
             this.btnSearch = new System.Windows.Forms.Button();
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.panelGrid = new System.Windows.Forms.Panel();
+            this.pnlData = new System.Windows.Forms.Panel();
             this.dgvImportList = new System.Windows.Forms.DataGridView();
             this.colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSupplier = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -36,8 +37,9 @@
             this.colTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelTop.SuspendLayout();
-            this.panelControls.SuspendLayout();
             this.panelGrid.SuspendLayout();
+            this.panelControls.SuspendLayout();
+            this.pnlData.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvImportList)).BeginInit();
             this.SuspendLayout();
             // 
@@ -45,10 +47,10 @@
             // 
             this.panelTop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
             this.panelTop.Controls.Add(this.lblTitle);
-            this.panelTop.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelTop.Location = new System.Drawing.Point(0, 0);
             this.panelTop.Name = "panelTop";
-            this.panelTop.Size = new System.Drawing.Size(1365, 600);
+            this.panelTop.Size = new System.Drawing.Size(1365, 68);
             this.panelTop.TabIndex = 0;
             // 
             // lblTitle
@@ -62,6 +64,17 @@
             this.lblTitle.TabIndex = 0;
             this.lblTitle.Text = "DANH SÁCH PHIẾU NHẬP";
             // 
+            // panelGrid
+            // 
+            this.panelGrid.Controls.Add(this.pnlData);
+            this.panelGrid.Controls.Add(this.panelControls);
+            this.panelGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelGrid.Location = new System.Drawing.Point(0, 68);
+            this.panelGrid.Name = "panelGrid";
+            this.panelGrid.Padding = new System.Windows.Forms.Padding(20);
+            this.panelGrid.Size = new System.Drawing.Size(1365, 532);
+            this.panelGrid.TabIndex = 2;
+            // 
             // panelControls
             // 
             this.panelControls.BackColor = System.Drawing.Color.WhiteSmoke;
@@ -72,10 +85,10 @@
             this.panelControls.Controls.Add(this.txtSearch);
             this.panelControls.Controls.Add(this.label1);
             this.panelControls.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelControls.Location = new System.Drawing.Point(0, 0);
+            this.panelControls.Location = new System.Drawing.Point(20, 20);
             this.panelControls.Name = "panelControls";
-            this.panelControls.Size = new System.Drawing.Size(1365, 70);
-            this.panelControls.TabIndex = 1;
+            this.panelControls.Size = new System.Drawing.Size(1325, 80);
+            this.panelControls.TabIndex = 4;
             // 
             // btnExport
             // 
@@ -84,7 +97,7 @@
             this.btnExport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnExport.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.btnExport.ForeColor = System.Drawing.Color.White;
-            this.btnExport.Location = new System.Drawing.Point(1079, 18);
+            this.btnExport.Location = new System.Drawing.Point(1039, 18);
             this.btnExport.Name = "btnExport";
             this.btnExport.Size = new System.Drawing.Size(120, 38);
             this.btnExport.TabIndex = 6;
@@ -98,7 +111,7 @@
             this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDelete.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.btnDelete.ForeColor = System.Drawing.Color.White;
-            this.btnDelete.Location = new System.Drawing.Point(963, 18);
+            this.btnDelete.Location = new System.Drawing.Point(923, 18);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(110, 38);
             this.btnDelete.TabIndex = 5;
@@ -114,13 +127,12 @@
             this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAdd.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
             this.btnAdd.ForeColor = System.Drawing.Color.White;
-            this.btnAdd.Location = new System.Drawing.Point(1205, 18);
+            this.btnAdd.Location = new System.Drawing.Point(1165, 18);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(140, 35);
             this.btnAdd.TabIndex = 3;
             this.btnAdd.Text = "+ Nhập hàng mới";
             this.btnAdd.UseVisualStyleBackColor = false;
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // btnSearch
             // 
@@ -156,15 +168,14 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Mã phiếu/NCC:";
             // 
-            // panelGrid
+            // pnlData
             // 
-            this.panelGrid.Controls.Add(this.dgvImportList);
-            this.panelGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelGrid.Location = new System.Drawing.Point(0, 70);
-            this.panelGrid.Name = "panelGrid";
-            this.panelGrid.Padding = new System.Windows.Forms.Padding(20);
-            this.panelGrid.Size = new System.Drawing.Size(1365, 530);
-            this.panelGrid.TabIndex = 2;
+            this.pnlData.Controls.Add(this.dgvImportList);
+            this.pnlData.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlData.Location = new System.Drawing.Point(20, 100);
+            this.pnlData.Name = "pnlData";
+            this.pnlData.Size = new System.Drawing.Size(1325, 412);
+            this.pnlData.TabIndex = 5;
             // 
             // dgvImportList
             // 
@@ -190,7 +201,7 @@
             this.dgvImportList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvImportList.EnableHeadersVisualStyles = false;
             this.dgvImportList.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
-            this.dgvImportList.Location = new System.Drawing.Point(20, 20);
+            this.dgvImportList.Location = new System.Drawing.Point(0, 0);
             this.dgvImportList.MultiSelect = false;
             this.dgvImportList.Name = "dgvImportList";
             this.dgvImportList.ReadOnly = true;
@@ -202,8 +213,8 @@
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
             this.dgvImportList.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvImportList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvImportList.Size = new System.Drawing.Size(1325, 490);
-            this.dgvImportList.TabIndex = 0;
+            this.dgvImportList.Size = new System.Drawing.Size(1325, 412);
+            this.dgvImportList.TabIndex = 1;
             // 
             // colId
             // 
@@ -247,15 +258,15 @@
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1365, 600);
             this.Controls.Add(this.panelGrid);
-            this.Controls.Add(this.panelControls);
             this.Controls.Add(this.panelTop);
             this.Name = "frmInventoryMain";
             this.Text = "Quản lý nhập kho";
             this.panelTop.ResumeLayout(false);
             this.panelTop.PerformLayout();
+            this.panelGrid.ResumeLayout(false);
             this.panelControls.ResumeLayout(false);
             this.panelControls.PerformLayout();
-            this.panelGrid.ResumeLayout(false);
+            this.pnlData.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvImportList)).EndInit();
             this.ResumeLayout(false);
 
@@ -265,19 +276,20 @@
 
         private System.Windows.Forms.Panel panelTop;
         private System.Windows.Forms.Label lblTitle;
+        private System.Windows.Forms.Panel panelGrid;
         private System.Windows.Forms.Panel panelControls;
+        private System.Windows.Forms.Button btnExport;
+        private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.TextBox txtSearch;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button btnAdd;
-        private System.Windows.Forms.Panel panelGrid;
+        private System.Windows.Forms.Panel pnlData;
         private System.Windows.Forms.DataGridView dgvImportList;
         private System.Windows.Forms.DataGridViewTextBoxColumn colId;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSupplier;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTotal;
         private System.Windows.Forms.DataGridViewTextBoxColumn colStatus;
-        private System.Windows.Forms.Button btnExport;
-        private System.Windows.Forms.Button btnDelete;
     }
 }

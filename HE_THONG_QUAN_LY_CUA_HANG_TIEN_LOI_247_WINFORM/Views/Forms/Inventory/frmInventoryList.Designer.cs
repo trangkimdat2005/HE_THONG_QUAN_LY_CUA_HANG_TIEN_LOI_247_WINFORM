@@ -22,6 +22,7 @@
             this.panelTop = new System.Windows.Forms.Panel();
             this.lblTitle = new System.Windows.Forms.Label();
             this.panelSearch = new System.Windows.Forms.Panel();
+            this.btnExport = new System.Windows.Forms.Button();
             this.lblProductName = new System.Windows.Forms.Label();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.btnSearch = new System.Windows.Forms.Button();
@@ -33,7 +34,6 @@
             this.colTenSP = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDVT = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSoLuong = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnExport = new System.Windows.Forms.Button();
             this.panelTop.SuspendLayout();
             this.panelSearch.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -75,6 +75,19 @@
             this.panelSearch.Name = "panelSearch";
             this.panelSearch.Size = new System.Drawing.Size(1163, 70);
             this.panelSearch.TabIndex = 1;
+            // 
+            // btnExport
+            // 
+            this.btnExport.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(89)))), ((int)(((byte)(182)))));
+            this.btnExport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExport.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.btnExport.ForeColor = System.Drawing.Color.White;
+            this.btnExport.Location = new System.Drawing.Point(835, 25);
+            this.btnExport.Name = "btnExport";
+            this.btnExport.Size = new System.Drawing.Size(120, 35);
+            this.btnExport.TabIndex = 5;
+            this.btnExport.Text = "Xuất Excel";
+            this.btnExport.UseVisualStyleBackColor = false;
             // 
             // lblProductName
             // 
@@ -207,19 +220,6 @@
             this.colSoLuong.Name = "colSoLuong";
             this.colSoLuong.ReadOnly = true;
             this.colSoLuong.Width = 150;
-            // 
-            // btnExport
-            // 
-            this.btnExport.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(89)))), ((int)(((byte)(182)))));
-            this.btnExport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnExport.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            this.btnExport.ForeColor = System.Drawing.Color.White;
-            this.btnExport.Location = new System.Drawing.Point(835, 25);
-            this.btnExport.Name = "btnExport";
-            this.btnExport.Size = new System.Drawing.Size(120, 35);
-            this.btnExport.TabIndex = 5;
-            this.btnExport.Text = "Xuất Excel";
-            this.btnExport.UseVisualStyleBackColor = false;
             // 
             // frmInventoryList
             // 
