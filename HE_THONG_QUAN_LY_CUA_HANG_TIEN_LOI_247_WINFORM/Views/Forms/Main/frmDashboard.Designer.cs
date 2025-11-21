@@ -28,18 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
             this.btnRefresh = new Guna.UI2.WinForms.Guna2Button();
             this.lblDateTime = new System.Windows.Forms.Label();
@@ -57,11 +57,6 @@
             this.pnlAlerts = new Guna.UI2.WinForms.Guna2Panel();
             this.lblAlertsValue = new System.Windows.Forms.Label();
             this.lblAlertsTitle = new System.Windows.Forms.Label();
-            this.pnlShiftInfo = new Guna.UI2.WinForms.Guna2Panel();
-            this.lblShiftEmployees = new System.Windows.Forms.Label();
-            this.lblShiftTime = new System.Windows.Forms.Label();
-            this.lblShiftName = new System.Windows.Forms.Label();
-            this.lblShiftInfo = new System.Windows.Forms.Label();
             this.pnlMainArea = new Guna.UI2.WinForms.Guna2Panel();
             this.pnlGridsRow = new System.Windows.Forms.Panel();
             this.pnlRecentActivities = new Guna.UI2.WinForms.Guna2Panel();
@@ -79,13 +74,17 @@
             this.pnlTopProducts = new Guna.UI2.WinForms.Guna2Panel();
             this.chartTopProducts = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.lblTopProducts = new System.Windows.Forms.Label();
+            this.lblShiftInfo = new System.Windows.Forms.Label();
+            this.lblShiftName = new System.Windows.Forms.Label();
+            this.lblShiftTime = new System.Windows.Forms.Label();
+            this.lblShiftEmployees = new System.Windows.Forms.Label();
+            this.pnlShiftInfo = new Guna.UI2.WinForms.Guna2Panel();
             this.guna2Panel1.SuspendLayout();
             this.flowLayoutPanelKPI.SuspendLayout();
             this.pnlRevenue.SuspendLayout();
             this.pnlOrders.SuspendLayout();
             this.pnlCustomers.SuspendLayout();
             this.pnlAlerts.SuspendLayout();
-            this.pnlShiftInfo.SuspendLayout();
             this.pnlMainArea.SuspendLayout();
             this.pnlGridsRow.SuspendLayout();
             this.pnlRecentActivities.SuspendLayout();
@@ -97,6 +96,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.chartRevenue)).BeginInit();
             this.pnlTopProducts.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chartTopProducts)).BeginInit();
+            this.pnlShiftInfo.SuspendLayout();
             this.SuspendLayout();
             // 
             // guna2Panel1
@@ -309,63 +309,6 @@
             this.lblAlertsTitle.TabIndex = 0;
             this.lblAlertsTitle.Text = "⚠️ CẢNH BÁO TỒN KHO";
             // 
-            // pnlShiftInfo
-            // 
-            this.pnlShiftInfo.BackColor = System.Drawing.Color.White;
-            this.pnlShiftInfo.Controls.Add(this.lblShiftEmployees);
-            this.pnlShiftInfo.Controls.Add(this.lblShiftTime);
-            this.pnlShiftInfo.Controls.Add(this.lblShiftName);
-            this.pnlShiftInfo.Controls.Add(this.lblShiftInfo);
-            this.pnlShiftInfo.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlShiftInfo.Location = new System.Drawing.Point(0, 850);
-            this.pnlShiftInfo.Name = "pnlShiftInfo";
-            this.pnlShiftInfo.Size = new System.Drawing.Size(1321, 44);
-            this.pnlShiftInfo.TabIndex = 4;
-            // 
-            // lblShiftEmployees
-            // 
-            this.lblShiftEmployees.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblShiftEmployees.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.lblShiftEmployees.ForeColor = System.Drawing.Color.Black;
-            this.lblShiftEmployees.Location = new System.Drawing.Point(821, 15);
-            this.lblShiftEmployees.Name = "lblShiftEmployees";
-            this.lblShiftEmployees.Size = new System.Drawing.Size(480, 20);
-            this.lblShiftEmployees.TabIndex = 3;
-            this.lblShiftEmployees.Text = "👤 Nhân viên: Nguyễn Văn A, Trần Thị B";
-            this.lblShiftEmployees.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // lblShiftTime
-            // 
-            this.lblShiftTime.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.lblShiftTime.ForeColor = System.Drawing.Color.Black;
-            this.lblShiftTime.Location = new System.Drawing.Point(400, 15);
-            this.lblShiftTime.Name = "lblShiftTime";
-            this.lblShiftTime.Size = new System.Drawing.Size(300, 20);
-            this.lblShiftTime.TabIndex = 2;
-            this.lblShiftTime.Text = "🕐 Thời gian: 06:00 - 14:00";
-            this.lblShiftTime.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblShiftName
-            // 
-            this.lblShiftName.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            this.lblShiftName.ForeColor = System.Drawing.Color.Black;
-            this.lblShiftName.Location = new System.Drawing.Point(200, 15);
-            this.lblShiftName.Name = "lblShiftName";
-            this.lblShiftName.Size = new System.Drawing.Size(150, 20);
-            this.lblShiftName.TabIndex = 1;
-            this.lblShiftName.Text = "Ca 1 (Sáng)";
-            this.lblShiftName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // lblShiftInfo
-            // 
-            this.lblShiftInfo.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            this.lblShiftInfo.ForeColor = System.Drawing.Color.Black;
-            this.lblShiftInfo.Location = new System.Drawing.Point(20, 15);
-            this.lblShiftInfo.Name = "lblShiftInfo";
-            this.lblShiftInfo.Size = new System.Drawing.Size(180, 20);
-            this.lblShiftInfo.TabIndex = 0;
-            this.lblShiftInfo.Text = "🕒 Ca làm việc hiện tại:";
-            // 
             // pnlMainArea
             // 
             this.pnlMainArea.Controls.Add(this.pnlGridsRow);
@@ -411,26 +354,26 @@
             // 
             this.dgvRecentActivities.AllowUserToAddRows = false;
             this.dgvRecentActivities.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
-            this.dgvRecentActivities.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 10.5F);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvRecentActivities.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.White;
+            this.dgvRecentActivities.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Segoe UI", 10.5F);
+            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvRecentActivities.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
             this.dgvRecentActivities.ColumnHeadersHeight = 40;
             this.dgvRecentActivities.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 10.5F);
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvRecentActivities.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Segoe UI", 10.5F);
+            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvRecentActivities.DefaultCellStyle = dataGridViewCellStyle9;
             this.dgvRecentActivities.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvRecentActivities.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.dgvRecentActivities.Location = new System.Drawing.Point(0, 40);
@@ -505,26 +448,26 @@
             // 
             this.dgvAlerts.AllowUserToAddRows = false;
             this.dgvAlerts.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.White;
-            this.dgvAlerts.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 10.5F);
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvAlerts.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle10.BackColor = System.Drawing.Color.White;
+            this.dgvAlerts.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("Segoe UI", 10.5F);
+            dataGridViewCellStyle11.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvAlerts.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
             this.dgvAlerts.ColumnHeadersHeight = 40;
             this.dgvAlerts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 10.5F);
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvAlerts.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("Segoe UI", 10.5F);
+            dataGridViewCellStyle12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvAlerts.DefaultCellStyle = dataGridViewCellStyle12;
             this.dgvAlerts.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvAlerts.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.dgvAlerts.Location = new System.Drawing.Point(0, 40);
@@ -605,16 +548,16 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.chartRevenue.BackColor = System.Drawing.Color.Transparent;
-            chartArea1.Name = "ChartArea1";
-            this.chartRevenue.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chartRevenue.Legends.Add(legend1);
+            chartArea3.Name = "ChartArea1";
+            this.chartRevenue.ChartAreas.Add(chartArea3);
+            legend3.Name = "Legend1";
+            this.chartRevenue.Legends.Add(legend3);
             this.chartRevenue.Location = new System.Drawing.Point(0, 40);
             this.chartRevenue.Name = "chartRevenue";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Doanh thu";
-            this.chartRevenue.Series.Add(series1);
+            series3.ChartArea = "ChartArea1";
+            series3.Legend = "Legend1";
+            series3.Name = "Doanh thu";
+            this.chartRevenue.Series.Add(series3);
             this.chartRevenue.Size = new System.Drawing.Size(811, 360);
             this.chartRevenue.TabIndex = 1;
             this.chartRevenue.Text = "chart1";
@@ -664,16 +607,16 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.chartTopProducts.BackColor = System.Drawing.Color.Transparent;
-            chartArea2.Name = "ChartArea1";
-            this.chartTopProducts.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.chartTopProducts.Legends.Add(legend2);
+            chartArea4.Name = "ChartArea1";
+            this.chartTopProducts.ChartAreas.Add(chartArea4);
+            legend4.Name = "Legend1";
+            this.chartTopProducts.Legends.Add(legend4);
             this.chartTopProducts.Location = new System.Drawing.Point(0, 40);
             this.chartTopProducts.Name = "chartTopProducts";
-            series2.ChartArea = "ChartArea1";
-            series2.Legend = "Legend1";
-            series2.Name = "Số lượng";
-            this.chartTopProducts.Series.Add(series2);
+            series4.ChartArea = "ChartArea1";
+            series4.Legend = "Legend1";
+            series4.Name = "Số lượng";
+            this.chartTopProducts.Series.Add(series4);
             this.chartTopProducts.Size = new System.Drawing.Size(450, 360);
             this.chartTopProducts.TabIndex = 1;
             this.chartTopProducts.Text = "chart2";
@@ -691,6 +634,63 @@
             this.lblTopProducts.TabIndex = 0;
             this.lblTopProducts.Text = "🔥 TOP 5 SẢN PHẨM BÁN CHẠY";
             this.lblTopProducts.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblShiftInfo
+            // 
+            this.lblShiftInfo.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.lblShiftInfo.ForeColor = System.Drawing.Color.Black;
+            this.lblShiftInfo.Location = new System.Drawing.Point(20, 15);
+            this.lblShiftInfo.Name = "lblShiftInfo";
+            this.lblShiftInfo.Size = new System.Drawing.Size(180, 20);
+            this.lblShiftInfo.TabIndex = 0;
+            this.lblShiftInfo.Text = "🕒 Ca làm việc hiện tại:";
+            // 
+            // lblShiftName
+            // 
+            this.lblShiftName.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.lblShiftName.ForeColor = System.Drawing.Color.Black;
+            this.lblShiftName.Location = new System.Drawing.Point(200, 15);
+            this.lblShiftName.Name = "lblShiftName";
+            this.lblShiftName.Size = new System.Drawing.Size(150, 20);
+            this.lblShiftName.TabIndex = 1;
+            this.lblShiftName.Text = "Ca 1 (Sáng)";
+            this.lblShiftName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblShiftTime
+            // 
+            this.lblShiftTime.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.lblShiftTime.ForeColor = System.Drawing.Color.Black;
+            this.lblShiftTime.Location = new System.Drawing.Point(400, 15);
+            this.lblShiftTime.Name = "lblShiftTime";
+            this.lblShiftTime.Size = new System.Drawing.Size(300, 20);
+            this.lblShiftTime.TabIndex = 2;
+            this.lblShiftTime.Text = "🕐 Thời gian: 06:00 - 14:00";
+            this.lblShiftTime.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblShiftEmployees
+            // 
+            this.lblShiftEmployees.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblShiftEmployees.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.lblShiftEmployees.ForeColor = System.Drawing.Color.Black;
+            this.lblShiftEmployees.Location = new System.Drawing.Point(792, 13);
+            this.lblShiftEmployees.Name = "lblShiftEmployees";
+            this.lblShiftEmployees.Size = new System.Drawing.Size(480, 20);
+            this.lblShiftEmployees.TabIndex = 3;
+            this.lblShiftEmployees.Text = "👤 Nhân viên: Nguyễn Văn A, Trần Thị B";
+            this.lblShiftEmployees.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // pnlShiftInfo
+            // 
+            this.pnlShiftInfo.BackColor = System.Drawing.Color.White;
+            this.pnlShiftInfo.Controls.Add(this.lblShiftEmployees);
+            this.pnlShiftInfo.Controls.Add(this.lblShiftTime);
+            this.pnlShiftInfo.Controls.Add(this.lblShiftName);
+            this.pnlShiftInfo.Controls.Add(this.lblShiftInfo);
+            this.pnlShiftInfo.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pnlShiftInfo.Location = new System.Drawing.Point(0, 850);
+            this.pnlShiftInfo.Name = "pnlShiftInfo";
+            this.pnlShiftInfo.Size = new System.Drawing.Size(1321, 44);
+            this.pnlShiftInfo.TabIndex = 4;
             // 
             // frmDashboard
             // 
@@ -713,7 +713,6 @@
             this.pnlOrders.ResumeLayout(false);
             this.pnlCustomers.ResumeLayout(false);
             this.pnlAlerts.ResumeLayout(false);
-            this.pnlShiftInfo.ResumeLayout(false);
             this.pnlMainArea.ResumeLayout(false);
             this.pnlGridsRow.ResumeLayout(false);
             this.pnlRecentActivities.ResumeLayout(false);
@@ -725,6 +724,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.chartRevenue)).EndInit();
             this.pnlTopProducts.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.chartTopProducts)).EndInit();
+            this.pnlShiftInfo.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -748,11 +748,6 @@
         private Guna.UI2.WinForms.Guna2Panel pnlAlerts;
         private System.Windows.Forms.Label lblAlertsValue;
         private System.Windows.Forms.Label lblAlertsTitle;
-        private Guna.UI2.WinForms.Guna2Panel pnlShiftInfo;
-        private System.Windows.Forms.Label lblShiftEmployees;
-        private System.Windows.Forms.Label lblShiftTime;
-        private System.Windows.Forms.Label lblShiftName;
-        private System.Windows.Forms.Label lblShiftInfo;
         private Guna.UI2.WinForms.Guna2Panel pnlMainArea;
         private System.Windows.Forms.Panel pnlGridsRow;
         private Guna.UI2.WinForms.Guna2Panel pnlRecentActivities;
@@ -770,5 +765,10 @@
         private Guna.UI2.WinForms.Guna2Panel pnlTopProducts;
         private System.Windows.Forms.DataVisualization.Charting.Chart chartTopProducts;
         private System.Windows.Forms.Label lblTopProducts;
+        private System.Windows.Forms.Label lblShiftInfo;
+        private System.Windows.Forms.Label lblShiftName;
+        private System.Windows.Forms.Label lblShiftTime;
+        private System.Windows.Forms.Label lblShiftEmployees;
+        private Guna.UI2.WinForms.Guna2Panel pnlShiftInfo;
     }
 }

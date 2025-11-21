@@ -312,11 +312,11 @@
     <Compile Include="Views\forms\Invoice\frmPayment.Designer.cs">
       <DependentUpon>frmPayment.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\forms\Main\frmChangePasswork.cs">
+    <Compile Include="Views\forms\Main\frmChangePassword.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\forms\Main\frmChangePasswork.Designer.cs">
-      <DependentUpon>frmChangePasswork.cs</DependentUpon>
+    <Compile Include="Views\forms\Main\frmChangePassword.Designer.cs">
+      <DependentUpon>frmChangePassword.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\forms\Main\frmDashboard.cs">
       <SubType>Form</SubType>
