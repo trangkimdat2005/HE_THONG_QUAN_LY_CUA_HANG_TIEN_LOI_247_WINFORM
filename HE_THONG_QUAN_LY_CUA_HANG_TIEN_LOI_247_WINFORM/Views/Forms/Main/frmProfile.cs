@@ -442,8 +442,12 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Views.forms.Main
         
         private void btnChangePassword_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Chức năng đổi mật khẩu đang được phát triển!", 
-                "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            var frmChange = new frmChangePassword();
+            if (frmChange.ShowDialog() == DialogResult.OK)
+            {
+                // User chose to logout after password change
+                // Perform logout logic here
+            }
         }
         
         // Thêm biến tracking chế độ
