@@ -195,7 +195,7 @@
             this.lblVatNote.ForeColor = System.Drawing.Color.DimGray;
             this.lblVatNote.Location = new System.Drawing.Point(135, 100);
             this.lblVatNote.Name = "lblVatNote";
-            this.lblVatNote.Size = new System.Drawing.Size(158, 15);
+            this.lblVatNote.Size = new System.Drawing.Size(159, 15);
             this.lblVatNote.TabIndex = 2;
             this.lblVatNote.Text = "Đã bao gồm VAT và giảm giá";
             // 

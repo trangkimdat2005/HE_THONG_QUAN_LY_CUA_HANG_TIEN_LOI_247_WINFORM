@@ -95,7 +95,7 @@
             this.btnNext.Name = "btnNext";
             this.btnNext.Size = new System.Drawing.Size(78, 25);
             this.btnNext.TabIndex = 8;
-            this.btnNext.Text = "Tuần trước";
+            this.btnNext.Text = "Tuần sau";
             this.btnNext.UseVisualStyleBackColor = true;
             this.btnNext.Click += new System.EventHandler(this.btnNext_Click_1);
             // 
