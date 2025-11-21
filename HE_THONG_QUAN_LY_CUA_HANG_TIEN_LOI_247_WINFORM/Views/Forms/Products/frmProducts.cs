@@ -603,7 +603,67 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
 
         private void btnExport_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Chức năng đang phát triển!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            ExportToExcel(dgvProducts);
+        }
+
+        private void ExportToExcel(DataGridView dgv)
+        {
+            if (dgv.Rows.Count == 0)
+            {
+                MessageBox.Show("Không có dữ liệu để xuất!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            try
+            {
+                using (SaveFileDialog sfd = new SaveFileDialog())
+                {
+                    sfd.Filter = "Excel Workbook|*.xlsx";
+                    sfd.FileName = "DanhSachSanPham_" + DateTime.Now.ToString("ddMMyy_Hmmss") + ".xlsx";
+
+                    if (sfd.ShowDialog() == DialogResult.OK)
+                    {
+                        using (var workbook = new ClosedXML.Excel.XLWorkbook())
+                        {
+                            var worksheet = workbook.Worksheets.Add("Danh Sách");
+
+                            for (int i = 0; i < dgv.Columns.Count; i++)
+                            {
+                                if (dgv.Columns[i].Visible)
+                                {
+                                    worksheet.Cell(1, i + 1).Value = dgv.Columns[i].HeaderText;
+                                    worksheet.Cell(1, i + 1).Style.Font.Bold = true;
+                                    worksheet.Cell(1, i + 1).Style.Fill.BackgroundColor = ClosedXML.Excel.XLColor.LightGray;
+                                }
+                            }
+
+                            for (int i = 0; i < dgv.Rows.Count; i++)
+                            {
+                                int excelCol = 1;
+                                for (int j = 0; j < dgv.Columns.Count; j++)
+                                {
+                                    if (dgv.Columns[j].Visible)
+                                    {
+                                        var cellValue = dgv.Rows[i].Cells[j].Value;
+                                        worksheet.Cell(i + 2, excelCol).Value = cellValue != null ? cellValue.ToString() : "";
+                                        excelCol++;
+                                    }
+                                }
+                            }
+
+                            worksheet.Columns().AdjustToContents();
+                            workbook.SaveAs(sfd.FileName);
+                        }
+
+                        MessageBox.Show("Xuất file Excel thành công!\nĐường dẫn: " + sfd.FileName, 
+                            "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi xuất file: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnBrowseImage_Click(object sender, EventArgs e)
