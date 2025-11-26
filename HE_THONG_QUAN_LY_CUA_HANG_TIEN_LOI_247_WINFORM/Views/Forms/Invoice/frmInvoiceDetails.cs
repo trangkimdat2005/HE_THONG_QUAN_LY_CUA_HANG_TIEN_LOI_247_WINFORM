@@ -1,13 +1,14 @@
-﻿using System;
+﻿using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services;
+using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Controllers;
+using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Models;
+using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Views.forms.Invoice;
+using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Entity;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Controllers;
-using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Models;
-using System.Data.Entity;
-using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services;
 
 namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms.Bills
 {
@@ -89,6 +90,8 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
 
         private void frmInvoiceDetails_Load(object sender, EventArgs e)
         {
+            this.KeyPreview = true;
+            this.KeyDown += new KeyEventHandler(frmChiTietHoaDon_KeyDown);
             InitializeUI();
             LoadCustomers();
             LoadCategories();
@@ -99,7 +102,20 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
                 LoadInvoiceData();
             }
         }
+        private void frmChiTietHoaDon_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Control && e.KeyCode == Keys.H)
+            {
+                btnCancel.PerformClick();
+                e.SuppressKeyPress = true;
+            }
 
+            if (e.Control && e.KeyCode == Keys.S)
+            {
+                btnScan.PerformClick();
+                e.SuppressKeyPress = true;
+            }
+        }
         private void InitializeUI()
         {
             // Setup DataGridViews
@@ -1013,8 +1029,20 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
 
             if (e.ColumnIndex == dgvProducts.Columns["colAdd"].Index)
             {
-                // delegate to Add button handler
                 btnAddProduct_Click(sender, EventArgs.Empty);
+            }
+        }
+        private void dgvDanhSachSanPham_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (dgvProducts.CurrentRow != null)
+                {
+                    btnAddProduct_Click(sender, EventArgs.Empty);
+
+                    e.Handled = true;
+                    e.SuppressKeyPress = true;
+                }
             }
         }
 
@@ -1190,6 +1218,46 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
                 if (btn != null) btn.Enabled = enabled;
             }
             catch { }
+        }
+
+        private void btnScan_Click(object sender, EventArgs e)
+        {
+            using (frmScanBarcode scanForm = new frmScanBarcode())
+            {
+                if (scanForm.ShowDialog() == DialogResult.OK)
+                {
+                    string code = scanForm.ScannedCode;
+                    txtSearch.Text = code;
+
+                    if (dgvProducts.Rows.Count > 0)
+                    {
+                        dgvProducts.ClearSelection();
+                        dgvProducts.Rows[0].Selected = true;
+
+                        if (dgvProducts.Rows.Count > 0)
+                        {
+                            dgvProducts.ClearSelection();
+                            dgvProducts.Rows[0].Selected = true;
+
+                            // --- ĐOẠN SỬA LỖI ---
+                            // Thay vì cố định Cells[0], ta tìm ô nào đang hiện (Visible) thì focus vào
+                            foreach (DataGridViewCell cell in dgvProducts.Rows[0].Cells)
+                            {
+                                if (cell.Visible)
+                                {
+                                    dgvProducts.CurrentCell = cell;
+                                    break; // Tìm thấy rồi thì thoát, không cần chạy tiếp
+                                }
+                            }
+                            // --------------------
+
+                            dgvProducts.Focus();
+                        }
+
+                        //dgvProducts.Focus();
+                    }
+                }
+            }
         }
     }
 
