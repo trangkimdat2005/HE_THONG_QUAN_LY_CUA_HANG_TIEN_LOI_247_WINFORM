@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Windows.Forms;
 using System.Drawing;
-using System.Runtime.InteropServices; // <--- 1. Thêm thư viện này
+using System.Runtime.InteropServices;
 using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Controllers;
+using ClosedXML.Excel;
 
 namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms.Inventory
 {
