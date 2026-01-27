@@ -136,6 +136,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Config\PaymentConfig.cs" />
+    <Compile Include="Controllers\BarcodeController.cs" />
     <Compile Include="Examples\ExampleFormWithPermissions.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -216,6 +217,7 @@
     <Compile Include="Models\UserRole.cs" />
     <Compile Include="Models\ViTri.cs" />
     <Compile Include="Services\AuthenticationService.cs" />
+    <Compile Include="Services\BarcodeService.cs" />
     <Compile Include="Services\BrandService.cs" />
     <Compile Include="Services\CategoryService.cs" />
     <Compile Include="Services\CustomerService.cs" />
@@ -294,6 +296,18 @@
     </Compile>
     <Compile Include="Views\forms\Employees\frmShiftList.Designer.cs">
       <DependentUpon>frmShiftList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\forms\Inventory\frmAddBarcode.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\forms\Inventory\frmAddBarcode.Designer.cs">
+      <DependentUpon>frmAddBarcode.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\forms\Inventory\frmBarcode.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\forms\Inventory\frmBarcode.Designer.cs">
+      <DependentUpon>frmBarcode.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\forms\Inventory\frmInventoryList.cs">
       <SubType>Form</SubType>
@@ -397,6 +411,12 @@
     <Compile Include="Views\forms\Products\frmProducts.Designer.cs">
       <DependentUpon>frmProducts.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\forms\Promotions\frmAddPromotion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\forms\Promotions\frmAddPromotion.Designer.cs">
+      <DependentUpon>frmAddPromotion.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\forms\Promotions\frmPromotionDetail.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -460,6 +480,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\forms\Employees\frmShiftList.resx">
       <DependentUpon>frmShiftList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\forms\Inventory\frmAddBarcode.resx">
+      <DependentUpon>frmAddBarcode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\forms\Inventory\frmBarcode.resx">
+      <DependentUpon>frmBarcode.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\forms\Inventory\frmInventoryList.resx">
       <DependentUpon>frmInventoryList.cs</DependentUpon>

@@ -42,6 +42,7 @@
             this.btn_dashboard = new Guna.UI2.WinForms.Guna2Button();
             this.btn_products = new Guna.UI2.WinForms.Guna2Button();
             this.pnlProductSubmenu = new Guna.UI2.WinForms.Guna2Panel();
+            this.btnSub_Barcode = new Guna.UI2.WinForms.Guna2Button();
             this.btnSub_HangHoa = new Guna.UI2.WinForms.Guna2Button();
             this.btnSub_DonViTinh = new Guna.UI2.WinForms.Guna2Button();
             this.btnSub_NhanHieu = new Guna.UI2.WinForms.Guna2Button();
@@ -288,6 +289,7 @@
             this.pnlProductSubmenu.AutoSize = true;
             this.pnlProductSubmenu.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.pnlProductSubmenu.BackColor = System.Drawing.SystemColors.MenuBar;
+            this.pnlProductSubmenu.Controls.Add(this.btnSub_Barcode);
             this.pnlProductSubmenu.Controls.Add(this.btnSub_HangHoa);
             this.pnlProductSubmenu.Controls.Add(this.btnSub_DonViTinh);
             this.pnlProductSubmenu.Controls.Add(this.btnSub_NhanHieu);
@@ -296,10 +298,37 @@
             this.pnlProductSubmenu.Location = new System.Drawing.Point(7, 132);
             this.pnlProductSubmenu.Margin = new System.Windows.Forms.Padding(2);
             this.pnlProductSubmenu.Name = "pnlProductSubmenu";
-            this.pnlProductSubmenu.Size = new System.Drawing.Size(306, 213);
+            this.pnlProductSubmenu.Size = new System.Drawing.Size(306, 256);
             this.pnlProductSubmenu.TabIndex = 14;
             this.pnlProductSubmenu.Visible = false;
             this.pnlProductSubmenu.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlProductSubmenu_Paint);
+            // 
+            // btnSub_Barcode
+            // 
+            this.btnSub_Barcode.BackColor = System.Drawing.Color.Transparent;
+            this.btnSub_Barcode.BorderColor = System.Drawing.Color.White;
+            this.btnSub_Barcode.BorderRadius = 10;
+            this.btnSub_Barcode.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnSub_Barcode.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnSub_Barcode.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnSub_Barcode.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnSub_Barcode.FillColor = System.Drawing.Color.Transparent;
+            this.btnSub_Barcode.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.btnSub_Barcode.ForeColor = System.Drawing.Color.Black;
+            this.btnSub_Barcode.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.btnSub_Barcode.ImageOffset = new System.Drawing.Point(20, 0);
+            this.btnSub_Barcode.Location = new System.Drawing.Point(0, 215);
+            this.btnSub_Barcode.Margin = new System.Windows.Forms.Padding(2);
+            this.btnSub_Barcode.Name = "btnSub_Barcode";
+            this.btnSub_Barcode.PressedColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnSub_Barcode.PressedDepth = 50;
+            this.btnSub_Barcode.Size = new System.Drawing.Size(304, 39);
+            this.btnSub_Barcode.TabIndex = 13;
+            this.btnSub_Barcode.Text = "📋 Quản lý Barcode";
+            this.btnSub_Barcode.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.btnSub_Barcode.TextOffset = new System.Drawing.Point(20, 0);
+            this.btnSub_Barcode.UseTransparentBackground = true;
+            this.btnSub_Barcode.Click += new System.EventHandler(this.btnSub_Barcode_Click);
             // 
             // btnSub_HangHoa
             // 
@@ -991,36 +1020,37 @@
         private System.Windows.Forms.FlowLayoutPanel flpMenu;
         private Guna.UI2.WinForms.Guna2Button btn_dashboard;
         private Guna.UI2.WinForms.Guna2Button btn_products;
-        private Guna.UI2.WinForms.Guna2Button btn_bills;
-        private Guna.UI2.WinForms.Guna2Button btn_employees;
-        private Guna.UI2.WinForms.Guna2Button btn_customers;
-        private Guna.UI2.WinForms.Guna2Button btn_promotions;
-        private Guna.UI2.WinForms.Guna2Button btn_suppliers;
-        private Guna.UI2.WinForms.Guna2Button btn_inventory;
-        private Guna.UI2.WinForms.Guna2Panel pnlUserInfo;
         private Guna.UI2.WinForms.Guna2Panel pnlProductSubmenu;
+        private Guna.UI2.WinForms.Guna2Button btnSub_HangHoa;
         private Guna.UI2.WinForms.Guna2Button btnSub_DonViTinh;
         private Guna.UI2.WinForms.Guna2Button btnSub_NhanHieu;
         private Guna.UI2.WinForms.Guna2Button btnSub_DanhMuc;
         private Guna.UI2.WinForms.Guna2Button btnSub_SanPham;
+        private Guna.UI2.WinForms.Guna2Button btn_bills;
+        private Guna.UI2.WinForms.Guna2Button btn_employees;
         private Guna.UI2.WinForms.Guna2Panel pnlEmployeeSubmenu;
         private Guna.UI2.WinForms.Guna2Button btnSub_PhanCong;
         private Guna.UI2.WinForms.Guna2Button btnSub_DanhSachNV;
+        private Guna.UI2.WinForms.Guna2Button btn_customers;
         private Guna.UI2.WinForms.Guna2Panel pnlCustomerSubmenu;
         private Guna.UI2.WinForms.Guna2Button btnSub_TheThanhVien;
         private Guna.UI2.WinForms.Guna2Button btnSub_DanhSachKH;
+        private Guna.UI2.WinForms.Guna2Button btn_promotions;
+        private Guna.UI2.WinForms.Guna2Button btn_suppliers;
         private Guna.UI2.WinForms.Guna2Panel pnlSupplierSubmenu;
         private Guna.UI2.WinForms.Guna2Button btnSub_LichSuGiaoDich;
         private Guna.UI2.WinForms.Guna2Button btnSub_DanhSachNCC;
+        private Guna.UI2.WinForms.Guna2Button btn_inventory;
         private Guna.UI2.WinForms.Guna2Panel pnlStorageSubmenu;
         private Guna.UI2.WinForms.Guna2Button btnSub_TonKho;
         private Guna.UI2.WinForms.Guna2Button btnSub_NhapKho;
-        private Guna.UI2.WinForms.Guna2Button btnSub_HangHoa;
+        private Guna.UI2.WinForms.Guna2Button btn_reports;
+        private Guna.UI2.WinForms.Guna2Panel pnlUserInfo;
         private Guna.UI2.WinForms.Guna2PictureBox guna2PictureBox2;
         private System.Windows.Forms.Panel panel1;
         private Guna.UI2.WinForms.Guna2PictureBox guna2PictureBox1;
         private Guna.UI2.WinForms.Guna2Button btn_account;
-        private Guna.UI2.WinForms.Guna2Button btn_reports;
         private Guna.UI2.WinForms.Guna2Button btn_show;
+        private Guna.UI2.WinForms.Guna2Button btnSub_Barcode;
     }
 }
