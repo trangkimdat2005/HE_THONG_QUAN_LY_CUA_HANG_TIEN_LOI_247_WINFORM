@@ -84,7 +84,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
                 .AsNoTracking()
                 .Include(p => p.SanPham)
                 .Include(p => p.DonViDoLuong)
-                .Where(p => !p.isDelete && p.trangThai == "available")
+                .Where(p => !p.isDelete && p.trangThai == "Còn hàng")
                 .OrderBy(p => p.SanPham.ten)
                 .ToList();
         }
