@@ -46,6 +46,7 @@
             this.colStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlBottom = new System.Windows.Forms.Panel();
             this.lblTotal = new System.Windows.Forms.Label();
+            this.btnImport = new System.Windows.Forms.Button();
             this.pnlTop.SuspendLayout();
             this.pnlSearch.SuspendLayout();
             this.pnlButtons.SuspendLayout();
@@ -187,6 +188,7 @@
             // 
             this.pnlButtons.BackColor = System.Drawing.Color.White;
             this.pnlButtons.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlButtons.Controls.Add(this.btnImport);
             this.pnlButtons.Controls.Add(this.btnExport);
             this.pnlButtons.Controls.Add(this.btnDelete);
             this.pnlButtons.Controls.Add(this.btnEdit);
@@ -203,7 +205,7 @@
             this.btnExport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnExport.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.btnExport.ForeColor = System.Drawing.Color.White;
-            this.btnExport.Location = new System.Drawing.Point(520, 12);
+            this.btnExport.Location = new System.Drawing.Point(679, 12);
             this.btnExport.Name = "btnExport";
             this.btnExport.Size = new System.Drawing.Size(160, 40);
             this.btnExport.TabIndex = 3;
@@ -377,6 +379,20 @@
             this.lblTotal.TabIndex = 0;
             this.lblTotal.Text = "Tổng số: 0 nhân viên";
             // 
+            // btnImport
+            // 
+            this.btnImport.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(204)))), ((int)(((byte)(113)))));
+            this.btnImport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnImport.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.btnImport.ForeColor = System.Drawing.Color.White;
+            this.btnImport.Location = new System.Drawing.Point(513, 13);
+            this.btnImport.Name = "btnImport";
+            this.btnImport.Size = new System.Drawing.Size(160, 40);
+            this.btnImport.TabIndex = 4;
+            this.btnImport.Text = "Thêm từ Excel";
+            this.btnImport.UseVisualStyleBackColor = false;
+            this.btnImport.Click += new System.EventHandler(this.btnImport_Click);
+            // 
             // frmEmployeeList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -433,5 +449,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colEmail;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPosition;
         private System.Windows.Forms.DataGridViewTextBoxColumn colStatus;
+        private System.Windows.Forms.Button btnImport;
     }
 }
