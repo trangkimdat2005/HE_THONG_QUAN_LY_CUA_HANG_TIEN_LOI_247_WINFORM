@@ -280,8 +280,8 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
                 {
                     cmbStatusDetail.DataSource = new[]
                     {
-                        new { Value = "Available", Text = "Đang kinh doanh" },
-                        new { Value = "Unavailable", Text = "Ngừng kinh doanh" }
+                        new { Value = "Còn hàng", Text = "Còn hàng" },
+                        new { Value = "Hết hàng", Text = "Hết hàng" }
                     };
                     cmbStatusDetail.DisplayMember = "Text";
                     cmbStatusDetail.ValueMember = "Value";
@@ -535,7 +535,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
                     sanPhamId = cmbGoodDetail.SelectedValue.ToString(),
                     donViId = cmbUnitDetail.SelectedValue.ToString(),
                     giaBan = decimal.Parse(txtPrice.Text.Replace(",", "").Replace(".", "")),
-                    trangThai = cmbStatusDetail.SelectedValue?.ToString() ?? "Available",
+                    trangThai = cmbStatusDetail.SelectedValue?.ToString() ?? "Còn hàng",
                     heSoQuyDoi = 1,
                     isDelete = false
                 };
@@ -787,5 +787,70 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
         }
 
         #endregion
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Filter = "Excel Files|*.xlsx;*.xls";
+            dialog.Title = "Chọn file Excel Quy cách & Giá bán";
+
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                // 1. Bật chế độ chờ (Con trỏ xoay)
+                this.Cursor = Cursors.WaitCursor;
+
+                try
+                {
+                    // 2. Khởi tạo Service
+                    var excelService = new HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Services.ExcelImportService();
+
+                    // 3. Gọi hàm nhập Sản Phẩm Đơn Vị (Vừa viết xong)
+                    var result = excelService.ImportSanPhamDonVi(dialog.FileName);
+
+                    // 4. Tắt chế độ chờ
+                    this.Cursor = Cursors.Default;
+
+                    // 5. Xử lý kết quả
+                    if (result.IsSuccess)
+                    {
+                        MessageBox.Show(result.Message, "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        // --- QUAN TRỌNG: GỌI HÀM LOAD LẠI DATA ---
+                        // Bạn hãy thay tên hàm dưới đây bằng hàm load dữ liệu thực tế của bạn
+                        // Ví dụ: LoadData(); hoặc HienThiDanhSach();
+                        LoadData();
+                    }
+                    else
+                    {
+                        // Xử lý hiển thị lỗi
+                        if (result.ErrorLogs != null && result.ErrorLogs.Count > 0)
+                        {
+                            // Chỉ hiện tối đa 15 dòng lỗi đầu tiên để tránh tràn màn hình
+                            string errorDetails = string.Join("\n", result.ErrorLogs.Take(15));
+
+                            if (result.ErrorLogs.Count > 15)
+                                errorDetails += $"\n... và còn {result.ErrorLogs.Count - 15} lỗi khác.";
+
+                            MessageBox.Show(result.Message + "\n\nCHI TIẾT LỖI:\n" + errorDetails,
+                                            "Lỗi dữ liệu", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
+                        else
+                        {
+                            MessageBox.Show(result.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    this.Cursor = Cursors.Default;
+                    MessageBox.Show("Lỗi Application: " + ex.Message, "Lỗi nghiêm trọng", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void panelTop_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

@@ -273,8 +273,8 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
                             }
                             else
                             {
-                                // Tạo mới tồn kho nếu chưa có
-                                string tonKhoId = _services.GenerateNewId<TonKho>("TKHO", 6);
+                                // Tạo mới tồn kho nếu chưa có - Sửa prefix từ "TKHO" sang "TK_SPDV"
+                                string tonKhoId = _services.GenerateNewId<TonKho>("TK_SPDV", 10);
                                 db.TonKhoes.Add(new TonKho
                                 {
                                     id = tonKhoId,

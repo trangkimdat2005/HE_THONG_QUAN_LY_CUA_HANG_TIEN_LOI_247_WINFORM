@@ -947,7 +947,6 @@
             this.btn_reports.Text = "Báo cáo";
             this.btn_reports.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.btn_reports.UseTransparentBackground = true;
-            this.btn_reports.Visible = false;
             this.btn_reports.Click += new System.EventHandler(this.btn_reports_Click);
             // 
             // pnlUserInfo
