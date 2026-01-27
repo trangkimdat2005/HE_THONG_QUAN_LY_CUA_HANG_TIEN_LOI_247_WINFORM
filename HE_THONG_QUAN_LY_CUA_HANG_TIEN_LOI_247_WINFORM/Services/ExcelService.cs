@@ -455,5 +455,175 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Services
             }
             return result;
         }
+        public ImportResult ImportPhieuNhap(string filePath, string nhaCungCapId, string nhanVienId)
+        {
+            var result = new ImportResult();
+
+            // 1. Kiểm tra tham số đầu vào
+            if (string.IsNullOrEmpty(nhaCungCapId))
+            {
+                result.IsSuccess = false;
+                result.Message = "Chưa chọn Nhà cung cấp!";
+                return result;
+            }
+            if (string.IsNullOrEmpty(nhanVienId))
+            {
+                result.IsSuccess = false;
+                result.Message = "Không xác định được nhân viên đang đăng nhập!";
+                return result;
+            }
+
+            using (var transaction = _context.Database.BeginTransaction())
+            {
+                try
+                {
+                    // 2. Đọc file Excel
+                    var rows = MiniExcel.Query<NhapHangImportDto>(filePath).ToList();
+                    if (rows == null || rows.Count == 0)
+                    {
+                        result.IsSuccess = false;
+                        result.Message = "File Excel rỗng!";
+                        return result;
+                    }
+
+                    // GỘP CÁC DÒNG TRÙNG MÃ SẢN PHẨM
+                    var groupedRows = rows
+                        .GroupBy(r => r.SanPhamDonViId)
+                        .Select(g => new NhapHangImportDto
+                        {
+                            SanPhamDonViId = g.Key,
+                            SoLuong = g.Sum(x => x.SoLuong), // Cộng dồn số lượng
+                            DonGia = g.First().DonGia,       // Lấy giá dòng đầu
+                            HanSuDung = g.FirstOrDefault(x => x.HanSuDung != null)?.HanSuDung
+                        })
+                        .ToList();
+
+                    // Cache danh sách mã quy cách để kiểm tra tồn tại
+                    var validSpdvIds = new HashSet<string>(
+                        _context.SanPhamDonVis.Where(x => !x.isDelete).Select(x => x.id).ToList(),
+                        StringComparer.OrdinalIgnoreCase
+                    );
+
+                    // 3. TẠO PHIẾU NHẬP (HEADER)
+                    int nextPnNumber = 1;
+                    var maxPnIdString = _context.PhieuNhaps
+                        .Where(p => p.id.StartsWith("PN"))
+                        .OrderByDescending(p => p.id)
+                        .Select(p => p.id)
+                        .FirstOrDefault();
+
+                    if (!string.IsNullOrEmpty(maxPnIdString) && maxPnIdString.Length > 2)
+                    {
+                        if (int.TryParse(maxPnIdString.Substring(2), out int currentMax))
+                        {
+                            nextPnNumber = currentMax + 1;
+                        }
+                    }
+                    string newPhieuNhapId = "PN" + nextPnNumber.ToString().PadLeft(4, '0');
+
+                    var phieuNhap = new PhieuNhap
+                    {
+                        id = newPhieuNhapId,
+                        nhaCungCapId = nhaCungCapId, // Lấy ID NCC được chọn
+                        nhanVienId = nhanVienId,     // Lấy ID NV đăng nhập (đã fix từ Form)
+                        ngayNhap = DateTime.Now,     // Lấy thời gian hiện tại
+                        isDelete = false,
+                        tongTien = 0                 // Sẽ cập nhật sau
+                    };
+
+                    // 4. TẠO CHI TIẾT PHIẾU NHẬP (DETAIL)
+                    var listChiTiet = new List<ChiTietPhieuNhap>();
+                    decimal tongTienCaPhieu = 0;
+                    int excelRowIndex = 1;
+
+                    foreach (var row in groupedRows)
+                    {
+                        excelRowIndex++;
+
+                        // Validate dữ liệu
+                        if (string.IsNullOrWhiteSpace(row.SanPhamDonViId))
+                        {
+                            result.ErrorLogs.Add($"Dòng {excelRowIndex}: Mã quy cách trống.");
+                            continue;
+                        }
+                        if (!validSpdvIds.Contains(row.SanPhamDonViId.Trim()))
+                        {
+                            result.ErrorLogs.Add($"Dòng {excelRowIndex}: Mã '{row.SanPhamDonViId}' không tồn tại trong hệ thống.");
+                            continue;
+                        }
+                        if (row.SoLuong <= 0)
+                        {
+                            result.ErrorLogs.Add($"Sản phẩm '{row.SanPhamDonViId}': Số lượng phải lớn hơn 0.");
+                            continue;
+                        }
+
+                        // Tính toán
+                        decimal thanhTien = row.SoLuong * row.DonGia;
+
+                        // Tạo đối tượng ChiTiet
+                        var chiTiet = new ChiTietPhieuNhap
+                        {
+                            phieuNhapId = newPhieuNhapId,            // ID phiếu vừa tạo
+                            sanPhamDonViId = row.SanPhamDonViId.Trim(),
+                            soLuong = row.SoLuong,
+                            donGia = row.DonGia,
+                            tongTien = thanhTien,                    // Lưu tổng tiền dòng này
+                            hanSuDung = row.HanSuDung ?? DateTime.Now.AddYears(1), // Mặc định +1 năm nếu trống
+                            isDelete = false
+                        };
+
+                        listChiTiet.Add(chiTiet);
+                        tongTienCaPhieu += thanhTien;
+                    }
+
+                    // Kiểm tra lỗi trước khi lưu
+                    if (result.ErrorLogs.Count > 0)
+                    {
+                        transaction.Rollback();
+                        result.IsSuccess = false;
+                        result.Message = $"Phát hiện {result.ErrorLogs.Count} lỗi dữ liệu. Đã hủy thao tác.";
+                        return result;
+                    }
+                    if (listChiTiet.Count == 0)
+                    {
+                        transaction.Rollback();
+                        result.IsSuccess = false;
+                        result.Message = "Không có dữ liệu hợp lệ để nhập.";
+                        return result;
+                    }
+
+                    // 5. LƯU DỮ LIỆU (Đã bỏ phần cập nhật tồn kho thủ công)
+                    phieuNhap.tongTien = tongTienCaPhieu; // Cập nhật tổng tiền phiếu nhập
+
+                    _context.PhieuNhaps.Add(phieuNhap);
+                    _context.ChiTietPhieuNhaps.AddRange(listChiTiet);
+
+                    _context.SaveChanges(); // Trigger trong DB sẽ tự chạy để update Tồn kho tại đây
+                    transaction.Commit();
+
+                    result.IsSuccess = true;
+                    result.Message = $"Đã nhập kho thành công phiếu {newPhieuNhapId}!\nTổng tiền: {tongTienCaPhieu:N0} VNĐ";
+                }
+                catch (Exception ex)
+                {
+                    try { transaction.Rollback(); } catch { }
+
+                    result.IsSuccess = false;
+
+                    // Code "đào" lỗi tận gốc
+                    string fullError = ex.Message;
+                    var tempEx = ex.InnerException;
+                    while (tempEx != null)
+                    {
+                        fullError += "\n -> Chi tiết: " + tempEx.Message;
+                        tempEx = tempEx.InnerException;
+                    }
+
+                    result.Message = "Lỗi hệ thống: " + fullError;
+                }
+            }
+
+            return result;
+        }
     }
 }

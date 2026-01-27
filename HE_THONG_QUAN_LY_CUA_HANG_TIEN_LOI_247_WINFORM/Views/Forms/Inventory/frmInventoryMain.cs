@@ -1,14 +1,19 @@
-﻿using System;
-using System.Drawing;
-using System.Windows.Forms;
-using System.Runtime.InteropServices;
+﻿using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services;
 using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Controllers;
+using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Models;
+using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Utils;
+using System;
+using System.Drawing;
+using System.Linq;
+using System.Runtime.InteropServices;
+using System.Windows.Forms;
 
 namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms.Inventory
 {
     public partial class frmInventoryMain : Form
     {
         private readonly StockInController _stockInController;
+        private AppDbContext _context;
 
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         private static extern Int32 SendMessage(IntPtr hWnd, int msg, int wParam, [MarshalAs(UnmanagedType.LPWStr)] string lParam);
@@ -25,6 +30,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
         {
             InitializeComponent();
             _stockInController = new StockInController();
+            _context = new AppDbContext();
 
             SetPlaceholder(txtSearch, "Nhập mã phiếu hoặc tên nhà cung cấp...");
             if (btnExport != null) btnExport.Click += btnExport_Click;
@@ -381,6 +387,109 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
 
         private void panelControls_Paint(object sender, PaintEventArgs e)
         {
+        }
+
+        private void btnExport_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string selectedNccId = "";
+
+            // Tạo form tạm thời
+            using (Form dialogForm = new Form())
+            {
+                dialogForm.Text = "Chọn Nhà Cung Cấp";
+                dialogForm.Size = new Size(350, 180);
+                dialogForm.StartPosition = FormStartPosition.CenterParent;
+                dialogForm.FormBorderStyle = FormBorderStyle.FixedDialog;
+                dialogForm.MinimizeBox = false;
+                dialogForm.MaximizeBox = false;
+
+                // Tạo Label
+                Label lbl = new Label();
+                lbl.Text = "Vui lòng chọn nhà cung cấp:";
+                lbl.Location = new Point(20, 20);
+                lbl.AutoSize = true;
+
+                // Tạo ComboBox và đổ dữ liệu
+                ComboBox cboNCC = new ComboBox();
+                cboNCC.Location = new Point(20, 45);
+                cboNCC.Size = new Size(290, 25);
+                cboNCC.DropDownStyle = ComboBoxStyle.DropDownList; // Chỉ cho chọn, không cho gõ linh tinh
+
+                var listNcc = _context.NhaCungCaps.Where(n => !n.isDelete).ToList();
+                cboNCC.DataSource = listNcc;
+                cboNCC.DisplayMember = "ten"; 
+                cboNCC.ValueMember = "id";             
+
+                // Tạo nút Xác nhận
+                Button btnConfirm = new Button();
+                btnConfirm.Text = "Xác nhận";
+                btnConfirm.Location = new Point(110, 90);
+                btnConfirm.Size = new Size(100, 30);
+                btnConfirm.DialogResult = DialogResult.OK; // Bấm nút này = OK
+                btnConfirm.Cursor = Cursors.Hand;
+
+                // Thêm các controls vào form
+                dialogForm.Controls.AddRange(new Control[] { lbl, cboNCC, btnConfirm });
+                dialogForm.AcceptButton = btnConfirm; // Cho phép ấn Enter để xác nhận
+
+                // Hiển thị Dialog và chờ kết quả
+                if (dialogForm.ShowDialog() == DialogResult.OK)
+                {
+                    if (cboNCC.SelectedValue != null)
+                    {
+                        selectedNccId = cboNCC.SelectedValue.ToString();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Bạn chưa chọn nhà cung cấp!", "Cảnh báo");
+                        return;
+                    }
+                }
+                else
+                {
+                    // Người dùng ấn dấu X đóng form hoặc ấn Hủy
+                    return;
+                }
+            }
+
+            string nvId = UserSession.Instance.EmployeeId;
+
+
+            OpenFileDialog openFile = new OpenFileDialog();
+            openFile.Filter = "Excel Files|*.xlsx;*.xls";
+            openFile.Title = "Chọn file danh sách hàng nhập cho NCC: " + selectedNccId;
+
+            if (openFile.ShowDialog() == DialogResult.OK)
+            {
+                this.Cursor = Cursors.WaitCursor;
+
+                // Gọi Service Import
+                var service = new HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Services.ExcelImportService();
+                var result = service.ImportPhieuNhap(openFile.FileName, selectedNccId, nvId);
+
+                this.Cursor = Cursors.Default;
+
+                if (result.IsSuccess)
+                {
+                    MessageBox.Show(result.Message, "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    // Gọi hàm load lại danh sách phiếu nhập (nếu có)
+                     LoadImportReceipts(); 
+                }
+                else
+                {
+                    string msg = result.Message;
+                    if (result.ErrorLogs != null && result.ErrorLogs.Count > 0)
+                        msg += "\n\nChi tiết lỗi:\n" + string.Join("\n", result.ErrorLogs.Take(10));
+
+                    MessageBox.Show(msg, "Lỗi nhập hàng", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
     }
 }
