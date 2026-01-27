@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using System.Drawing;
 using System.Runtime.InteropServices;
 using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Controllers;
+using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Utils;
 using ClosedXML.Excel;
 
 namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms.Inventory
@@ -31,11 +32,8 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
             SetPlaceholder(txtSearch, "Nhập mã hoặc tên sản phẩm để tìm kiếm...");
 
             this.Load += frmInventoryList_Load;
-
+            
             if (btnExport != null) btnExport.Click += btnExport_Click;
-
-            //if (btnSearch != null) btnSearch.Click += btnSearch_Click;
-            //if (btnRefresh != null) btnRefresh.Click += btnRefresh_Click;
 
             if (txtSearch != null)
             {
@@ -175,6 +173,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
             PerformSearch();
         }
 
+        // ✅ NÚT LÀM MỚI - Load lại toàn bộ dữ liệu
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             try
@@ -182,6 +181,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
                 txtSearch.Clear();
                 LoadInventoryData();
                 LoadStatistics();
+                
             }
             catch (Exception ex)
             {
@@ -216,7 +216,6 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
                         {
                             var worksheet = workbook.Worksheets.Add("Tồn Kho");
 
-                            // Header (dòng 4)
                             int headerRow = 1;
                             for (int i = 0; i < dgv.Columns.Count; i++)
                             {
@@ -226,7 +225,6 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
                                 worksheet.Cell(headerRow, i + 1).Style.Alignment.Horizontal = ClosedXML.Excel.XLAlignmentHorizontalValues.Center;
                             }
 
-                            // Data
                             for (int i = 0; i < dgv.Rows.Count; i++)
                             {
                                 for (int j = 0; j < dgv.Columns.Count; j++)
@@ -235,7 +233,6 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
                                     var cellValue = dgv.Rows[i].Cells[j].Value;
                                     cell.Value = cellValue != null ? cellValue.ToString() : "";
 
-                                    // Highlight hết hàng (màu đỏ)
                                     if (dgv.Columns[j].Name == "colSoLuong" && cellValue != null)
                                     {
                                         if (int.TryParse(cellValue.ToString(), out int soLuong))
@@ -256,9 +253,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
                                 }
                             }
 
-                            // Auto-fit columns
                             worksheet.Columns().AdjustToContents();
-
                             workbook.SaveAs(sfd.FileName);
                         }
 
