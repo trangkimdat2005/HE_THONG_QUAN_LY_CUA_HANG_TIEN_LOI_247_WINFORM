@@ -184,6 +184,7 @@
             this.lbl_ForgotPassword.TabIndex = 11;
             this.lbl_ForgotPassword.Text = "Quên mật khẩu?";
             this.lbl_ForgotPassword.TextAlignment = System.Drawing.ContentAlignment.TopRight;
+            this.lbl_ForgotPassword.Click += new System.EventHandler(this.lbl_ForgotPassword_Click_1);
             // 
             // taikhoantxt
             // 

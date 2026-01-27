@@ -143,6 +143,7 @@
     <Compile Include="Controllers\BarcodeController.cs" />
     <Compile Include="DTO\ImportResult.cs" />
     <Compile Include="DTO\NhanVienImportDto.cs" />
+    <Compile Include="DTO\NhapHangImportDto.cs" />
     <Compile Include="DTO\SanPhamDonViImportDto.cs" />
     <Compile Include="DTO\SanPhamImportDto.cs" />
     <Compile Include="Examples\ExampleFormWithPermissions.cs">
@@ -229,6 +230,7 @@
     <Compile Include="Services\BrandService.cs" />
     <Compile Include="Services\CategoryService.cs" />
     <Compile Include="Services\CustomerService.cs" />
+    <Compile Include="Services\EmailHelper.cs" />
     <Compile Include="Services\EventService.cs" />
     <Compile Include="Services\ExcelService.cs" />
     <Compile Include="Services\GoodsService.cs" />
@@ -390,6 +392,24 @@
     <Compile Include="Views\forms\Main\frmProfile.Designer.cs">
       <DependentUpon>frmProfile.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\forms\Main\frmNhapOTP.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\forms\Main\frmNhapOTP.Designer.cs">
+      <DependentUpon>frmNhapOTP.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\forms\Main\frmQuenMatKhau.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\forms\Main\frmQuenMatKhau.Designer.cs">
+      <DependentUpon>frmQuenMatKhau.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\forms\Main\frmXacNhanMK.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\forms\Main\frmXacNhanMK.Designer.cs">
+      <DependentUpon>frmXacNhanMK.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\forms\Products\frmBrands.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -528,6 +548,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\forms\Main\frmProfile.resx">
       <DependentUpon>frmProfile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\forms\Main\frmNhapOTP.resx">
+      <DependentUpon>frmNhapOTP.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\forms\Main\frmQuenMatKhau.resx">
+      <DependentUpon>frmQuenMatKhau.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\forms\Main\frmXacNhanMK.resx">
+      <DependentUpon>frmXacNhanMK.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\forms\Products\frmBrands.resx">
       <DependentUpon>frmBrands.cs</DependentUpon>

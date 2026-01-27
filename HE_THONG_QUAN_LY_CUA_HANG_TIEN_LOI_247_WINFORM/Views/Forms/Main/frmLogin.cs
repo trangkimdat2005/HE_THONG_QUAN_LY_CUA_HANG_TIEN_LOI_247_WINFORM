@@ -1,4 +1,6 @@
 ﻿using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services;
+using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Views;
+using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Views.forms.Main;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -140,6 +142,12 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
         private void btn_login_Click_1(object sender, EventArgs e)
         {
 
+        }
+
+        private void lbl_ForgotPassword_Click_1(object sender, EventArgs e)
+        {
+            frmQuenMatKhau frm = new frmQuenMatKhau();
+            frm.ShowDialog();
         }
     }
 }
