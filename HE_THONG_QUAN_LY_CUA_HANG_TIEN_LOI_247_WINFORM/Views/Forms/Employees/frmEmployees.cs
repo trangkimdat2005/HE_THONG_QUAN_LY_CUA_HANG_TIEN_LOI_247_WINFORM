@@ -267,9 +267,16 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
             {
                 using (var ms = new MemoryStream(nv.HinhAnh.Anh))
                 {
-                    ptrbAnh.Image = Image.FromStream(ms);
+                    try
+                    {
+                        ptrbAnh.Image = Image.FromStream(ms);
+                    }
+                    catch (Exception)
+                    {
+                        ptrbAnh.Image = null;
+                    }
                 }
-                ptrbAnh.Tag = "DB_IMAGE";
+                ptrbAnh.Tag = Image.FromFile(@"D:\code\ky_I_nam_3\Lập trình trực quan\BTL\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\Resources\img\logo.png");
             }
         }
     }
