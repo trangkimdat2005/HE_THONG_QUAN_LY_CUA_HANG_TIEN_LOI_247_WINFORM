@@ -164,24 +164,28 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
             return _context.NhanViens.Where(n => !n.isDelete).OrderBy(n => n.hoTen).ToList();
         }
 
-        // Lấy danh sách sản phẩm (với đơn vị)
+        // Lấy danh sách sản phẩm (với đơn vị) - Bao gồm cả sản phẩm hết hàng để nhập thêm
         public dynamic GetAllProductUnits()
         {
             try
             {
                 var products = (from spDv in _context.SanPhamDonVis
-                               where !spDv.isDelete && spDv.trangThai == "available"
+                               where !spDv.isDelete 
+                                     && (spDv.trangThai == "Còn hàng" || spDv.trangThai == "Hết hàng")
                                join sp in _context.SanPhams on spDv.sanPhamId equals sp.id
                                where !sp.isDelete
                                join dv in _context.DonViDoLuongs on spDv.donViId equals dv.id
                                where !dv.isDelete
+                               orderby sp.ten, dv.ten
                                select new
                                {
                                    Id = spDv.id,
-                                   Ten = sp.ten + " - " + dv.ten,
+                                   Ten = sp.ten + " - " + dv.ten + 
+                                         (spDv.trangThai == "Hết hàng" ? " (Hết hàng)" : ""),
                                    TenSanPham = sp.ten,
                                    DonVi = dv.ten,
-                                   GiaBanHienTai = spDv.giaBan
+                                   GiaBanHienTai = spDv.giaBan,
+                                   TrangThai = spDv.trangThai
                                }).ToList();
 
                 return products;
@@ -241,8 +245,11 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
                         if (chiTietList == null || chiTietList.Count == 0)
                             return (false, "Phiếu nhập phải có ít nhất 1 sản phẩm", null);
 
+                        db.Configuration.AutoDetectChangesEnabled = false;
+
                         string phieuNhapId = _services.GenerateNewId<PhieuNhap>("PN", 6);
                         decimal tongTien = chiTietList.Sum(ct => ct.tongTien);
+
 
                         var phieuNhap = new PhieuNhap
                         {
@@ -261,9 +268,13 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
                             ct.phieuNhapId = phieuNhapId;
                             ct.tongTien = ct.soLuong * ct.donGia;
                             ct.isDelete = false;
+                            
                             db.ChiTietPhieuNhaps.Add(ct);
 
-                            // Cập nhật tồn kho
+
+                            // ✅ Database trigger sẽ tự động cập nhật TonKho
+                            // Nếu không có trigger, uncomment đoạn code dưới:
+                            /*
                             var tonKho = db.TonKhoes.FirstOrDefault(tk =>
                                 tk.sanPhamDonViId == ct.sanPhamDonViId && !tk.isDelete);
 
@@ -273,17 +284,30 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
                             }
                             else
                             {
-                                // Tạo mới tồn kho nếu chưa có - Sửa prefix từ "TKHO" sang "TK_SPDV"
-                                string tonKhoId = _services.GenerateNewId<TonKho>("TK_SPDV", 10);
-                                db.TonKhoes.Add(new TonKho
+                                string tonKhoId = _services.GenerateNewId<TonKho>("TK_SPDV", 11);
+                                var newTonKho = new TonKho
                                 {
                                     id = tonKhoId,
                                     sanPhamDonViId = ct.sanPhamDonViId,
                                     soLuongTon = ct.soLuong,
                                     isDelete = false
-                                });
+                                };
+                                db.TonKhoes.Add(newTonKho);
+                            }
+                            */
+
+                            // ✅ Cập nhật trạng thái sản phẩm
+                            var sanPhamDonVi = db.SanPhamDonVis
+                                .FirstOrDefault(spDv => spDv.id == ct.sanPhamDonViId && !spDv.isDelete);
+
+                            if (sanPhamDonVi != null && sanPhamDonVi.trangThai == "Hết hàng")
+                            {
+                                sanPhamDonVi.trangThai = "Còn hàng";
                             }
                         }
+
+                        db.Configuration.AutoDetectChangesEnabled = true;
+                        db.ChangeTracker.DetectChanges();
 
                         db.SaveChanges();
                         transaction.Commit();
