@@ -10,6 +10,7 @@ using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Views.forms.Reports;
 using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Views.Forms.Inventory;
 using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Views.Forms.Products;
 using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Views.forms.Main;
+using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Views.forms.Inventory;
 using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Utils;
 using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Models;
 using System.Data.Entity;
@@ -444,6 +445,12 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
         {
             LoadFormIntoPanel(new frmMeasurements());
             SetActiveButton(btn_products, btnSub_DonViTinh);
+        }
+
+        private void btnSub_Barcode_Click(object sender, EventArgs e)
+        {
+            LoadFormIntoPanel(new frmBarcode());
+            SetActiveButton(btn_products, btnSub_Barcode);
         }
 
         // --- Click cho các nút menu con của Nhân viên ---
