@@ -932,7 +932,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
                             {
                                 if (!isNewInvoice)
                                 {
-                                    var oldPromos = ctx.ChiTietHoaDonKhuyenMais.Where(p => p.hoaDonId == invoice.id).ToList();s
+                                    var oldPromos = ctx.ChiTietHoaDonKhuyenMais.Where(p => p.hoaDonId == invoice.id).ToList();
                                     ctx.ChiTietHoaDonKhuyenMais.RemoveRange(oldPromos);
                                 }
 
