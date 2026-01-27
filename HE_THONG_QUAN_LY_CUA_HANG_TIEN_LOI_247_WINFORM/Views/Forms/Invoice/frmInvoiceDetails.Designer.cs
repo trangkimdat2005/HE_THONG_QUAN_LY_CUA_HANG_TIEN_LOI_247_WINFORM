@@ -26,6 +26,14 @@
             this.splitContainer = new System.Windows.Forms.SplitContainer();
             this.panelLeft = new System.Windows.Forms.Panel();
             this.dgvInvoiceDetails = new System.Windows.Forms.DataGridView();
+            this.colSanPhamId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colUnitInvoice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colUnitPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPromo = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.colRemove = new System.Windows.Forms.DataGridViewButtonColumn();
             this.panelTotal = new System.Windows.Forms.Panel();
             this.lblTotal = new System.Windows.Forms.Label();
             this.lblTotalTitle = new System.Windows.Forms.Label();
@@ -53,16 +61,9 @@
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.lblSearch = new System.Windows.Forms.Label();
             this.pnlButtons = new System.Windows.Forms.Panel();
+            this.btnScan = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnPayment = new System.Windows.Forms.Button();
-            this.colSanPhamId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colUnitInvoice = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colUnitPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPromo = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.colRemove = new System.Windows.Forms.DataGridViewButtonColumn();
             this.pnlTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
@@ -171,6 +172,59 @@
             this.dgvInvoiceDetails.TabIndex = 0;
             this.dgvInvoiceDetails.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvInvoiceDetails_CellContentClick);
             this.dgvInvoiceDetails.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvInvoiceDetails_CellValueChanged);
+            // 
+            // colSanPhamId
+            // 
+            this.colSanPhamId.HeaderText = "SanPhamId";
+            this.colSanPhamId.Name = "colSanPhamId";
+            this.colSanPhamId.Visible = false;
+            // 
+            // colProduct
+            // 
+            this.colProduct.HeaderText = "Sản phẩm";
+            this.colProduct.Name = "colProduct";
+            this.colProduct.ReadOnly = true;
+            // 
+            // colUnitInvoice
+            // 
+            this.colUnitInvoice.FillWeight = 60F;
+            this.colUnitInvoice.HeaderText = "Đơn vị";
+            this.colUnitInvoice.Name = "colUnitInvoice";
+            this.colUnitInvoice.ReadOnly = true;
+            // 
+            // colQuantity
+            // 
+            this.colQuantity.FillWeight = 50F;
+            this.colQuantity.HeaderText = "Số lượng";
+            this.colQuantity.Name = "colQuantity";
+            // 
+            // colUnitPrice
+            // 
+            this.colUnitPrice.FillWeight = 50F;
+            this.colUnitPrice.HeaderText = "Đơn giá";
+            this.colUnitPrice.Name = "colUnitPrice";
+            this.colUnitPrice.ReadOnly = true;
+            // 
+            // colTotal
+            // 
+            this.colTotal.FillWeight = 90F;
+            this.colTotal.HeaderText = "Thành tiền";
+            this.colTotal.Name = "colTotal";
+            this.colTotal.ReadOnly = true;
+            // 
+            // colPromo
+            // 
+            this.colPromo.HeaderText = "Khuyết mãi";
+            this.colPromo.Name = "colPromo";
+            this.colPromo.Text = "Chọn";
+            // 
+            // colRemove
+            // 
+            this.colRemove.FillWeight = 25F;
+            this.colRemove.HeaderText = "Xoá";
+            this.colRemove.Name = "colRemove";
+            this.colRemove.Text = "Xoá";
+            this.colRemove.UseColumnTextForButtonValue = true;
             // 
             // panelTotal
             // 
@@ -384,6 +438,7 @@
             this.dgvProducts.Size = new System.Drawing.Size(415, 540);
             this.dgvProducts.TabIndex = 0;
             this.dgvProducts.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProducts_CellContentClick);
+            this.dgvProducts.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvDanhSachSanPham_KeyDown);
             // 
             // colProductId
             // 
@@ -490,6 +545,7 @@
             // 
             this.pnlButtons.BackColor = System.Drawing.Color.White;
             this.pnlButtons.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlButtons.Controls.Add(this.btnScan);
             this.pnlButtons.Controls.Add(this.btnCancel);
             this.pnlButtons.Controls.Add(this.btnPayment);
             this.pnlButtons.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -499,6 +555,21 @@
             this.pnlButtons.Size = new System.Drawing.Size(1400, 60);
             this.pnlButtons.TabIndex = 2;
             // 
+            // btnScan
+            // 
+            this.btnScan.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnScan.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(204)))), ((int)(((byte)(113)))));
+            this.btnScan.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnScan.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.btnScan.ForeColor = System.Drawing.Color.White;
+            this.btnScan.Location = new System.Drawing.Point(1125, 12);
+            this.btnScan.Name = "btnScan";
+            this.btnScan.Size = new System.Drawing.Size(120, 35);
+            this.btnScan.TabIndex = 2;
+            this.btnScan.Text = "➕ Quét mã";
+            this.btnScan.UseVisualStyleBackColor = false;
+            this.btnScan.Click += new System.EventHandler(this.btnScan_Click);
+            // 
             // btnCancel
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -506,7 +577,7 @@
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.btnCancel.ForeColor = System.Drawing.Color.White;
-            this.btnCancel.Location = new System.Drawing.Point(1140, 12);
+            this.btnCancel.Location = new System.Drawing.Point(983, 12);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(120, 35);
             this.btnCancel.TabIndex = 0;
@@ -528,61 +599,6 @@
             this.btnPayment.Text = "💳 Thanh toán";
             this.btnPayment.UseVisualStyleBackColor = false;
             this.btnPayment.Click += new System.EventHandler(this.btnPayment_Click);
-            // 
-            // colSanPhamId
-            // 
-            this.colSanPhamId.HeaderText = "SanPhamId";
-            this.colSanPhamId.Name = "colSanPhamId";
-            this.colSanPhamId.Visible = false;
-            // 
-            // colProduct
-            // 
-            this.colProduct.HeaderText = "Sản phẩm";
-            this.colProduct.Name = "colProduct";
-            this.colProduct.ReadOnly = true;
-            // 
-            // colUnitInvoice
-            // 
-            this.colUnitInvoice.FillWeight = 60F;
-            this.colUnitInvoice.HeaderText = "Đơn vị";
-            this.colUnitInvoice.Name = "colUnitInvoice";
-            this.colUnitInvoice.ReadOnly = true;
-            // 
-            // colQuantity
-            // 
-            this.colQuantity.FillWeight = 50F;
-            this.colQuantity.HeaderText = "Số lượng";
-            this.colQuantity.Name = "colQuantity";
-            // 
-            // colUnitPrice
-            // 
-            this.colUnitPrice.FillWeight = 50F;
-            this.colUnitPrice.HeaderText = "Đơn giá";
-            this.colUnitPrice.Name = "colUnitPrice";
-            this.colUnitPrice.ReadOnly = true;
-            // 
-            // colTotal
-            // 
-            this.colTotal.FillWeight = 90F;
-            this.colTotal.HeaderText = "Thành tiền";
-            this.colTotal.Name = "colTotal";
-            this.colTotal.ReadOnly = true;
-            // 
-            // colPromo
-            // 
-            this.colPromo.FillWeight = 100F;
-            this.colPromo.HeaderText = "Khuyết mãi";
-            this.colPromo.Name = "colPromo";
-            this.colPromo.Text = "Chọn";
-            // 
-            // colRemove
-            //
-            this.colRemove.FillWeight = 25F;
-            this.colRemove.HeaderText = "Xoá";
-            this.colRemove.Name = "colRemove";
-            this.colRemove.Text = "Xoá";
-      
-            this.colRemove.UseColumnTextForButtonValue = true;
             // 
             // frmInvoiceDetails
             // 
@@ -663,5 +679,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colTotal;
         private System.Windows.Forms.DataGridViewButtonColumn colPromo;
         private System.Windows.Forms.DataGridViewButtonColumn colRemove;
+        private System.Windows.Forms.Button btnScan;
     }
 }

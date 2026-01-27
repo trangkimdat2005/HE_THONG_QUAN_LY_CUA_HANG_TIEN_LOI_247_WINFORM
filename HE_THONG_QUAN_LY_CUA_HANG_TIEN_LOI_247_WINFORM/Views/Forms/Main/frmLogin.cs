@@ -131,5 +131,15 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
             base.OnFormClosing(e);
             _authService?.Dispose();
         }
+
+        private void frmLogin_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn_login_Click_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }

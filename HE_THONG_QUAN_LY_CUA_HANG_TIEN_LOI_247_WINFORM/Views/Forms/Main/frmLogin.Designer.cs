@@ -149,6 +149,7 @@
             this.btn_login.Size = new System.Drawing.Size(262, 41);
             this.btn_login.TabIndex = 12;
             this.btn_login.Text = "ĐĂNG NHẬP";
+            this.btn_login.Click += new System.EventHandler(this.btn_login_Click_1);
             // 
             // btn_ShowPassword
             // 
@@ -246,6 +247,7 @@
             this.Name = "frmLogin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Đăng nhập hệ thống";
+            this.Load += new System.EventHandler(this.frmLogin_Load);
             this.pnl_Logo.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Logo)).EndInit();
             this.guna2Panel1.ResumeLayout(false);
