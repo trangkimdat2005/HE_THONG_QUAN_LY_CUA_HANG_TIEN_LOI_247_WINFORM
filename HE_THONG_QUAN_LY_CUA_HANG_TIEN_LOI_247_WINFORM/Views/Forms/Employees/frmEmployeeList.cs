@@ -272,5 +272,53 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
         {
 
         }
+
+        private void btnImport_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Filter = "Excel Files|*.xlsx;*.xls";
+            dialog.Title = "Chọn file Excel danh sách nhân viên";
+
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                // Hiển thị con trỏ xoay xoay để người dùng biết đang xử lý
+                this.Cursor = Cursors.WaitCursor;
+
+                try
+                {
+                    // Gọi Service Excel riêng
+                    var excelService = new HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Services.ExcelImportService();
+                    var result = excelService.ImportNhanVien(dialog.FileName);
+
+                    this.Cursor = Cursors.Default; // Trả lại con trỏ chuột
+
+                    if (result.IsSuccess)
+                    {
+                        MessageBox.Show(result.Message, "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        btnRefresh_Click(null, null); // Load lại danh sách
+                    }
+                    else
+                    {
+                        // Nếu có danh sách lỗi cụ thể -> Hiện thông báo chi tiết
+                        if (result.ErrorLogs != null && result.ErrorLogs.Count > 0)
+                        {
+                            string errorMsg = result.Message + "\n\nChi tiết lỗi:\n" + string.Join("\n", result.ErrorLogs.Take(10)); // Chỉ hiện 10 lỗi đầu tiên cho đỡ dài
+                            if (result.ErrorLogs.Count > 10) errorMsg += "\n... và còn nhiều lỗi khác.";
+
+                            MessageBox.Show(errorMsg, "Lỗi dữ liệu", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
+                        else
+                        {
+                            MessageBox.Show(result.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    this.Cursor = Cursors.Default;
+                    MessageBox.Show("Lỗi Application: " + ex.Message);
+                }
+            }
+        }
     }
 }

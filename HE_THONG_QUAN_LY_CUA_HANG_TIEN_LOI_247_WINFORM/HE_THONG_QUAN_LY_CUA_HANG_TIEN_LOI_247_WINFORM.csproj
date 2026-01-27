@@ -81,6 +81,9 @@
     <Reference Include="Microsoft.Bcl.HashCode, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.HashCode.1.1.1\lib\net461\Microsoft.Bcl.HashCode.dll</HintPath>
     </Reference>
+    <Reference Include="MiniExcel, Version=1.42.0.0, Culture=neutral, PublicKeyToken=e7310002a53eac39, processorArchitecture=MSIL">
+      <HintPath>..\packages\MiniExcel.1.42.0\lib\net45\MiniExcel.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="QRCoder, Version=1.7.0.0, Culture=neutral, PublicKeyToken=c4ed5b9ae8358a28, processorArchitecture=MSIL">
@@ -99,6 +102,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Design" />
+    <Reference Include="System.IO.Compression" />
     <Reference Include="System.Management" />
     <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
@@ -136,6 +140,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Config\PaymentConfig.cs" />
+    <Compile Include="DTO\ImportResult.cs" />
+    <Compile Include="DTO\NhanVienImportDto.cs" />
+    <Compile Include="DTO\SanPhamDonViImportDto.cs" />
+    <Compile Include="DTO\SanPhamImportDto.cs" />
     <Compile Include="Examples\ExampleFormWithPermissions.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -220,6 +228,7 @@
     <Compile Include="Services\CategoryService.cs" />
     <Compile Include="Services\CustomerService.cs" />
     <Compile Include="Services\EventService.cs" />
+    <Compile Include="Services\ExcelService.cs" />
     <Compile Include="Services\GoodsService.cs" />
     <Compile Include="Services\InventoryService.cs" />
     <Compile Include="Services\InvoiceService.cs" />
