@@ -284,7 +284,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
         }
 
         /// <summary>
-        /// L?y l?ch s? thanh toán
+        /// Lấy danh sách thanh toán
         /// </summary>
         public List<GiaoDichThanhToan> GetPaymentHistory(string invoiceId)
         {
@@ -296,7 +296,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
         }
 
         /// <summary>
-        /// L?y danh sách ph??ng th?c thanh toán
+        /// lấy danh sách pt thanh toán
         /// </summary>
         public List<KenhThanhToan> GetPaymentMethods()
         {
@@ -307,7 +307,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
         }
 
         /// <summary>
-        /// T?o mã hóa ??n t? ??ng
+        /// Tạo mã hóa đơn
         /// </summary>
         public string GenerateNewInvoiceId()
         {
@@ -326,7 +326,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
         }
 
         /// <summary>
-        /// T?o mã giao d?ch thanh toán
+        /// Tạo mã giao  dịch thanh toán
         /// </summary>
         private string GeneratePaymentId()
         {

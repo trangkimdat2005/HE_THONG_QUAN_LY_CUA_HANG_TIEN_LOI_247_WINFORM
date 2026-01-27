@@ -25,7 +25,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
                 var query = from tk in _context.TonKhoes
                            where !tk.isDelete
                            join spDv in _context.SanPhamDonVis on tk.sanPhamDonViId equals spDv.id
-                           where !spDv.isDelete && spDv.trangThai == "available"
+                           where !spDv.isDelete 
                            join sp in _context.SanPhams on spDv.sanPhamId equals sp.id
                            where !sp.isDelete
                            join dv in _context.DonViDoLuongs on spDv.donViId equals dv.id
@@ -63,7 +63,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
                 var query = from tk in _context.TonKhoes
                            where !tk.isDelete
                            join spDv in _context.SanPhamDonVis on tk.sanPhamDonViId equals spDv.id
-                           where !spDv.isDelete && spDv.trangThai == "available"
+                           where !spDv.isDelete
                            join sp in _context.SanPhams on spDv.sanPhamId equals sp.id
                            where !sp.isDelete
                            join dv in _context.DonViDoLuongs on spDv.donViId equals dv.id
