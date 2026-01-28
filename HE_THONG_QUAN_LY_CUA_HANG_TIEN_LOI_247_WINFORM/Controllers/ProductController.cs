@@ -127,28 +127,84 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Controllers
             {
                 using (var context = new AppDbContext())
                 {
-                    // Kiểm tra trùng lặp
-                    var exists = context.SanPhamDonVis.Any(p =>
-                        p.sanPhamId == model.sanPhamId &&
-                        p.donViId == model.donViId &&
-                        !p.isDelete);
+                    // ✅ TÌM BẢN GHI (Kể cả đã xóa mềm)
+                    var existingProduct = context.SanPhamDonVis
+                        .Where(p =>
+                            p.sanPhamId == model.sanPhamId &&
+                            p.donViId == model.donViId)
+                        .FirstOrDefault();
 
-                    if (exists)
-                        return (false, "Sản phẩm với đơn vị này đã tồn tại!", null);
+                    if (existingProduct != null)
+                    {
+                        if (existingProduct.isDelete)
+                        {
+                            // ✅ TỰ ĐỘNG KHÔI PHỤC - KHÔNG BÁO LỖI
+                            existingProduct.isDelete = false;
+                            existingProduct.giaBan = model.giaBan;
+                            existingProduct.heSoQuyDoi = model.heSoQuyDoi;
+                            existingProduct.trangThai = model.trangThai ?? "Còn hàng";
 
-                    // Tạo ID mới theo format SPDV0001
+                            context.SaveChanges();
+
+                            return (true, 
+                                $" Thêm sản phẩm thành công!\nMã: {existingProduct.id}", 
+                                existingProduct);
+                        }
+                        else
+                        {
+                            // ✅ ĐÃ TỒN TẠI VÀ ĐANG ACTIVE → BÁO LỖI CHI TIẾT
+                            var detailInfo = context.SanPhamDonVis
+                                .AsNoTracking()
+                                .Where(p => p.id == existingProduct.id)
+                                .Select(p => new {
+                                    p.id,
+                                    p.giaBan,
+                                    p.trangThai,
+                                    TenSanPham = p.SanPham.ten,
+                                    TenDonVi = p.DonViDoLuong.ten
+                                })
+                                .FirstOrDefault();
+
+                            return (false, 
+                                $"Sản phẩm với đơn vị này đã tồn tại!\n\n" +
+                                $"Mã: {detailInfo.id}\n" +
+                                $"Tên: {detailInfo.TenSanPham ?? "Không rõ"}\n" +
+                                $"Đơn vị: {detailInfo.TenDonVi ?? "Không rõ"}\n" +
+                                $"Giá bán: {detailInfo.giaBan:N0} đ\n" +
+                                $"Trạng thái: {detailInfo.trangThai ?? "Không rõ"}\n\n", 
+                                null);
+                        }
+                    }
+
+                    // ✅ THÊM MỚI (không tồn tại)
                     model.id = GenerateNewProductUnitId();
                     model.isDelete = false;
+
+                    if (string.IsNullOrEmpty(model.trangThai))
+                        model.trangThai = "Còn hàng";
 
                     context.SanPhamDonVis.Add(model);
                     context.SaveChanges();
 
-                    return (true, $"Thêm thành công! Mã: {model.id}", model);
+                    return (true, $"✓ Thêm sản phẩm thành công!\nMã: {model.id}", model);
                 }
+            }
+            catch (System.Data.Entity.Infrastructure.DbUpdateException dbEx)
+            {
+                var innerMsg = dbEx.InnerException?.InnerException?.Message ?? dbEx.InnerException?.Message ?? dbEx.Message;
+                
+                if (innerMsg.Contains("PRIMARY KEY") || innerMsg.Contains("PK_"))
+                {
+                    return (false,
+                        $"Sản phẩm với Hàng hóa và Đơn vị này đã tồn tại trong hệ thống.\n\n", 
+                        null);
+                }
+                
+                return (false, $"Lỗi cơ sở dữ liệu:\n{innerMsg}", null);
             }
             catch (Exception ex)
             {
-                return (false, $"Lỗi: {ex.Message}", null);
+                return (false, $"Lỗi khi thêm sản phẩm:\n{ex.Message}", null);
             }
         }
 
@@ -161,32 +217,59 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Controllers
                 {
                     var existing = context.SanPhamDonVis.FirstOrDefault(p => p.id == model.id);
                     if (existing == null)
-                        return (false, "Không tìm thấy sản phẩm!");
+                        return (false, " Không tìm thấy sản phẩm!");
 
-                    // Kiểm tra trùng lặp (trừ chính nó)
-                    var duplicate = context.SanPhamDonVis.Any(p =>
-                        p.id != model.id &&
-                        p.sanPhamId == model.sanPhamId &&
-                        p.donViId == model.donViId &&
-                        !p.isDelete);
+                    //  Kiểm tra trùng lặp (trừ chính nó) với thông báo chi tiết
+                    var duplicateProduct = context.SanPhamDonVis
+                        .AsNoTracking()
+                        .Where(p =>
+                            p.id != model.id &&
+                            p.sanPhamId == model.sanPhamId &&
+                            p.donViId == model.donViId &&
+                            !p.isDelete)
+                        .Select(p => new {
+                            p.id,
+                            p.giaBan,
+                            TenSanPham = p.SanPham.ten,
+                            TenDonVi = p.DonViDoLuong.ten
+                        })
+                        .FirstOrDefault();
 
-                    if (duplicate)
-                        return (false, "Sản phẩm với đơn vị này đã tồn tại!");
+                    if (duplicateProduct != null)
+                    {
+                        return (false,
+                            $"Sản phẩm với đơn vị này đã tồn tại!\n\n" +
+                            $"Mã trùng: {duplicateProduct.id}\n" +
+                            $"Tên: {duplicateProduct.TenSanPham ?? "Không rõ"}\n" +
+                            $"Đơn vị: {duplicateProduct.TenDonVi ?? "Không rõ"}\n" +
+                            $"Giá bán: {duplicateProduct.giaBan:N0} đ\n\n");
+                    }
 
-                    // Cập nhật
-                    existing.sanPhamId = model.sanPhamId;
-                    existing.donViId = model.donViId;
+                    // ✅ Cập nhật - KHÔNG SỬA sanPhamId và donViId (là khóa chính
+                    // Chỉ sửa giá bán, trạng thái, hệ số quy đổi
                     existing.giaBan = model.giaBan;
                     existing.heSoQuyDoi = model.heSoQuyDoi;
-                    existing.trangThai = model.trangThai;
+                    existing.trangThai = model.trangThai ?? "Còn hàng";
 
                     context.SaveChanges();
-                    return (true, "Cập nhật thành công!");
+                    return (true, "✓ Cập nhật sản phẩm thành công!");
                 }
+            }
+            catch (System.Data.Entity.Infrastructure.DbUpdateException dbEx)
+            {
+                var innerMsg = dbEx.InnerException?.InnerException?.Message ?? dbEx.InnerException?.Message ?? dbEx.Message;
+                
+                if (innerMsg.Contains("PRIMARY KEY") || innerMsg.Contains("PK_"))
+                {
+                    return (false, 
+                        $"Không thể thay đổi Hàng hóa hoặc Đơn vị vì đã tồn tại.\n\n" );
+                }
+                
+                return (false, $"Lỗi cơ sở dữ liệu:\n{innerMsg}");
             }
             catch (Exception ex)
             {
-                return (false, $"Lỗi: {ex.Message}");
+                return (false, $"Lỗi khi cập nhật:\n{ex.Message}");
             }
         }
 
