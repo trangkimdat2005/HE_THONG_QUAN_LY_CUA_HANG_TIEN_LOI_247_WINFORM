@@ -346,6 +346,102 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
             return "GD001";
         }
 
+        /// <summary>
+        /// Xử lý hoàn trả hàng: tạo PhieuDoiTra và tùy chọn tăng tồn kho
+        /// </summary>
+        public Tuple<bool, string> ProcessReturn(
+            string hoaDonId,
+            string sanPhamDonViId,
+            int soLuong,
+            string lyDo,
+            decimal soTienHoan,
+            string chinhSachId,
+            bool addToStock)
+        {
+            using (var transaction = _context.Database.BeginTransaction())
+            {
+                try
+                {
+                    if (string.IsNullOrEmpty(hoaDonId))
+                        return Tuple.Create(false, "Mã hóa đơn không hợp lệ");
+
+                    if (string.IsNullOrEmpty(sanPhamDonViId))
+                        return Tuple.Create(false, "Sản phẩm không hợp lệ");
+
+                    if (soLuong <=0)
+                        return Tuple.Create(false, "Số lượng hoàn trả phải lớn hơn 0");
+
+                    var hoaDon = _context.HoaDons.FirstOrDefault(h => h.id == hoaDonId && !h.isDelete);
+                    if (hoaDon == null)
+                        return Tuple.Create(false, "Không tìm thấy hóa đơn");
+
+                    // Chỉ cho phép hoàn trả khi hóa đơn đã thanh toán
+                    if (!string.Equals(hoaDon.trangThai?.Trim(), "Đã thanh toán", StringComparison.CurrentCultureIgnoreCase))
+                    {
+                        return Tuple.Create(false, "Chỉ cho phép hoàn trả khi hóa đơn đã thanh toán");
+                    }
+
+                    // Tạo Phiếu Đổi Trả
+                    var phieuId = _services.GenerateNewId<PhieuDoiTra>("PDT",6) ?? Guid.NewGuid().ToString();
+
+                    var phieu = new PhieuDoiTra
+                    {
+                        id = phieuId,
+                        hoaDonId = hoaDonId,
+                        sanPhamDonViId = sanPhamDonViId,
+                        ngayDoiTra = DateTime.Now,
+                        lyDo = lyDo ?? string.Empty,
+                        soTienHoan = soTienHoan,
+                        chinhSachId = chinhSachId ?? string.Empty,
+                        isDelete = false
+                    };
+
+                    _context.PhieuDoiTras.Add(phieu);
+
+                    if (addToStock)
+                    {
+                        // Cập nhật TonKho
+                        var tonKho = _context.TonKhoes.FirstOrDefault(tk => tk.sanPhamDonViId == sanPhamDonViId && !tk.isDelete);
+                        if (tonKho != null)
+                        {
+                            tonKho.soLuongTon += soLuong;
+                            _context.Entry(tonKho).State = EntityState.Modified;
+                        }
+                        else
+                        {
+                            var newTkId = _services.GenerateNewId<TonKho>("TK",8) ?? Guid.NewGuid().ToString();
+                            var newTonKho = new TonKho
+                            {
+                                id = newTkId,
+                                sanPhamDonViId = sanPhamDonViId,
+                                soLuongTon = soLuong,
+                                isDelete = false
+                            };
+                            _context.TonKhoes.Add(newTonKho);
+                        }
+
+                        // Cập nhật SanPhamViTri nếu có (tăng số lượng tại vị trí tồn kho đầu tiên)
+                        var spvt = _context.SanPhamViTris.FirstOrDefault(s => s.sanPhamDonViId == sanPhamDonViId && !s.isDelete);
+                        if (spvt != null)
+                        {
+                            spvt.soLuong += soLuong;
+                            _context.Entry(spvt).State = EntityState.Modified;
+                        }
+                    }
+
+                    _context.SaveChanges();
+                    transaction.Commit();
+
+                    return Tuple.Create(true, "Hoàn trả thành công");
+                }
+                catch (Exception ex)
+                {
+                    transaction.Rollback();
+                    return Tuple.Create(false, $"Lỗi hoàn trả: {ex.Message}");
+                }
+            }
+        }
+
         public void Dispose()
         {
             _context?.Dispose();
