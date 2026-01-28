@@ -45,8 +45,8 @@
             this.cboDiscountType = new System.Windows.Forms.ComboBox();
             this.grpInfo = new System.Windows.Forms.GroupBox();
             this.pnlCode = new System.Windows.Forms.Panel();
-            this.txtCode = new System.Windows.Forms.TextBox();
             this.btnGenerateCode = new System.Windows.Forms.Button();
+            this.txtCode = new System.Windows.Forms.TextBox();
             this.lblCode = new System.Windows.Forms.Label();
             this.txtDescription = new System.Windows.Forms.TextBox();
             this.lblDescription = new System.Windows.Forms.Label();
@@ -94,7 +94,7 @@
             this.lblTitle.ForeColor = System.Drawing.Color.White;
             this.lblTitle.Location = new System.Drawing.Point(15, 15);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(220, 30);
+            this.lblTitle.Size = new System.Drawing.Size(272, 37);
             this.lblTitle.TabIndex = 0;
             this.lblTitle.Text = "THÊM KHUYẾN MÃI";
             // 
@@ -151,55 +151,57 @@
             // 
             this.lblUsageLimit.AutoSize = true;
             this.lblUsageLimit.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.lblUsageLimit.Location = new System.Drawing.Point(20, 180);
+            this.lblUsageLimit.Location = new System.Drawing.Point(528, 41);
             this.lblUsageLimit.Name = "lblUsageLimit";
-            this.lblUsageLimit.Size = new System.Drawing.Size(114, 15);
+            this.lblUsageLimit.Size = new System.Drawing.Size(143, 20);
             this.lblUsageLimit.TabIndex = 9;
             this.lblUsageLimit.Text = "Tổng số lần sử dụng";
             // 
             // txtUsageLimit
             // 
             this.txtUsageLimit.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.txtUsageLimit.Location = new System.Drawing.Point(20, 205);
+            this.txtUsageLimit.Location = new System.Drawing.Point(528, 66);
             this.txtUsageLimit.Name = "txtUsageLimit";
-            this.txtUsageLimit.Size = new System.Drawing.Size(200, 25);
+            this.txtUsageLimit.Size = new System.Drawing.Size(143, 30);
             this.txtUsageLimit.TabIndex = 8;
             // 
             // lblMinOrder
             // 
             this.lblMinOrder.AutoSize = true;
             this.lblMinOrder.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.lblMinOrder.Location = new System.Drawing.Point(250, 110);
+            this.lblMinOrder.Location = new System.Drawing.Point(18, 110);
             this.lblMinOrder.Name = "lblMinOrder";
-            this.lblMinOrder.Size = new System.Drawing.Size(106, 15);
+            this.lblMinOrder.Size = new System.Drawing.Size(133, 20);
             this.lblMinOrder.TabIndex = 7;
             this.lblMinOrder.Text = "Đơn hàng tối thiểu";
             // 
             // txtMinOrder
             // 
             this.txtMinOrder.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.txtMinOrder.Location = new System.Drawing.Point(250, 135);
+            this.txtMinOrder.Location = new System.Drawing.Point(18, 135);
             this.txtMinOrder.Name = "txtMinOrder";
-            this.txtMinOrder.Size = new System.Drawing.Size(200, 25);
+            this.txtMinOrder.Size = new System.Drawing.Size(200, 30);
             this.txtMinOrder.TabIndex = 6;
             // 
             // lblMaxDiscount
             // 
             this.lblMaxDiscount.AutoSize = true;
             this.lblMaxDiscount.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.lblMaxDiscount.Location = new System.Drawing.Point(20, 110);
+            this.lblMaxDiscount.Location = new System.Drawing.Point(254, 110);
             this.lblMaxDiscount.Name = "lblMaxDiscount";
-            this.lblMaxDiscount.Size = new System.Drawing.Size(68, 15);
+            this.lblMaxDiscount.Size = new System.Drawing.Size(87, 20);
             this.lblMaxDiscount.TabIndex = 5;
             this.lblMaxDiscount.Text = "Giảm tối đa";
+            this.lblMaxDiscount.Click += new System.EventHandler(this.lblMaxDiscount_Click);
             // 
             // txtMaxDiscount
             // 
             this.txtMaxDiscount.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.txtMaxDiscount.Location = new System.Drawing.Point(20, 135);
+            this.txtMaxDiscount.Location = new System.Drawing.Point(254, 135);
             this.txtMaxDiscount.Name = "txtMaxDiscount";
-            this.txtMaxDiscount.Size = new System.Drawing.Size(200, 25);
+            this.txtMaxDiscount.Size = new System.Drawing.Size(200, 30);
             this.txtMaxDiscount.TabIndex = 4;
+            this.txtMaxDiscount.TextChanged += new System.EventHandler(this.txtMaxDiscount_TextChanged);
             // 
             // lblDiscountValue
             // 
@@ -207,7 +209,7 @@
             this.lblDiscountValue.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.lblDiscountValue.Location = new System.Drawing.Point(250, 40);
             this.lblDiscountValue.Name = "lblDiscountValue";
-            this.lblDiscountValue.Size = new System.Drawing.Size(68, 15);
+            this.lblDiscountValue.Size = new System.Drawing.Size(87, 20);
             this.lblDiscountValue.TabIndex = 3;
             this.lblDiscountValue.Text = "Giá trị giảm";
             // 
@@ -216,7 +218,7 @@
             this.txtDiscountValue.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.txtDiscountValue.Location = new System.Drawing.Point(250, 65);
             this.txtDiscountValue.Name = "txtDiscountValue";
-            this.txtDiscountValue.Size = new System.Drawing.Size(200, 25);
+            this.txtDiscountValue.Size = new System.Drawing.Size(200, 30);
             this.txtDiscountValue.TabIndex = 2;
             // 
             // lblDiscountType
@@ -225,7 +227,7 @@
             this.lblDiscountType.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.lblDiscountType.Location = new System.Drawing.Point(20, 40);
             this.lblDiscountType.Name = "lblDiscountType";
-            this.lblDiscountType.Size = new System.Drawing.Size(90, 15);
+            this.lblDiscountType.Size = new System.Drawing.Size(111, 20);
             this.lblDiscountType.TabIndex = 1;
             this.lblDiscountType.Text = "Hình thức giảm";
             // 
@@ -239,7 +241,7 @@
             "Giảm tiền (VND)"});
             this.cboDiscountType.Location = new System.Drawing.Point(20, 65);
             this.cboDiscountType.Name = "cboDiscountType";
-            this.cboDiscountType.Size = new System.Drawing.Size(200, 25);
+            this.cboDiscountType.Size = new System.Drawing.Size(200, 31);
             this.cboDiscountType.TabIndex = 0;
             // 
             // grpInfo
@@ -262,8 +264,8 @@
             // 
             // pnlCode
             // 
-            this.pnlCode.Controls.Add(this.txtCode);
             this.pnlCode.Controls.Add(this.btnGenerateCode);
+            this.pnlCode.Controls.Add(this.txtCode);
             this.pnlCode.Location = new System.Drawing.Point(20, 215);
             this.pnlCode.Name = "pnlCode";
             this.pnlCode.Size = new System.Drawing.Size(760, 30);
@@ -271,17 +273,17 @@
             // 
             // txtCode
             // 
-            this.txtCode.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtCode.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.txtCode.Location = new System.Drawing.Point(0, 0);
             this.txtCode.Name = "txtCode";
-            this.txtCode.Size = new System.Drawing.Size(760, 25);
+            this.txtCode.Size = new System.Drawing.Size(610, 30);
             this.txtCode.TabIndex = 0;
             // 
             // btnGenerateCode
             // 
             this.btnGenerateCode.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(183)))), ((int)(((byte)(255)))));
             this.btnGenerateCode.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGenerateCode.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.btnGenerateCode.ForeColor = System.Drawing.Color.White;
             this.btnGenerateCode.Location = new System.Drawing.Point(620, 0);
             this.btnGenerateCode.Name = "btnGenerateCode";
@@ -296,7 +298,7 @@
             this.lblCode.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.lblCode.Location = new System.Drawing.Point(20, 195);
             this.lblCode.Name = "lblCode";
-            this.lblCode.Size = new System.Drawing.Size(90, 15);
+            this.lblCode.Size = new System.Drawing.Size(111, 20);
             this.lblCode.TabIndex = 4;
             this.lblCode.Text = "Mã Khuyến Mãi";
             // 
@@ -315,7 +317,7 @@
             this.lblDescription.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.lblDescription.Location = new System.Drawing.Point(20, 85);
             this.lblDescription.Name = "lblDescription";
-            this.lblDescription.Size = new System.Drawing.Size(38, 15);
+            this.lblDescription.Size = new System.Drawing.Size(48, 20);
             this.lblDescription.TabIndex = 2;
             this.lblDescription.Text = "Mô tả";
             // 
@@ -324,7 +326,7 @@
             this.txtName.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.txtName.Location = new System.Drawing.Point(20, 55);
             this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(760, 25);
+            this.txtName.Size = new System.Drawing.Size(760, 30);
             this.txtName.TabIndex = 1;
             // 
             // lblName
@@ -333,7 +335,7 @@
             this.lblName.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.lblName.Location = new System.Drawing.Point(20, 30);
             this.lblName.Name = "lblName";
-            this.lblName.Size = new System.Drawing.Size(97, 15);
+            this.lblName.Size = new System.Drawing.Size(120, 20);
             this.lblName.TabIndex = 0;
             this.lblName.Text = "Tên chương trình";
             // 
@@ -369,7 +371,7 @@
             this.rdoProduct.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.rdoProduct.Location = new System.Drawing.Point(20, 95);
             this.rdoProduct.Name = "rdoProduct";
-            this.rdoProduct.Size = new System.Drawing.Size(114, 19);
+            this.rdoProduct.Size = new System.Drawing.Size(140, 24);
             this.rdoProduct.TabIndex = 2;
             this.rdoProduct.Text = "Sản phẩm cụ thể";
             this.rdoProduct.UseVisualStyleBackColor = true;
@@ -380,7 +382,7 @@
             this.rdoCategory.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.rdoCategory.Location = new System.Drawing.Point(20, 65);
             this.rdoCategory.Name = "rdoCategory";
-            this.rdoCategory.Size = new System.Drawing.Size(116, 19);
+            this.rdoCategory.Size = new System.Drawing.Size(141, 24);
             this.rdoCategory.TabIndex = 1;
             this.rdoCategory.Text = "Danh mục cụ thể";
             this.rdoCategory.UseVisualStyleBackColor = true;
@@ -392,7 +394,7 @@
             this.rdoAll.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.rdoAll.Location = new System.Drawing.Point(20, 35);
             this.rdoAll.Name = "rdoAll";
-            this.rdoAll.Size = new System.Drawing.Size(119, 19);
+            this.rdoAll.Size = new System.Drawing.Size(149, 24);
             this.rdoAll.TabIndex = 0;
             this.rdoAll.TabStop = true;
             this.rdoAll.Text = "Toàn bộ cửa hàng";
@@ -449,7 +451,7 @@
             this.dtpEndDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpEndDate.Location = new System.Drawing.Point(20, 195);
             this.dtpEndDate.Name = "dtpEndDate";
-            this.dtpEndDate.Size = new System.Drawing.Size(200, 25);
+            this.dtpEndDate.Size = new System.Drawing.Size(200, 30);
             this.dtpEndDate.TabIndex = 5;
             // 
             // lblEndDate
@@ -458,7 +460,7 @@
             this.lblEndDate.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.lblEndDate.Location = new System.Drawing.Point(20, 175);
             this.lblEndDate.Name = "lblEndDate";
-            this.lblEndDate.Size = new System.Drawing.Size(81, 15);
+            this.lblEndDate.Size = new System.Drawing.Size(100, 20);
             this.lblEndDate.TabIndex = 4;
             this.lblEndDate.Text = "Ngày kết thúc";
             // 
@@ -469,7 +471,7 @@
             this.dtpStartDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpStartDate.Location = new System.Drawing.Point(20, 135);
             this.dtpStartDate.Name = "dtpStartDate";
-            this.dtpStartDate.Size = new System.Drawing.Size(200, 25);
+            this.dtpStartDate.Size = new System.Drawing.Size(200, 30);
             this.dtpStartDate.TabIndex = 3;
             // 
             // lblStartDate
@@ -478,7 +480,7 @@
             this.lblStartDate.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.lblStartDate.Location = new System.Drawing.Point(20, 115);
             this.lblStartDate.Name = "lblStartDate";
-            this.lblStartDate.Size = new System.Drawing.Size(78, 15);
+            this.lblStartDate.Size = new System.Drawing.Size(99, 20);
             this.lblStartDate.TabIndex = 2;
             this.lblStartDate.Text = "Ngày bắt đầu";
             // 
@@ -492,7 +494,7 @@
             "Tạm dừng"});
             this.cboStatus.Location = new System.Drawing.Point(20, 75);
             this.cboStatus.Name = "cboStatus";
-            this.cboStatus.Size = new System.Drawing.Size(200, 25);
+            this.cboStatus.Size = new System.Drawing.Size(200, 31);
             this.cboStatus.TabIndex = 1;
             // 
             // lblStatus
@@ -501,13 +503,13 @@
             this.lblStatus.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.lblStatus.Location = new System.Drawing.Point(20, 50);
             this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(59, 15);
+            this.lblStatus.Size = new System.Drawing.Size(75, 20);
             this.lblStatus.TabIndex = 0;
             this.lblStatus.Text = "Trạng thái";
             // 
             // frmAddPromotion
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.ClientSize = new System.Drawing.Size(1200, 700);
