@@ -482,7 +482,7 @@
             this.btn_bills.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.btn_bills.ImageOffset = new System.Drawing.Point(0, 2);
             this.btn_bills.ImageSize = new System.Drawing.Size(40, 40);
-            this.btn_bills.Location = new System.Drawing.Point(5, 357);
+            this.btn_bills.Location = new System.Drawing.Point(5, 400);
             this.btn_bills.Margin = new System.Windows.Forms.Padding(0, 10, 0, 0);
             this.btn_bills.Name = "btn_bills";
             this.btn_bills.Padding = new System.Windows.Forms.Padding(10, 5, 0, 0);
@@ -511,7 +511,7 @@
             this.btn_employees.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.btn_employees.ImageOffset = new System.Drawing.Point(0, 2);
             this.btn_employees.ImageSize = new System.Drawing.Size(40, 40);
-            this.btn_employees.Location = new System.Drawing.Point(5, 417);
+            this.btn_employees.Location = new System.Drawing.Point(5, 460);
             this.btn_employees.Margin = new System.Windows.Forms.Padding(0, 10, 0, 0);
             this.btn_employees.Name = "btn_employees";
             this.btn_employees.Padding = new System.Windows.Forms.Padding(10, 5, 0, 0);
@@ -533,7 +533,7 @@
             this.pnlEmployeeSubmenu.Controls.Add(this.btnSub_PhanCong);
             this.pnlEmployeeSubmenu.Controls.Add(this.btnSub_DanhSachNV);
             this.pnlEmployeeSubmenu.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlEmployeeSubmenu.Location = new System.Drawing.Point(7, 469);
+            this.pnlEmployeeSubmenu.Location = new System.Drawing.Point(7, 512);
             this.pnlEmployeeSubmenu.Margin = new System.Windows.Forms.Padding(2);
             this.pnlEmployeeSubmenu.Name = "pnlEmployeeSubmenu";
             this.pnlEmployeeSubmenu.Size = new System.Drawing.Size(306, 125);
@@ -638,7 +638,7 @@
             this.btn_customers.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.btn_customers.ImageOffset = new System.Drawing.Point(0, 2);
             this.btn_customers.ImageSize = new System.Drawing.Size(40, 40);
-            this.btn_customers.Location = new System.Drawing.Point(5, 563);
+            this.btn_customers.Location = new System.Drawing.Point(5, 649);
             this.btn_customers.Margin = new System.Windows.Forms.Padding(0, 10, 0, 0);
             this.btn_customers.Name = "btn_customers";
             this.btn_customers.Padding = new System.Windows.Forms.Padding(10, 5, 0, 0);
@@ -659,7 +659,7 @@
             this.pnlCustomerSubmenu.Controls.Add(this.btnSub_TheThanhVien);
             this.pnlCustomerSubmenu.Controls.Add(this.btnSub_DanhSachKH);
             this.pnlCustomerSubmenu.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlCustomerSubmenu.Location = new System.Drawing.Point(7, 615);
+            this.pnlCustomerSubmenu.Location = new System.Drawing.Point(7, 701);
             this.pnlCustomerSubmenu.Margin = new System.Windows.Forms.Padding(2);
             this.pnlCustomerSubmenu.Name = "pnlCustomerSubmenu";
             this.pnlCustomerSubmenu.Size = new System.Drawing.Size(306, 82);
@@ -737,7 +737,7 @@
             this.btn_promotions.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.btn_promotions.ImageOffset = new System.Drawing.Point(0, 2);
             this.btn_promotions.ImageSize = new System.Drawing.Size(40, 40);
-            this.btn_promotions.Location = new System.Drawing.Point(5, 709);
+            this.btn_promotions.Location = new System.Drawing.Point(5, 795);
             this.btn_promotions.Margin = new System.Windows.Forms.Padding(0, 10, 0, 0);
             this.btn_promotions.Name = "btn_promotions";
             this.btn_promotions.Padding = new System.Windows.Forms.Padding(10, 5, 0, 0);
@@ -766,7 +766,7 @@
             this.btn_suppliers.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.btn_suppliers.ImageOffset = new System.Drawing.Point(0, 2);
             this.btn_suppliers.ImageSize = new System.Drawing.Size(40, 40);
-            this.btn_suppliers.Location = new System.Drawing.Point(5, 769);
+            this.btn_suppliers.Location = new System.Drawing.Point(5, 855);
             this.btn_suppliers.Margin = new System.Windows.Forms.Padding(0, 10, 0, 0);
             this.btn_suppliers.Name = "btn_suppliers";
             this.btn_suppliers.Padding = new System.Windows.Forms.Padding(10, 5, 0, 0);
@@ -787,7 +787,7 @@
             this.pnlSupplierSubmenu.Controls.Add(this.btnSub_LichSuGiaoDich);
             this.pnlSupplierSubmenu.Controls.Add(this.btnSub_DanhSachNCC);
             this.pnlSupplierSubmenu.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlSupplierSubmenu.Location = new System.Drawing.Point(7, 821);
+            this.pnlSupplierSubmenu.Location = new System.Drawing.Point(7, 907);
             this.pnlSupplierSubmenu.Margin = new System.Windows.Forms.Padding(2);
             this.pnlSupplierSubmenu.Name = "pnlSupplierSubmenu";
             this.pnlSupplierSubmenu.Size = new System.Drawing.Size(306, 82);
@@ -865,7 +865,7 @@
             this.btn_inventory.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.btn_inventory.ImageOffset = new System.Drawing.Point(0, 2);
             this.btn_inventory.ImageSize = new System.Drawing.Size(40, 40);
-            this.btn_inventory.Location = new System.Drawing.Point(5, 915);
+            this.btn_inventory.Location = new System.Drawing.Point(5, 1001);
             this.btn_inventory.Margin = new System.Windows.Forms.Padding(0, 10, 0, 0);
             this.btn_inventory.Name = "btn_inventory";
             this.btn_inventory.Padding = new System.Windows.Forms.Padding(10, 5, 0, 0);
@@ -887,7 +887,7 @@
             this.pnlStorageSubmenu.Controls.Add(this.btnSub_TonKho);
             this.pnlStorageSubmenu.Controls.Add(this.btnSub_NhapKho);
             this.pnlStorageSubmenu.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlStorageSubmenu.Location = new System.Drawing.Point(7, 967);
+            this.pnlStorageSubmenu.Location = new System.Drawing.Point(7, 1053);
             this.pnlStorageSubmenu.Margin = new System.Windows.Forms.Padding(2);
             this.pnlStorageSubmenu.Name = "pnlStorageSubmenu";
             this.pnlStorageSubmenu.Size = new System.Drawing.Size(306, 82);
@@ -965,7 +965,7 @@
             this.btn_reports.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.btn_reports.ImageOffset = new System.Drawing.Point(0, 2);
             this.btn_reports.ImageSize = new System.Drawing.Size(40, 40);
-            this.btn_reports.Location = new System.Drawing.Point(5, 1061);
+            this.btn_reports.Location = new System.Drawing.Point(5, 1147);
             this.btn_reports.Margin = new System.Windows.Forms.Padding(0, 10, 0, 0);
             this.btn_reports.Name = "btn_reports";
             this.btn_reports.Padding = new System.Windows.Forms.Padding(10, 5, 0, 0);
@@ -1019,9 +1019,10 @@
             this.Controls.Add(this.sharePanel);
             this.Controls.Add(this.panelHeader);
             this.Controls.Add(this.pnlSidebar);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "frmMain";
-            this.Text = "frmMain";
+            this.Text = "Tạp Hoá Tư Khờ";
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.panelHeader.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).EndInit();
