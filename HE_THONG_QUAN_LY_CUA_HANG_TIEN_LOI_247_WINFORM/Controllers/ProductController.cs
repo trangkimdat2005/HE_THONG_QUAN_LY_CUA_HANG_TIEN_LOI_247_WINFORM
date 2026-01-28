@@ -28,6 +28,18 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Controllers
             return _productService.FilterProducts(keyword, null, null);
         }
 
+        // ✅ Thêm method GetAllProducts cho promotion form
+        public List<SanPham> GetAllProducts()
+        {
+            using (var context = new AppDbContext())
+            {
+                return context.SanPhams
+                    .Where(p => !p.isDelete)
+                    .OrderBy(p => p.ten)
+                    .ToList();
+            }
+        }
+
         public SanPham GetProductById(string id)
         {
             return _productService.GetProductById(id);

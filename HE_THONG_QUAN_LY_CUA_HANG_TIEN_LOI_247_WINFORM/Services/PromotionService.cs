@@ -9,197 +9,258 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
 {
     public class PromotionService : IDisposable
     {
-        #region Constants
         private const string STATUS_UPCOMING = "Sắp diễn ra";
         private const string STATUS_ONGOING = "Đang diễn ra";
         private const string STATUS_ENDED = "Đã kết thúc";
         private const string GIAM_THEO_PHAN_TRAM = "Phần trăm";
         private const string GIAM_THEO_GIA_TIEN = "Giá tiền";
-        #endregion
 
-        #region Fields
         private readonly AppDbContext _context;
         private readonly QuanLyServices _baseService;
         private bool _disposed;
-        #endregion
 
-        #region Constructor
         public PromotionService()
         {
             _context = new AppDbContext();
             _baseService = new QuanLyServices();
         }
-        #endregion
 
         #region Get Operations
 
-        /// <summary>
-        /// Lấy tất cả chương trình khuyến mãi - SẮP XẾP TĂNG DẦN THEO ID
-        /// </summary>
         public List<PromotionListDto> GetAllPromotions()
         {
-            try
-            {
-                var promotions = _context.ChuongTrinhKhuyenMais
-                    .AsNoTracking()
-                    .Where(ct => !ct.isDelete)
-                    .OrderBy(ct => ct.id) // ✅ Sắp xếp TĂNG DẦN theo ID
-                    .Select(ct => new
-                    {
-                        ct.id,
-                        ct.ten,
-                        ct.loai,
-                        ct.ngayBatDau,
-                        ct.ngayKetThuc,
-                        ct.moTa
-                    })
-                    .ToList();
+            var promotions = _context.ChuongTrinhKhuyenMais
+                .AsNoTracking()
+                .Where(ct => !ct.isDelete)
+                .OrderBy(ct => ct.id)
+                .Select(ct => new { ct.id, ct.ten, ct.loai, ct.ngayBatDau, ct.ngayKetThuc, ct.moTa })
+                .ToList();
 
-                return promotions.Select(p => new PromotionListDto
-                {
-                    Id = p.id,
-                    Ten = p.ten,
-                    Loai = p.loai,
-                    NgayBatDau = p.ngayBatDau,
-                    NgayKetThuc = p.ngayKetThuc,
-                    SoLuongMa = 0, // Không còn mã khuyến mãi
-                    TrangThai = DetermineProgramStatus(p.ngayBatDau, p.ngayKetThuc),
-                    MoTa = p.moTa
-                }).ToList();
-            }
-            catch (Exception ex)
+            return promotions.Select(p => new PromotionListDto
             {
-                throw new InvalidOperationException("Lỗi khi truy vấn danh sách chương trình khuyến mãi", ex);
-            }
+                Id = p.id,
+                Ten = p.ten,
+                Loai = p.loai,
+                NgayBatDau = p.ngayBatDau,
+                NgayKetThuc = p.ngayKetThuc,
+                SoLuongMa = GetPromoCodeCount(p.id),
+                TrangThai = GetStatus(p.ngayBatDau, p.ngayKetThuc),
+                MoTa = p.moTa
+            }).ToList();
         }
 
-        /// <summary>
-        /// Tìm kiếm chương trình khuyến mãi - SẮP XẾP TĂNG DẦN THEO ID
-        /// </summary>
         public List<PromotionListDto> SearchPromotions(string keyword)
         {
-            try
-            {
-                keyword = (keyword ?? string.Empty).ToLower().Trim();
+            keyword = (keyword ?? "").ToLower().Trim();
 
-                var promotions = _context.ChuongTrinhKhuyenMais
-                    .AsNoTracking()
-                    .Where(ct => !ct.isDelete &&
-                                (ct.id.ToLower().Contains(keyword) ||
-                                 ct.ten.ToLower().Contains(keyword) ||
-                                 ct.loai.ToLower().Contains(keyword)))
-                    .OrderBy(ct => ct.id) // ✅ Sắp xếp TĂNG DẦN theo ID
-                    .Select(ct => new
-                    {
-                        ct.id,
-                        ct.ten,
-                        ct.loai,
-                        ct.ngayBatDau,
-                        ct.ngayKetThuc,
-                        ct.moTa
-                    })
-                    .ToList();
+            var promotions = _context.ChuongTrinhKhuyenMais
+                .AsNoTracking()
+                .Where(ct => !ct.isDelete &&
+                            (ct.id.ToLower().Contains(keyword) ||
+                             ct.ten.ToLower().Contains(keyword) ||
+                             ct.loai.ToLower().Contains(keyword)))
+                .OrderBy(ct => ct.id)
+                .Select(ct => new { ct.id, ct.ten, ct.loai, ct.ngayBatDau, ct.ngayKetThuc, ct.moTa })
+                .ToList();
 
-                return promotions.Select(p => new PromotionListDto
-                {
-                    Id = p.id,
-                    Ten = p.ten,
-                    Loai = p.loai,
-                    NgayBatDau = p.ngayBatDau,
-                    NgayKetThuc = p.ngayKetThuc,
-                    SoLuongMa = 0,
-                    TrangThai = DetermineProgramStatus(p.ngayBatDau, p.ngayKetThuc),
-                    MoTa = p.moTa
-                }).ToList();
-            }
-            catch (Exception ex)
+            return promotions.Select(p => new PromotionListDto
             {
-                throw new InvalidOperationException($"Lỗi khi tìm kiếm với từ khóa '{keyword}'", ex);
-            }
+                Id = p.id,
+                Ten = p.ten,
+                Loai = p.loai,
+                NgayBatDau = p.ngayBatDau,
+                NgayKetThuc = p.ngayKetThuc,
+                SoLuongMa = GetPromoCodeCount(p.id),
+                TrangThai = GetStatus(p.ngayBatDau, p.ngayKetThuc),
+                MoTa = p.moTa
+            }).ToList();
         }
 
-        public ChuongTrinhKhuyenMai GetPromotionById(string id)
+        public ChuongTrinhKhuyenMai GetPromotionById(string id) =>
+            _context.ChuongTrinhKhuyenMais.AsNoTracking().FirstOrDefault(c => c.id == id && !c.isDelete);
+
+        public List<DieuKienApDung> GetConditionsByProgramId(string chuongTrinhId) =>
+            _context.DieuKienApDungs.AsNoTracking()
+                .Where(dk => dk.chuongTrinhId == chuongTrinhId && !dk.isDelete)
+                .OrderBy(dk => dk.id).ToList();
+
+        public List<string> GetSelectedCategoryIds(string chuongTrinhId)
         {
-            try
-            {
-                return _context.ChuongTrinhKhuyenMais
-                    .AsNoTracking()
-                    .FirstOrDefault(c => c.id == id && !c.isDelete);
-            }
-            catch (Exception ex)
-            {
-                throw new InvalidOperationException($"Lỗi khi lấy thông tin chương trình {id}", ex);
-            }
+            var condition = _context.DieuKienApDungs.AsNoTracking()
+                .FirstOrDefault(dk => dk.chuongTrinhId == chuongTrinhId && !dk.isDelete);
+            if (condition == null) return new List<string>();
+
+            return _context.DieuKienApDungDanhMucs.AsNoTracking()
+                .Where(d => d.dieuKienId == condition.id && !d.isDelete)
+                .Select(d => d.danhMucId).ToList();
         }
 
-        public List<DieuKienApDung> GetConditionsByProgramId(string chuongTrinhId)
+        public List<string> GetSelectedProductIds(string chuongTrinhId)
         {
-            try
-            {
-                return _context.DieuKienApDungs
-                    .AsNoTracking()
-                    .Where(dk => dk.chuongTrinhId == chuongTrinhId && !dk.isDelete)
-                    .OrderBy(dk => dk.id)
-                    .ToList();
-            }
-            catch (Exception ex)
-            {
-                throw new InvalidOperationException($"Lỗi khi lấy điều kiện áp dụng của chương trình {chuongTrinhId}", ex);
-            }
+            var condition = _context.DieuKienApDungs.AsNoTracking()
+                .FirstOrDefault(dk => dk.chuongTrinhId == chuongTrinhId && !dk.isDelete);
+            if (condition == null) return new List<string>();
+
+            return _context.DieuKienApDungSanPhams.AsNoTracking()
+                .Where(d => d.dieuKienId == condition.id && !d.isDelete)
+                .Select(d => d.sanPhamId).ToList();
         }
 
         #endregion
 
-        #region CRUD Operations
+        #region Promo Code Operations
 
-        public (bool success, string message, string promotionId) CreatePromotion(
-            ChuongTrinhKhuyenMai promotion, 
-            List<DieuKienApDung> conditions = null)
+        public string GenerateNewPromoCodeId() => GenerateId<MaKhuyenMai>("MKM", 7, 3);
+        public string GenerateNewConditionId() => GenerateId<DieuKienApDung>("DK", 6, 2);
+        private int GetPromoCodeCount(string chuongTrinhId) =>
+            _context.MaKhuyenMais.Count(m => m.chuongTrinhId == chuongTrinhId && !m.isDelete);
+
+        public List<PromoCodeDto> GetPromoCodesByProgramId(string chuongTrinhId) =>
+            _context.MaKhuyenMais.AsNoTracking()
+                .Where(m => m.chuongTrinhId == chuongTrinhId && !m.isDelete)
+                .OrderBy(m => m.id)
+                .Select(m => new PromoCodeDto
+                {
+                    Id = m.id, Code = m.code, GiaTri = m.giaTri,
+                    SoLanSuDung = m.soLanSuDung, TrangThai = m.trangThai, ChuongTrinhId = m.chuongTrinhId
+                }).ToList();
+
+        public MaKhuyenMai GetPromoCodeById(string id) =>
+            _context.MaKhuyenMais.AsNoTracking().FirstOrDefault(m => m.id == id && !m.isDelete);
+
+        public MaKhuyenMai GetPromoCodeByCode(string code) =>
+            _context.MaKhuyenMais.AsNoTracking().FirstOrDefault(m => m.code == code && !m.isDelete);
+
+        public bool IsPromoCodeExists(string code, string excludeId = null)
+        {
+            var query = _context.MaKhuyenMais.Where(m => m.code == code && !m.isDelete);
+            if (!string.IsNullOrEmpty(excludeId))
+                query = query.Where(m => m.id != excludeId);
+            return query.Any();
+        }
+
+        public (bool success, string message, MaKhuyenMai result) CreatePromoCode(MaKhuyenMai promoCode)
+        {
+            var validation = ValidatePromoCode(promoCode);
+            if (!validation.isValid) return (false, validation.message, null);
+
+            if (IsPromoCodeExists(promoCode.code))
+                return (false, $"Mã khuyến mãi '{promoCode.code}' đã tồn tại!", null);
+
+            var program = _context.ChuongTrinhKhuyenMais.Find(promoCode.chuongTrinhId);
+            if (program == null || program.isDelete)
+                return (false, "Chương trình khuyến mãi không tồn tại!", null);
+
+            promoCode.id = GenerateNewPromoCodeId();
+            promoCode.isDelete = false;
+            promoCode.trangThai = promoCode.trangThai ?? "Hoạt động";
+
+            _context.MaKhuyenMais.Add(promoCode);
+            _context.SaveChanges();
+
+            return (true, $"Thêm mã khuyến mãi thành công!\nMã: {promoCode.id}\nCode: {promoCode.code}", promoCode);
+        }
+
+        public (bool success, string message) UpdatePromoCode(MaKhuyenMai promoCode)
+        {
+            var validation = ValidatePromoCode(promoCode, true);
+            if (!validation.isValid) return (false, validation.message);
+
+            var existing = _context.MaKhuyenMais.FirstOrDefault(m => m.id == promoCode.id);
+            if (existing == null || existing.isDelete)
+                return (false, "Không tìm thấy mã khuyến mãi!");
+
+            if (IsPromoCodeExists(promoCode.code, promoCode.id))
+                return (false, $"Mã khuyến mãi '{promoCode.code}' đã tồn tại!");
+
+            existing.code = promoCode.code;
+            existing.giaTri = promoCode.giaTri;
+            existing.soLanSuDung = promoCode.soLanSuDung;
+            existing.trangThai = promoCode.trangThai ?? "Hoạt động";
+
+            _context.SaveChanges();
+            return (true, "Cập nhật mã khuyến mãi thành công!");
+        }
+
+        public (bool success, string message) DeletePromoCode(string id)
+        {
+            var promoCode = _context.MaKhuyenMais.FirstOrDefault(m => m.id == id);
+            if (promoCode == null) return (false, "Không tìm thấy mã khuyến mãi!");
+
+            promoCode.isDelete = true;
+            _context.SaveChanges();
+            return (true, "Xóa mã khuyến mãi thành công!");
+        }
+
+        #endregion
+
+        #region CRUD Operations - Complete
+
+        public (bool success, string message, string promotionId) CreatePromotionComplete(
+            ChuongTrinhKhuyenMai promotion, DieuKienApDung condition,
+            string promoCodeValue, decimal promoGiaTri, int promoSoLanSuDung, string promoTrangThai,
+            List<string> selectedCategoryIds = null, List<string> selectedProductIds = null)
         {
             using (var transaction = _context.Database.BeginTransaction())
             {
                 try
                 {
-                    var validationResult = ValidatePromotionData(promotion);
-                    if (!validationResult.isValid)
-                        return (false, validationResult.message, null);
+                    var validation = ValidatePromotionData(promotion);
+                    if (!validation.isValid) return (false, validation.message, null);
 
-                    if (conditions != null && conditions.Count > 0)
-                    {
-                        var conditionValidation = ValidateConditions(conditions);
-                        if (!conditionValidation.isValid)
-                            return (false, conditionValidation.message, null);
-                    }
+                    if (condition != null && string.IsNullOrWhiteSpace(condition.giamTheo))
+                        return (false, "Phải chọn loại giảm (Phần trăm hoặc Giá tiền)!", null);
 
-                    var promotionId = string.IsNullOrEmpty(promotion.id)
-                        ? _baseService.GenerateNewId<ChuongTrinhKhuyenMai>("CTKM", 8)
-                        : promotion.id;
+                    if (!string.IsNullOrWhiteSpace(promoCodeValue) && IsPromoCodeExists(promoCodeValue))
+                        return (false, $"Mã khuyến mãi '{promoCodeValue}' đã tồn tại!", null);
 
+                    string promotionId = promotion.id ?? _baseService.GenerateNewId<ChuongTrinhKhuyenMai>("CTKM", 8);
                     promotion.id = promotionId;
                     promotion.isDelete = false;
                     _context.ChuongTrinhKhuyenMais.Add(promotion);
 
-                    if (conditions != null && conditions.Count > 0)
+                    if (condition != null)
                     {
-                        AddConditions(conditions, promotionId);
+                        string conditionId = GenerateNewConditionId();
+                        condition.id = conditionId;
+                        condition.chuongTrinhId = promotionId;
+                        condition.isDelete = false;
+                        _context.DieuKienApDungs.Add(condition);
+
+                        AddCategoryLinks(conditionId, selectedCategoryIds);
+                        AddProductLinks(conditionId, selectedProductIds);
+                    }
+
+                    if (!string.IsNullOrWhiteSpace(promoCodeValue))
+                    {
+                        _context.MaKhuyenMais.Add(new MaKhuyenMai
+                        {
+                            id = GenerateNewPromoCodeId(),
+                            chuongTrinhId = promotionId,
+                            code = promoCodeValue.Trim(),
+                            giaTri = promoGiaTri,
+                            soLanSuDung = promoSoLanSuDung > 0 ? promoSoLanSuDung : 100,
+                            trangThai = string.IsNullOrEmpty(promoTrangThai) ? "Hoạt động" : promoTrangThai,
+                            isDelete = false
+                        });
                     }
 
                     _context.SaveChanges();
                     transaction.Commit();
-
-                    return (true, $"Tạo chương trình {promotionId} thành công!", promotionId);
+                    return (true, $"Tạo chương trình khuyến mãi thành công!\nMã CT: {promotionId}", promotionId);
                 }
                 catch (Exception ex)
                 {
                     transaction.Rollback();
-                    return (false, $"Lỗi tạo chương trình: {ex.Message}", null);
+                    return (false, $"Lỗi tạo chương trình: {GetExceptionMessage(ex)}", null);
                 }
             }
         }
 
-        public (bool success, string message) UpdatePromotion(
-            ChuongTrinhKhuyenMai promotion,
-            List<DieuKienApDung> conditions = null)
+        public (bool success, string message) UpdatePromotionComplete(
+            ChuongTrinhKhuyenMai promotion, DieuKienApDung condition,
+            string promoCodeValue, decimal promoGiaTri, int promoSoLanSuDung, string promoTrangThai,
+            List<string> selectedCategoryIds = null, List<string> selectedProductIds = null)
         {
             using (var transaction = _context.Database.BeginTransaction())
             {
@@ -207,18 +268,10 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
                 {
                     var existing = _context.ChuongTrinhKhuyenMais.Find(promotion.id);
                     if (existing == null || existing.isDelete)
-                        return (false, "Không tìm thấy chương trình");
+                        return (false, "Không tìm thấy chương trình!");
 
-                    var validationResult = ValidatePromotionData(promotion);
-                    if (!validationResult.isValid)
-                        return (false, validationResult.message);
-
-                    if (conditions != null && conditions.Count > 0)
-                    {
-                        var conditionValidation = ValidateConditions(conditions);
-                        if (!conditionValidation.isValid)
-                            return (false, conditionValidation.message);
-                    }
+                    var validation = ValidatePromotionData(promotion);
+                    if (!validation.isValid) return (false, validation.message);
 
                     existing.ten = promotion.ten;
                     existing.loai = promotion.loai;
@@ -226,17 +279,74 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
                     existing.ngayKetThuc = promotion.ngayKetThuc;
                     existing.moTa = promotion.moTa;
 
-                    UpdateConditions(promotion.id, conditions);
+                    string conditionId = null;
+                    if (condition != null)
+                    {
+                        var existingCondition = _context.DieuKienApDungs
+                            .FirstOrDefault(d => d.chuongTrinhId == promotion.id && !d.isDelete);
+
+                        if (existingCondition != null)
+                        {
+                            existingCondition.dieuKien = condition.dieuKien;
+                            existingCondition.giaTriToiThieu = condition.giaTriToiThieu;
+                            existingCondition.giamTheo = condition.giamTheo;
+                            existingCondition.giaTriToiDa = condition.giaTriToiDa;
+                            conditionId = existingCondition.id;
+                        }
+                        else
+                        {
+                            conditionId = GenerateNewConditionId();
+                            condition.id = conditionId;
+                            condition.chuongTrinhId = promotion.id;
+                            condition.isDelete = false;
+                            _context.DieuKienApDungs.Add(condition);
+                        }
+
+                        UpdateCategoryLinks(conditionId, selectedCategoryIds);
+                        UpdateProductLinks(conditionId, selectedProductIds);
+                    }
+
+                    if (!string.IsNullOrWhiteSpace(promoCodeValue))
+                    {
+                        var existingPromoCode = _context.MaKhuyenMais
+                            .FirstOrDefault(m => m.chuongTrinhId == promotion.id && !m.isDelete);
+
+                        if (existingPromoCode != null)
+                        {
+                            if (IsPromoCodeExists(promoCodeValue, existingPromoCode.id))
+                                return (false, $"Mã khuyến mãi '{promoCodeValue}' đã tồn tại!");
+
+                            existingPromoCode.code = promoCodeValue.Trim();
+                            existingPromoCode.giaTri = promoGiaTri;
+                            existingPromoCode.soLanSuDung = promoSoLanSuDung;
+                            existingPromoCode.trangThai = string.IsNullOrEmpty(promoTrangThai) ? "Hoạt động" : promoTrangThai;
+                        }
+                        else
+                        {
+                            if (IsPromoCodeExists(promoCodeValue))
+                                return (false, $"Mã khuyến mãi '{promoCodeValue}' đã tồn tại!");
+
+                            _context.MaKhuyenMais.Add(new MaKhuyenMai
+                            {
+                                id = GenerateNewPromoCodeId(),
+                                chuongTrinhId = promotion.id,
+                                code = promoCodeValue.Trim(),
+                                giaTri = promoGiaTri,
+                                soLanSuDung = promoSoLanSuDung > 0 ? promoSoLanSuDung : 100,
+                                trangThai = string.IsNullOrEmpty(promoTrangThai) ? "Hoạt động" : promoTrangThai,
+                                isDelete = false
+                            });
+                        }
+                    }
 
                     _context.SaveChanges();
                     transaction.Commit();
-
                     return (true, $"Cập nhật chương trình {promotion.id} thành công!");
                 }
                 catch (Exception ex)
                 {
                     transaction.Rollback();
-                    return (false, $"Lỗi cập nhật chương trình: {ex.Message}");
+                    return (false, $"Lỗi cập nhật chương trình: {GetExceptionMessage(ex)}");
                 }
             }
         }
@@ -253,16 +363,14 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
 
                     promotion.isDelete = true;
 
-                    var conditions = _context.DieuKienApDungs
-                        .Where(d => d.chuongTrinhId == id && !d.isDelete)
-                        .ToList();
-                    
-                    foreach (var condition in conditions)
-                        condition.isDelete = true;
+                    _context.DieuKienApDungs.Where(d => d.chuongTrinhId == id && !d.isDelete)
+                        .ToList().ForEach(c => c.isDelete = true);
+
+                    _context.MaKhuyenMais.Where(m => m.chuongTrinhId == id && !m.isDelete)
+                        .ToList().ForEach(m => m.isDelete = true);
 
                     _context.SaveChanges();
                     transaction.Commit();
-
                     return (true, "Xóa chương trình thành công!");
                 }
                 catch (Exception ex)
@@ -273,136 +381,255 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
             }
         }
 
+        public (bool success, string message, string promotionId) CreatePromotion(
+            ChuongTrinhKhuyenMai promotion, List<DieuKienApDung> conditions = null)
+        {
+            using (var transaction = _context.Database.BeginTransaction())
+            {
+                try
+                {
+                    var validation = ValidatePromotionData(promotion);
+                    if (!validation.isValid) return (false, validation.message, null);
+
+                    var promotionId = promotion.id ?? _baseService.GenerateNewId<ChuongTrinhKhuyenMai>("CTKM", 8);
+                    promotion.id = promotionId;
+                    promotion.isDelete = false;
+                    _context.ChuongTrinhKhuyenMais.Add(promotion);
+
+                    if (conditions?.Count > 0)
+                    {
+                        foreach (var condition in conditions)
+                        {
+                            condition.id = condition.id ?? GenerateNewConditionId();
+                            condition.chuongTrinhId = promotionId;
+                            condition.isDelete = false;
+                            _context.DieuKienApDungs.Add(condition);
+                        }
+                    }
+
+                    _context.SaveChanges();
+                    transaction.Commit();
+                    return (true, $"Tạo chương trình {promotionId} thành công!", promotionId);
+                }
+                catch (Exception ex)
+                {
+                    transaction.Rollback();
+                    return (false, $"Lỗi tạo chương trình: {ex.Message}", null);
+                }
+            }
+        }
+
+        public (bool success, string message) UpdatePromotion(
+            ChuongTrinhKhuyenMai promotion, List<DieuKienApDung> conditions = null)
+        {
+            using (var transaction = _context.Database.BeginTransaction())
+            {
+                try
+                {
+                    var existing = _context.ChuongTrinhKhuyenMais.Find(promotion.id);
+                    if (existing == null || existing.isDelete)
+                        return (false, "Không tìm thấy chương trình");
+
+                    var validation = ValidatePromotionData(promotion);
+                    if (!validation.isValid) return (false, validation.message);
+
+                    existing.ten = promotion.ten;
+                    existing.loai = promotion.loai;
+                    existing.ngayBatDau = promotion.ngayBatDau;
+                    existing.ngayKetThuc = promotion.ngayKetThuc;
+                    existing.moTa = promotion.moTa;
+
+                    // Xóa điều kiện cũ
+                    _context.DieuKienApDungs.Where(d => d.chuongTrinhId == promotion.id && !d.isDelete)
+                        .ToList().ForEach(d => d.isDelete = true);
+
+                    // Thêm điều kiện mới
+                    if (conditions?.Count > 0)
+                    {
+                        foreach (var condition in conditions)
+                        {
+                            var existingCond = _context.DieuKienApDungs
+                                .FirstOrDefault(c => c.id == condition.id && c.chuongTrinhId == promotion.id);
+                            
+                            if (existingCond != null)
+                            {
+                                existingCond.isDelete = false;
+                                existingCond.dieuKien = condition.dieuKien;
+                                existingCond.giaTriToiThieu = condition.giaTriToiThieu;
+                                existingCond.giamTheo = condition.giamTheo;
+                                existingCond.giaTriToiDa = condition.giaTriToiDa;
+                            }
+                            else
+                            {
+                                condition.id = GenerateNewConditionId();
+                                condition.chuongTrinhId = promotion.id;
+                                condition.isDelete = false;
+                                _context.DieuKienApDungs.Add(condition);
+                            }
+                        }
+                    }
+
+                    _context.SaveChanges();
+                    transaction.Commit();
+                    return (true, $"Cập nhật chương trình {promotion.id} thành công!");
+                }
+                catch (Exception ex)
+                {
+                    transaction.Rollback();
+                    return (false, $"Lỗi cập nhật chương trình: {ex.Message}");
+                }
+            }
+        }
+
         #endregion
 
         #region Helper Methods
+
+        private string GenerateId<T>(string prefix, int totalLength, int prefixLength) where T : class
+        {
+            try
+            {
+                List<string> allIds;
+                
+                if (typeof(T) == typeof(MaKhuyenMai))
+                {
+                    allIds = _context.MaKhuyenMais
+                        .Where(m => m.id.StartsWith(prefix) && m.id.Length == totalLength)
+                        .Select(m => m.id).ToList();
+                }
+                else if (typeof(T) == typeof(DieuKienApDung))
+                {
+                    allIds = _context.DieuKienApDungs
+                        .Where(d => d.id.StartsWith(prefix) && d.id.Length == totalLength)
+                        .Select(d => d.id).ToList();
+                }
+                else
+                {
+                    return prefix + DateTime.Now.ToString("mmss");
+                }
+
+                if (allIds.Count == 0) return $"{prefix}0001";
+
+                var maxNumber = allIds
+                    .Select(id => int.TryParse(id.Substring(prefixLength), out int num) ? num : 0)
+                    .Max();
+
+                return $"{prefix}{(maxNumber + 1):D4}";
+            }
+            catch
+            {
+                return prefix + DateTime.Now.ToString("mmss");
+            }
+        }
+
+        private void AddCategoryLinks(string conditionId, List<string> categoryIds)
+        {
+            if (categoryIds == null || categoryIds.Count == 0) return;
+            foreach (var categoryId in categoryIds)
+            {
+                _context.DieuKienApDungDanhMucs.Add(new DieuKienApDungDanhMuc
+                {
+                    id = Guid.NewGuid().ToString(),
+                    dieuKienId = conditionId,
+                    danhMucId = categoryId,
+                    isDelete = false
+                });
+            }
+        }
+
+        private void AddProductLinks(string conditionId, List<string> productIds)
+        {
+            if (productIds == null || productIds.Count == 0) return;
+            foreach (var productId in productIds)
+            {
+                _context.DieuKienApDungSanPhams.Add(new DieuKienApDungSanPham
+                {
+                    id = Guid.NewGuid().ToString(),
+                    dieuKienId = conditionId,
+                    sanPhamId = productId,
+                    isDelete = false
+                });
+            }
+        }
+
+        private void UpdateCategoryLinks(string conditionId, List<string> categoryIds)
+        {
+            var oldLinks = _context.DieuKienApDungDanhMucs.Where(d => d.dieuKienId == conditionId).ToList();
+            oldLinks.ForEach(l => l.isDelete = true);
+
+            if (categoryIds == null || categoryIds.Count == 0) return;
+            foreach (var categoryId in categoryIds)
+            {
+                var existing = oldLinks.FirstOrDefault(l => l.danhMucId == categoryId);
+                if (existing != null) existing.isDelete = false;
+                else _context.DieuKienApDungDanhMucs.Add(new DieuKienApDungDanhMuc
+                {
+                    id = Guid.NewGuid().ToString(),
+                    dieuKienId = conditionId,
+                    danhMucId = categoryId,
+                    isDelete = false
+                });
+            }
+        }
+
+        private void UpdateProductLinks(string conditionId, List<string> productIds)
+        {
+            var oldLinks = _context.DieuKienApDungSanPhams.Where(d => d.dieuKienId == conditionId).ToList();
+            oldLinks.ForEach(l => l.isDelete = true);
+
+            if (productIds == null || productIds.Count == 0) return;
+            foreach (var productId in productIds)
+            {
+                var existing = oldLinks.FirstOrDefault(l => l.sanPhamId == productId);
+                if (existing != null) existing.isDelete = false;
+                else _context.DieuKienApDungSanPhams.Add(new DieuKienApDungSanPham
+                {
+                    id = Guid.NewGuid().ToString(),
+                    dieuKienId = conditionId,
+                    sanPhamId = productId,
+                    isDelete = false
+                });
+            }
+        }
 
         private (bool isValid, string message) ValidatePromotionData(ChuongTrinhKhuyenMai promotion)
         {
             if (string.IsNullOrWhiteSpace(promotion.ten))
                 return (false, "Tên chương trình không được để trống");
-
             if (string.IsNullOrWhiteSpace(promotion.loai))
                 return (false, "Loại chương trình không được để trống");
-
             if (promotion.ngayBatDau >= promotion.ngayKetThuc)
                 return (false, "Ngày kết thúc phải sau ngày bắt đầu");
-
             return (true, string.Empty);
         }
 
-        private (bool isValid, string message) ValidateConditions(List<DieuKienApDung> conditions)
+        private (bool isValid, string message) ValidatePromoCode(MaKhuyenMai promoCode, bool isUpdate = false)
         {
-            foreach (var condition in conditions)
-            {
-                if (string.IsNullOrWhiteSpace(condition.dieuKien))
-                    return (false, "Điều kiện không được để trống");
-
-                if (string.IsNullOrWhiteSpace(condition.giamTheo))
-                    return (false, "Phải chọn loại giảm (Phần trăm hoặc Giá tiền)");
-
-                if (condition.giamTheo != GIAM_THEO_PHAN_TRAM && condition.giamTheo != GIAM_THEO_GIA_TIEN)
-                    return (false, $"Loại giảm không hợp lệ. Chỉ cho phép '{GIAM_THEO_PHAN_TRAM}' hoặc '{GIAM_THEO_GIA_TIEN}'");
-
-                if (condition.giaTriToiThieu < 0)
-                    return (false, "Giá trị tối thiểu phải >= 0");
-
-                if (condition.giaTriToiDa > 0 && condition.giaTriToiDa < condition.giaTriToiThieu)
-                    return (false, "Giá trị tối đa phải >= giá trị tối thiểu");
-
-                if (condition.giamTheo == GIAM_THEO_PHAN_TRAM)
-                {
-                    if (condition.giaTriToiThieu > 100)
-                        return (false, "Phần trăm giảm không được vượt quá 100%");
-                    
-                    if (condition.giaTriToiDa > 100)
-                        return (false, "Phần trăm tối đa không được vượt quá 100%");
-                }
-            }
-
+            if (string.IsNullOrWhiteSpace(promoCode.code))
+                return (false, "Mã khuyến mãi không được để trống!");
+            if (promoCode.code.Length > 100)
+                return (false, "Mã khuyến mãi không được vượt quá 100 ký tự!");
+            if (string.IsNullOrWhiteSpace(promoCode.chuongTrinhId) && !isUpdate)
+                return (false, "Chưa chọn chương trình khuyến mãi!");
+            if (promoCode.giaTri < 0)
+                return (false, "Giá trị khuyến mãi không được âm!");
+            if (promoCode.soLanSuDung < 0)
+                return (false, "Số lần sử dụng không được âm!");
             return (true, string.Empty);
         }
 
-        private void AddConditions(List<DieuKienApDung> conditions, string promotionId)
-        {
-            foreach (var condition in conditions)
-            {
-                if (string.IsNullOrEmpty(condition.id))
-                    condition.id = _baseService.GenerateNewId<DieuKienApDung>("DK", 6);
-                
-                condition.chuongTrinhId = promotionId;
-                condition.isDelete = false;
-                _context.DieuKienApDungs.Add(condition);
-            }
-        }
-
-        private void UpdateConditions(string promotionId, List<DieuKienApDung> newConditions)
-        {
-            var oldConditions = _context.DieuKienApDungs
-                .Where(d => d.chuongTrinhId == promotionId && !d.isDelete)
-                .ToList();
-
-            foreach (var oldCondition in oldConditions)
-                oldCondition.isDelete = true;
-
-            if (newConditions != null && newConditions.Count > 0)
-            {
-                foreach (var condition in newConditions)
-                {
-                    if (!string.IsNullOrEmpty(condition.id) && condition.id.StartsWith("DK"))
-                    {
-                        var existingCondition = oldConditions.FirstOrDefault(c => c.id == condition.id);
-                        if (existingCondition != null)
-                        {
-                            existingCondition.isDelete = false;
-                            existingCondition.dieuKien = condition.dieuKien;
-                            existingCondition.giaTriToiThieu = condition.giaTriToiThieu;
-                            existingCondition.giamTheo = condition.giamTheo;
-                            existingCondition.giaTriToiDa = condition.giaTriToiDa;
-                        }
-                        else
-                        {
-                            AddNewCondition(condition, promotionId);
-                        }
-                    }
-                    else
-                    {
-                        AddNewCondition(condition, promotionId);
-                    }
-                }
-            }
-        }
-        private void AddNewCondition(DieuKienApDung condition, string promotionId)
-        {
-            var newCondition = new DieuKienApDung
-            {
-                id = _baseService.GenerateNewId<DieuKienApDung>("DK", 6),
-                chuongTrinhId = promotionId,
-                dieuKien = condition.dieuKien,
-                giaTriToiThieu = condition.giaTriToiThieu,
-                giamTheo = condition.giamTheo,
-                giaTriToiDa = condition.giaTriToiDa,
-                isDelete = false
-            };
-            _context.DieuKienApDungs.Add(newCondition);
-        }
-
-        private string DetermineProgramStatus(DateTime startDate, DateTime endDate)
+        private string GetStatus(DateTime startDate, DateTime endDate)
         {
             var now = DateTime.Now;
-
-            if (now < startDate)
-                return STATUS_UPCOMING;
-            
-            if (now >= startDate && now <= endDate)
-                return STATUS_ONGOING;
-            
+            if (now < startDate) return STATUS_UPCOMING;
+            if (now <= endDate) return STATUS_ONGOING;
             return STATUS_ENDED;
         }
 
-        #endregion
+        private string GetExceptionMessage(Exception ex) =>
+            ex.InnerException?.InnerException?.Message ?? ex.InnerException?.Message ?? ex.Message;
 
-        #region Dispose Pattern
+        #endregion
 
         public void Dispose()
         {
@@ -413,7 +640,5 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
             }
             GC.SuppressFinalize(this);
         }
-
-        #endregion
     }
 }

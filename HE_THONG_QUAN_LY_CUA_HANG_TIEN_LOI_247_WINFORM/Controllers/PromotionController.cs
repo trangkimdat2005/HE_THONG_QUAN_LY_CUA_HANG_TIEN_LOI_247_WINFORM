@@ -8,47 +8,33 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Controllers
 {
     public class PromotionController : IDisposable
     {
-        #region Fields
-        private readonly PromotionService _promotionService;
+        private readonly PromotionService _service;
         private readonly QuanLyServices _baseService;
         private bool _disposed;
-        #endregion
 
-        #region Constructor
         public PromotionController()
         {
-            _promotionService = new PromotionService();
+            _service = new PromotionService();
             _baseService = new QuanLyServices();
         }
-        #endregion
 
         #region Get Operations
 
-        public List<PromotionListDto> GetAllPromotions()
-        {
-            return _promotionService.GetAllPromotions();
-        }
+        public List<PromotionListDto> GetAllPromotions() => _service.GetAllPromotions();
+        
+        public List<PromotionListDto> SearchPromotions(string keyword) => _service.SearchPromotions(keyword ?? "");
 
-        public List<PromotionListDto> SearchPromotions(string keyword)
-        {
-            return _promotionService.SearchPromotions(keyword ?? string.Empty);
-        }
+        public ChuongTrinhKhuyenMai GetPromotionById(string id) =>
+            string.IsNullOrWhiteSpace(id) ? throw new ArgumentException("Mã chương trình không hợp lệ") : _service.GetPromotionById(id);
 
-        public ChuongTrinhKhuyenMai GetPromotionById(string id)
-        {
-            if (string.IsNullOrWhiteSpace(id))
-                throw new ArgumentException("Mã chương trình không hợp lệ");
+        public List<DieuKienApDung> GetConditionsByProgramId(string chuongTrinhId) =>
+            string.IsNullOrWhiteSpace(chuongTrinhId) ? new List<DieuKienApDung>() : _service.GetConditionsByProgramId(chuongTrinhId);
 
-            return _promotionService.GetPromotionById(id);
-        }
+        public List<string> GetSelectedCategoryIds(string chuongTrinhId) =>
+            string.IsNullOrWhiteSpace(chuongTrinhId) ? new List<string>() : _service.GetSelectedCategoryIds(chuongTrinhId);
 
-        public List<DieuKienApDung> GetConditionsByProgramId(string chuongTrinhId)
-        {
-            if (string.IsNullOrWhiteSpace(chuongTrinhId))
-                return new List<DieuKienApDung>();
-
-            return _promotionService.GetConditionsByProgramId(chuongTrinhId);
-        }
+        public List<string> GetSelectedProductIds(string chuongTrinhId) =>
+            string.IsNullOrWhiteSpace(chuongTrinhId) ? new List<string>() : _service.GetSelectedProductIds(chuongTrinhId);
 
         #endregion
 
@@ -56,79 +42,125 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Controllers
 
         public string GenerateNewPromotionId()
         {
-            try
-            {
-                return _baseService.GenerateNewId<ChuongTrinhKhuyenMai>("CTKM", 8);
-            }
-            catch
-            {
-                return "CTKM" + DateTime.Now.ToString("ddMMyyHHmm");
-            }
+            try { return _baseService.GenerateNewId<ChuongTrinhKhuyenMai>("CTKM", 8); }
+            catch { return "CTKM" + DateTime.Now.ToString("ddMMyyHHmm"); }
+        }
+
+        public (bool success, string message, string promotionId) CreatePromotionComplete(
+            ChuongTrinhKhuyenMai promotion, DieuKienApDung condition,
+            string promoCode, decimal promoGiaTri, int promoSoLanSuDung, string promoTrangThai,
+            List<string> selectedCategoryIds = null, List<string> selectedProductIds = null)
+        {
+            if (promotion == null) return (false, "Dữ liệu chương trình trống!", null);
+            return _service.CreatePromotionComplete(promotion, condition, promoCode, promoGiaTri, 
+                promoSoLanSuDung, promoTrangThai, selectedCategoryIds, selectedProductIds);
+        }
+
+        public (bool success, string message) UpdatePromotionComplete(
+            ChuongTrinhKhuyenMai promotion, DieuKienApDung condition,
+            string promoCode, decimal promoGiaTri, int promoSoLanSuDung, string promoTrangThai,
+            List<string> selectedCategoryIds = null, List<string> selectedProductIds = null)
+        {
+            if (promotion == null || string.IsNullOrWhiteSpace(promotion.id))
+                return (false, "Dữ liệu chương trình không hợp lệ!");
+            return _service.UpdatePromotionComplete(promotion, condition, promoCode, promoGiaTri, 
+                promoSoLanSuDung, promoTrangThai, selectedCategoryIds, selectedProductIds);
         }
 
         public (bool success, string message, string promotionId) CreatePromotion(
-            ChuongTrinhKhuyenMai promotion,
-            List<DieuKienApDung> conditions = null)
+            ChuongTrinhKhuyenMai promotion, List<DieuKienApDung> conditions = null)
         {
-            try
-            {
-                if (promotion == null)
-                    return (false, "Dữ liệu chương trình trống", null);
-
-                return _promotionService.CreatePromotion(promotion, conditions);
-            }
-            catch (Exception ex)
-            {
-                return (false, $"Lỗi Controller: {ex.Message}", null);
-            }
+            if (promotion == null) return (false, "Dữ liệu chương trình trống", null);
+            return _service.CreatePromotion(promotion, conditions);
         }
 
         public (bool success, string message) UpdatePromotion(
-            ChuongTrinhKhuyenMai promotion,
-            List<DieuKienApDung> conditions = null)
+            ChuongTrinhKhuyenMai promotion, List<DieuKienApDung> conditions = null)
         {
-            try
-            {
-                if (string.IsNullOrWhiteSpace(promotion?.id))
-                    return (false, "ID chương trình không hợp lệ");
-
-                return _promotionService.UpdatePromotion(promotion, conditions);
-            }
-            catch (Exception ex)
-            {
-                return (false, $"Lỗi Controller: {ex.Message}");
-            }
+            if (string.IsNullOrWhiteSpace(promotion?.id)) return (false, "ID chương trình không hợp lệ");
+            return _service.UpdatePromotion(promotion, conditions);
         }
 
-        public (bool success, string message) DeletePromotion(string id)
-        {
-            try
-            {
-                if (string.IsNullOrWhiteSpace(id))
-                    return (false, "ID không hợp lệ");
-
-                return _promotionService.DeletePromotion(id);
-            }
-            catch (Exception ex)
-            {
-                return (false, $"Lỗi Controller: {ex.Message}");
-            }
-        }
+        public (bool success, string message) DeletePromotion(string id) =>
+            string.IsNullOrWhiteSpace(id) ? (false, "ID không hợp lệ") : _service.DeletePromotion(id);
 
         #endregion
 
-        #region Dispose Pattern
+        #region Promo Code Operations
+
+        public string GenerateNewPromoCodeId()
+        {
+            try { return _service.GenerateNewPromoCodeId(); }
+            catch { return "MKM" + DateTime.Now.ToString("mmss"); }
+        }
+
+        public List<PromoCodeDto> GetPromoCodesByProgramId(string chuongTrinhId) =>
+            string.IsNullOrWhiteSpace(chuongTrinhId) ? new List<PromoCodeDto>() : _service.GetPromoCodesByProgramId(chuongTrinhId);
+
+        public MaKhuyenMai GetPromoCodeById(string id) =>
+            string.IsNullOrWhiteSpace(id) ? null : _service.GetPromoCodeById(id);
+
+        public MaKhuyenMai GetPromoCodeByCode(string code) =>
+            string.IsNullOrWhiteSpace(code) ? null : _service.GetPromoCodeByCode(code);
+
+        public bool IsPromoCodeExists(string code, string excludeId = null) =>
+            !string.IsNullOrWhiteSpace(code) && _service.IsPromoCodeExists(code, excludeId);
+
+        public (bool success, string message, MaKhuyenMai result) CreatePromoCode(
+            string code, string chuongTrinhId, decimal giaTri, int soLanSuDung, string trangThai = "Hoạt động")
+        {
+            if (string.IsNullOrWhiteSpace(code)) return (false, "Mã khuyến mãi không được để trống!", null);
+            if (string.IsNullOrWhiteSpace(chuongTrinhId)) return (false, "Chưa chọn chương trình khuyến mãi!", null);
+            if (giaTri < 0) return (false, "Giá trị khuyến mãi không được âm!", null);
+            if (soLanSuDung < 0) return (false, "Số lần sử dụng không được âm!", null);
+
+            return _service.CreatePromoCode(new MaKhuyenMai
+            {
+                code = code.Trim(),
+                chuongTrinhId = chuongTrinhId,
+                giaTri = giaTri,
+                soLanSuDung = soLanSuDung,
+                trangThai = string.IsNullOrEmpty(trangThai) ? "Active" : trangThai,
+                isDelete = false
+            });
+        }
+
+        public (bool success, string message, MaKhuyenMai result) CreatePromoCode(MaKhuyenMai promoCode) =>
+            promoCode == null ? (false, "Dữ liệu mã khuyến mãi trống!", null) : _service.CreatePromoCode(promoCode);
+
+        public (bool success, string message) UpdatePromoCode(string id, string code, decimal giaTri, int soLanSuDung, string trangThai)
+        {
+            if (string.IsNullOrWhiteSpace(id)) return (false, "ID mã khuyến mãi không hợp lệ!");
+            if (string.IsNullOrWhiteSpace(code)) return (false, "Mã khuyến mãi không được để trống!");
+
+            return _service.UpdatePromoCode(new MaKhuyenMai
+            {
+                id = id,
+                code = code.Trim(),
+                giaTri = giaTri,
+                soLanSuDung = soLanSuDung,
+                trangThai = string.IsNullOrEmpty(trangThai) ? "Hoạt động" : trangThai
+            });
+        }
+
+        public (bool success, string message) UpdatePromoCode(MaKhuyenMai promoCode) =>
+            promoCode == null || string.IsNullOrWhiteSpace(promoCode.id) 
+                ? (false, "Dữ liệu mã khuyến mãi không hợp lệ!") 
+                : _service.UpdatePromoCode(promoCode);
+
+        public (bool success, string message) DeletePromoCode(string id) =>
+            string.IsNullOrWhiteSpace(id) ? (false, "ID mã khuyến mãi không hợp lệ!") : _service.DeletePromoCode(id);
+
+        #endregion
 
         public void Dispose()
         {
             if (!_disposed)
             {
-                _promotionService?.Dispose();
+                _service?.Dispose();
                 _disposed = true;
             }
             GC.SuppressFinalize(this);
         }
-
-        #endregion
     }
 }
