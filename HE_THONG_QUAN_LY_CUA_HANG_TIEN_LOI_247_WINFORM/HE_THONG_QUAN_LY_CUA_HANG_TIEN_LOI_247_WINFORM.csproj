@@ -137,6 +137,7 @@
   <ItemGroup>
     <Compile Include="Config\PaymentConfig.cs" />
     <Compile Include="Controllers\BarcodeController.cs" />
+    <Compile Include="Controllers\EmployeeAccountController.cs" />
     <Compile Include="Examples\ExampleFormWithPermissions.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -221,6 +222,7 @@
     <Compile Include="Services\BrandService.cs" />
     <Compile Include="Services\CategoryService.cs" />
     <Compile Include="Services\CustomerService.cs" />
+    <Compile Include="Services\EmployeeAccountService.cs" />
     <Compile Include="Services\EventService.cs" />
     <Compile Include="Services\GoodsService.cs" />
     <Compile Include="Services\InventoryService.cs" />
@@ -273,6 +275,18 @@
     <Compile Include="Views\forms\Customers\frmPurchaseHistory.Designer.cs">
       <DependentUpon>frmPurchaseHistory.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\forms\Employees\frmAddEmployeeAccount.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\forms\Employees\frmAddEmployeeAccount.Designer.cs">
+      <DependentUpon>frmAddEmployeeAccount.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\forms\Employees\frmEmployeeAccount.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\forms\Employees\frmEmployeeAccount.Designer.cs">
+      <DependentUpon>frmEmployeeAccount.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\forms\Employees\frmEmployeeList.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -284,6 +298,12 @@
     </Compile>
     <Compile Include="Views\forms\Employees\frmEmployees.Designer.cs">
       <DependentUpon>frmEmployees.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\forms\Employees\frmResetPassword.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\forms\Employees\frmResetPassword.Designer.cs">
+      <DependentUpon>frmResetPassword.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\forms\Employees\frmShiftAssignment.cs">
       <SubType>Form</SubType>
@@ -469,11 +489,17 @@
     <EmbeddedResource Include="Views\forms\Customers\frmPurchaseHistory.resx">
       <DependentUpon>frmPurchaseHistory.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\forms\Employees\frmAddEmployeeAccount.resx">
+      <DependentUpon>frmAddEmployeeAccount.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\forms\Employees\frmEmployeeList.resx">
       <DependentUpon>frmEmployeeList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\forms\Employees\frmEmployees.resx">
       <DependentUpon>frmEmployees.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\forms\Employees\frmResetPassword.resx">
+      <DependentUpon>frmResetPassword.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\forms\Employees\frmShiftAssignment.resx">
       <DependentUpon>frmShiftAssignment.cs</DependentUpon>

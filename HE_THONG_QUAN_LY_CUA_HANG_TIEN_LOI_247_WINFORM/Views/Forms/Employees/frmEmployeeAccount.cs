@@ -1,0 +1,262 @@
+﻿using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Controllers;
+using System;
+using System.Collections;
+using System.Runtime.InteropServices;
+using System.Windows.Forms;
+
+namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Views.forms.Employees
+{
+    public partial class frmEmployeeAccount : Form
+    {
+        private readonly EmployeeAccountController _controller;
+        private string _selectedEmployeeId;
+
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
+        private static extern Int32 SendMessage(IntPtr hWnd, int msg, int wParam, [MarshalAs(UnmanagedType.LPWStr)] string lParam);
+
+        private const int EM_SETCUEBANNER = 0x1501;
+
+        private void SetPlaceholder(TextBox txt, string text)
+        {
+            if (txt != null)
+            {
+                SendMessage(txt.Handle, EM_SETCUEBANNER, 0, text);
+            }
+        }
+
+        public frmEmployeeAccount()
+        {
+            InitializeComponent();
+            _controller = new EmployeeAccountController();
+
+            SetPlaceholder(txtSearch, "Nhập tên nhân viên hoặc tên đăng nhập để tìm...");
+
+            if (txtSearch != null)
+            {
+                txtSearch.TextChanged += (s, e) => { btnSearch_Click(null, null); };
+            }
+
+            if (dgvAccounts != null)
+                this.dgvAccounts.SelectionChanged += dgvAccounts_SelectionChanged;
+
+            if (txtSearch != null)
+                txtSearch.KeyPress += (s, e) => { if (e.KeyChar == 13) { btnSearch_Click(s, e); e.Handled = true; } };
+
+            this.VisibleChanged += (s, e) => {
+                if (this.Visible) LoadAccounts();
+            };
+        }
+
+        private void frmEmployeeAccount_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                if (dgvAccounts != null) dgvAccounts.AutoGenerateColumns = false;
+                LoadAccounts();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi tải form: {ex.Message}", "Lỗi",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void LoadAccounts()
+        {
+            try
+            {
+                var accounts = _controller.GetAllEmployeeAccounts();
+                dgvAccounts.DataSource = accounts;
+
+                foreach (System.Windows.Forms.DataGridViewColumn col in dgvAccounts.Columns)
+                {
+                    if (col.HeaderText.ToLower().Contains("mã nv"))
+                        col.DataPropertyName = "NhanVienId";
+                    else if (col.HeaderText.ToLower().Contains("họ tên"))
+                        col.DataPropertyName = "HoTen";
+                    else if (col.HeaderText.ToLower().Contains("chức vụ"))
+                        col.DataPropertyName = "ChucVu";
+                    else if (col.HeaderText.ToLower().Contains("sđt"))
+                        col.DataPropertyName = "SoDienThoai";
+                    else if (col.HeaderText.ToLower().Contains("tên đăng nhập"))
+                        col.DataPropertyName = "TenDangNhap";
+                    else if (col.HeaderText.ToLower().Contains("email tk"))
+                        col.DataPropertyName = "EmailTK";
+                    else if (col.HeaderText.ToLower().Contains("trạng thái tk"))
+                        col.DataPropertyName = "TrangThaiTK";
+                }
+
+                if (accounts is IList list)
+                    lblStatus.Text = $"Tổng số: {list.Count} tài khoản";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi hiển thị: {ex.Message}", "Lỗi",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private string GetCurrentEmployeeId()
+        {
+            if (dgvAccounts.CurrentRow == null) return null;
+
+            var dataItem = dgvAccounts.CurrentRow.DataBoundItem;
+            if (dataItem != null)
+            {
+                var prop = dataItem.GetType().GetProperty("NhanVienId");
+                if (prop != null) return prop.GetValue(dataItem)?.ToString();
+            }
+
+            if (dgvAccounts.ColumnCount > 0 && dgvAccounts.CurrentRow.Cells[0].Value != null)
+                return dgvAccounts.CurrentRow.Cells[0].Value.ToString();
+
+            return null;
+        }
+
+        private string GetCurrentAccountId()
+        {
+            if (dgvAccounts.CurrentRow == null) return null;
+
+            var dataItem = dgvAccounts.CurrentRow.DataBoundItem;
+            if (dataItem != null)
+            {
+                var prop = dataItem.GetType().GetProperty("TaiKhoanId");
+                if (prop != null) return prop.GetValue(dataItem)?.ToString();
+            }
+
+            return null;
+        }
+
+        private void dgvAccounts_SelectionChanged(object sender, EventArgs e)
+        {
+            string id = GetCurrentEmployeeId();
+            if (!string.IsNullOrEmpty(id))
+            {
+                _selectedEmployeeId = id;
+            }
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                using (var frm = new frmAddEmployeeAccount())
+                {
+                    if (frm.ShowDialog() == DialogResult.OK)
+                    {
+                        LoadAccounts();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi mở form thêm tài khoản: {ex.Message}", "Lỗi",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnResetPassword_Click(object sender, EventArgs e)
+        {
+            string accountId = GetCurrentAccountId();
+            if (string.IsNullOrEmpty(accountId))
+            {
+                MessageBox.Show("Vui lòng chọn tài khoản!", "Thông báo",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            try
+            {
+                using (var frm = new frmResetPassword(accountId))
+                {
+                    if (frm.ShowDialog() == DialogResult.OK)
+                    {
+                        MessageBox.Show("Đặt lại mật khẩu thành công!", "Thông báo",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi: {ex.Message}", "Lỗi",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnToggleStatus_Click(object sender, EventArgs e)
+        {
+            string accountId = GetCurrentAccountId();
+            if (string.IsNullOrEmpty(accountId))
+            {
+                MessageBox.Show("Vui lòng chọn tài khoản!", "Thông báo",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (MessageBox.Show("Bạn có chắc chắn muốn thay đổi trạng thái tài khoản này?",
+                "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                var (success, message) = _controller.ToggleAccountStatus(accountId);
+                if (success)
+                {
+                    MessageBox.Show(message, "Thông báo",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LoadAccounts();
+                }
+                else
+                {
+                    MessageBox.Show(message, "Lỗi",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            string employeeId = GetCurrentEmployeeId();
+            if (string.IsNullOrEmpty(employeeId))
+            {
+                MessageBox.Show("Vui lòng chọn tài khoản!", "Thông báo",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (MessageBox.Show("Bạn có chắc chắn muốn xóa tài khoản này?\n\nLưu ý: Thao tác này không thể hoàn tác!",
+                "Xác nhận xóa", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            {
+                var (success, message) = _controller.DeleteEmployeeAccount(employeeId);
+                if (success)
+                {
+                    MessageBox.Show(message, "Thông báo",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LoadAccounts();
+                }
+                else
+                {
+                    MessageBox.Show(message, "Lỗi",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            var list = _controller.SearchEmployeeAccounts(txtSearch.Text.Trim());
+            dgvAccounts.DataSource = list;
+            if (list is IList l)
+                lblStatus.Text = $"Tìm thấy: {l.Count}";
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            txtSearch.Clear();
+            LoadAccounts();
+        }
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            _controller?.Dispose();
+            base.OnFormClosing(e);
+        }
+    }
+}
