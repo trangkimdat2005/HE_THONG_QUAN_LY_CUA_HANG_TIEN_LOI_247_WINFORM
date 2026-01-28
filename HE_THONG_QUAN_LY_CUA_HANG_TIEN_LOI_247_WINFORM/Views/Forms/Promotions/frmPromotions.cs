@@ -189,7 +189,8 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Promo
                     return;
                 }
 
-                var frmDetail = new frmPromotionDetail(promotionId);
+                // ✅ Sử dụng frmAddPromotion cho cả Add và Edit
+                var frmDetail = new frmAddPromotion(promotionId);
                 DialogResult result = frmDetail.ShowDialog();
 
                 if (result == DialogResult.OK)
