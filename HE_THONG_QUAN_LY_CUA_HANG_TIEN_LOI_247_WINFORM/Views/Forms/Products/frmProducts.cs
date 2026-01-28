@@ -1,6 +1,7 @@
 ﻿using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Controllers;
 using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.DTO;
 using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Models;
+using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Utils;
 using System;
 using System.Data;
 using System.Drawing;
@@ -17,7 +18,6 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
         private string _selectedId;
         private bool _isAddMode = false;
 
-        // === API cho Placeholder (giống frmGoods) ===
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         private static extern Int32 SendMessage(IntPtr hWnd, int msg, int wParam, [MarshalAs(UnmanagedType.LPWStr)] string lParam);
         private const int EM_SETCUEBANNER = 0x1501;
@@ -36,26 +36,24 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
             _controller = new ProductController();
             _context = new AppDbContext();
 
-            // Set placeholder
             SetPlaceholder(txtSearch, "Nhập tên hoặc mã hàng hóa để tìm...");
 
-            // === GÁN SỰ KIỆN (theo pattern frmGoods/frmMeasurements) ===
             this.Load += frmProducts_Load;
-            this.Activated += frmProducts_Activated; // Reload khi form được activate lại
             
-            // Selection Changed (giống frmGoods)
+            this.VisibleChanged += (s, e) => {
+                if (this.Visible && !_isAddMode) 
+                {
+                    LoadFilterComboBoxes();
+                    ReloadDetailComboBoxes();
+                    LoadData();
+                }
+            };
+            
             if (dgvProducts != null) dgvProducts.SelectionChanged += dgvProducts_SelectionChanged;
             
-            // === SEARCH EVENTS - GIỐNG FRMGOODS ===
-            // TextChanged: Tự động search khi gõ
             if (txtSearch != null)
             {
                 txtSearch.TextChanged += (s, e) => { btnSearch_Click(null, null); };
-            }
-            
-            // Enter key: Search
-            if (txtSearch != null)
-            {
                 txtSearch.KeyPress += (s, e) =>
                 {
                     if (e.KeyChar == 13)
@@ -66,15 +64,12 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
                 };
             }
 
-            // Search & Filter buttons
             if (btnSearch != null) btnSearch.Click += btnSearch_Click;
             if (btnRefresh != null) btnRefresh.Click += btnRefresh_Click;
             
-            // Filter ComboBoxes - auto reload khi chọn
             if (cmbBrand != null) cmbBrand.SelectionChangeCommitted += (s, e) => LoadData();
             if (cmbCategory != null) cmbCategory.SelectionChangeCommitted += (s, e) => LoadData();
 
-            // CRUD Buttons
             if (btnAdd != null) btnAdd.Click += btnAdd_Click;
             if (btnEdit != null) btnEdit.Click += btnEdit_Click;
             if (btnDelete != null) btnDelete.Click += btnDelete_Click;
@@ -82,7 +77,6 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
             if (btnCancel != null) btnCancel.Click += btnCancel_Click;
             if (btnExport != null) btnExport.Click += btnExport_Click;
 
-            // Image Buttons
             if (btnBrowseImage != null) btnBrowseImage.Click += btnBrowseImage_Click;
             if (btnClearImage != null) btnClearImage.Click += btnClearImage_Click;
         }
@@ -91,7 +85,6 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
         {
             try
             {
-                // Setup DataGridView
                 if (dgvProducts != null)
                 {
                     dgvProducts.AutoGenerateColumns = false;
@@ -103,7 +96,6 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
                 LoadData();
                 SetFormMode(false);
 
-                // Auto-select dòng đầu tiên (giống frmGoods)
                 if (dgvProducts.Rows.Count > 0)
                 {
                     dgvProducts.Rows[0].Selected = true;
@@ -127,30 +119,18 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
             }
         }
 
-        // === EVENT KHI FORM ĐƯỢC ACTIVATE LẠI ===
-        private void frmProducts_Activated(object sender, EventArgs e)
-        {
-            // Reload ComboBox hàng hóa để cập nhật dữ liệu mới từ frmGoods
-            if (!_isAddMode)
-            {
-                ReloadDetailComboBoxes();
-            }
-        }
-
         #region Setup DataGridView
 
         private void SetupDataGridViewColumns()
         {
             if (dgvProducts == null) return;
 
-            // ẨN cột colId (Mã sản phẩm đơn vị)
             if (dgvProducts.Columns.Contains("colId"))
             {
-                dgvProducts.Columns["colId"].Visible = false; // ẨN HOÀN TOÀN
-                dgvProducts.Columns["colId"].DataPropertyName = "Id"; // Vẫn cần bind để lấy ID
+                dgvProducts.Columns["colId"].Visible = false;
+                dgvProducts.Columns["colId"].DataPropertyName = "Id";
             }
 
-            // Mapping các cột hiển thị
             if (dgvProducts.Columns.Contains("colProductName"))
                 dgvProducts.Columns["colProductName"].DataPropertyName = "TenSanPham";
             if (dgvProducts.Columns.Contains("colBrand"))
@@ -170,7 +150,6 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
             dgvProducts.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
         }
 
-        // Helper: Lấy index của cột visible đầu tiên
         private int GetFirstVisibleColumnIndex()
         {
             foreach (DataGridViewColumn col in dgvProducts.Columns)
@@ -182,13 +161,12 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
 
         #endregion
 
-        #region Load Data & Logic
+        #region Load Data
 
         private void LoadFilterComboBoxes()
         {
             try
             {
-                // Filter ComboBox cho nhãn hiệu (có "Tất cả")
                 var brands = _context.NhanHieux.Where(x => !x.isDelete).OrderBy(x => x.ten).ToList();
                 var filterBrands = new System.Collections.Generic.List<NhanHieu>
                 {
@@ -205,7 +183,6 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
                     cmbBrand.SelectedIndex = 0;
                 }
 
-                // Filter ComboBox cho danh mục (có "Tất cả")
                 var categories = _context.DanhMucs.Where(x => !x.isDelete).OrderBy(x => x.ten).ToList();
                 var filterCategories = new System.Collections.Generic.List<DanhMuc>
                 {
@@ -232,29 +209,22 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
         {
             try
             {
-                // ComboBox hàng hóa cho form nhập liệu
                 var goods = _controller.GetAllGoods();
                 if (cmbGoodDetail != null)
                 {
-                    var currentValue = cmbGoodDetail.SelectedValue; // Lưu giá trị hiện tại
+                    var currentValue = cmbGoodDetail.SelectedValue;
 
                     cmbGoodDetail.DataSource = null;
                     cmbGoodDetail.DataSource = goods;
                     cmbGoodDetail.DisplayMember = "ten";
                     cmbGoodDetail.ValueMember = "id";
                     
-                    // Khôi phục giá trị đã chọn (nếu có)
                     if (currentValue != null)
-                    {
                         cmbGoodDetail.SelectedValue = currentValue;
-                    }
                     else
-                    {
                         cmbGoodDetail.SelectedIndex = -1;
-                    }
                 }
 
-                // ComboBox đơn vị
                 var units = _controller.GetAllUnits();
                 if (cmbUnitDetail != null)
                 {
@@ -266,16 +236,11 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
                     cmbUnitDetail.ValueMember = "id";
                     
                     if (currentValue != null)
-                    {
                         cmbUnitDetail.SelectedValue = currentValue;
-                    }
                     else
-                    {
                         cmbUnitDetail.SelectedIndex = -1;
-                    }
                 }
 
-                // ComboBox trạng thái
                 if (cmbStatusDetail != null)
                 {
                     cmbStatusDetail.DataSource = new[]
@@ -294,16 +259,13 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
             }
         }
 
-        // Reload ComboBox mà không reset selection (dùng khi form activated)
         private void ReloadDetailComboBoxes()
         {
             try
             {
-                // Lưu giá trị hiện tại
                 var currentGoodValue = cmbGoodDetail?.SelectedValue;
                 var currentUnitValue = cmbUnitDetail?.SelectedValue;
 
-                // Reload ComboBox hàng hóa
                 var goods = _controller.GetAllGoods();
                 if (cmbGoodDetail != null)
                 {
@@ -312,14 +274,12 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
                     cmbGoodDetail.DisplayMember = "ten";
                     cmbGoodDetail.ValueMember = "id";
                     
-                    // Khôi phục giá trị
                     if (currentGoodValue != null)
                         cmbGoodDetail.SelectedValue = currentGoodValue;
                     else
                         cmbGoodDetail.SelectedIndex = -1;
                 }
 
-                // Reload ComboBox đơn vị
                 var units = _controller.GetAllUnits();
                 if (cmbUnitDetail != null)
                 {
@@ -348,7 +308,6 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
                 string brandId = cmbBrand?.SelectedValue?.ToString();
                 string categoryId = cmbCategory?.SelectedValue?.ToString();
 
-                // Xử lý filter "Tất cả" (empty string → null)
                 if (brandId == "") brandId = null;
                 if (categoryId == "") categoryId = null;
 
@@ -375,10 +334,9 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
             var dataItem = dgvProducts.CurrentRow.DataBoundItem as ProductDetailDto;
             if (dataItem != null)
             {
-                return dataItem.Id; // Đây là ID của SanPhamDonVi (SPDV0001, SPDV0002...)
+                return dataItem.Id;
             }
 
-            // Fallback: lấy từ cột colId (ẩn)
             if (dgvProducts.Columns.Contains("colId") && dgvProducts.CurrentRow.Cells["colId"].Value != null)
                 return dgvProducts.CurrentRow.Cells["colId"].Value.ToString();
 
@@ -387,7 +345,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
 
         #endregion
 
-        #region Selection Changed (giống frmGoods)
+        #region Selection Changed
 
         private void dgvProducts_SelectionChanged(object sender, EventArgs e)
         {
@@ -421,7 +379,6 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
 
                 if (item != null)
                 {
-                    // Binding dữ liệu vào ComboBox
                     if (cmbGoodDetail != null && !string.IsNullOrEmpty(item.SanPhamId))
                         cmbGoodDetail.SelectedValue = item.SanPhamId;
                     else if (cmbGoodDetail != null)
@@ -432,17 +389,14 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
                     else if (cmbUnitDetail != null)
                         cmbUnitDetail.SelectedIndex = -1;
 
-                    // Giá bán
                     if (txtPrice != null)
                         txtPrice.Text = item.GiaBan.ToString("N0");
 
-                    // Trạng thái
                     if (cmbStatusDetail != null && !string.IsNullOrEmpty(item.TrangThai))
                         cmbStatusDetail.SelectedValue = item.TrangThai;
                     else if (cmbStatusDetail != null)
                         cmbStatusDetail.SelectedIndex = 0;
 
-                    // Clear ảnh
                     if (picProduct != null)
                         picProduct.Image = null;
                 }
@@ -463,11 +417,9 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
             _isAddMode = true;
             ClearForm();
 
-            // Hiển thị ID tự động sẽ sinh (giống frmGoods/frmMeasurements)
             try
             {
                 string newId = _controller.GenerateNewProductUnitId();
-                // Có thể hiển thị newId lên một label hoặc tooltip để user biết
                 this.Text = $"Quản lý sản phẩm - Thêm mới (Mã tự động: {newId})";
             }
             catch (Exception ex)
@@ -475,7 +427,6 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
                 MessageBox.Show($"Không thể sinh mã tự động: {ex.Message}", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
-            // Focus vào combobox hàng hóa
             if (cmbGoodDetail != null && cmbGoodDetail.Items.Count > 0)
                 cmbGoodDetail.Focus();
         }
@@ -531,7 +482,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
             {
                 var model = new SanPhamDonVi
                 {
-                    id = _isAddMode ? null : _selectedId, // Null khi Add - Controller sẽ tự sinh
+                    id = _isAddMode ? null : _selectedId,
                     sanPhamId = cmbGoodDetail.SelectedValue.ToString(),
                     donViId = cmbUnitDetail.SelectedValue.ToString(),
                     giaBan = decimal.Parse(txtPrice.Text.Replace(",", "").Replace(".", "")),
@@ -556,7 +507,6 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
                     SetFormMode(false);
                     _isAddMode = false;
 
-                    // Tự động select sản phẩm vừa thêm/sửa
                     if (!string.IsNullOrEmpty(result?.id))
                     {
                         _selectedId = result.id;
@@ -731,7 +681,6 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
 
         private void SetFormMode(bool isEdit)
         {
-            // Vùng nhập liệu
             if (cmbGoodDetail != null) cmbGoodDetail.Enabled = isEdit;
             if (cmbUnitDetail != null) cmbUnitDetail.Enabled = isEdit;
             if (txtPrice != null) txtPrice.Enabled = isEdit;
@@ -739,7 +688,6 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
             if (btnBrowseImage != null) btnBrowseImage.Enabled = isEdit;
             if (btnClearImage != null) btnClearImage.Enabled = isEdit;
 
-            // Nút Lưu/Hủy
             if (btnSave != null)
             {
                 btnSave.Visible = isEdit;
@@ -751,20 +699,17 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
                 btnCancel.Enabled = isEdit;
             }
 
-            // Nút chức năng chính
             if (btnAdd != null) btnAdd.Enabled = !isEdit;
             if (btnEdit != null) btnEdit.Enabled = !isEdit;
             if (btnDelete != null) btnDelete.Enabled = !isEdit;
             if (btnExport != null) btnExport.Enabled = !isEdit;
 
-            // Vùng tìm kiếm và lọc
             if (btnSearch != null) btnSearch.Enabled = !isEdit;
             if (btnRefresh != null) btnRefresh.Enabled = !isEdit;
             if (txtSearch != null) txtSearch.Enabled = !isEdit;
             if (cmbBrand != null) cmbBrand.Enabled = !isEdit;
             if (cmbCategory != null) cmbCategory.Enabled = !isEdit;
 
-            // Grid
             if (dgvProducts != null) dgvProducts.Enabled = !isEdit;
         }
 
@@ -779,13 +724,6 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
             if (picProduct != null) picProduct.Image = null;
         }
 
-        protected override void OnFormClosing(FormClosingEventArgs e)
-        {
-            _controller?.Dispose();
-            _context?.Dispose();
-            base.OnFormClosing(e);
-        }
-
         #endregion
 
         private void button1_Click(object sender, EventArgs e)
@@ -796,36 +734,24 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
 
             if (dialog.ShowDialog() == DialogResult.OK)
             {
-                // 1. Bật chế độ chờ (Con trỏ xoay)
                 this.Cursor = Cursors.WaitCursor;
 
                 try
                 {
-                    // 2. Khởi tạo Service
                     var excelService = new HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Services.ExcelImportService();
-
-                    // 3. Gọi hàm nhập Sản Phẩm Đơn Vị (Vừa viết xong)
                     var result = excelService.ImportSanPhamDonVi(dialog.FileName);
 
-                    // 4. Tắt chế độ chờ
                     this.Cursor = Cursors.Default;
 
-                    // 5. Xử lý kết quả
                     if (result.IsSuccess)
                     {
                         MessageBox.Show(result.Message, "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                        // --- QUAN TRỌNG: GỌI HÀM LOAD LẠI DATA ---
-                        // Bạn hãy thay tên hàm dưới đây bằng hàm load dữ liệu thực tế của bạn
-                        // Ví dụ: LoadData(); hoặc HienThiDanhSach();
                         LoadData();
                     }
                     else
                     {
-                        // Xử lý hiển thị lỗi
                         if (result.ErrorLogs != null && result.ErrorLogs.Count > 0)
                         {
-                            // Chỉ hiện tối đa 15 dòng lỗi đầu tiên để tránh tràn màn hình
                             string errorDetails = string.Join("\n", result.ErrorLogs.Take(15));
 
                             if (result.ErrorLogs.Count > 15)
@@ -846,6 +772,13 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
                     MessageBox.Show("Lỗi Application: " + ex.Message, "Lỗi nghiêm trọng", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+        }
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            _controller?.Dispose();
+            _context?.Dispose();
+            base.OnFormClosing(e);
         }
 
         private void panelTop_Paint(object sender, PaintEventArgs e)

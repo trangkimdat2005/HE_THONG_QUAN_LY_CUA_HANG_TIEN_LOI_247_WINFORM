@@ -402,7 +402,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Views.Forms.Inventory
                 {
                     var session = UserSession.Instance;
                     MessageBox.Show(
-                        $"✓ Lưu phiếu nhập thành công!\n\n" +
+                        $"Lưu phiếu nhập thành công!\n\n" +
                         $"Mã phiếu: {phieuNhapId}\n" +
                         $"Người nhập: {session.EmployeeName}\n" +
                         $"Tổng tiền: {_totalAmount:N0} đ",
@@ -413,12 +413,12 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Views.Forms.Inventory
                 }
                 else
                 {
-                    MessageBox.Show($"✗ {message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show($"{message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"✗ Lỗi lưu phiếu nhập:\n{ex.Message}", "Lỗi",
+                MessageBox.Show($"Lỗi lưu phiếu nhập:\n{ex.Message}", "Lỗi",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally

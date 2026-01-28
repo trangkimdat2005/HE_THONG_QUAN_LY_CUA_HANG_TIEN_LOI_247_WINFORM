@@ -37,7 +37,12 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
                         Id = u.id,
                         Ten = u.ten,
                         KyHieu = u.kyHieu,
-                        SoLuongSanPham = _readContext.SanPhamDonVis.Count(sp => sp.donViId == u.id && !sp.isDelete && sp.trangThai == "available"),
+                        // ✅ Đếm cả "Còn hàng" và "Hết hàng"
+                        SoLuongSanPham = _readContext.SanPhamDonVis.Count(sp => 
+                            sp.donViId == u.id && 
+                            !sp.isDelete && 
+                            (sp.trangThai == "Còn hàng" || sp.trangThai == "Hết hàng")
+                        ),
                         TrangThai = u.isDelete ? "Không hoạt động" : "Hoạt động"
                     })
                     .ToList();
@@ -62,7 +67,12 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
                         Id = u.id,
                         Ten = u.ten,
                         KyHieu = u.kyHieu,
-                        SoLuongSanPham = _readContext.SanPhamDonVis.Count(sp => sp.donViId == u.id && !sp.isDelete && sp.trangThai == "available"),
+                        // ✅ Đếm cả "Còn hàng" và "Hết hàng"
+                        SoLuongSanPham = _readContext.SanPhamDonVis.Count(sp => 
+                            sp.donViId == u.id && 
+                            !sp.isDelete && 
+                            (sp.trangThai == "Còn hàng" || sp.trangThai == "Hết hàng")
+                        ),
                         TrangThai = u.isDelete ? "Không hoạt động" : "Hoạt động"
                     })
                     .ToList();
@@ -77,7 +87,12 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
 
         public int GetProductCount(string unitId)
         {
-            return _readContext.SanPhamDonVis.Count(sp => sp.donViId == unitId && !sp.isDelete && sp.trangThai == "available");
+            // ✅ Đếm cả "Còn hàng" và "Hết hàng"
+            return _readContext.SanPhamDonVis.Count(sp => 
+                sp.donViId == unitId && 
+                !sp.isDelete && 
+                (sp.trangThai == "Còn hàng" || sp.trangThai == "Hết hàng")
+            );
         }
 
         #endregion
@@ -149,7 +164,13 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
                     var unit = db.DonViDoLuongs.Find(unitId);
                     if (unit == null) return (false, "Không tìm thấy đơn vị.");
 
-                    int productCount = db.SanPhamDonVis.Count(sp => sp.donViId == unitId && !sp.isDelete && sp.trangThai == "available");
+                    // ✅ Kiểm tra cả "Còn hàng" và "Hết hàng"
+                    int productCount = db.SanPhamDonVis.Count(sp => 
+                        sp.donViId == unitId && 
+                        !sp.isDelete && 
+                        (sp.trangThai == "Còn hàng" || sp.trangThai == "Hết hàng")
+                    );
+                    
                     if (productCount > 0)
                         return (false, $"Không thể xóa! Đang có {productCount} sản phẩm sử dụng đơn vị này.");
 
