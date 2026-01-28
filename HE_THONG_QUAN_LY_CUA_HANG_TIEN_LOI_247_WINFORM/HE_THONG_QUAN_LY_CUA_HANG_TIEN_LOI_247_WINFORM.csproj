@@ -521,6 +521,9 @@
     <EmbeddedResource Include="Views\forms\Employees\frmAddEmployeeAccount.resx">
       <DependentUpon>frmAddEmployeeAccount.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\forms\Employees\frmEmployeeAccount.resx">
+      <DependentUpon>frmEmployeeAccount.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\forms\Employees\frmEmployeeList.resx">
       <DependentUpon>frmEmployeeList.cs</DependentUpon>
     </EmbeddedResource>

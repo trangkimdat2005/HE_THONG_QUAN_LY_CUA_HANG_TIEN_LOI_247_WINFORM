@@ -52,11 +52,44 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Views.forms.Employees
             try
             {
                 if (dgvAccounts != null) dgvAccounts.AutoGenerateColumns = false;
+                ConfigureGridColumns();
+                LoadRoles();
                 LoadAccounts();
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Lỗi tải form: {ex.Message}", "Lỗi",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void ConfigureGridColumns()
+        {
+            if (dgvAccounts == null) return;
+
+            colEmployeeId.DataPropertyName = "NhanVienId";
+            colName.DataPropertyName = "HoTen";
+            colPosition.DataPropertyName = "ChucVu";
+            colPhone.DataPropertyName = "SoDienThoai";
+            colUsername.DataPropertyName = "TenDangNhap";
+            colEmail.DataPropertyName = "EmailTK";
+            colRole.DataPropertyName = "RoleName";
+            colStatus.DataPropertyName = "TrangThaiTK";
+        }
+
+        private void LoadRoles()
+        {
+            try
+            {
+                var roles = _controller.GetRoles();
+                cboRole.DisplayMember = "ten";
+                cboRole.ValueMember = "id";
+                cboRole.DataSource = roles;
+                cboRole.SelectedIndex = roles.Count > 0 ? 0 : -1;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi tải danh sách vai trò: {ex.Message}", "Lỗi",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -67,24 +100,6 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Views.forms.Employees
             {
                 var accounts = _controller.GetAllEmployeeAccounts();
                 dgvAccounts.DataSource = accounts;
-
-                foreach (System.Windows.Forms.DataGridViewColumn col in dgvAccounts.Columns)
-                {
-                    if (col.HeaderText.ToLower().Contains("mã nv"))
-                        col.DataPropertyName = "NhanVienId";
-                    else if (col.HeaderText.ToLower().Contains("họ tên"))
-                        col.DataPropertyName = "HoTen";
-                    else if (col.HeaderText.ToLower().Contains("chức vụ"))
-                        col.DataPropertyName = "ChucVu";
-                    else if (col.HeaderText.ToLower().Contains("sđt"))
-                        col.DataPropertyName = "SoDienThoai";
-                    else if (col.HeaderText.ToLower().Contains("tên đăng nhập"))
-                        col.DataPropertyName = "TenDangNhap";
-                    else if (col.HeaderText.ToLower().Contains("email tk"))
-                        col.DataPropertyName = "EmailTK";
-                    else if (col.HeaderText.ToLower().Contains("trạng thái tk"))
-                        col.DataPropertyName = "TrangThaiTK";
-                }
 
                 if (accounts is IList list)
                     lblStatus.Text = $"Tổng số: {list.Count} tài khoản";
@@ -134,6 +149,26 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Views.forms.Employees
             {
                 _selectedEmployeeId = id;
             }
+
+            SetSelectedRoleFromGrid();
+        }
+
+        private void SetSelectedRoleFromGrid()
+        {
+            if (dgvAccounts.CurrentRow == null || dgvAccounts.CurrentRow.DataBoundItem == null)
+            {
+                cboRole.SelectedIndex = -1;
+                return;
+            }
+
+            var dataItem = dgvAccounts.CurrentRow.DataBoundItem;
+            var prop = dataItem.GetType().GetProperty("RoleId");
+            var roleId = prop?.GetValue(dataItem)?.ToString();
+
+            if (!string.IsNullOrEmpty(roleId))
+                cboRole.SelectedValue = roleId;
+            else
+                cboRole.SelectedIndex = -1;
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -251,6 +286,38 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Views.forms.Employees
         {
             txtSearch.Clear();
             LoadAccounts();
+        }
+
+        private void btnAssignRole_Click(object sender, EventArgs e)
+        {
+            string accountId = GetCurrentAccountId();
+            if (string.IsNullOrEmpty(accountId))
+            {
+                MessageBox.Show("Vui lòng chọn tài khoản!", "Thông báo",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (cboRole.SelectedValue == null)
+            {
+                MessageBox.Show("Vui lòng chọn vai trò!", "Thông báo",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            var roleId = cboRole.SelectedValue.ToString();
+            var (success, message) = _controller.UpdateAccountRole(accountId, roleId);
+            if (success)
+            {
+                MessageBox.Show(message, "Thông báo",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                LoadAccounts();
+            }
+            else
+            {
+                MessageBox.Show(message, "Lỗi",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         protected override void OnFormClosing(FormClosingEventArgs e)
