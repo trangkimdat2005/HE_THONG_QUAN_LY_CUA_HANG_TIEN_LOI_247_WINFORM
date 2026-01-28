@@ -1,6 +1,6 @@
-﻿namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Views.forms.Inventory
+﻿namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Views.forms.Employees
 {
-    partial class frmBarcode
+    partial class frmEmployeeAccount
     {
         private System.ComponentModel.IContainer components = null;
 
@@ -27,16 +27,18 @@
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.lblSearch = new System.Windows.Forms.Label();
             this.panelActions = new System.Windows.Forms.Panel();
-            this.btnPrint = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
-            this.btnEdit = new System.Windows.Forms.Button();
+            this.btnToggleStatus = new System.Windows.Forms.Button();
+            this.btnResetPassword = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.panelGrid = new System.Windows.Forms.Panel();
-            this.dgvBarcodes = new System.Windows.Forms.DataGridView();
-            this.colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colProductName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCodeType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colBarcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvAccounts = new System.Windows.Forms.DataGridView();
+            this.colEmployeeId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPosition = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPhone = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colUsername = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colEmail = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelBottom = new System.Windows.Forms.Panel();
             this.lblStatus = new System.Windows.Forms.Label();
@@ -44,7 +46,7 @@
             this.panelSearch.SuspendLayout();
             this.panelActions.SuspendLayout();
             this.panelGrid.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvBarcodes)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvAccounts)).BeginInit();
             this.panelBottom.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -55,7 +57,7 @@
             this.panelTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelTop.Location = new System.Drawing.Point(0, 0);
             this.panelTop.Name = "panelTop";
-            this.panelTop.Size = new System.Drawing.Size(1000, 60);
+            this.panelTop.Size = new System.Drawing.Size(1200, 60);
             this.panelTop.TabIndex = 0;
             // 
             // lblTitle
@@ -65,9 +67,9 @@
             this.lblTitle.ForeColor = System.Drawing.Color.White;
             this.lblTitle.Location = new System.Drawing.Point(0, 0);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(1000, 60);
+            this.lblTitle.Size = new System.Drawing.Size(1200, 60);
             this.lblTitle.TabIndex = 0;
-            this.lblTitle.Text = "QUẢN LÝ BARCODE";
+            this.lblTitle.Text = "QUẢN LÝ TÀI KHOẢN NHÂN VIÊN";
             this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panelSearch
@@ -81,7 +83,7 @@
             this.panelSearch.Location = new System.Drawing.Point(0, 60);
             this.panelSearch.Name = "panelSearch";
             this.panelSearch.Padding = new System.Windows.Forms.Padding(10);
-            this.panelSearch.Size = new System.Drawing.Size(1000, 60);
+            this.panelSearch.Size = new System.Drawing.Size(1200, 60);
             this.panelSearch.TabIndex = 1;
             // 
             // btnRefresh
@@ -90,7 +92,7 @@
             this.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRefresh.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.btnRefresh.ForeColor = System.Drawing.Color.White;
-            this.btnRefresh.Location = new System.Drawing.Point(880, 13);
+            this.btnRefresh.Location = new System.Drawing.Point(1080, 13);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(100, 35);
             this.btnRefresh.TabIndex = 3;
@@ -104,7 +106,7 @@
             this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSearch.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.btnSearch.ForeColor = System.Drawing.Color.White;
-            this.btnSearch.Location = new System.Drawing.Point(760, 13);
+            this.btnSearch.Location = new System.Drawing.Point(960, 13);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(100, 35);
             this.btnSearch.TabIndex = 2;
@@ -117,7 +119,7 @@
             this.txtSearch.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.txtSearch.Location = new System.Drawing.Point(100, 16);
             this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(640, 27);
+            this.txtSearch.Size = new System.Drawing.Size(840, 27);
             this.txtSearch.TabIndex = 1;
             // 
             // lblSearch
@@ -133,30 +135,16 @@
             // panelActions
             // 
             this.panelActions.BackColor = System.Drawing.Color.White;
-            this.panelActions.Controls.Add(this.btnPrint);
             this.panelActions.Controls.Add(this.btnDelete);
-            this.panelActions.Controls.Add(this.btnEdit);
+            this.panelActions.Controls.Add(this.btnToggleStatus);
+            this.panelActions.Controls.Add(this.btnResetPassword);
             this.panelActions.Controls.Add(this.btnAdd);
             this.panelActions.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelActions.Location = new System.Drawing.Point(0, 120);
             this.panelActions.Name = "panelActions";
             this.panelActions.Padding = new System.Windows.Forms.Padding(10);
-            this.panelActions.Size = new System.Drawing.Size(1000, 60);
+            this.panelActions.Size = new System.Drawing.Size(1200, 60);
             this.panelActions.TabIndex = 2;
-            // 
-            // btnPrint
-            // 
-            this.btnPrint.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(162)))), ((int)(((byte)(184)))));
-            this.btnPrint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPrint.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            this.btnPrint.ForeColor = System.Drawing.Color.White;
-            this.btnPrint.Location = new System.Drawing.Point(400, 13);
-            this.btnPrint.Name = "btnPrint";
-            this.btnPrint.Size = new System.Drawing.Size(120, 35);
-            this.btnPrint.TabIndex = 3;
-            this.btnPrint.Text = "In Barcode";
-            this.btnPrint.UseVisualStyleBackColor = false;
-            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
             // 
             // btnDelete
             // 
@@ -164,27 +152,41 @@
             this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDelete.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.btnDelete.ForeColor = System.Drawing.Color.White;
-            this.btnDelete.Location = new System.Drawing.Point(270, 13);
+            this.btnDelete.Location = new System.Drawing.Point(470, 13);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(120, 35);
-            this.btnDelete.TabIndex = 2;
-            this.btnDelete.Text = "Xóa";
+            this.btnDelete.Size = new System.Drawing.Size(150, 35);
+            this.btnDelete.TabIndex = 3;
+            this.btnDelete.Text = "Xóa tài khoản";
             this.btnDelete.UseVisualStyleBackColor = false;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
-            // btnEdit
+            // btnToggleStatus
             // 
-            this.btnEdit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(193)))), ((int)(((byte)(7)))));
-            this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnEdit.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            this.btnEdit.ForeColor = System.Drawing.Color.Black;
-            this.btnEdit.Location = new System.Drawing.Point(140, 13);
-            this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(120, 35);
-            this.btnEdit.TabIndex = 1;
-            this.btnEdit.Text = "Sửa";
-            this.btnEdit.UseVisualStyleBackColor = false;
-            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
+            this.btnToggleStatus.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(193)))), ((int)(((byte)(7)))));
+            this.btnToggleStatus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnToggleStatus.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.btnToggleStatus.ForeColor = System.Drawing.Color.Black;
+            this.btnToggleStatus.Location = new System.Drawing.Point(310, 13);
+            this.btnToggleStatus.Name = "btnToggleStatus";
+            this.btnToggleStatus.Size = new System.Drawing.Size(150, 35);
+            this.btnToggleStatus.TabIndex = 2;
+            this.btnToggleStatus.Text = "Khóa/Mở khóa";
+            this.btnToggleStatus.UseVisualStyleBackColor = false;
+            this.btnToggleStatus.Click += new System.EventHandler(this.btnToggleStatus_Click);
+            // 
+            // btnResetPassword
+            // 
+            this.btnResetPassword.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(162)))), ((int)(((byte)(184)))));
+            this.btnResetPassword.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnResetPassword.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.btnResetPassword.ForeColor = System.Drawing.Color.White;
+            this.btnResetPassword.Location = new System.Drawing.Point(150, 13);
+            this.btnResetPassword.Name = "btnResetPassword";
+            this.btnResetPassword.Size = new System.Drawing.Size(150, 35);
+            this.btnResetPassword.TabIndex = 1;
+            this.btnResetPassword.Text = "Đặt lại mật khẩu";
+            this.btnResetPassword.UseVisualStyleBackColor = false;
+            this.btnResetPassword.Click += new System.EventHandler(this.btnResetPassword_Click);
             // 
             // btnAdd
             // 
@@ -194,28 +196,28 @@
             this.btnAdd.ForeColor = System.Drawing.Color.White;
             this.btnAdd.Location = new System.Drawing.Point(10, 13);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(120, 35);
+            this.btnAdd.Size = new System.Drawing.Size(130, 35);
             this.btnAdd.TabIndex = 0;
-            this.btnAdd.Text = "Thêm mới";
+            this.btnAdd.Text = "Tạo tài khoản";
             this.btnAdd.UseVisualStyleBackColor = false;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // panelGrid
             // 
-            this.panelGrid.Controls.Add(this.dgvBarcodes);
+            this.panelGrid.Controls.Add(this.dgvAccounts);
             this.panelGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelGrid.Location = new System.Drawing.Point(0, 180);
             this.panelGrid.Name = "panelGrid";
             this.panelGrid.Padding = new System.Windows.Forms.Padding(10);
-            this.panelGrid.Size = new System.Drawing.Size(1000, 370);
+            this.panelGrid.Size = new System.Drawing.Size(1200, 420);
             this.panelGrid.TabIndex = 3;
             // 
-            // dgvBarcodes
+            // dgvAccounts
             // 
-            this.dgvBarcodes.AllowUserToAddRows = false;
-            this.dgvBarcodes.AllowUserToDeleteRows = false;
-            this.dgvBarcodes.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvBarcodes.BackgroundColor = System.Drawing.Color.White;
+            this.dgvAccounts.AllowUserToAddRows = false;
+            this.dgvAccounts.AllowUserToDeleteRows = false;
+            this.dgvAccounts.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvAccounts.BackgroundColor = System.Drawing.Color.White;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(123)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
@@ -223,13 +225,15 @@
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvBarcodes.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvBarcodes.ColumnHeadersHeight = 40;
-            this.dgvBarcodes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colId,
-            this.colProductName,
-            this.colCodeType,
-            this.colBarcode,
+            this.dgvAccounts.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvAccounts.ColumnHeadersHeight = 40;
+            this.dgvAccounts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colEmployeeId,
+            this.colName,
+            this.colPosition,
+            this.colPhone,
+            this.colUsername,
+            this.colEmail,
             this.colStatus});
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
@@ -238,51 +242,65 @@
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(237)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvBarcodes.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dgvBarcodes.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvBarcodes.EnableHeadersVisualStyles = false;
-            this.dgvBarcodes.Location = new System.Drawing.Point(10, 10);
-            this.dgvBarcodes.MultiSelect = false;
-            this.dgvBarcodes.Name = "dgvBarcodes";
-            this.dgvBarcodes.ReadOnly = true;
-            this.dgvBarcodes.RowHeadersVisible = false;
-            this.dgvBarcodes.RowTemplate.Height = 35;
-            this.dgvBarcodes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvBarcodes.Size = new System.Drawing.Size(980, 350);
-            this.dgvBarcodes.TabIndex = 0;
+            this.dgvAccounts.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvAccounts.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvAccounts.EnableHeadersVisualStyles = false;
+            this.dgvAccounts.Location = new System.Drawing.Point(10, 10);
+            this.dgvAccounts.MultiSelect = false;
+            this.dgvAccounts.Name = "dgvAccounts";
+            this.dgvAccounts.ReadOnly = true;
+            this.dgvAccounts.RowHeadersVisible = false;
+            this.dgvAccounts.RowTemplate.Height = 35;
+            this.dgvAccounts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvAccounts.Size = new System.Drawing.Size(1180, 400);
+            this.dgvAccounts.TabIndex = 0;
             // 
-            // colId
+            // colEmployeeId
             // 
-            this.colId.FillWeight = 80F;
-            this.colId.HeaderText = "Mã định danh";
-            this.colId.Name = "colId";
-            this.colId.ReadOnly = true;
+            this.colEmployeeId.FillWeight = 70F;
+            this.colEmployeeId.HeaderText = "Mã NV";
+            this.colEmployeeId.Name = "colEmployeeId";
+            this.colEmployeeId.ReadOnly = true;
             // 
-            // colProductName
+            // colName
             // 
-            this.colProductName.FillWeight = 150F;
-            this.colProductName.HeaderText = "Sản phẩm";
-            this.colProductName.Name = "colProductName";
-            this.colProductName.ReadOnly = true;
+            this.colName.FillWeight = 150F;
+            this.colName.HeaderText = "Họ tên";
+            this.colName.Name = "colName";
+            this.colName.ReadOnly = true;
             // 
-            // colCodeType
+            // colPosition
             // 
-            this.colCodeType.FillWeight = 80F;
-            this.colCodeType.HeaderText = "Loại mã";
-            this.colCodeType.Name = "colCodeType";
-            this.colCodeType.ReadOnly = true;
+            this.colPosition.FillWeight = 100F;
+            this.colPosition.HeaderText = "Chức vụ";
+            this.colPosition.Name = "colPosition";
+            this.colPosition.ReadOnly = true;
             // 
-            // colBarcode
+            // colPhone
             // 
-            this.colBarcode.FillWeight = 120F;
-            this.colBarcode.HeaderText = "Mã Code";
-            this.colBarcode.Name = "colBarcode";
-            this.colBarcode.ReadOnly = true;
+            this.colPhone.FillWeight = 100F;
+            this.colPhone.HeaderText = "SĐT";
+            this.colPhone.Name = "colPhone";
+            this.colPhone.ReadOnly = true;
+            // 
+            // colUsername
+            // 
+            this.colUsername.FillWeight = 120F;
+            this.colUsername.HeaderText = "Tên đăng nhập";
+            this.colUsername.Name = "colUsername";
+            this.colUsername.ReadOnly = true;
+            // 
+            // colEmail
+            // 
+            this.colEmail.FillWeight = 150F;
+            this.colEmail.HeaderText = "Email TK";
+            this.colEmail.Name = "colEmail";
+            this.colEmail.ReadOnly = true;
             // 
             // colStatus
             // 
             this.colStatus.FillWeight = 80F;
-            this.colStatus.HeaderText = "Trạng thái";
+            this.colStatus.HeaderText = "Trạng thái TK";
             this.colStatus.Name = "colStatus";
             this.colStatus.ReadOnly = true;
             // 
@@ -291,9 +309,9 @@
             this.panelBottom.BackColor = System.Drawing.Color.WhiteSmoke;
             this.panelBottom.Controls.Add(this.lblStatus);
             this.panelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelBottom.Location = new System.Drawing.Point(0, 550);
+            this.panelBottom.Location = new System.Drawing.Point(0, 600);
             this.panelBottom.Name = "panelBottom";
-            this.panelBottom.Size = new System.Drawing.Size(1000, 40);
+            this.panelBottom.Size = new System.Drawing.Size(1200, 40);
             this.panelBottom.TabIndex = 4;
             // 
             // lblStatus
@@ -306,28 +324,26 @@
             this.lblStatus.TabIndex = 0;
             this.lblStatus.Text = "Tổng số: 0 mục";
             // 
-            // frmBarcode
+            // frmEmployeeAccount
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1000, 590);
+            this.ClientSize = new System.Drawing.Size(1200, 640);
             this.Controls.Add(this.panelGrid);
             this.Controls.Add(this.panelBottom);
             this.Controls.Add(this.panelActions);
             this.Controls.Add(this.panelSearch);
             this.Controls.Add(this.panelTop);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MaximizeBox = false;
-            this.Name = "frmBarcode";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Quản lý Barcode";
-            this.Load += new System.EventHandler(this.frmBarcode_Load);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Name = "frmEmployeeAccount";
+            this.Text = "Quản lý tài khoản nhân viên";
+            this.Load += new System.EventHandler(this.frmEmployeeAccount_Load);
             this.panelTop.ResumeLayout(false);
             this.panelSearch.ResumeLayout(false);
             this.panelSearch.PerformLayout();
             this.panelActions.ResumeLayout(false);
             this.panelGrid.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvBarcodes)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvAccounts)).EndInit();
             this.panelBottom.ResumeLayout(false);
             this.panelBottom.PerformLayout();
             this.ResumeLayout(false);
@@ -344,18 +360,20 @@
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.Panel panelActions;
-        private System.Windows.Forms.Button btnPrint;
         private System.Windows.Forms.Button btnAdd;
-        private System.Windows.Forms.Button btnEdit;
+        private System.Windows.Forms.Button btnResetPassword;
+        private System.Windows.Forms.Button btnToggleStatus;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Panel panelGrid;
-        private System.Windows.Forms.DataGridView dgvBarcodes;
+        private System.Windows.Forms.DataGridView dgvAccounts;
         private System.Windows.Forms.Panel panelBottom;
         private System.Windows.Forms.Label lblStatus;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colProductName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCodeType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colBarcode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colEmployeeId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPosition;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPhone;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colUsername;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colEmail;
         private System.Windows.Forms.DataGridViewTextBoxColumn colStatus;
     }
 }

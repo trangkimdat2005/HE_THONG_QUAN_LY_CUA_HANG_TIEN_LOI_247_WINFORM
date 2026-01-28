@@ -1,8 +1,13 @@
 ﻿using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Controllers;
+using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Models;
 using System;
 using System.Collections;
+using System.Drawing;
+using System.Drawing.Printing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using ZXing;
+using ZXing.Common;
 
 namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Views.forms.Inventory
 {
@@ -202,6 +207,159 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Views.forms.Inventory
         {
             txtSearch.Clear();
             LoadBarcodes();
+        }
+
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+            string id = GetCurrentId();
+            if (string.IsNullOrEmpty(id))
+            {
+                MessageBox.Show("Vui lòng chọn barcode để in!", "Thông báo", 
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            try
+            {
+                var barcode = _barcodeController.GetBarcodeById(id);
+                if (barcode == null)
+                {
+                    MessageBox.Show("Không tìm thấy thông tin barcode!", "Lỗi", 
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                PrintBarcode(barcode);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi in barcode: {ex.Message}", "Lỗi", 
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void PrintBarcode(MaDinhDanhSanPham barcode)
+        {
+            try
+            {
+                PrintDocument printDocument = new PrintDocument();
+                printDocument.PrintPage += (sender, e) => PrintBarcodePage(sender, e, barcode);
+
+                PrintDialog printDialog = new PrintDialog();
+                printDialog.Document = printDocument;
+
+                if (printDialog.ShowDialog() == DialogResult.OK)
+                {
+                    printDocument.Print();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi in: {ex.Message}", "Lỗi", 
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void PrintBarcodePage(object sender, PrintPageEventArgs e, MaDinhDanhSanPham barcode)
+        {
+            try
+            {
+                Graphics graphics = e.Graphics;
+                Font titleFont = new Font("Segoe UI", 16, FontStyle.Bold);
+                Font normalFont = new Font("Segoe UI", 10);
+                Font codeFont = new Font("Consolas", 12, FontStyle.Bold);
+                
+                Brush blackBrush = Brushes.Black;
+                
+                float yPos = 50;
+                float leftMargin = 100;
+                
+                // Tiêu đề
+                graphics.DrawString("BARCODE LABEL", titleFont, blackBrush, leftMargin, yPos);
+                yPos += 40;
+                
+                // Thông tin sản phẩm
+                var productUnits = _barcodeController.GetAllProductUnits();
+                var productUnit = productUnits.Find(p => p.id == barcode.sanPhamDonViId);
+                
+                if (productUnit != null && productUnit.SanPham != null)
+                {
+                    graphics.DrawString($"Sản phẩm: {productUnit.SanPham.ten}", normalFont, blackBrush, leftMargin, yPos);
+                    yPos += 25;
+                    
+                    if (productUnit.DonViDoLuong != null)
+                    {
+                        graphics.DrawString($"Đơn vị: {productUnit.DonViDoLuong.ten}", normalFont, blackBrush, leftMargin, yPos);
+                        yPos += 25;
+                    }
+                }
+                
+                graphics.DrawString($"Loại mã: {barcode.loaiMa}", normalFont, blackBrush, leftMargin, yPos);
+                yPos += 25;
+                
+                graphics.DrawString($"Mã code: {barcode.maCode}", codeFont, blackBrush, leftMargin, yPos);
+                yPos += 40;
+                
+                // Tạo và vẽ barcode
+                Bitmap barcodeImage = GenerateBarcodeImage(barcode.maCode, barcode.loaiMa);
+                if (barcodeImage != null)
+                {
+                    int imageWidth = 400;
+                    int imageHeight = 200;
+                    graphics.DrawImage(barcodeImage, leftMargin, yPos, imageWidth, imageHeight);
+                    yPos += imageHeight + 20;
+                }
+                
+                // Ngày in
+                graphics.DrawString($"Ngày in: {DateTime.Now:dd/MM/yyyy HH:mm}", normalFont, blackBrush, leftMargin, yPos);
+                
+                e.HasMorePages = false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi tạo trang in: {ex.Message}", "Lỗi", 
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private Bitmap GenerateBarcodeImage(string code, string codeType)
+        {
+            try
+            {
+                BarcodeWriter writer = new BarcodeWriter();
+                
+                if (codeType == "QR Code")
+                {
+                    writer.Format = BarcodeFormat.QR_CODE;
+                }
+                else if (codeType == "Barcode")
+                {
+                    writer.Format = BarcodeFormat.CODE_128;
+                }
+                else if (codeType == "EAN-13")
+                {
+                    writer.Format = BarcodeFormat.EAN_13;
+                }
+                else
+                {
+                    writer.Format = BarcodeFormat.CODE_128;
+                }
+
+                writer.Options = new EncodingOptions
+                {
+                    Width = 400,
+                    Height = 200,
+                    Margin = 10
+                };
+
+                return writer.Write(code);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi tạo barcode image: {ex.Message}", "Lỗi", 
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
+            }
         }
 
         protected override void OnFormClosing(FormClosingEventArgs e)
