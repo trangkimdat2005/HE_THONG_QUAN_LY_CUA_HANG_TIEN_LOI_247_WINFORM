@@ -17,8 +17,8 @@
 
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelTop = new System.Windows.Forms.Panel();
             this.lblTitle = new System.Windows.Forms.Label();
             this.panelSearch = new System.Windows.Forms.Panel();
@@ -27,6 +27,9 @@
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.lblSearch = new System.Windows.Forms.Label();
             this.panelActions = new System.Windows.Forms.Panel();
+            this.btnAssignRole = new System.Windows.Forms.Button();
+            this.cboRole = new System.Windows.Forms.ComboBox();
+            this.lblRole = new System.Windows.Forms.Label();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnToggleStatus = new System.Windows.Forms.Button();
             this.btnResetPassword = new System.Windows.Forms.Button();
@@ -39,6 +42,7 @@
             this.colPhone = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colUsername = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colEmail = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colRole = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelBottom = new System.Windows.Forms.Panel();
             this.lblStatus = new System.Windows.Forms.Label();
@@ -128,13 +132,16 @@
             this.lblSearch.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.lblSearch.Location = new System.Drawing.Point(20, 19);
             this.lblSearch.Name = "lblSearch";
-            this.lblSearch.Size = new System.Drawing.Size(74, 19);
+            this.lblSearch.Size = new System.Drawing.Size(75, 19);
             this.lblSearch.TabIndex = 0;
             this.lblSearch.Text = "Tìm kiếm:";
             // 
             // panelActions
             // 
             this.panelActions.BackColor = System.Drawing.Color.White;
+            this.panelActions.Controls.Add(this.btnAssignRole);
+            this.panelActions.Controls.Add(this.cboRole);
+            this.panelActions.Controls.Add(this.lblRole);
             this.panelActions.Controls.Add(this.btnDelete);
             this.panelActions.Controls.Add(this.btnToggleStatus);
             this.panelActions.Controls.Add(this.btnResetPassword);
@@ -145,6 +152,40 @@
             this.panelActions.Padding = new System.Windows.Forms.Padding(10);
             this.panelActions.Size = new System.Drawing.Size(1200, 60);
             this.panelActions.TabIndex = 2;
+            // 
+            // btnAssignRole
+            // 
+            this.btnAssignRole.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(123)))), ((int)(((byte)(255)))));
+            this.btnAssignRole.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAssignRole.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.btnAssignRole.ForeColor = System.Drawing.Color.White;
+            this.btnAssignRole.Location = new System.Drawing.Point(1041, 13);
+            this.btnAssignRole.Name = "btnAssignRole";
+            this.btnAssignRole.Size = new System.Drawing.Size(149, 35);
+            this.btnAssignRole.TabIndex = 6;
+            this.btnAssignRole.Text = "Cập nhật quyền";
+            this.btnAssignRole.UseVisualStyleBackColor = false;
+            this.btnAssignRole.Click += new System.EventHandler(this.btnAssignRole_Click);
+            // 
+            // cboRole
+            // 
+            this.cboRole.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboRole.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.cboRole.FormattingEnabled = true;
+            this.cboRole.Location = new System.Drawing.Point(784, 16);
+            this.cboRole.Name = "cboRole";
+            this.cboRole.Size = new System.Drawing.Size(226, 25);
+            this.cboRole.TabIndex = 5;
+            // 
+            // lblRole
+            // 
+            this.lblRole.AutoSize = true;
+            this.lblRole.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.lblRole.Location = new System.Drawing.Point(721, 19);
+            this.lblRole.Name = "lblRole";
+            this.lblRole.Size = new System.Drawing.Size(57, 19);
+            this.lblRole.TabIndex = 4;
+            this.lblRole.Text = "Vai trò:";
             // 
             // btnDelete
             // 
@@ -218,14 +259,14 @@
             this.dgvAccounts.AllowUserToDeleteRows = false;
             this.dgvAccounts.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvAccounts.BackgroundColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(123)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvAccounts.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(123)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvAccounts.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvAccounts.ColumnHeadersHeight = 40;
             this.dgvAccounts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colEmployeeId,
@@ -234,15 +275,16 @@
             this.colPhone,
             this.colUsername,
             this.colEmail,
+            this.colRole,
             this.colStatus});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9.75F);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(237)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvAccounts.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(237)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvAccounts.DefaultCellStyle = dataGridViewCellStyle4;
             this.dgvAccounts.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvAccounts.EnableHeadersVisualStyles = false;
             this.dgvAccounts.Location = new System.Drawing.Point(10, 10);
@@ -271,14 +313,12 @@
             // 
             // colPosition
             // 
-            this.colPosition.FillWeight = 100F;
             this.colPosition.HeaderText = "Chức vụ";
             this.colPosition.Name = "colPosition";
             this.colPosition.ReadOnly = true;
             // 
             // colPhone
             // 
-            this.colPhone.FillWeight = 100F;
             this.colPhone.HeaderText = "SĐT";
             this.colPhone.Name = "colPhone";
             this.colPhone.ReadOnly = true;
@@ -296,6 +336,13 @@
             this.colEmail.HeaderText = "Email TK";
             this.colEmail.Name = "colEmail";
             this.colEmail.ReadOnly = true;
+            // 
+            // colRole
+            // 
+            this.colRole.FillWeight = 120F;
+            this.colRole.HeaderText = "Vai trò";
+            this.colRole.Name = "colRole";
+            this.colRole.ReadOnly = true;
             // 
             // colStatus
             // 
@@ -320,7 +367,7 @@
             this.lblStatus.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.lblStatus.Location = new System.Drawing.Point(10, 10);
             this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(107, 19);
+            this.lblStatus.Size = new System.Drawing.Size(110, 19);
             this.lblStatus.TabIndex = 0;
             this.lblStatus.Text = "Tổng số: 0 mục";
             // 
@@ -342,6 +389,7 @@
             this.panelSearch.ResumeLayout(false);
             this.panelSearch.PerformLayout();
             this.panelActions.ResumeLayout(false);
+            this.panelActions.PerformLayout();
             this.panelGrid.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvAccounts)).EndInit();
             this.panelBottom.ResumeLayout(false);
@@ -364,6 +412,9 @@
         private System.Windows.Forms.Button btnResetPassword;
         private System.Windows.Forms.Button btnToggleStatus;
         private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.Button btnAssignRole;
+        private System.Windows.Forms.ComboBox cboRole;
+        private System.Windows.Forms.Label lblRole;
         private System.Windows.Forms.Panel panelGrid;
         private System.Windows.Forms.DataGridView dgvAccounts;
         private System.Windows.Forms.Panel panelBottom;
@@ -374,6 +425,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colPhone;
         private System.Windows.Forms.DataGridViewTextBoxColumn colUsername;
         private System.Windows.Forms.DataGridViewTextBoxColumn colEmail;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRole;
         private System.Windows.Forms.DataGridViewTextBoxColumn colStatus;
     }
 }
