@@ -31,11 +31,14 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
                     {
                         Id = c.id,
                         Ten = c.ten,
-                        // Đếm tổng số SanPhamDonVi (đơn vị sản phẩm) có trong danh mục - đang kinh doanh
+                        //  Đếm SanPhamDonVi: Kiểm tra cả SanPham.isDelete
                         SoLuongSanPham = (from dm in _readContext.SanPhamDanhMucs
                                           where dm.danhMucId == c.id && !dm.isDelete
-                                          join spDv in _readContext.SanPhamDonVis on dm.sanPhamId equals spDv.sanPhamId
-                                          where !spDv.isDelete && spDv.trangThai == "available"
+                                          join sp in _readContext.SanPhams on dm.sanPhamId equals sp.id
+                                          where !sp.isDelete 
+                                          join spDv in _readContext.SanPhamDonVis on sp.id equals spDv.sanPhamId
+                                          where !spDv.isDelete 
+                                                && (spDv.trangThai == "Còn hàng" || spDv.trangThai == "Hết hàng")
                                           select spDv.id).Count(),
                         TrangThai = c.isDelete ? "Không hoạt động" : "Hoạt động"
                     })
@@ -59,11 +62,14 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
                     {
                         Id = c.id,
                         Ten = c.ten,
-                        // Đếm tổng số SanPhamDonVi (đơn vị sản phẩm) có trong danh mục - đang kinh doanh
+                        //  Đếm SanPhamDonVi: Kiểm tra cả SanPham.isDelete
                         SoLuongSanPham = (from dm in _readContext.SanPhamDanhMucs
                                           where dm.danhMucId == c.id && !dm.isDelete
-                                          join spDv in _readContext.SanPhamDonVis on dm.sanPhamId equals spDv.sanPhamId
-                                          where !spDv.isDelete && spDv.trangThai == "available"
+                                          join sp in _readContext.SanPhams on dm.sanPhamId equals sp.id
+                                          where !sp.isDelete // ✅ THÊM ĐIỀU KIỆN NÀY
+                                          join spDv in _readContext.SanPhamDonVis on sp.id equals spDv.sanPhamId
+                                          where !spDv.isDelete 
+                                                && (spDv.trangThai == "Còn hàng" || spDv.trangThai == "Hết hàng")
                                           select spDv.id).Count(),
                         TrangThai = c.isDelete ? "Không hoạt động" : "Hoạt động"
                     })
@@ -80,11 +86,14 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
         // Hàm này lấy số lượng hiển thị lên Label bên phải
         public int GetProductCountFromLocation(string categoryId)
         {
-            // Đếm tổng số SanPhamDonVi (đơn vị sản phẩm) có trong danh mục - đang kinh doanh
+            //  Đếm SanPhamDonVi: Kiểm tra cả SanPham.isDelete
             return (from dm in _readContext.SanPhamDanhMucs
                     where dm.danhMucId == categoryId && !dm.isDelete
-                    join spDv in _readContext.SanPhamDonVis on dm.sanPhamId equals spDv.sanPhamId
-                    where !spDv.isDelete && spDv.trangThai == "available"
+                    join sp in _readContext.SanPhams on dm.sanPhamId equals sp.id
+                    where !sp.isDelete //  THÊM ĐIỀU KIỆN NÀY
+                    join spDv in _readContext.SanPhamDonVis on sp.id equals spDv.sanPhamId
+                    where !spDv.isDelete 
+                          && (spDv.trangThai == "Còn hàng" || spDv.trangThai == "Hết hàng")
                     select spDv.id).Count();
         }
 
@@ -149,11 +158,14 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
                     var category = db.DanhMucs.Find(categoryId);
                     if (category == null) return (false, "Không tìm thấy danh mục.");
 
-                    // Kiểm tra nếu danh mục đang có đơn vị sản phẩm đang kinh doanh
+                    //  Kiểm tra nếu danh mục đang có sản phẩm: Kiểm tra cả SanPham.isDelete
                     int countInUse = (from dm in db.SanPhamDanhMucs
                                       where dm.danhMucId == categoryId && !dm.isDelete
-                                      join spDv in db.SanPhamDonVis on dm.sanPhamId equals spDv.sanPhamId
-                                      where !spDv.isDelete && spDv.trangThai == "available"
+                                      join sp in db.SanPhams on dm.sanPhamId equals sp.id
+                                      where !sp.isDelete // ✅ THÊM ĐIỀU KIỆN NÀY
+                                      join spDv in db.SanPhamDonVis on sp.id equals spDv.sanPhamId
+                                      where !spDv.isDelete 
+                                            && (spDv.trangThai == "Còn hàng" || spDv.trangThai == "Hết hàng")
                                       select spDv.id).Count();
 
                     if (countInUse > 0)
@@ -161,7 +173,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
 
                     category.isDelete = true;
 
-                    // Xóa mềm các liên kết (dù đã chặn ở trên nhưng cứ giữ để an toàn)
+                    // Xóa mềm các liên kết
                     var links = db.SanPhamDanhMucs.Where(x => x.danhMucId == categoryId).ToList();
                     foreach (var link in links) link.isDelete = true;
 

@@ -51,6 +51,7 @@
             this.btn_bills = new Guna.UI2.WinForms.Guna2Button();
             this.btn_employees = new Guna.UI2.WinForms.Guna2Button();
             this.pnlEmployeeSubmenu = new Guna.UI2.WinForms.Guna2Panel();
+            this.btnSub_TaiKhoan = new Guna.UI2.WinForms.Guna2Button();
             this.btnSub_PhanCong = new Guna.UI2.WinForms.Guna2Button();
             this.btnSub_DanhSachNV = new Guna.UI2.WinForms.Guna2Button();
             this.btn_customers = new Guna.UI2.WinForms.Guna2Button();
@@ -528,16 +529,44 @@
             this.pnlEmployeeSubmenu.AutoSize = true;
             this.pnlEmployeeSubmenu.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.pnlEmployeeSubmenu.BackColor = System.Drawing.SystemColors.MenuBar;
+            this.pnlEmployeeSubmenu.Controls.Add(this.btnSub_TaiKhoan);
             this.pnlEmployeeSubmenu.Controls.Add(this.btnSub_PhanCong);
             this.pnlEmployeeSubmenu.Controls.Add(this.btnSub_DanhSachNV);
             this.pnlEmployeeSubmenu.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlEmployeeSubmenu.Location = new System.Drawing.Point(7, 469);
             this.pnlEmployeeSubmenu.Margin = new System.Windows.Forms.Padding(2);
             this.pnlEmployeeSubmenu.Name = "pnlEmployeeSubmenu";
-            this.pnlEmployeeSubmenu.Size = new System.Drawing.Size(306, 82);
+            this.pnlEmployeeSubmenu.Size = new System.Drawing.Size(306, 125);
             this.pnlEmployeeSubmenu.TabIndex = 15;
             this.pnlEmployeeSubmenu.Visible = false;
             this.pnlEmployeeSubmenu.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlEmployeeSubmenu_Paint);
+            // 
+            // btnSub_TaiKhoan
+            // 
+            this.btnSub_TaiKhoan.BackColor = System.Drawing.Color.Transparent;
+            this.btnSub_TaiKhoan.BorderColor = System.Drawing.Color.White;
+            this.btnSub_TaiKhoan.BorderRadius = 10;
+            this.btnSub_TaiKhoan.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnSub_TaiKhoan.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnSub_TaiKhoan.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnSub_TaiKhoan.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnSub_TaiKhoan.FillColor = System.Drawing.Color.Transparent;
+            this.btnSub_TaiKhoan.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.btnSub_TaiKhoan.ForeColor = System.Drawing.Color.Black;
+            this.btnSub_TaiKhoan.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.btnSub_TaiKhoan.ImageOffset = new System.Drawing.Point(20, 0);
+            this.btnSub_TaiKhoan.Location = new System.Drawing.Point(0, 84);
+            this.btnSub_TaiKhoan.Margin = new System.Windows.Forms.Padding(2);
+            this.btnSub_TaiKhoan.Name = "btnSub_TaiKhoan";
+            this.btnSub_TaiKhoan.PressedColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnSub_TaiKhoan.PressedDepth = 50;
+            this.btnSub_TaiKhoan.Size = new System.Drawing.Size(304, 39);
+            this.btnSub_TaiKhoan.TabIndex = 9;
+            this.btnSub_TaiKhoan.Text = "🔐 Quản lý Tài khoản";
+            this.btnSub_TaiKhoan.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.btnSub_TaiKhoan.TextOffset = new System.Drawing.Point(20, 0);
+            this.btnSub_TaiKhoan.UseTransparentBackground = true;
+            this.btnSub_TaiKhoan.Click += new System.EventHandler(this.btnSub_TaiKhoan_Click);
             // 
             // btnSub_PhanCong
             // 
@@ -1028,6 +1057,7 @@
         private Guna.UI2.WinForms.Guna2Button btn_bills;
         private Guna.UI2.WinForms.Guna2Button btn_employees;
         private Guna.UI2.WinForms.Guna2Panel pnlEmployeeSubmenu;
+        private Guna.UI2.WinForms.Guna2Button btnSub_TaiKhoan;
         private Guna.UI2.WinForms.Guna2Button btnSub_PhanCong;
         private Guna.UI2.WinForms.Guna2Button btnSub_DanhSachNV;
         private Guna.UI2.WinForms.Guna2Button btn_customers;

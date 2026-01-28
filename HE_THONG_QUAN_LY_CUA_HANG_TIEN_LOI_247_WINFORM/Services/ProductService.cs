@@ -85,8 +85,8 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
                     MoTa = x.MoTa,
                     GiaBan = x.GiaBan,
                     DonVi = x.DonViTen,
-                    TrangThai = x.IsDelete ? "Ngừng kinh doanh" : 
-                               (x.TrangThai ?? "Đang kinh doanh")
+                    TrangThai = x.IsDelete ? "Còn hàng" : 
+                               (x.TrangThai ?? "Hết hàng")
                 }).OrderBy(x => x.TenSanPham).Take(1000).ToList();
             }
             catch (Exception ex) 

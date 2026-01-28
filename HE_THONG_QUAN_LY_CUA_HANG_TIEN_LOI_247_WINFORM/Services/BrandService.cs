@@ -59,7 +59,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
                     {
                         Id = b.id,
                         Ten = b.ten,
-                        // Đếm theo SanPhamDonVi (đơn vị sản phẩm) - đang kinh doanh
+                        // ✅ Đếm theo SanPhamDonVi - Bao gồm cả "Còn hàng" và "Hết hàng"
                         SoLuongSanPham = _readContext.SanPhamDonVis.Count(spDv => 
                             _readContext.SanPhams.Any(sp => 
                                 sp.id == spDv.sanPhamId && 
@@ -67,7 +67,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
                                 !sp.isDelete
                             ) && 
                             !spDv.isDelete && 
-                            spDv.trangThai == "available"
+                            (spDv.trangThai == "Còn hàng" || spDv.trangThai == "Hết hàng")
                         ),
                         TrangThai = b.isDelete ? "Không hoạt động" : "Hoạt động"
                     })
@@ -92,7 +92,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
                     {
                         Id = b.id,
                         Ten = b.ten,
-                        // Đếm theo SanPhamDonVi (đơn vị sản phẩm) - đang kinh doanh
+                        // ✅ Đếm theo SanPhamDonVi - Bao gồm cả "Còn hàng" và "Hết hàng"
                         SoLuongSanPham = _readContext.SanPhamDonVis.Count(spDv => 
                             _readContext.SanPhams.Any(sp => 
                                 sp.id == spDv.sanPhamId && 
@@ -100,7 +100,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
                                 !sp.isDelete
                             ) && 
                             !spDv.isDelete && 
-                            spDv.trangThai == "available"
+                            (spDv.trangThai == "Còn hàng" || spDv.trangThai == "Hết hàng")
                         ),
                         TrangThai = b.isDelete ? "Không hoạt động" : "Hoạt động"
                     })
@@ -116,7 +116,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
 
         public int GetProductCount(string brandId)
         {
-            // Đếm theo SanPhamDonVi (đơn vị sản phẩm) - đang kinh doanh
+            // ✅ Đếm theo SanPhamDonVi - Bao gồm cả "Còn hàng" và "Hết hàng"
             return _readContext.SanPhamDonVis.Count(spDv => 
                 _readContext.SanPhams.Any(sp => 
                     sp.id == spDv.sanPhamId && 
@@ -124,7 +124,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
                     !sp.isDelete
                 ) && 
                 !spDv.isDelete && 
-                spDv.trangThai == "available"
+                (spDv.trangThai == "Còn hàng" || spDv.trangThai == "Hết hàng")
             );
         }
 
@@ -185,7 +185,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
                     var brand = db.NhanHieux.Find(brandId);
                     if (brand == null) return (false, "Không tìm thấy nhãn hiệu.");
 
-                    // Kiểm tra đơn vị sản phẩm đang kinh doanh
+                    // ✅ Kiểm tra đơn vị sản phẩm - Bao gồm cả "Còn hàng" và "Hết hàng"
                     int countInUse = db.SanPhamDonVis.Count(spDv => 
                         db.SanPhams.Any(sp => 
                             sp.id == spDv.sanPhamId && 
@@ -193,7 +193,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
                             !sp.isDelete
                         ) && 
                         !spDv.isDelete && 
-                        spDv.trangThai == "available"
+                        (spDv.trangThai == "Còn hàng" || spDv.trangThai == "Hết hàng")
                     );
 
                     if (countInUse > 0)
