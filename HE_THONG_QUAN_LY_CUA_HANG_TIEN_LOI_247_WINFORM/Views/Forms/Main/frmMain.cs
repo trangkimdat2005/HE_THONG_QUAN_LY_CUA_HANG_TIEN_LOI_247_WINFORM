@@ -54,10 +54,58 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
         {
             // Hiển thị thông tin user đã đăng nhập
             UpdateUserInfo();
-            
+            ApplyRolePermissions();
             // Load Dashboard mặc định khi mở chương trình
             LoadFormIntoPanel(new frmDashboard());
             SetActiveButton(btn_dashboard, null); // Highlight nút Dashboard
+        }
+
+        private void ApplyRolePermissions()
+        {
+            bool isAdmin = PermissionExtensions.CheckRole("R_ADM", showMessage: false) ||
+                           PermissionExtensions.CheckRole("ADMIN", showMessage: false) ||
+                           PermissionExtensions.CheckRole(RoleConstants.ADMIN, showMessage: false);
+
+            if (isAdmin)
+                return;
+
+            bool isWarehouse = PermissionExtensions.CheckRole("R_KHO", showMessage: false) ||
+                               PermissionExtensions.CheckRole("NV_KHO", showMessage: false);
+            bool isSales = PermissionExtensions.CheckRole("R_NV", showMessage: false) ||
+                           PermissionExtensions.CheckRole("NV_BANHANG", showMessage: false);
+
+            SetMenuVisibility(btn_products, pnlProductSubmenu, false);
+            SetMenuVisibility(btn_bills, null, false);
+            SetMenuVisibility(btn_employees, pnlEmployeeSubmenu, false);
+            SetMenuVisibility(btn_customers, pnlCustomerSubmenu, false);
+            SetMenuVisibility(btn_promotions, null, false);
+            SetMenuVisibility(btn_suppliers, pnlSupplierSubmenu, false);
+            SetMenuVisibility(btn_inventory, pnlStorageSubmenu, false);
+            SetMenuVisibility(btn_reports, null, false);
+
+            if (isWarehouse)
+            {
+                SetMenuVisibility(btn_inventory, pnlStorageSubmenu, true);
+            }
+
+            if (isSales)
+            {
+                SetMenuVisibility(btn_products, pnlProductSubmenu, true);
+                SetMenuVisibility(btn_bills, null, true);
+                SetMenuVisibility(btn_customers, pnlCustomerSubmenu, true);
+                SetMenuVisibility(btn_promotions, null, true);
+            }
+
+            HideSubMenus();
+        }
+
+        private void SetMenuVisibility(Guna.UI2.WinForms.Guna2Button menuButton, Guna.UI2.WinForms.Guna2Panel submenu, bool visible)
+        {
+            if (menuButton != null)
+                menuButton.Visible = visible;
+
+            if (submenu != null)
+                submenu.Visible = visible && submenu.Visible;
         }
 
         /// <summary>
@@ -222,6 +270,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
                 {
                     // Nếu đăng nhập thành công, hiển thị lại main form
                     UpdateUserInfo();
+                    ApplyRolePermissions();
                     LoadFormIntoPanel(new frmDashboard());
                     SetActiveButton(btn_dashboard, null);
                     this.Show();

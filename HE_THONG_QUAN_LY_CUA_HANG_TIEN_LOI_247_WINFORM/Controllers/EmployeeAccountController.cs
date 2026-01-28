@@ -29,6 +29,11 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Controllers
             return _service.GetEmployeesWithoutAccount();
         }
 
+        public List<Role> GetRoles()
+        {
+            return _service.GetRoles();
+        }
+
         public (bool success, string message, TaiKhoan account) CreateEmployeeAccount(
             string employeeId, 
             string username, 
@@ -51,6 +56,11 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Controllers
         public (bool success, string message) DeleteEmployeeAccount(string employeeId)
         {
             return _service.DeleteEmployeeAccount(employeeId);
+        }
+
+        public (bool success, string message) UpdateAccountRole(string accountId, string roleId)
+        {
+            return _service.UpdateAccountRole(accountId, roleId);
         }
 
         public void Dispose()
