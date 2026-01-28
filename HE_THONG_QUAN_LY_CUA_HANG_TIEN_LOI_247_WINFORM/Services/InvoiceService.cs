@@ -12,10 +12,12 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
     public class InvoiceService : IDisposable
     {
         private readonly AppDbContext _context;
+        private readonly QuanLyServices _services;
 
         public InvoiceService()
         {
             _context = new AppDbContext();
+            _services = new QuanLyServices();
         }
 
         /// <summary>
@@ -326,7 +328,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
         }
 
         /// <summary>
-        /// Tạo mã giao  dịch thanh toán
+        /// Tạo mã giao dịch thanh toán
         /// </summary>
         private string GeneratePaymentId()
         {

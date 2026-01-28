@@ -6,6 +6,8 @@ using System.Linq;
 using System.Windows.Forms;
 using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Controllers;
 using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Models;
+using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services;
+using System.Data.Entity;
 
 namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms.Bills
 {
@@ -13,6 +15,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
     {
         private InvoiceController _invoiceController;
         private string _selectedInvoiceId;
+        private readonly IQuanLyServices _quanLyServices = new QuanLyServices();
 
         public frmInvoices()
         {
@@ -86,25 +89,25 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
             try { DisplayInvoices(_invoiceController.SearchInvoices(txtSearch.Text, dtpFromDate.Value, dtpToDate.Value, cmbStatus.Text)); } catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
 
-        private void btnCreateNew_Click(object sender, EventArgs e) 
-        { 
+        private void btnCreateNew_Click(object sender, EventArgs e)
+        {
             var form = new frmInvoiceDetails();
             if (form.ShowDialog() == DialogResult.OK)
             {
                 LoadInvoices(); // Refresh if invoice was created and paid
             }
         }
-        
-        private void btnView_Click(object sender, EventArgs e) 
-        { 
-            if (!string.IsNullOrEmpty(_selectedInvoiceId)) 
-            { 
+
+        private void btnView_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(_selectedInvoiceId))
+            {
                 var form = new frmInvoiceDetails(_selectedInvoiceId);
                 if (form.ShowDialog() == DialogResult.OK)
                 {
                     LoadInvoices(); // Refresh if invoice was updated/paid
                 }
-            } 
+            }
         }
         private void btnDelete_Click(object sender, EventArgs e)
         {
@@ -115,6 +118,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
                 MessageBox.Show(res.Item2); if (res.Item1) LoadInvoices();
             }
         }
+
         private void btnRefresh_Click(object sender, EventArgs e) => LoadInvoices();
         private void dgvInvoices_SelectionChanged(object sender, EventArgs e) { if (dgvInvoices.CurrentRow != null) _selectedInvoiceId = dgvInvoices.CurrentRow.Cells["colInvoiceId"].Value?.ToString(); }
         private void dgvInvoices_CellDoubleClick(object sender, DataGridViewCellEventArgs e) { if (e.RowIndex >= 0) btnView_Click(null, null); }

@@ -631,6 +631,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="PresentationLayer\Forms\Bills\" />
     <Folder Include="Utils\" />
   </ItemGroup>
   <ItemGroup>
