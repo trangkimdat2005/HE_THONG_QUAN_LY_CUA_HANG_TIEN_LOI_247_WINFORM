@@ -32,7 +32,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
             SetPlaceholder(txtSearch, "Nhập mã hoặc tên sản phẩm để tìm kiếm...");
 
             this.Load += frmInventoryList_Load;
-            
+
             if (btnExport != null) btnExport.Click += btnExport_Click;
 
             if (txtSearch != null)
@@ -48,6 +48,13 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
                     }
                 };
             }
+            this.VisibleChanged += (s, e) => {
+                if (this.Visible)
+                {
+                    LoadInventoryData();
+                    LoadStatistics();
+                }
+            };
         }
 
         private void frmInventoryList_Load(object sender, EventArgs e)
