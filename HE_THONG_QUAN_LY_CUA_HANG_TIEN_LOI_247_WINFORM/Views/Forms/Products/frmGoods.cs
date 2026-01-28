@@ -2,10 +2,11 @@
 using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Models;
 using System;
 using System.Collections;
-using System.Runtime.InteropServices;
-using System.Windows.Forms;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
+using System.Runtime.InteropServices;
+using System.Windows.Forms;
 
 namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Views.Forms.Products
 {
@@ -600,6 +601,71 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Views.Forms.Products
         private void txtDescription_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnExport_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnImport_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Filter = "Excel Files|*.xlsx;*.xls"; // Chỉ cho chọn file Excel
+            dialog.Title = "Chọn file Excel danh sách sản phẩm";
+
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                // Đổi con trỏ chuột thành hình xoay xoay để người dùng biết đang chạy
+                this.Cursor = Cursors.WaitCursor;
+
+                try
+                {
+                    // 1. Khởi tạo Service
+                    var excelService = new HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Services.ExcelImportService();
+
+                    // 2. Gọi hàm nhập Sản Phẩm
+                    var result = excelService.ImportSanPham(dialog.FileName);
+
+                    this.Cursor = Cursors.Default; // Trả lại con trỏ chuột bình thường
+
+                    // 3. Xử lý kết quả trả về
+                    if (result.IsSuccess)
+                    {
+                        MessageBox.Show(result.Message, "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        // GỌI HÀM LOAD LẠI DỮ LIỆU Ở ĐÂY
+                        // Ví dụ: LoadData(); hoặc btnRefresh_Click(null, null);
+                        // Bạn thay bằng tên hàm load dữ liệu thực tế của form bạn nhé
+                        LoadGoods();
+                    }
+                    else
+                    {
+                        // Nếu có lỗi chi tiết thì hiện ra
+                        if (result.ErrorLogs != null && result.ErrorLogs.Count > 0)
+                        {
+                            // Ghép các dòng lỗi lại để hiện thông báo (lấy tối đa 15 lỗi đầu cho đỡ dài)
+                            string errorDetails = string.Join("\n", result.ErrorLogs.Take(15));
+
+                            if (result.ErrorLogs.Count > 15)
+                                errorDetails += $"\n... và {result.ErrorLogs.Count - 15} lỗi khác.";
+
+                            MessageBox.Show(result.Message + "\n\nCHI TIẾT LỖI:\n" + errorDetails,
+                                            "Lỗi dữ liệu", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
+                        else
+                        {
+                            // Lỗi chung chung (ví dụ file rỗng)
+                            MessageBox.Show(result.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    this.Cursor = Cursors.Default;
+                    MessageBox.Show("Lỗi Application: " + ex.Message, "Lỗi nghiêm trọng", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
     }
 }

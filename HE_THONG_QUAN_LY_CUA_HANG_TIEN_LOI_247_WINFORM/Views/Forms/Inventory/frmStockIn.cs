@@ -14,6 +14,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Views.Forms.Inventory
         private readonly StockInController _stockInController;
         private List<ImportDetailItem> _detailList;
         private decimal _totalAmount = 0;
+        private bool _isSaving = false; // Flag để chặn duplicate save
 
         private class ImportDetailItem
         {
@@ -34,7 +35,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Views.Forms.Inventory
             SetupDataGridView();
             this.Load += frmStockIn_Load;
 
-            // Đăng ký sự kiện - KHÔNG COMMENT OUT
+            // Đăng ký sự kiện - CẦN THIẾT vì Designer.cs không có
             if (btnAdd != null) btnAdd.Click += btnAdd_Click;
             if (btnSave != null) btnSave.Click += btnSave_Click;
             if (btnCancel != null) btnCancel.Click += btnCancel_Click;
@@ -349,6 +350,11 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Views.Forms.Inventory
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            // ✅ CHẶN DUPLICATE CALL
+            if (_isSaving) return;
+
+            _isSaving = true;
+
             try
             {
                 if (cboSupplier.SelectedValue == null)
@@ -396,7 +402,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Views.Forms.Inventory
                 {
                     var session = UserSession.Instance;
                     MessageBox.Show(
-                        $" Lưu phiếu nhập thành công!\n\n" +
+                        $"✓ Lưu phiếu nhập thành công!\n\n" +
                         $"Mã phiếu: {phieuNhapId}\n" +
                         $"Người nhập: {session.EmployeeName}\n" +
                         $"Tổng tiền: {_totalAmount:N0} đ",
@@ -414,6 +420,13 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Views.Forms.Inventory
             {
                 MessageBox.Show($"✗ Lỗi lưu phiếu nhập:\n{ex.Message}", "Lỗi",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                if (this.DialogResult != DialogResult.OK)
+                {
+                    _isSaving = false;
+                }
             }
         }
 

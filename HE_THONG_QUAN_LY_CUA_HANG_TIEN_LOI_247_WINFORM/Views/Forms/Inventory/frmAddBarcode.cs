@@ -57,16 +57,45 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Views.forms.Inventory
         {
             try
             {
-                var productUnits = _barcodeController.GetAllProductUnits();
-                cboProductUnit.DataSource = productUnits;
-                cboProductUnit.DisplayMember = "SanPham.ten";
-                cboProductUnit.ValueMember = "id";
+                var productUnits = _barcodeController.GetAllProductUnits() ?? new System.Collections.Generic.List<SanPhamDonVi>();
+
+                // Debug: if no items, show message to help troubleshooting
+                if (productUnits.Count ==0)
+                {
+                    // Clear combo and show placeholder
+                    cboProductUnit.DataSource = null;
+                    cboProductUnit.Items.Clear();
+                    cboProductUnit.Items.Add("(Không có sản phẩm)");
+                    cboProductUnit.SelectedIndex =0;
+                    System.Diagnostics.Debug.WriteLine("LoadProductUnits: GetAllProductUnits returned0 items.");
+                    return;
+                }
+
+                // Map to simple objects to ensure Display text is always available
+                var list = productUnits.Select(u => new
+                {
+                    Id = u.id,
+                    Display = string.Format("{0}{1}{2}",
+                        u.SanPham != null ? u.SanPham.ten : string.Empty,
+                        (u.SanPham != null && u.DonViDoLuong != null) ? " - " : string.Empty,
+                        u.DonViDoLuong != null ? u.DonViDoLuong.ten : string.Empty)
+                }).ToList();
+
+                // Bind using a BindingSource to avoid potential WinForms binding quirks
+                var bs = new BindingSource();
+                bs.DataSource = list;
+
+                cboProductUnit.DataSource = bs;
+                cboProductUnit.DisplayMember = "Display";
+                cboProductUnit.ValueMember = "Id";
+
                 cboProductUnit.SelectedIndex = -1;
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Lỗi tải danh sách sản phẩm: {ex.Message}", "Lỗi", 
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
+                System.Diagnostics.Debug.WriteLine($"LoadProductUnits error: {ex}");
             }
         }
 
