@@ -123,6 +123,52 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
 
             // Disable payment button initially
             btnPayment.Enabled = false;
+
+            // Load promo options into the colPromo combo column
+            LoadPromoOptions();
+
+            // Ensure combo selection commits immediately so CellValueChanged runs and totals update
+            dgvInvoiceDetails.CurrentCellDirtyStateChanged += dgvInvoiceDetails_CurrentCellDirtyStateChanged;
+        }
+
+        // Commit edits for combobox cells so CellValueChanged fires immediately
+        private void dgvInvoiceDetails_CurrentCellDirtyStateChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (dgvInvoiceDetails.IsCurrentCellDirty)
+                {
+                    var cell = dgvInvoiceDetails.CurrentCell;
+                    if (cell is DataGridViewComboBoxCell || cell is DataGridViewCheckBoxCell)
+                    {
+                        dgvInvoiceDetails.CommitEdit(DataGridViewDataErrorContexts.Commit);
+                    }
+                }
+            }
+            catch { }
+        }
+        // Load active promotions into the DataGridViewComboBoxColumn 'colPromo' (keep column-level empty to allow row-level combos)
+        private void LoadPromoOptions()
+        {
+            try
+            {
+                // Do not set column DataSource here to avoid conflicts with row-level combo cells.
+                if (dgvInvoiceDetails.Columns.Contains("colPromo"))
+                {
+                    var col = dgvInvoiceDetails.Columns["colPromo"] as DataGridViewComboBoxColumn;
+                    if (col != null)
+                    {
+                        col.DataSource = null;
+                        col.Items.Clear();
+                        col.DisplayMember = null;
+                        col.ValueMember = null;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"LoadPromoOptions (clear) error: {ex.Message}");
+            }
         }
 
         private void LoadCustomers()
@@ -510,7 +556,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
 
                         using (var ctx = new AppDbContext())
                         {
-                            var mk = ctx.MaKhuyenMais.FirstOrDefault(m => m.id == selectedId && !m.isDelete && m.trangThai == "Active");
+                            var mk = ctx.MaKhuyenMais.FirstOrDefault(m => m.id == selectedId && !m.isDelete && m.trangThai == "Hoạt động");
                             if (mk != null)
                             {
                                 var unitPrice = decimal.Parse(row.Cells["colUnitPrice"].Value.ToString().Replace(" đ", "").Replace(",", ""));
@@ -553,31 +599,52 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
 
         private void CalculateTotal()
         {
-            decimal subtotal = 0;
-
-            foreach (DataGridViewRow row in dgvInvoiceDetails.Rows)
+            try
             {
-                if (row.Cells["colTotal"].Value != null)
+                decimal subtotalBeforePromo =0m; // sum of unitPrice * qty
+                decimal promoTotal =0m; // sum of applied promos
+
+                for (int i =0; i < dgvInvoiceDetails.Rows.Count; i++)
                 {
-                    var totalStr = row.Cells["colTotal"].Value.ToString();
-                    subtotal += decimal.Parse(totalStr.Replace(" đ", "").Replace(",", ""));
+                    var row = dgvInvoiceDetails.Rows[i];
+                    var qty =0;
+                    var unitPrice =0m;
+                    int.TryParse(row.Cells["colQuantity"].Value?.ToString() ?? "0", out qty);
+                    decimal.TryParse((row.Cells["colUnitPrice"].Value?.ToString() ?? "0").Replace(" đ", "").Replace(",", ""), out unitPrice);
+
+                    subtotalBeforePromo += qty * unitPrice;
+
+                    if (_promoValuePerRow.TryGetValue(i, out decimal pv)) promoTotal += pv;
                 }
+
+                // manual discount from control
+                decimal manualDiscount = ReadDiscountFromControl();
+
+                // Cap manual discount so it doesn't exceed remaining amount after promos
+                var maxManual = subtotalBeforePromo - promoTotal;
+                if (maxManual <0) maxManual =0;
+                if (manualDiscount > maxManual) manualDiscount = maxManual;
+
+                decimal effectiveDiscount = promoTotal + manualDiscount;
+                decimal total = subtotalBeforePromo - effectiveDiscount;
+                if (total <0) total = 0;
+
+                // Update row totals to ensure UI consistent (row total = qty*price - promo)
+                for (int i =0; i < dgvInvoiceDetails.Rows.Count; i++)
+                {
+                    UpdateRowTotal(i);
+                }
+
+                lblSubtotal.Text = subtotalBeforePromo.ToString("N0") + " đ";
+                lblDiscountValue.Text = effectiveDiscount.ToString("N0") + " đ";
+                lblTotal.Text = total.ToString("N0") + " đ";
+
+                // reflect manual discount control value (might have been capped)
+                SetDiscountTextControl(manualDiscount);
+
+                btnPayment.Enabled = dgvInvoiceDetails.Rows.Count >0;
             }
-
-            decimal discount = ReadDiscountFromControl();
-            if (discount > subtotal)
-            {
-                discount = subtotal;
-                SetDiscountTextControl(discount);
-            }
-
-            var total = subtotal - discount;
-
-            lblSubtotal.Text = subtotal.ToString("N0") + " đ";
-            lblDiscountValue.Text = discount.ToString("N0") + " đ";
-            lblTotal.Text = total.ToString("N0") + " đ";
-
-            btnPayment.Enabled = dgvInvoiceDetails.Rows.Count > 0;
+            catch { }
         }
 
         private void btnApplyDiscount_Click(object sender, EventArgs e)
@@ -861,7 +928,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
                             ctx.SaveChanges();
 
                             var promoDetails = BuildPromoDetails(invoice.id);
-                            if (promoDetails != null && promoDetails.Count > 0)
+                            if (promoDetails != null && promoDetails.Count >0)
                             {
                                 if (!isNewInvoice)
                                 {
@@ -869,9 +936,44 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
                                     ctx.ChiTietHoaDonKhuyenMais.RemoveRange(oldPromos);
                                 }
 
+                                // Collect existing IDs from DB to avoid collisions
+                                var existingIds = new HashSet<string>(ctx.ChiTietHoaDonKhuyenMais.Select(c => c.id));
+                                // Also track ids that will be used in this batch to prevent duplicates among new items
+                                var usedIds = new HashSet<string>(existingIds);
+
+                                // If BuildPromoDetails already assigned ids (it assigns GUIDs), reserve them
+                                foreach (var p in promoDetails)
+                                {
+                                    if (!string.IsNullOrEmpty(p.id) && !usedIds.Contains(p.id))
+                                        usedIds.Add(p.id);
+                                }
+
                                 foreach (var pd in promoDetails)
                                 {
-                                    pd.id = _quanLyServices.GenerateNewId<ChiTietHoaDonKhuyenMai>("CTHD", 8) ?? Guid.NewGuid().ToString();
+                                    // If id is empty or collides with existing/previously generated ids, generate a unique one
+                                    if (string.IsNullOrEmpty(pd.id) || usedIds.Contains(pd.id))
+                                    {
+                                        string generatedId = null;
+                                        int genRetry =0;
+                                        do
+                                        {
+                                            generatedId = _quanLyServices.GenerateNewId<ChiTietHoaDonKhuyenMai>("CTHD",8) ?? Guid.NewGuid().ToString();
+                                            genRetry++;
+                                        }
+                                        while (usedIds.Contains(generatedId) && genRetry <20);
+
+                                        if (usedIds.Contains(generatedId))
+                                        {
+                                            // As a last resort, use a GUID
+                                            generatedId = Guid.NewGuid().ToString();
+                                        }
+
+                                        pd.id = generatedId;
+                                    }
+
+                                    // mark id as used to prevent duplicates within this batch
+                                    usedIds.Add(pd.id);
+
                                     ctx.ChiTietHoaDonKhuyenMais.Add(pd);
                                 }
 
@@ -889,7 +991,9 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
                         }
                         catch (System.Data.Entity.Validation.DbEntityValidationException ex)
                         {
-                            transaction.Rollback();
+                            // use SafeRollback instead of direct transaction.Rollback()
+                            System.Diagnostics.Debug.WriteLine($"SaveInvoiceFromPayment - validation error: {ex}");
+                            SafeRollback(transaction);
                             var errorMessages = new System.Text.StringBuilder();
                             foreach (var validationErrors in ex.EntityValidationErrors)
                             {
@@ -902,7 +1006,8 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
                         }
                         catch (System.Data.Entity.Infrastructure.DbUpdateException ex)
                         {
-                            transaction.Rollback();
+                            System.Diagnostics.Debug.WriteLine($"SaveInvoiceFromPayment - db update error: {ex}");
+                            SafeRollback(transaction);
                             var innerException = ex.InnerException;
                             var errorDetails = new System.Text.StringBuilder();
                             errorDetails.AppendLine("Lỗi database:");
@@ -917,7 +1022,8 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
                         }
                         catch (Exception)
                         {
-                            transaction.Rollback();
+                            // Ensure rollback attempt but suppress rollback errors
+                            SafeRollback(transaction);
                             throw;
                         }
                     }
@@ -1030,6 +1136,27 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
             _categoryController?.Dispose();
         }
 
+        // Helper to rollback safely (catch and log rollback errors)
+        private void SafeRollback(DbContextTransaction transaction)
+        {
+            try
+            {
+                if (transaction != null)
+                {
+                    try
+                    {
+                        transaction.Rollback();
+                    }
+                    catch (Exception rbEx)
+                    {
+                        System.Diagnostics.Debug.WriteLine($"SafeRollback: rollback failed: {rbEx}");
+                        // Do not rethrow - original exception is more important
+                    }
+                }
+            }
+            catch { }
+        }
+
         private void dgvProducts_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) return;
@@ -1085,20 +1212,29 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
         {
             try
             {
-                if (rowIndex < 0 || rowIndex >= dgvInvoiceDetails.Rows.Count) return;
+                if (rowIndex <0 || rowIndex >= dgvInvoiceDetails.Rows.Count) return;
 
                 var comboCell = new DataGridViewComboBoxCell();
                 var svc = new QuanLyServices();
 
                 var sanPhamDonVis = svc.GetList<SanPhamDonVi>();
                 var spdv = sanPhamDonVis.FirstOrDefault(s => s.id == sanPhamDonViId && !s.isDelete);
-                if (spdv == null) { dgvInvoiceDetails.Rows[rowIndex].Cells["colPromo"] = comboCell; return; }
+                if (spdv == null)
+                {
+                    // set empty combo
+                    comboCell.Items.Clear();
+                    comboCell.Items.Add("(Không có mã KM)");
+                    comboCell.Value = null;
+                    dgvInvoiceDetails.Rows[rowIndex].Cells["colPromo"] = comboCell;
+                    return;
+                }
 
                 var sanPhamId = spdv.sanPhamId;
-                var sanPhamDanhMucs = svc.GetList<SanPhamDanhMuc>();
-                var productCategoryIds = sanPhamDanhMucs.Where(x => x.sanPhamId == sanPhamId && !x.isDelete).Select(x => x.danhMucId).ToList();
+                var sanPhamDanhMuc = svc.GetList<SanPhamDanhMuc>();
+                var productCategoryIds = sanPhamDanhMuc.Where(x => x.sanPhamId == sanPhamId && !x.isDelete).Select(x => x.danhMucId).ToList();
 
-                var allMa = svc.GetList<MaKhuyenMai>().Where(m => !m.isDelete && m.trangThai == "Active").ToList();
+                // Get all active promotion codes
+                var allMa = svc.GetList<MaKhuyenMai>().Where(m => !m.isDelete && (m.trangThai ?? string.Empty).Equals("Hoạt động", StringComparison.OrdinalIgnoreCase)).ToList();
                 var allDieuKien = svc.GetList<DieuKienApDung>().Where(d => !d.isDelete).ToList();
                 var allDKSanPham = svc.GetList<DieuKienApDungSanPham>().Where(d => !d.isDelete).ToList();
                 var allDKDanhMuc = svc.GetList<DieuKienApDungDanhMuc>().Where(d => !d.isDelete).ToList();
@@ -1118,9 +1254,9 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
                     if (applicable) promos.Add(new { Id = m.id, Code = m.code, GiaTri = m.giaTri });
                 }
 
-                var list = promos.Select(p => new { Id = p.Id, Display = p.Code + " (" + (p.GiaTri < 1 ? (p.GiaTri * 100).ToString("0") + "%" : p.GiaTri.ToString("N0") + " đ") + ")" }).ToList();
+                var list = promos.Select(p => new { Id = p.Id, Display = p.Code + " (" + (p.GiaTri < 1 ? (p.GiaTri * 100).ToString("0") + "%" : string.Format("{0:N0} đ", p.GiaTri)) + ")" }).ToList();
 
-                if (list == null || list.Count == 0)
+                if (list == null || list.Count ==0)
                 {
                     comboCell.Items.Clear();
                     comboCell.Items.Add("(Không có mã KM)");
@@ -1136,7 +1272,10 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
 
                 dgvInvoiceDetails.Rows[rowIndex].Cells["colPromo"] = comboCell;
             }
-            catch { }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"PopulatePromoComboForRow error: {ex.Message}");
+            }
         }
 
         private void btnApplyDiscount_Click_1(object sender, EventArgs e)
@@ -1156,7 +1295,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
                 {
                     using (var ctx = new AppDbContext())
                     {
-                        var mk = ctx.MaKhuyenMais.FirstOrDefault(m => m.code == code && !m.isDelete && m.trangThai == "Active");
+                        var mk = ctx.MaKhuyenMais.FirstOrDefault(m => m.code == code && !m.isDelete && m.trangThai == "Hoạt động");
                         if (mk == null) continue;
                         var unitPrice = decimal.Parse(row.Cells["colUnitPrice"].Value.ToString().Replace(" đ", "").Replace(",", ""));
                         var qty = int.Parse(row.Cells["colQuantity"].Value?.ToString() ?? "0");
