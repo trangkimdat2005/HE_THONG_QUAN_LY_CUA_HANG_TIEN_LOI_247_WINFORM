@@ -141,15 +141,12 @@
   <ItemGroup>
     <Compile Include="Config\PaymentConfig.cs" />
     <Compile Include="Controllers\BarcodeController.cs" />
-<<<<<<< HEAD
     <Compile Include="Controllers\EmployeeAccountController.cs" />
-=======
     <Compile Include="DTO\ImportResult.cs" />
     <Compile Include="DTO\NhanVienImportDto.cs" />
     <Compile Include="DTO\NhapHangImportDto.cs" />
     <Compile Include="DTO\SanPhamDonViImportDto.cs" />
     <Compile Include="DTO\SanPhamImportDto.cs" />
->>>>>>> 626f02ee2e547071ce42b1009a5205d3259e6dcf
     <Compile Include="Examples\ExampleFormWithPermissions.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -234,11 +231,8 @@
     <Compile Include="Services\BrandService.cs" />
     <Compile Include="Services\CategoryService.cs" />
     <Compile Include="Services\CustomerService.cs" />
-<<<<<<< HEAD
     <Compile Include="Services\EmployeeAccountService.cs" />
-=======
     <Compile Include="Services\EmailHelper.cs" />
->>>>>>> 626f02ee2e547071ce42b1009a5205d3259e6dcf
     <Compile Include="Services\EventService.cs" />
     <Compile Include="Services\ExcelService.cs" />
     <Compile Include="Services\GoodsService.cs" />
