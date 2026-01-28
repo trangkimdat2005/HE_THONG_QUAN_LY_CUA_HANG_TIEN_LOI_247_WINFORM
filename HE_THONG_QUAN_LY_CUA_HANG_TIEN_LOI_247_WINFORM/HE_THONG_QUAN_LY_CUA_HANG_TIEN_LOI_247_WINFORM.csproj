@@ -602,6 +602,9 @@
     <EmbeddedResource Include="Views\forms\Products\frmProducts.resx">
       <DependentUpon>frmProducts.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\forms\Promotions\frmAddPromotion.resx">
+      <DependentUpon>frmAddPromotion.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\forms\Promotions\frmPromotionDetail.resx">
       <DependentUpon>frmPromotionDetail.cs</DependentUpon>
     </EmbeddedResource>

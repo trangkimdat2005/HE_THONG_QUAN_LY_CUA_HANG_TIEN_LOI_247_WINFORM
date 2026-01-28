@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Controllers;
+using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Views.forms.Promotions;
 
 namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Promotions
 {
@@ -154,7 +155,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Promo
         {
             try
             {
-                var frmDetail = new frmPromotionDetail();
+                var frmDetail = new frmAddPromotion();
                 DialogResult result = frmDetail.ShowDialog();
 
                 if (result == DialogResult.OK)
