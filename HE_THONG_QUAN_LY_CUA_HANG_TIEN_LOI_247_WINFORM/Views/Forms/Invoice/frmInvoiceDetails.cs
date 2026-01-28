@@ -4,6 +4,7 @@ using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Models;
 using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Views.forms.Invoice;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Data.Entity;
 using System.Drawing;
@@ -35,6 +36,8 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
         private Dictionary<int, List<string>> _appliedPromosPerRow = new Dictionary<int, List<string>>();
         private Dictionary<int, decimal> _promoValuePerRow = new Dictionary<int, decimal>();
 
+        private HoaDon _currentInvoice; // store loaded invoice for status checks
+
         public frmInvoiceDetails()
         {
             InitializeComponent();
@@ -54,11 +57,11 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
         {
             // Style cho bảng Chi tiết hóa đơn (Bên trái)
             StyleGrid(dgvInvoiceDetails);
-            dgvInvoiceDetails.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(41, 128, 185); // Xanh Dương
+            dgvInvoiceDetails.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(41,128,185); // Xanh Dương
 
             // Style cho bảng Sản phẩm (Bên phải)
             StyleGrid(dgvProducts);
-            dgvProducts.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(39, 174, 96); // Xanh Lá
+            dgvProducts.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(39,174,96); // Xanh Lá
 
 
         }
@@ -66,20 +69,20 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
         {
             dgv.BorderStyle = BorderStyle.None;
             dgv.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
-            dgv.GridColor = Color.FromArgb(230, 230, 230);
+            dgv.GridColor = Color.FromArgb(230,230,230);
             dgv.RowHeadersVisible = false;
             dgv.EnableHeadersVisualStyles = false;
-            dgv.ColumnHeadersHeight = 40;
-            dgv.RowTemplate.Height = 40;
+            dgv.ColumnHeadersHeight =40;
+            dgv.RowTemplate.Height =40;
 
             dgv.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-            dgv.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            dgv.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI",10F, FontStyle.Bold);
             dgv.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
 
-            dgv.DefaultCellStyle.SelectionBackColor = Color.FromArgb(211, 233, 252);
+            dgv.DefaultCellStyle.SelectionBackColor = Color.FromArgb(211,233,252);
             dgv.DefaultCellStyle.SelectionForeColor = Color.Black;
-            dgv.DefaultCellStyle.Font = new Font("Segoe UI", 10F);
-            dgv.DefaultCellStyle.Padding = new Padding(5, 0, 0, 0);
+            dgv.DefaultCellStyle.Font = new Font("Segoe UI",10F);
+            dgv.DefaultCellStyle.Padding = new Padding(5,0,0,0);
         }
         public frmInvoiceDetails(string invoiceId) : this()
         {
@@ -123,6 +126,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
 
             // Disable payment button initially
             btnPayment.Enabled = false;
+
 
             // Load promo options into the colPromo combo column
             LoadPromoOptions();
@@ -264,6 +268,9 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
                     this.Close();
                     return;
                 }
+
+                // store current invoice for status checks
+                _currentInvoice = invoice;
 
                 // Load invoice info
                 lblInvoiceId.Text = invoice.id;
@@ -601,14 +608,14 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
         {
             try
             {
-                decimal subtotalBeforePromo =0m; // sum of unitPrice * qty
-                decimal promoTotal =0m; // sum of applied promos
+                decimal subtotalBeforePromo = 0m; // sum of unitPrice * qty
+                decimal promoTotal = 0m; // sum of applied promos
 
-                for (int i =0; i < dgvInvoiceDetails.Rows.Count; i++)
+                for (int i = 0; i < dgvInvoiceDetails.Rows.Count; i++)
                 {
                     var row = dgvInvoiceDetails.Rows[i];
-                    var qty =0;
-                    var unitPrice =0m;
+                    var qty = 0;
+                    var unitPrice = 0m;
                     int.TryParse(row.Cells["colQuantity"].Value?.ToString() ?? "0", out qty);
                     decimal.TryParse((row.Cells["colUnitPrice"].Value?.ToString() ?? "0").Replace(" đ", "").Replace(",", ""), out unitPrice);
 
@@ -622,15 +629,15 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
 
                 // Cap manual discount so it doesn't exceed remaining amount after promos
                 var maxManual = subtotalBeforePromo - promoTotal;
-                if (maxManual <0) maxManual =0;
+                if (maxManual < 0) maxManual = 0;
                 if (manualDiscount > maxManual) manualDiscount = maxManual;
 
                 decimal effectiveDiscount = promoTotal + manualDiscount;
                 decimal total = subtotalBeforePromo - effectiveDiscount;
-                if (total <0) total = 0;
+                if (total < 0) total = 0;
 
                 // Update row totals to ensure UI consistent (row total = qty*price - promo)
-                for (int i =0; i < dgvInvoiceDetails.Rows.Count; i++)
+                for (int i = 0; i < dgvInvoiceDetails.Rows.Count; i++)
                 {
                     UpdateRowTotal(i);
                 }
@@ -642,7 +649,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
                 // reflect manual discount control value (might have been capped)
                 SetDiscountTextControl(manualDiscount);
 
-                btnPayment.Enabled = dgvInvoiceDetails.Rows.Count >0;
+                btnPayment.Enabled = dgvInvoiceDetails.Rows.Count > 0;
             }
             catch { }
         }
@@ -677,7 +684,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
 
                     dgvProducts.Rows.Clear();
 
-                    if (matches.Count ==0)
+                    if (matches.Count == 0)
                     {
                         // no barcode matches -> show empty list
                         return;
@@ -928,7 +935,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
                             ctx.SaveChanges();
 
                             var promoDetails = BuildPromoDetails(invoice.id);
-                            if (promoDetails != null && promoDetails.Count >0)
+                            if (promoDetails != null && promoDetails.Count > 0)
                             {
                                 if (!isNewInvoice)
                                 {
@@ -954,13 +961,13 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
                                     if (string.IsNullOrEmpty(pd.id) || usedIds.Contains(pd.id))
                                     {
                                         string generatedId = null;
-                                        int genRetry =0;
+                                        int genRetry = 0;
                                         do
                                         {
                                             generatedId = _quanLyServices.GenerateNewId<ChiTietHoaDonKhuyenMai>("CTHD",8) ?? Guid.NewGuid().ToString();
                                             genRetry++;
                                         }
-                                        while (usedIds.Contains(generatedId) && genRetry <20);
+                                        while (usedIds.Contains(generatedId) && genRetry < 20);
 
                                         if (usedIds.Contains(generatedId))
                                         {
@@ -1200,8 +1207,8 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
                     dgvInvoiceDetails.Rows.RemoveAt(e.RowIndex);
                     if (_appliedPromosPerRow.ContainsKey(e.RowIndex)) _appliedPromosPerRow.Remove(e.RowIndex);
                     if (_promoValuePerRow.ContainsKey(e.RowIndex)) _promoValuePerRow.Remove(e.RowIndex);
-                    _appliedPromosPerRow = _appliedPromosPerRow.ToDictionary(k => k.Key > e.RowIndex ? k.Key - 1 : k.Key, v => v.Value);
-                    _promoValuePerRow = _promoValuePerRow.ToDictionary(k => k.Key > e.RowIndex ? k.Key - 1 : k.Key, v => v.Value);
+                    _appliedPromosPerRow = _appliedPromosPerRow.ToDictionary(k => k.Key > e.RowIndex ? k.Key -1 : k.Key, v => v.Value);
+                    _promoValuePerRow = _promoValuePerRow.ToDictionary(k => k.Key > e.RowIndex ? k.Key -1 : k.Key, v => v.Value);
                     CalculateTotal();
                 }
                 catch { }
@@ -1256,7 +1263,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
 
                 var list = promos.Select(p => new { Id = p.Id, Display = p.Code + " (" + (p.GiaTri < 1 ? (p.GiaTri * 100).ToString("0") + "%" : string.Format("{0:N0} đ", p.GiaTri)) + ")" }).ToList();
 
-                if (list == null || list.Count ==0)
+                if (list == null || list.Count == 0)
                 {
                     comboCell.Items.Clear();
                     comboCell.Items.Add("(Không có mã KM)");

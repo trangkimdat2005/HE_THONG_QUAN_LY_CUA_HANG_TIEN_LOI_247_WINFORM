@@ -168,6 +168,32 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Controllers
 
         #endregion
 
+        #region Return Operations
+
+        /// <summary>
+        /// Xử lý trả hàng cho hóa đơn
+        /// </summary>
+        /// <param name="hoaDonId">Mã hóa đơn</param>
+        /// <param name="sanPhamDonViId">Mã sản phẩm đơn vị</param>
+        /// <param name="soLuong">Số lượng trả</param>
+        /// <param name="lyDo">Lý do trả</param>
+        /// <param name="soTienHoan">Số tiền hoàn</param>
+        /// <param name="chinhSachId">Mã chính sách</param>
+        /// <param name="addToStock">Thêm vào kho</param>
+        /// <returns>Tuple(success, message)</returns>
+        public (bool success, string message) ProcessReturn(string hoaDonId, string sanPhamDonViId, int soLuong, string lyDo, decimal soTienHoan, string chinhSachId, bool addToStock)
+        {
+            // Validation
+            if (string.IsNullOrEmpty(hoaDonId)) return (false, "Mã hóa đơn không hợp lệ");
+            if (string.IsNullOrEmpty(sanPhamDonViId)) return (false, "Sản phẩm không hợp lệ");
+            if (soLuong <= 0) return (false, "Số lượng phải lớn hơn 0");
+
+            var result = _invoiceService.ProcessReturn(hoaDonId, sanPhamDonViId, soLuong, lyDo, soTienHoan, chinhSachId, addToStock);
+            return (result.Item1, result.Item2);
+        }
+
+        #endregion
+
         public void Dispose()
         {
             _invoiceService?.Dispose();
