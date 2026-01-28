@@ -276,7 +276,8 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.PresentationLayer.Forms
                         ptrbAnh.Image = null;
                     }
                 }
-                ptrbAnh.Tag = Image.FromFile(@"D:\code\ky_I_nam_3\Lập trình trực quan\BTL\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM\Resources\img\logo.png");
+                // mark Tag to indicate image was loaded from DB (not a file path)
+                ptrbAnh.Tag = "DB_IMAGE";
             }
         }
     }
