@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Data.Entity;
@@ -49,12 +49,12 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Services
                             TrangThaiTK = tk.trangThai,
                             TrangThaiNV = nv.trangThai,
                             RoleId = roleInfo == null ? null : roleInfo.id,
-                            RoleName = roleInfo == null ? "Ch?a g�n" : roleInfo.ten
+                            RoleName = roleInfo == null ? "Chưa gán" : roleInfo.ten
                         }).ToList();
             }
             catch (Exception ex)
             {
-                throw new Exception($"L?i l?y danh s?ch t?i kho?n: {ex.Message}");
+                throw new Exception($"Lỗi lấy danh sách tài khoản: {ex.Message}");
             }
         }
 
@@ -94,12 +94,12 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Services
                             TrangThaiTK = tk.trangThai,
                             TrangThaiNV = nv.trangThai,
                             RoleId = roleInfo == null ? null : roleInfo.id,
-                            RoleName = roleInfo == null ? "Ch?a g�n" : roleInfo.ten
+                            RoleName = roleInfo == null ? "Chưa gán" : roleInfo.ten
                         }).ToList();
             }
             catch (Exception ex)
             {
-                throw new Exception($"L?i t?m ki?m: {ex.Message}");
+                throw new Exception($"Lỗi tìm kiếm: {ex.Message}");
             }
         }
 
@@ -114,14 +114,14 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Services
 
                 return _context.NhanViens
                     .Where(nv => !nv.isDelete && 
-                           nv.trangThai == "Active" &&
+                           nv.trangThai == "Hoạt động" &&
                            !employeesWithAccount.Contains(nv.id))
                     .OrderBy(nv => nv.hoTen)
                     .ToList();
             }
             catch (Exception ex)
             {
-                throw new Exception($"L?i l?y danh s�ch nh�n vi�n: {ex.Message}");
+                throw new Exception($"Lỗi lấy danh sách nhân viên: {ex.Message}");
             }
         }
 
@@ -138,18 +138,18 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Services
                     try
                     {
                         if (db.TaiKhoans.Any(t => t.tenDangNhap == username && !t.isDelete))
-                            return (false, "T�n ??ng nh?p ?� t?n t?i!", null);
+                            return (false, "Tên đăng nhập đã tồn tại!", null);
 
                         if (!string.IsNullOrEmpty(email) && 
                             db.TaiKhoans.Any(t => t.email == email && !t.isDelete))
-                            return (false, "Email ?� ???c s? d?ng!", null);
+                            return (false, "Email đã sữ dụng!", null);
 
                         var employee = db.NhanViens.FirstOrDefault(nv => nv.id == employeeId);
                         if (employee == null)
-                            return (false, "Kh�ng t�m th?y nh�n vi�n!", null);
+                            return (false, "Không tìm thấy nhân viên!", null);
 
                         if (db.TaiKhoanNhanViens.Any(tknv => tknv.nhanVienId == employeeId && !tknv.isDelete))
-                            return (false, "Nh�n vi�n ?� c� t�i kho?n!", null);
+                            return (false, "Nhân viên đã có tài khoản!", null);
 
                         string accountId = _services.GenerateNewId<TaiKhoan>("TK", 6);
                         string hashedPassword = AuthenticationService.HashPassword(password);
@@ -160,7 +160,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Services
                             tenDangNhap = username,
                             matKhauHash = hashedPassword,
                             email = email,
-                            trangThai = "Active",
+                            trangThai = "Hoạt động",
                             isDelete = false
                         };
 
@@ -192,12 +192,12 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Services
                         db.SaveChanges();
                         transaction.Commit();
 
-                        return (true, $"T?o t�i kho?n th�nh c�ng! T�n ??ng nh?p: {username}", account);
+                        return (true, $"Tạo tài khoản thành công! Tên đăng nhập: {username}", account);
                     }
                     catch (Exception ex)
                     {
                         transaction.Rollback();
-                        return (false, $"L?i: {ex.Message}", null);
+                        return (false, $"Lỗi: {ex.Message}", null);
                     }
                 }
             }
@@ -211,16 +211,16 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Services
                 {
                     var account = db.TaiKhoans.FirstOrDefault(t => t.id == accountId);
                     if (account == null)
-                        return (false, "Kh�ng t�m th?y t�i kho?n!");
+                        return (false, "Không tìm thấy tài khoản!");
 
                     account.matKhauHash = AuthenticationService.HashPassword(newPassword);
                     db.SaveChanges();
 
-                    return (true, "??t l?i m?t kh?u th�nh c�ng!");
+                    return (true, "Đặt lại mật khẩu thành công!");
                 }
                 catch (Exception ex)
                 {
-                    return (false, $"L?i: {ex.Message}");
+                    return (false, $"Lỗi: {ex.Message}");
                 }
             }
         }
@@ -233,17 +233,17 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Services
                 {
                     var account = db.TaiKhoans.FirstOrDefault(t => t.id == accountId);
                     if (account == null)
-                        return (false, "Kh�ng t�m th?y t�i kho?n!");
+                        return (false, "Không tìm thấy tài khoản!");
 
-                    account.trangThai = account.trangThai == "Active" ? "Inactive" : "Active";
+                    account.trangThai = account.trangThai == "Hoạt động" ? "Bị khóa" : "Hoạt động";
                     db.SaveChanges();
 
-                    string status = account.trangThai == "Active" ? "k�ch ho?t" : "v� hi?u h�a";
-                    return (true, $"?� {status} t�i kho?n th�nh c�ng!");
+                    string status = account.trangThai == "Hoạt động" ? "kích hoạt" : "vô hiệu hóa";
+                    return (true, $"Đã {status} tài khoản thành công!");
                 }
                 catch (Exception ex)
                 {
-                    return (false, $"L?i: {ex.Message}");
+                    return (false, $"Lỗi: {ex.Message}");
                 }
             }
         }
@@ -260,7 +260,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Services
                             .FirstOrDefault(tknv => tknv.nhanVienId == employeeId && !tknv.isDelete);
 
                         if (empAccount == null)
-                            return (false, "Kh?ng t?m th?y t?i kho?n!");
+                            return (false, "Không tìm thấy tài khoản!");
 
                         empAccount.isDelete = true;
 
@@ -273,12 +273,12 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Services
                         db.SaveChanges();
                         transaction.Commit();
 
-                        return (true, "X?a t?i kho?n th?nh c?ng!");
+                        return (true, "Xóa tài khoản thành công!");
                     }
                     catch (Exception ex)
                     {
                         transaction.Rollback();
-                        return (false, $"L?i: {ex.Message}");
+                        return (false, $"Lỗi: {ex.Message}");
                     }
                 }
             }
@@ -295,7 +295,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Services
             }
             catch (Exception ex)
             {
-                throw new Exception($"L?i l?y danh s?ch vai tr?: {ex.Message}");
+                throw new Exception($"Lấy danh sách vai trò: {ex.Message}");
             }
         }
 
@@ -309,11 +309,11 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Services
                     {
                         var account = db.TaiKhoans.FirstOrDefault(t => t.id == accountId && !t.isDelete);
                         if (account == null)
-                            return (false, "Kh?ng t?m th?y t?i kho?n!");
+                            return (false, "Không tìm thấy tài khoản!");
 
                         var role = db.Roles.FirstOrDefault(r => r.id == roleId && !r.isDelete);
                         if (role == null)
-                            return (false, "Vai tr? kh?ng h?p l?!");
+                            return (false, "Vai trò không hợp lệ!");
 
                         var activeRoles = db.UserRoles
                             .Where(ur => ur.taiKhoanId == accountId
@@ -322,7 +322,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Services
                             .ToList();
 
                         if (activeRoles.Any(ur => ur.roleId == roleId))
-                            return (false, "T?i kho?n ?ang c? vai tr? n?y!");
+                            return (false, "Tài khoản đang có vai trò này!");
 
                         foreach (var userRole in activeRoles)
                         {
@@ -354,12 +354,12 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Services
                         db.SaveChanges();
                         transaction.Commit();
 
-                        return (true, "C?p nh?t vai tr? th?nh c?ng!");
+                        return (true, "Cập nhật vai trò thành công!");
                     }
                     catch (Exception ex)
                     {
                         transaction.Rollback();
-                        return (false, $"L?i: {ex.Message}");
+                        return (false, $"Lỗi: {ex.Message}");
                     }
                 }
             }

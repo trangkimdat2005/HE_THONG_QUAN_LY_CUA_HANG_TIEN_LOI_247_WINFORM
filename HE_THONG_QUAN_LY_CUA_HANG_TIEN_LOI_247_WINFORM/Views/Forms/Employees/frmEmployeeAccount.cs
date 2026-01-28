@@ -256,7 +256,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Views.forms.Employees
                 return;
             }
 
-            if (MessageBox.Show("Bạn có chắc chắn muốn xóa tài khoản này?\n\nLưu ý: Thao tác này không thể hoàn tác!",
+            if (MessageBox.Show("Bạn có chắc chắn muốn xóa tài khoản này?",
                 "Xác nhận xóa", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
             {
                 var (success, message) = _controller.DeleteEmployeeAccount(employeeId);

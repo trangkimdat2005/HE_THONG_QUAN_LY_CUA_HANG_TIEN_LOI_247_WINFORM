@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Data.Entity;
@@ -34,12 +34,12 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
                             LoaiMa = b.loaiMa,
                             MaCode = b.maCode,
                             DuongDan = b.duongDan,
-                            TrangThai = b.isDelete ? "Kh�ng ho?t ??ng" : "Ho?t ??ng"
+                            TrangThai = b.isDelete ? "Không hoạt động" : "Hooạt động"
                         }).ToList();
             }
             catch (Exception ex) 
             { 
-                throw new Exception($"L?i l?y danh s�ch barcode: {ex.Message}"); 
+                throw new Exception($"Lỗi lấy danh sách barcode: {ex.Message}"); 
             }
         }
 
@@ -64,12 +64,12 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
                             LoaiMa = b.loaiMa,
                             MaCode = b.maCode,
                             DuongDan = b.duongDan,
-                            TrangThai = b.isDelete ? "Kh�ng ho?t ??ng" : "Ho?t ??ng"
+                            TrangThai = b.isDelete ? "Không hoạt động" : "Hooạt động"
                         }).ToList();
             }
             catch (Exception ex) 
             { 
-                throw new Exception($"L?i t�m ki?m barcode: {ex.Message}"); 
+                throw new Exception($"Lỗi tìm kiếm barcode: {ex.Message}"); 
             }
         }
 
@@ -84,7 +84,7 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
                 .AsNoTracking()
                 .Include(p => p.SanPham)
                 .Include(p => p.DonViDoLuong)
-                .Where(p => !p.isDelete && p.trangThai == "C�n h�ng")
+                .Where(p => !p.isDelete && p.trangThai == "Còn hàng")
                 .OrderBy(p => p.SanPham.ten)
                 .ToList();
         }
@@ -96,9 +96,9 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
                 try
                 {
                     if (db.MaDinhDanhSanPhams.Any(b => b.maCode.ToLower() == barcode.maCode.ToLower() && !b.isDelete))
-                        return (false, "M� barcode ?� t?n t?i!", null);
+                        return (false, "Mã barcode đã tồn tại!", null);
 
-                    if (string.IsNullOrEmpty(barcode.id) || barcode.id == "T? ??ng t?o")
+                    if (string.IsNullOrEmpty(barcode.id) || barcode.id == "Tự động tạo")
                     {
                         barcode.id = _services.GenerateNewId<MaDinhDanhSanPham>("MDD", 3);
                     }
@@ -107,11 +107,11 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
                     db.MaDinhDanhSanPhams.Add(barcode);
                     db.SaveChanges();
 
-                    return (true, $"Th�m th�nh c�ng. M�: {barcode.id}", barcode);
+                    return (true, $"Thêm thành công. Mã: {barcode.id}", barcode);
                 }
                 catch (Exception ex) 
                 { 
-                    return (false, "L?i: " + ex.Message, null); 
+                    return (false, "Lỗi: " + ex.Message, null); 
                 }
             }
         }
@@ -124,11 +124,11 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
                 {
                     var existing = db.MaDinhDanhSanPhams.Find(barcode.id);
                     if (existing == null) 
-                        return (false, "Kh�ng t�m th?y barcode.");
+                        return (false, "Không tìm thấy barcode.");
 
                     if (db.MaDinhDanhSanPhams.Any(b => b.id != barcode.id && 
                         b.maCode.ToLower() == barcode.maCode.ToLower() && !b.isDelete))
-                        return (false, "M� barcode ?� t?n t?i!");
+                        return (false, "Mã barcode đã tồn tại!");
 
                     existing.sanPhamDonViId = barcode.sanPhamDonViId;
                     existing.loaiMa = barcode.loaiMa;
@@ -137,11 +137,11 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
                     existing.anhId = barcode.anhId;
 
                     db.SaveChanges();
-                    return (true, "C?p nh?t th�nh c�ng.");
+                    return (true, "Cập nhật thành công.");
                 }
                 catch (Exception ex) 
                 { 
-                    return (false, "L?i: " + ex.Message); 
+                    return (false, "Lỗi: " + ex.Message); 
                 }
             }
         }
@@ -154,11 +154,11 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.BLL.Services
                 {
                     var barcode = db.MaDinhDanhSanPhams.Find(barcodeId);
                     if (barcode == null) 
-                        return (false, "Kh�ng t�m th?y barcode.");
+                        return (false, "Không tìm thấy barcode.");
 
                     barcode.isDelete = true;
                     db.SaveChanges();
-                    return (true, "X�a th�nh c�ng.");
+                    return (true, "Xóa thành công.");
                 }
                 catch (Exception ex) 
                 { 
