@@ -1,4 +1,5 @@
 ﻿using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Controllers;
+using HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Utils;
 using System;
 using System.Collections;
 using System.Runtime.InteropServices;
@@ -55,12 +56,30 @@ namespace HE_THONG_QUAN_LY_CUA_HANG_TIEN_LOI_247_WINFORM.Views.forms.Employees
                 ConfigureGridColumns();
                 LoadRoles();
                 LoadAccounts();
+                ApplyRolePermissions();
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Lỗi tải form: {ex.Message}", "Lỗi",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void ApplyRolePermissions()
+        {
+            bool isAdmin = PermissionExtensions.CheckRole("ADMIN", showMessage: false) ||
+                           PermissionExtensions.CheckRole(RoleConstants.ADMIN, showMessage: false);
+
+            if (isAdmin)
+                return;
+
+            btnAdd.Visible = false;
+            btnResetPassword.Visible = false;
+            btnToggleStatus.Visible = false;
+            btnDelete.Visible = false;
+            btnAssignRole.Visible = false;
+            cboRole.Visible = false;
+            lblRole.Visible = false;
         }
 
         private void ConfigureGridColumns()
